@@ -1,0 +1,112 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink-950: #0a0d12;
+  --color-ink-900: #0e131a;
+  --color-ink-800: #141b24;
+  --color-ink-700: #1b2430;
+  --color-ink-600: #283344;
+
+  --color-gold-100: #f6e8c4;
+  --color-gold-200: #ecd49b;
+  --color-gold-300: #d9b873;
+  --color-gold-400: #c79a4b;
+  --color-gold-500: #a9802f;
+  --color-gold-600: #8a6724;
+
+  --font-serif: "Cormorant Garamond", "Playfair Display", Georgia, serif;
+  --font-display: "Cormorant Garamond", "Playfair Display", Georgia, serif;
+  --font-sans: "Manrope", "Inter", system-ui, sans-serif;
+  --font-script: "Pinyon Script", cursive;
+
+  --animate-fade-up: fade-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@keyframes overlay-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes headline-rise {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes skyline-drift {
+  0%,
+  100% {
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+  50% {
+    transform: scale(1.045) translate3d(-1%, -0.6%, 0);
+  }
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--color-ink-950);
+    color: var(--color-gold-100);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer utilities {
+  .text-gold-engraved {
+    color: var(--color-gold-300);
+    background: linear-gradient(
+      180deg,
+      var(--color-gold-100) 0%,
+      var(--color-gold-300) 45%,
+      var(--color-gold-500) 55%,
+      var(--color-gold-200) 100%
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 1px 0 rgba(255, 245, 214, 0.25))
+      drop-shadow(0 2px 3px rgba(0, 0, 0, 0.55));
+  }
+
+  .bg-grain {
+    background-image: radial-gradient(
+        circle at 20% 20%,
+        rgba(255, 255, 255, 0.04),
+        transparent 40%
+      ),
+      radial-gradient(circle at 80% 60%, rgba(255, 255, 255, 0.03), transparent 45%);
+  }
+}
