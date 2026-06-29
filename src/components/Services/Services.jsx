@@ -90,9 +90,9 @@ const ServicePanel = ({ label, title, description, image, slug, featured }) => {
       ref={ref}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className={`relative w-full overflow-hidden rounded-lg ${featured ? 'sm:col-span-2' : ''}`}
+      className={`service-panel relative w-full overflow-hidden rounded-lg ${featured ? 'sm:col-span-2' : ''}`}
       style={{
-        minHeight: featured ? '460px' : '380px',
+        '--panel-desktop-min-h': featured ? '460px' : '380px',
         boxShadow: hovered
           ? '0 32px 60px -22px rgba(7,11,17,0.45)'
           : '0 18px 38px -18px rgba(7,11,17,0.3)',
@@ -127,31 +127,33 @@ const ServicePanel = ({ label, title, description, image, slug, featured }) => {
         }}
       />
 
-      <div className="relative flex h-full min-h-[380px] w-full items-end p-6 sm:p-8">
+      <div className="relative flex h-full w-full items-end p-7 sm:p-8">
         <div className="max-w-md">
           <span
-            className="text-[0.65rem] font-semibold uppercase tracking-[0.3em]"
+            className="text-xs font-semibold uppercase tracking-[0.3em] sm:text-[0.65rem]"
             style={{ color: palette.warmGold }}
           >
             {label}
           </span>
 
           <h3
-            className={`mt-3 font-serif font-bold leading-tight ${
-              featured ? 'text-2xl sm:text-3xl lg:text-[2.25rem]' : 'text-xl sm:text-2xl'
+            className={`mt-4 font-serif font-bold leading-[1.04] sm:mt-3 sm:leading-tight ${
+              featured
+                ? 'text-5xl sm:text-3xl lg:text-[2.25rem]'
+                : 'text-4xl sm:text-2xl'
             }`}
             style={{ color: palette.offWhite }}
           >
             {title}
           </h3>
 
-          <p className="mt-3 text-sm leading-relaxed sm:text-base" style={{ color: `${palette.offWhite}c2` }}>
+          <p className="mt-4 text-base leading-relaxed sm:mt-3 sm:text-base" style={{ color: `${palette.offWhite}c2` }}>
             {description}
           </p>
 
           <a
             href={`/services/${slug}`}
-            className="mt-5 inline-flex items-center gap-2 text-sm font-semibold tracking-wide"
+            className="mt-6 inline-flex items-center gap-2 text-sm font-semibold tracking-wide sm:mt-5"
             style={{ color: hovered ? palette.warmGold : palette.gold }}
           >
             Learn More
@@ -171,8 +173,8 @@ const ServicePanel = ({ label, title, description, image, slug, featured }) => {
 
 const Services = () => (
   <section id="services" className="relative py-24 sm:py-28" style={{ backgroundColor: palette.sectionBg }}>
-    <div className="mx-auto max-w-6xl px-6 sm:px-10 lg:px-16">
-      <div className="mx-auto max-w-2xl text-center">
+    <div className="mx-auto max-w-6xl px-4 sm:px-10 lg:px-16">
+      <div className="mx-auto max-w-2xl px-2 text-center">
         <span className="text-xs font-semibold uppercase tracking-[0.3em]" style={{ color: palette.gold }}>
           What We Do
         </span>
@@ -189,7 +191,7 @@ const Services = () => (
         </p>
       </div>
 
-      <div className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6">
+      <div className="mt-10 grid grid-cols-1 gap-3 sm:mt-14 sm:grid-cols-2 sm:gap-6">
         {services.map((service) => (
           <ServicePanel key={service.slug} {...service} />
         ))}

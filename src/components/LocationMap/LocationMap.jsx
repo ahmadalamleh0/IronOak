@@ -5,7 +5,7 @@ const LocationMap = () => (
   <section className="relative bg-ink-950 py-24 sm:py-28">
     <div className="mx-auto max-w-6xl px-6 sm:px-10 lg:px-16">
       <h2 className="text-gold-engraved font-script text-center text-6xl leading-none sm:text-7xl">
-        location
+        our Location
       </h2>
 
       <div className="mt-10 overflow-hidden rounded-md border border-gold-400/15">

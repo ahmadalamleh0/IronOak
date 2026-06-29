@@ -89,6 +89,16 @@
     min-height: 100svh;
   }
 
+  .service-panel {
+    min-height: 88svh;
+  }
+
+  @media (min-width: 640px) {
+    .service-panel {
+      min-height: var(--panel-desktop-min-h, 380px);
+    }
+  }
+
   .hero-bg-photo {
     background-size: cover;
     background-position: 78% center;
