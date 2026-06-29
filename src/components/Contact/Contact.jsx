@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { IconMail, IconPhone, IconClock } from '../icons/index.jsx'
+import SectionHeading from '../SectionHeading/SectionHeading.jsx'
 
 const palette = {
   navy: '#07111D',
@@ -10,14 +11,6 @@ const palette = {
   warmGold: '#D8B866',
   offWhite: '#F4F1EA',
   sectionBg: '#DED4C2',
-}
-
-const headingGradient = {
-  backgroundImage: `linear-gradient(180deg, ${palette.graphite} 0%, ${palette.navy} 50%, ${palette.graphite} 100%)`,
-  backgroundClip: 'text',
-  WebkitBackgroundClip: 'text',
-  WebkitTextFillColor: 'transparent',
-  color: palette.graphite,
 }
 
 const watermarkStyle = {
@@ -71,21 +64,12 @@ const Contact = () => {
       />
 
       <div className="relative z-10 mx-auto max-w-6xl px-6 sm:px-10 lg:px-16">
-        <div className="mx-auto max-w-2xl text-center">
-          <h2
-            className="font-script text-7xl leading-none sm:text-8xl"
-            style={{ color: palette.gold, textShadow: '0 2px 18px rgba(201,162,74,0.22)' }}
-          >
-            Get In Touch
-          </h2>
-          <h3 className="mt-5 font-serif text-2xl font-bold leading-tight sm:text-3xl" style={headingGradient}>
-            Let&rsquo;s talk about your property
-          </h3>
-          <p className="mt-5 text-base leading-relaxed sm:text-lg" style={{ color: palette.stoneGray }}>
-            Need one job handled or ongoing property support? Tell us what you
-            need and our team will get back to you.
-          </p>
-        </div>
+        <SectionHeading
+          label="Get In Touch"
+          title="Let's Talk About Your Property"
+          description="Need one job handled or ongoing property support? Tell us what you need and our team will get back to you."
+          theme="light"
+        />
 
         <div className="mt-14 grid grid-cols-1 gap-12 lg:grid-cols-[1fr_0.8fr] lg:gap-16">
           {submitted ? (

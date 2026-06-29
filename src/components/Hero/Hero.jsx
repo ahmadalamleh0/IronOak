@@ -6,13 +6,13 @@ const overlayStyle = (ready) => ({
   opacity: ready ? undefined : 0,
   animation: ready ? 'overlay-rise 1.2s cubic-bezier(0.16,1,0.3,1) forwards' : 'none',
   background: [
-    'radial-gradient(ellipse 65% 55% at 50% 48%, rgba(5,9,16,0.78) 0%, rgba(5,9,16,0.5) 55%, rgba(5,9,16,0.28) 100%)',
-    'linear-gradient(0deg, rgba(5,9,16,0.55) 0%, rgba(5,9,16,0.3) 100%)',
+    'radial-gradient(ellipse 65% 55% at 50% 48%, rgba(5,9,16,0.62) 0%, rgba(5,9,16,0.38) 55%, rgba(5,9,16,0.16) 100%)',
+    'linear-gradient(0deg, rgba(5,9,16,0.42) 0%, rgba(5,9,16,0.2) 100%)',
   ].join(', '),
 })
 
 const textShadow = {
-  textShadow: '0 2px 18px rgba(0,0,0,0.55), 0 1px 4px rgba(0,0,0,0.85)',
+  textShadow: '0 2px 20px rgba(0,0,0,0.65), 0 1px 5px rgba(0,0,0,0.9)',
 }
 
 const Hero = ({ ready = false }) => {
@@ -33,7 +33,7 @@ const Hero = ({ ready = false }) => {
         className="hero-bg-photo absolute inset-0 motion-safe:animate-[skyline-drift_28s_ease-in-out_infinite]"
         style={{
           backgroundImage: 'url(/images/hero-skyline.jpg)',
-          filter: 'saturate(0.62) contrast(0.94) brightness(0.96)',
+          filter: 'saturate(0.7) contrast(0.98) brightness(1.12)',
         }}
       />
 
@@ -54,24 +54,15 @@ const Hero = ({ ready = false }) => {
 
         <h1
           style={{ ...headlineStyle, ...textShadow }}
-          className="mt-6 font-serif text-5xl font-bold leading-[1.05] tracking-tight text-white sm:text-7xl lg:text-8xl"
-        >
-          IronOak
-          <br />
-          <span className="text-4xl sm:text-5xl lg:text-6xl">Property Services</span>
-        </h1>
-
-        <p
-          style={{ ...fadeStyle(0.65), ...textShadow }}
-          className="mt-7 max-w-md text-base leading-relaxed text-white/80 sm:text-lg"
+          className="mt-7 max-w-xs font-serif text-3xl font-semibold leading-snug tracking-tight text-white sm:max-w-lg sm:text-4xl lg:max-w-2xl lg:text-5xl"
         >
           Reliable care for homes, buildings, and commercial spaces.
-        </p>
+        </h1>
 
-        <div style={fadeStyle(0.85)} className="mt-9">
+        <div style={fadeStyle(0.6)} className="mt-9">
           <a
             href="#contact"
-            className="inline-flex items-center justify-center rounded-sm border border-gold-400/70 bg-gradient-to-b from-gold-200 to-gold-500 px-8 py-3.5 text-sm font-semibold tracking-wide text-ink-950 shadow-[0_8px_24px_-8px_rgba(169,128,47,0.6)] transition-transform duration-300 hover:scale-[1.02]"
+            className="inline-flex items-center justify-center rounded-sm border border-gold-300/40 bg-gradient-to-b from-gold-300 to-gold-400 px-7 py-2.5 text-sm font-semibold tracking-wide text-ink-950 shadow-[0_4px_14px_-8px_rgba(169,128,47,0.35)] transition-all duration-300 hover:border-gold-300/70 hover:shadow-[0_6px_18px_-8px_rgba(169,128,47,0.45)]"
           >
             Request a Quote
           </a>

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { services } from '../../data/services.js'
+import SectionHeading from '../SectionHeading/SectionHeading.jsx'
 
 const palette = {
   navy: '#07111D',
@@ -11,14 +12,6 @@ const palette = {
   warmGold: '#D8B866',
   offWhite: '#F4F1EA',
   sectionBg: '#DED4C2',
-}
-
-const headingGradient = {
-  backgroundImage: `linear-gradient(180deg, ${palette.graphite} 0%, ${palette.navy} 50%, ${palette.graphite} 100%)`,
-  backgroundClip: 'text',
-  WebkitBackgroundClip: 'text',
-  WebkitTextFillColor: 'transparent',
-  color: palette.graphite,
 }
 
 const useRevealOnScroll = () => {
@@ -165,22 +158,14 @@ const ServicePanel = ({ label, title, description, image, slug, featured }) => {
 const Services = () => (
   <section id="services" className="relative py-24 sm:py-28" style={{ backgroundColor: palette.sectionBg }}>
     <div className="mx-auto max-w-6xl px-4 sm:px-10 lg:px-16">
-      <div className="mx-auto max-w-2xl px-2 text-center">
-        <span className="text-xs font-semibold uppercase tracking-[0.3em]" style={{ color: palette.gold }}>
-          What We Do
-        </span>
-        <h2
-          className="mt-4 font-serif text-4xl font-extrabold leading-tight sm:text-5xl"
-          style={headingGradient}
-        >
-          Our Services
-        </h2>
-        <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed sm:text-lg" style={{ color: palette.stoneGray }}>
-          Reliable property care services designed to keep homes, buildings,
-          and commercial spaces clean, functional, and professionally
-          maintained.
-        </p>
-      </div>
+      <SectionHeading
+        label="What We Do"
+        title="Our Services"
+        description="Reliable property care services designed to keep homes, buildings, and commercial spaces clean, functional, and professionally maintained."
+        theme="light"
+        className="px-2"
+        labelFont="var(--font-dreamy)"
+      />
 
       {/* mobile: cinematic full-bleed stacked slides, no card/grid styling at all */}
       <div className="mt-10 sm:hidden">

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { IconOffice, IconBuilding, IconResidential, IconWarehouse } from '../icons/index.jsx'
+import SectionHeading from '../SectionHeading/SectionHeading.jsx'
 
 const palette = {
   navy: '#07111D',
@@ -10,14 +11,6 @@ const palette = {
   warmGold: '#D8B866',
   offWhite: '#F4F1EA',
   sectionBg: '#DED4C2',
-}
-
-const headingGradient = {
-  backgroundImage: `linear-gradient(180deg, ${palette.graphite} 0%, ${palette.navy} 50%, ${palette.graphite} 100%)`,
-  backgroundClip: 'text',
-  WebkitBackgroundClip: 'text',
-  WebkitTextFillColor: 'transparent',
-  color: palette.graphite,
 }
 
 const properties = [
@@ -115,21 +108,13 @@ const PropertyCard = ({ icon: Icon, title, description, image }) => {
 const PropertyTypes = () => (
   <section className="relative py-24 sm:py-28" style={{ backgroundColor: palette.sectionBg }}>
     <div className="mx-auto max-w-6xl px-6 sm:px-10 lg:px-16">
-      <div className="mx-auto max-w-2xl text-center">
-        <span className="text-xs font-semibold uppercase tracking-[0.3em]" style={{ color: palette.gold }}>
-          Who We Support
-        </span>
-        <h2
-          className="mt-4 font-serif text-4xl font-extrabold leading-tight sm:text-5xl"
-          style={headingGradient}
-        >
-          Property Types We Serve
-        </h2>
-        <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed sm:text-lg" style={{ color: palette.stoneGray }}>
-          Reliable property care across residential, commercial, multi-unit,
-          and mixed-use spaces throughout the GTA.
-        </p>
-      </div>
+      <SectionHeading
+        label="Who We Support"
+        title="Property Types We Serve"
+        description="Reliable property care across residential, commercial, multi-unit, and mixed-use spaces throughout the GTA."
+        theme="light"
+        labelFont="var(--font-dreamy)"
+      />
 
       <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2">
         {properties.map((property) => (

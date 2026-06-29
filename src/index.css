@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Dreamy Girls";
+  src: url("/fonts/DreamyGirls.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
   --color-ink-950: #0a0d12;
   --color-ink-900: #0e131a;
@@ -18,6 +26,8 @@
   --font-display: "Cormorant Garamond", "Playfair Display", Georgia, serif;
   --font-sans: "Manrope", "Inter", system-ui, sans-serif;
   --font-script: "Pinyon Script", cursive;
+  --font-heading: "Bebas Neue", "Cormorant Garamond", serif;
+  --font-dreamy: "Dreamy Girls", "Pinyon Script", cursive;
 
   --animate-fade-up: fade-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 
