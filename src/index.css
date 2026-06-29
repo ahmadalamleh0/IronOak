@@ -85,6 +85,21 @@
 }
 
 @layer utilities {
+  .hero-svh {
+    min-height: 100svh;
+  }
+
+  .hero-bg-photo {
+    background-size: cover;
+    background-position: 78% center;
+  }
+
+  @media (min-width: 640px) {
+    .hero-bg-photo {
+      background-position: center;
+    }
+  }
+
   .text-gold-engraved {
     color: var(--color-gold-300);
     background: linear-gradient(

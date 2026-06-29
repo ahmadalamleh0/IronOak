@@ -34,7 +34,15 @@ const watermarkStyle = {
 }
 
 const inputClasses =
-  'w-full rounded-sm border border-[#6F7478]/35 bg-[#F4F1EA] px-4 py-3 text-sm text-[#1D242C] placeholder:text-[#6F7478] outline-none transition-colors duration-200 focus:border-[#C9A24A]'
+  'w-full rounded-md border border-[#6F7478]/28 bg-[#F8F6F0] px-5 py-3.5 text-sm font-medium text-[#1D242C] placeholder:font-normal placeholder:text-[#9B968F] outline-none shadow-[inset_0_1px_2px_rgba(7,17,29,0.05)] transition-all duration-300 focus:border-[#C9A24A]/80 focus:bg-white focus:shadow-[0_0_0_3px_rgba(201,162,74,0.16),inset_0_1px_2px_rgba(7,17,29,0.04)]'
+
+const selectChevron = {
+  backgroundImage:
+    "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%231D242C' stroke-width='1.6'%3E%3Cpath d='M5 8l5 5 5-5'/%3E%3C/svg%3E\")",
+  backgroundRepeat: 'no-repeat',
+  backgroundPosition: 'right 1.1rem center',
+  backgroundSize: '13px',
+}
 
 const Contact = () => {
   const [submitted, setSubmitted] = useState(false)
@@ -65,10 +73,10 @@ const Contact = () => {
       <div className="relative z-10 mx-auto max-w-6xl px-6 sm:px-10 lg:px-16">
         <div className="mx-auto max-w-2xl text-center">
           <h2
-            className="font-script text-6xl leading-none sm:text-7xl"
-            style={{ color: palette.gold }}
+            className="font-script text-7xl leading-none sm:text-8xl"
+            style={{ color: palette.gold, textShadow: '0 2px 18px rgba(201,162,74,0.22)' }}
           >
-            Get in touch
+            Get In Touch
           </h2>
           <h3 className="mt-5 font-serif text-2xl font-bold leading-tight sm:text-3xl" style={headingGradient}>
             Let&rsquo;s talk about your property
@@ -115,7 +123,12 @@ const Contact = () => {
                 placeholder="Phone number"
                 className={`${inputClasses} sm:col-span-1`}
               />
-              <select name="propertyType" defaultValue="" className={`${inputClasses} sm:col-span-1`}>
+              <select
+                name="propertyType"
+                defaultValue=""
+                className={`${inputClasses} sm:col-span-1 appearance-none pr-10`}
+                style={selectChevron}
+              >
                 <option value="" disabled>
                   Property type
                 </option>

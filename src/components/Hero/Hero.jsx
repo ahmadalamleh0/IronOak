@@ -35,10 +35,10 @@ const Hero = ({ ready = false }) => {
   }
 
   return (
-    <section className="relative flex min-h-dvh w-full overflow-hidden bg-ink-950">
-      {/* 1. hero image, full-bleed */}
+    <section className="hero-svh relative flex w-full overflow-hidden bg-ink-950">
+      {/* 1. hero image, full-bleed; mobile keeps the CN Tower/skyline in frame */}
       <div
-        className="absolute inset-0 bg-cover bg-center motion-safe:animate-[skyline-drift_28s_ease-in-out_infinite]"
+        className="hero-bg-photo absolute inset-0 motion-safe:animate-[skyline-drift_28s_ease-in-out_infinite]"
         style={{ backgroundImage: 'url(/images/hero-skyline.jpg)' }}
       />
 

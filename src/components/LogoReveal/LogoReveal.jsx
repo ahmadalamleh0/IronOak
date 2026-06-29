@@ -68,7 +68,7 @@ const LogoReveal = ({
           { autoAlpha: 1, y: 0, duration: 0.55 },
           '-=0.22',
         )
-        .to({}, { duration: 0.35 })
+        .to({}, { duration: 1.15 })
         .to(containerRef.current, {
           yPercent: -100,
           autoAlpha: 0,

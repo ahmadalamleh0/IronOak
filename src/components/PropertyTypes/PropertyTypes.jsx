@@ -115,14 +115,17 @@ const PropertyCard = ({ icon: Icon, title, description, image }) => {
 const PropertyTypes = () => (
   <section className="relative py-24 sm:py-28" style={{ backgroundColor: palette.sectionBg }}>
     <div className="mx-auto max-w-6xl px-6 sm:px-10 lg:px-16">
-      <div className="max-w-2xl">
+      <div className="mx-auto max-w-2xl text-center">
         <span className="text-xs font-semibold uppercase tracking-[0.3em]" style={{ color: palette.gold }}>
           Who We Support
         </span>
-        <h2 className="mt-4 font-serif text-3xl font-bold leading-tight sm:text-4xl" style={headingGradient}>
-          Property types we serve
+        <h2
+          className="mt-4 font-serif text-4xl font-extrabold leading-tight sm:text-5xl"
+          style={headingGradient}
+        >
+          Property Types We Serve
         </h2>
-        <p className="mt-5 text-base leading-relaxed sm:text-lg" style={{ color: palette.stoneGray }}>
+        <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed sm:text-lg" style={{ color: palette.stoneGray }}>
           Reliable property care across residential, commercial, multi-unit,
           and mixed-use spaces throughout the GTA.
         </p>

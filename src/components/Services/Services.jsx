@@ -1,59 +1,7 @@
-import {
-  IconWrench,
-  IconBuilding,
-  IconSpray,
-  IconPlumbing,
-  IconSparkle,
-  IconClipboard,
-} from '../icons/index.jsx'
-
-const services = [
-  {
-    icon: IconWrench,
-    title: 'Property Maintenance',
-    description: 'Hands-on repairs and upkeep that keep your property running smoothly.',
-    bullets: ['Handyman services', 'Repairs & maintenance', 'Small renovations', 'Preventative maintenance'],
-  },
-  {
-    icon: IconBuilding,
-    title: 'Building & Common Area Services',
-    description: 'Dependable support for lobbies, common areas, and everyday building operations.',
-    bullets: [
-      'Lobby & common area support',
-      'Building upkeep',
-      'Property manager support',
-      'Commercial & residential service plans',
-    ],
-  },
-  {
-    icon: IconSpray,
-    title: 'Exterior & Garage Services',
-    description: 'Keep entrances, driveways, and garages clean and presentable year-round.',
-    bullets: ['Garage power washing', 'Driveway & walkway cleaning', 'Exterior pressure washing', 'Seasonal maintenance'],
-  },
-  {
-    icon: IconPlumbing,
-    title: 'Plumbing Support',
-    description: 'Responsive plumbing support for everyday issues and unexpected repairs.',
-    bullets: ['Garage & basement plumbing', 'Leak detection & repairs', 'Fixture installations', 'Emergency plumbing support'],
-  },
-  {
-    icon: IconSparkle,
-    title: 'Cleaning & Property Care',
-    description: 'Detail-focused cleaning that keeps properties looking their best.',
-    bullets: ['Window cleaning', 'Gutter cleaning', 'Junk removal', 'Light landscaping'],
-  },
-  {
-    icon: IconClipboard,
-    title: 'Custom Service Plans',
-    description: 'Flexible plans built around how your property actually operates.',
-    bullets: ['Tailored service plans', 'One-time service calls', 'Ongoing service contracts', 'Residential & commercial support'],
-  },
-]
+import { useEffect, useRef, useState } from 'react'
 
 const palette = {
   navy: '#07111D',
-  deepBlue: '#0B1826',
   graphite: '#1D242C',
   stoneGray: '#6F7478',
   softGray: '#A8A59E',
@@ -64,90 +12,186 @@ const palette = {
 }
 
 const headingGradient = {
-  backgroundImage: `linear-gradient(180deg, ${palette.graphite} 0%, ${palette.navy} 50%, ${palette.deepBlue} 75%, ${palette.graphite} 100%)`,
+  backgroundImage: `linear-gradient(180deg, ${palette.graphite} 0%, ${palette.navy} 50%, ${palette.graphite} 100%)`,
   backgroundClip: 'text',
   WebkitBackgroundClip: 'text',
   WebkitTextFillColor: 'transparent',
   color: palette.graphite,
 }
 
+const services = [
+  {
+    slug: 'custom-solutions',
+    label: 'Tailored Property Support',
+    title: 'Custom Solutions',
+    description: 'Flexible service plans built around your property’s needs.',
+    image: '/services/custom-solutions.jpg',
+    featured: true,
+  },
+  {
+    slug: 'general-property-services',
+    label: 'Everyday Maintenance',
+    title: 'General Property Services',
+    description: 'Reliable repairs, upkeep, and preventative care for residential and commercial spaces.',
+    image: '/services/general-property-services.jpg',
+  },
+  {
+    slug: 'plumbing-support',
+    label: 'Practical Plumbing Help',
+    title: 'Plumbing Support',
+    description: 'Clean, dependable plumbing support for everyday issues and urgent property needs.',
+    image: '/services/plumbing-support.jpg',
+  },
+  {
+    slug: 'exterior-garage',
+    label: 'Exterior Care',
+    title: 'Exterior & Garage Services',
+    description: 'Keep entrances, driveways, parking areas, and exterior spaces clean and presentable.',
+    image: '/services/exterior-garage.jpg',
+  },
+  {
+    slug: 'additional-services',
+    label: 'Complete Property Care',
+    title: 'Additional Services',
+    description: 'Extra support for the details that keep your property looking sharp and well maintained.',
+    image: '/services/additional-services.jpg',
+  },
+]
+
+const useRevealOnScroll = () => {
+  const ref = useRef(null)
+  const [inView, setInView] = useState(false)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true)
+          observer.disconnect()
+        }
+      },
+      { threshold: 0.15 },
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
+
+  return [ref, inView]
+}
+
+const ServicePanel = ({ label, title, description, image, slug, featured }) => {
+  const [hovered, setHovered] = useState(false)
+  const [ref, inView] = useRevealOnScroll()
+
+  return (
+    <div
+      ref={ref}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className={`relative w-full overflow-hidden rounded-lg ${featured ? 'sm:col-span-2' : ''}`}
+      style={{
+        minHeight: featured ? '460px' : '380px',
+        boxShadow: hovered
+          ? '0 32px 60px -22px rgba(7,11,17,0.45)'
+          : '0 18px 38px -18px rgba(7,11,17,0.3)',
+        opacity: inView ? 1 : 0,
+        transform: inView ? 'translateY(0)' : 'translateY(28px)',
+        transitionProperty: 'opacity, transform, box-shadow',
+        transitionDuration: '700ms, 700ms, 350ms',
+        transitionTimingFunction: 'cubic-bezier(0.16,1,0.3,1)',
+      }}
+    >
+      {/* one unified image — fills the entire panel */}
+      <div
+        className="absolute inset-0 transition-transform duration-700 ease-out"
+        style={{
+          backgroundColor: palette.navy,
+          backgroundImage: `url(${image})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          filter: 'saturate(0.92) contrast(1.04)',
+          transform: hovered ? 'scale(1.05)' : 'scale(1)',
+        }}
+      />
+
+      {/* subtle navy tint so every panel feels like one consistent system */}
+      <div className="pointer-events-none absolute inset-0" style={{ backgroundColor: `${palette.navy}26` }} />
+
+      {/* strong bottom-to-top gradient for legible text */}
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          backgroundImage: `linear-gradient(to top, ${palette.navy}f2 0%, ${palette.navy}b8 28%, ${palette.navy}3d 58%, transparent 82%)`,
+        }}
+      />
+
+      <div className="relative flex h-full min-h-[380px] w-full items-end p-6 sm:p-8">
+        <div className="max-w-md">
+          <span
+            className="text-[0.65rem] font-semibold uppercase tracking-[0.3em]"
+            style={{ color: palette.warmGold }}
+          >
+            {label}
+          </span>
+
+          <h3
+            className={`mt-3 font-serif font-bold leading-tight ${
+              featured ? 'text-2xl sm:text-3xl lg:text-[2.25rem]' : 'text-xl sm:text-2xl'
+            }`}
+            style={{ color: palette.offWhite }}
+          >
+            {title}
+          </h3>
+
+          <p className="mt-3 text-sm leading-relaxed sm:text-base" style={{ color: `${palette.offWhite}c2` }}>
+            {description}
+          </p>
+
+          <a
+            href={`/services/${slug}`}
+            className="mt-5 inline-flex items-center gap-2 text-sm font-semibold tracking-wide"
+            style={{ color: hovered ? palette.warmGold : palette.gold }}
+          >
+            Learn More
+            <span
+              aria-hidden="true"
+              className="transition-transform duration-300"
+              style={{ transform: hovered ? 'translateX(4px)' : 'translateX(0)' }}
+            >
+              &rarr;
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 const Services = () => (
-  <section
-    id="services"
-    className="relative py-24 sm:py-28"
-    style={{ backgroundColor: palette.sectionBg }}
-  >
+  <section id="services" className="relative py-24 sm:py-28" style={{ backgroundColor: palette.sectionBg }}>
     <div className="mx-auto max-w-6xl px-6 sm:px-10 lg:px-16">
-      <div className="max-w-2xl">
-        <span
-          className="text-xs font-semibold uppercase tracking-[0.3em]"
-          style={{ color: palette.gold }}
-        >
-          Our Services
+      <div className="mx-auto max-w-2xl text-center">
+        <span className="text-xs font-semibold uppercase tracking-[0.3em]" style={{ color: palette.gold }}>
+          What We Do
         </span>
         <h2
-          className="mt-4 font-serif text-3xl font-bold leading-tight sm:text-4xl"
+          className="mt-4 font-serif text-4xl font-extrabold leading-tight sm:text-5xl"
           style={headingGradient}
         >
-          Property care, organized into clear service categories
+          Our Services
         </h2>
-        <p className="mt-5 text-base leading-relaxed sm:text-lg" style={{ color: palette.stoneGray }}>
-          From everyday maintenance to ongoing service plans — one partner for
-          every property need.
+        <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed sm:text-lg" style={{ color: palette.stoneGray }}>
+          Reliable property care services designed to keep homes, buildings,
+          and commercial spaces clean, functional, and professionally
+          maintained.
         </p>
       </div>
 
-      <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {services.map(({ icon: Icon, title, description, bullets }) => (
-          <div
-            key={title}
-            className="group relative flex flex-col rounded-md p-7 transition-all duration-300 hover:-translate-y-1"
-            style={{
-              backgroundColor: palette.graphite,
-              border: `1px solid ${palette.stoneGray}33`,
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = `${palette.warmGold}80`
-              e.currentTarget.style.backgroundColor = palette.deepBlue
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = `${palette.stoneGray}33`
-              e.currentTarget.style.backgroundColor = palette.graphite
-            }}
-          >
-            <div
-              className="flex h-12 w-12 items-center justify-center rounded-sm transition-colors duration-300"
-              style={{ border: `1px solid ${palette.gold}66` }}
-            >
-              <Icon className="h-6 w-6 text-[#C9A24A]" />
-            </div>
-
-            <h3 className="mt-6 font-serif text-lg font-bold" style={{ color: palette.offWhite }}>
-              {title}
-            </h3>
-            <p className="mt-3 text-sm leading-relaxed" style={{ color: palette.softGray }}>
-              {description}
-            </p>
-
-            <ul
-              className="mt-5 space-y-2 pt-5"
-              style={{ borderTop: `1px solid ${palette.stoneGray}26` }}
-            >
-              {bullets.map((b) => (
-                <li
-                  key={b}
-                  className="flex items-start gap-2.5 text-sm"
-                  style={{ color: palette.softGray }}
-                >
-                  <span
-                    className="mt-2 h-px w-2.5 shrink-0"
-                    style={{ backgroundColor: palette.warmGold }}
-                  />
-                  {b}
-                </li>
-              ))}
-            </ul>
-          </div>
+      <div className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6">
+        {services.map((service) => (
+          <ServicePanel key={service.slug} {...service} />
         ))}
       </div>
     </div>

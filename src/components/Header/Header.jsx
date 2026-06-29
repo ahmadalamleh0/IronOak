@@ -21,13 +21,14 @@ const Header = ({ ready = false }) => {
 
   const barActive = menuOpen
     ? 'border-white/10 bg-ink-950/80 backdrop-blur-md'
-    : 'border-transparent bg-ink-950/0'
+    : 'border-white/10 bg-ink-950/65 backdrop-blur-md sm:border-transparent sm:bg-ink-950/0 sm:backdrop-blur-none'
 
   return (
     <header className="group absolute inset-x-0 top-0 z-20">
-      {/* transparent at rest; becomes a dark navy glass bar on hover or while the menu is open */}
+      {/* always-on subtle bar on mobile (no hover there); transparent at rest on desktop,
+          becoming a dark navy glass bar on hover or while the menu is open */}
       <div
-        className={`absolute inset-0 h-20 border-b transition-all duration-300 sm:h-24 ${barActive} group-hover:border-white/10 group-hover:bg-ink-950/80 group-hover:backdrop-blur-md`}
+        className={`absolute inset-0 h-20 border-b transition-all duration-300 sm:h-24 ${barActive} sm:group-hover:border-white/10 sm:group-hover:bg-ink-950/80 sm:group-hover:backdrop-blur-md`}
       />
 
       <div
