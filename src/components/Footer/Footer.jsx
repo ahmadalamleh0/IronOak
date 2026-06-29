@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import LogoMark from '../Logo/LogoMark.jsx'
 
 const columns = [
@@ -11,12 +12,12 @@ const columns = [
       'Cleaning & Property Care',
       'Custom Service Plans',
     ],
-    hrefs: ['#services', '#services', '#services', '#services', '#services', '#services'],
+    hrefs: ['/#services', '/#services', '/#services', '/#services', '/#services', '/#services'],
   },
   {
     title: 'Company',
     links: ['Why IronOak', 'Contact', 'Request a Quote'],
-    hrefs: ['#why-ironoak', '#contact', '#contact'],
+    hrefs: ['/#why-ironoak', '/#contact', '/#contact'],
   },
 ]
 
@@ -54,12 +55,12 @@ const Footer = () => {
               <ul className="mt-5 space-y-3">
                 {col.links.map((link, i) => (
                   <li key={link}>
-                    <a
-                      href={col.hrefs[i]}
+                    <Link
+                      to={col.hrefs[i]}
                       className="text-sm text-gold-100/65 transition-colors duration-200 hover:text-gold-200"
                     >
                       {link}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>

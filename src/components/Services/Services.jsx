@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
+import { Link } from 'react-router-dom'
+import { services } from '../../data/services.js'
 
 const palette = {
   navy: '#07111D',
@@ -18,45 +20,6 @@ const headingGradient = {
   WebkitTextFillColor: 'transparent',
   color: palette.graphite,
 }
-
-const services = [
-  {
-    slug: 'custom-solutions',
-    label: 'Tailored Property Support',
-    title: 'Custom Solutions',
-    description: 'Flexible service plans built around your property’s needs.',
-    image: '/services/custom-solutions.jpg',
-    featured: true,
-  },
-  {
-    slug: 'general-property-services',
-    label: 'Everyday Maintenance',
-    title: 'General Property Services',
-    description: 'Reliable repairs, upkeep, and preventative care for residential and commercial spaces.',
-    image: '/services/general-property-services.jpg',
-  },
-  {
-    slug: 'plumbing-support',
-    label: 'Practical Plumbing Help',
-    title: 'Plumbing Support',
-    description: 'Clean, dependable plumbing support for everyday issues and urgent property needs.',
-    image: '/services/plumbing-support.jpg',
-  },
-  {
-    slug: 'exterior-garage',
-    label: 'Exterior Care',
-    title: 'Exterior & Garage Services',
-    description: 'Keep entrances, driveways, parking areas, and exterior spaces clean and presentable.',
-    image: '/services/exterior-garage.jpg',
-  },
-  {
-    slug: 'additional-services',
-    label: 'Complete Property Care',
-    title: 'Additional Services',
-    description: 'Extra support for the details that keep your property looking sharp and well maintained.',
-    image: '/services/additional-services.jpg',
-  },
-]
 
 const useRevealOnScroll = () => {
   const ref = useRef(null)
@@ -81,13 +44,14 @@ const useRevealOnScroll = () => {
   return [ref, inView]
 }
 
-// mobile: cinematic full-bleed stacked slides — no card, no grid, no padding
-const MobileServiceSlide = ({ label, title, description, image, slug }) => {
+// mobile: VYPR-style full-bleed clickable slides — no card, no grid, no padding
+const MobileServiceSlide = ({ label, title, image, slug }) => {
   const [ref, inView] = useRevealOnScroll()
 
   return (
-    <div
+    <Link
       ref={ref}
+      to={`/services/${slug}`}
       className="service-mobile-slide"
       style={{
         opacity: inView ? 1 : 0,
@@ -95,16 +59,17 @@ const MobileServiceSlide = ({ label, title, description, image, slug }) => {
         transition: 'opacity 700ms cubic-bezier(0.16,1,0.3,1), transform 700ms cubic-bezier(0.16,1,0.3,1)',
       }}
     >
-      <img src={image} alt={title} />
+      <div className="service-mobile-image-wrap">
+        <img src={image} alt={title} />
+      </div>
       <div className="service-mobile-content">
         <p className="service-mobile-label">{label}</p>
         <h3 className="service-mobile-title">{title}</h3>
-        <p className="service-mobile-description">{description}</p>
-        <a href={`/services/${slug}`} className="service-mobile-link">
+        <span className="service-mobile-link">
           Learn More <span aria-hidden="true">&rarr;</span>
-        </a>
+        </span>
       </div>
-    </div>
+    </Link>
   )
 }
 
@@ -177,8 +142,8 @@ const ServicePanel = ({ label, title, description, image, slug, featured }) => {
             {description}
           </p>
 
-          <a
-            href={`/services/${slug}`}
+          <Link
+            to={`/services/${slug}`}
             className="mt-5 inline-flex items-center gap-2 text-sm font-semibold tracking-wide"
             style={{ color: hovered ? palette.warmGold : palette.gold }}
           >
@@ -190,7 +155,7 @@ const ServicePanel = ({ label, title, description, image, slug, featured }) => {
             >
               &rarr;
             </span>
-          </a>
+          </Link>
         </div>
       </div>
     </div>

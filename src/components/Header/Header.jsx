@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import LogoMark from '../Logo/LogoMark.jsx'
 
 const textShadow = {
@@ -6,9 +7,9 @@ const textShadow = {
 }
 
 const navLinks = [
-  { label: 'Services', href: '#services' },
-  { label: 'Why IronOak', href: '#why-ironoak' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Services', href: '/#services' },
+  { label: 'Why IronOak', href: '/#why-ironoak' },
+  { label: 'Contact', href: '/#contact' },
 ]
 
 const Header = ({ ready = false }) => {
@@ -35,7 +36,7 @@ const Header = ({ ready = false }) => {
         style={{ ...fadeStyle, ...textShadow }}
         className="relative mx-auto flex h-20 w-full max-w-6xl items-center justify-between gap-3 px-6 sm:h-24 sm:px-10 lg:px-16"
       >
-        <a href="#" className="flex items-center gap-3">
+        <Link to="/" className="flex items-center gap-3">
           <LogoMark className="h-auto w-9 sm:w-11" />
           <div className="flex flex-col leading-tight">
             <span className="text-gold-engraved font-serif text-lg font-bold tracking-wide sm:text-xl">
@@ -45,7 +46,7 @@ const Header = ({ ready = false }) => {
               PROPERTY SERVICES INC.
             </span>
           </div>
-        </a>
+        </Link>
 
         <button
           type="button"
@@ -83,22 +84,22 @@ const Header = ({ ready = false }) => {
         }`}
       >
         {navLinks.map((link) => (
-          <a
+          <Link
             key={link.label}
-            href={link.href}
+            to={link.href}
             onClick={() => setMenuOpen(false)}
             className="block rounded-sm px-4 py-2.5 text-sm text-white/85 transition-colors duration-200 hover:bg-white/5 hover:text-gold-200"
           >
             {link.label}
-          </a>
+          </Link>
         ))}
-        <a
-          href="#contact"
+        <Link
+          to="/#contact"
           onClick={() => setMenuOpen(false)}
           className="mt-1 block rounded-sm bg-gradient-to-b from-gold-200 to-gold-500 px-4 py-2.5 text-center text-sm font-semibold text-ink-950"
         >
           Request a Quote
-        </a>
+        </Link>
       </div>
     </header>
   )
