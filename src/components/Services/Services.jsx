@@ -81,6 +81,34 @@ const useRevealOnScroll = () => {
   return [ref, inView]
 }
 
+// mobile: cinematic full-bleed stacked slides — no card, no grid, no padding
+const MobileServiceSlide = ({ label, title, description, image, slug }) => {
+  const [ref, inView] = useRevealOnScroll()
+
+  return (
+    <div
+      ref={ref}
+      className="service-mobile-slide"
+      style={{
+        opacity: inView ? 1 : 0,
+        transform: inView ? 'translateY(0)' : 'translateY(24px)',
+        transition: 'opacity 700ms cubic-bezier(0.16,1,0.3,1), transform 700ms cubic-bezier(0.16,1,0.3,1)',
+      }}
+    >
+      <img src={image} alt={title} />
+      <div className="service-mobile-content">
+        <p className="service-mobile-label">{label}</p>
+        <h3 className="service-mobile-title">{title}</h3>
+        <p className="service-mobile-description">{description}</p>
+        <a href={`/services/${slug}`} className="service-mobile-link">
+          Learn More <span aria-hidden="true">&rarr;</span>
+        </a>
+      </div>
+    </div>
+  )
+}
+
+// desktop: editorial grid card (one featured + 2x2 supporting)
 const ServicePanel = ({ label, title, description, image, slug, featured }) => {
   const [hovered, setHovered] = useState(false)
   const [ref, inView] = useRevealOnScroll()
@@ -127,33 +155,31 @@ const ServicePanel = ({ label, title, description, image, slug, featured }) => {
         }}
       />
 
-      <div className="relative flex h-full w-full items-end p-7 sm:p-8">
+      <div className="relative flex h-full w-full items-end p-8">
         <div className="max-w-md">
           <span
-            className="text-xs font-semibold uppercase tracking-[0.3em] sm:text-[0.65rem]"
+            className="text-[0.65rem] font-semibold uppercase tracking-[0.3em]"
             style={{ color: palette.warmGold }}
           >
             {label}
           </span>
 
           <h3
-            className={`mt-4 font-serif font-bold leading-[1.04] sm:mt-3 sm:leading-tight ${
-              featured
-                ? 'text-5xl sm:text-3xl lg:text-[2.25rem]'
-                : 'text-4xl sm:text-2xl'
+            className={`mt-3 font-serif font-bold leading-tight ${
+              featured ? 'text-3xl lg:text-[2.25rem]' : 'text-2xl'
             }`}
             style={{ color: palette.offWhite }}
           >
             {title}
           </h3>
 
-          <p className="mt-4 text-base leading-relaxed sm:mt-3 sm:text-base" style={{ color: `${palette.offWhite}c2` }}>
+          <p className="mt-3 text-base leading-relaxed" style={{ color: `${palette.offWhite}c2` }}>
             {description}
           </p>
 
           <a
             href={`/services/${slug}`}
-            className="mt-6 inline-flex items-center gap-2 text-sm font-semibold tracking-wide sm:mt-5"
+            className="mt-5 inline-flex items-center gap-2 text-sm font-semibold tracking-wide"
             style={{ color: hovered ? palette.warmGold : palette.gold }}
           >
             Learn More
@@ -191,7 +217,15 @@ const Services = () => (
         </p>
       </div>
 
-      <div className="mt-10 grid grid-cols-1 gap-3 sm:mt-14 sm:grid-cols-2 sm:gap-6">
+      {/* mobile: cinematic full-bleed stacked slides, no card/grid styling at all */}
+      <div className="mt-10 sm:hidden">
+        {services.map((service) => (
+          <MobileServiceSlide key={service.slug} {...service} />
+        ))}
+      </div>
+
+      {/* desktop/tablet: editorial card grid */}
+      <div className="hidden sm:mt-14 sm:grid sm:grid-cols-2 sm:gap-6">
         {services.map((service) => (
           <ServicePanel key={service.slug} {...service} />
         ))}
