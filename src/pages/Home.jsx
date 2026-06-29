@@ -6,7 +6,6 @@ import TrustStrip from '../components/TrustStrip/TrustStrip.jsx'
 import Services from '../components/Services/Services.jsx'
 import WhyIronOak from '../components/WhyIronOak/WhyIronOak.jsx'
 import PropertyTypes from '../components/PropertyTypes/PropertyTypes.jsx'
-import CTASection from '../components/CTASection/CTASection.jsx'
 import Contact from '../components/Contact/Contact.jsx'
 import AreasWeServe from '../components/AreasWeServe/AreasWeServe.jsx'
 import LocationMap from '../components/LocationMap/LocationMap.jsx'
@@ -34,7 +33,6 @@ const Home = () => {
         <WhyIronOak />
         <PropertyTypes />
         <AreasWeServe />
-        <CTASection />
         <Contact />
         <LocationMap />
       </main>

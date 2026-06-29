@@ -4,8 +4,11 @@ const MAP_EMBED_SRC = `https://www.google.com/maps?q=${encodeURIComponent(ADDRES
 const LocationMap = () => (
   <section className="relative bg-ink-950 py-24 sm:py-28">
     <div className="mx-auto max-w-6xl px-6 sm:px-10 lg:px-16">
-      <h2 className="text-gold-engraved font-script text-center text-6xl leading-none sm:text-7xl">
-        our Location
+      <h2
+        style={{ fontFamily: 'var(--font-heading)' }}
+        className="text-gold-engraved text-center text-4xl font-normal leading-tight tracking-wide sm:text-5xl"
+      >
+        Our Location
       </h2>
 
       <div className="mt-10 overflow-hidden rounded-md border border-gold-400/15">

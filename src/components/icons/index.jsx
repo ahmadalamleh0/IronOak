@@ -145,6 +145,13 @@ export const IconMail = ({ className = '' }) => (
   </svg>
 )
 
+export const IconAward = ({ className = '' }) => (
+  <svg viewBox="0 0 24 24" className={className} {...base}>
+    <circle cx="12" cy="9" r="5.5" />
+    <path d="M9 13.5l-1.5 7L12 18l4.5 2.5-1.5-7" />
+  </svg>
+)
+
 export const IconPhone = ({ className = '' }) => (
   <svg viewBox="0 0 24 24" className={className} {...base}>
     <path d="M5 4h3.2l1.3 4-2 1.4a12 12 0 0 0 5.1 5.1l1.4-2 4 1.3V17a2 2 0 0 1-2 2C10.6 19 5 13.4 5 6a2 2 0 0 1 0-2z" />

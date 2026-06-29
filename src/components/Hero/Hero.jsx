@@ -53,8 +53,8 @@ const Hero = ({ ready = false }) => {
         </span>
 
         <h1
-          style={{ ...headlineStyle, ...textShadow }}
-          className="mt-7 max-w-xs font-serif text-3xl font-semibold leading-snug tracking-tight text-white sm:max-w-lg sm:text-4xl lg:max-w-2xl lg:text-5xl"
+          style={{ ...headlineStyle, ...textShadow, fontFamily: 'var(--font-alfa)' }}
+          className="mt-7 max-w-xs text-2xl font-normal leading-snug text-white sm:max-w-lg sm:text-3xl lg:max-w-2xl lg:text-4xl"
         >
           Reliable care for homes, buildings, and commercial spaces.
         </h1>
