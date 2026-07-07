@@ -10,6 +10,7 @@ import Contact from '../components/Contact/Contact.jsx'
 import AreasWeServe from '../components/AreasWeServe/AreasWeServe.jsx'
 import LocationMap from '../components/LocationMap/LocationMap.jsx'
 import Footer from '../components/Footer/Footer.jsx'
+import FloatingWhatsAppButton from '../components/FloatingWhatsAppButton/FloatingWhatsAppButton.jsx'
 
 const Home = () => {
   const [introDone, setIntroDone] = useState(false)
@@ -37,6 +38,7 @@ const Home = () => {
         <LocationMap />
       </main>
       <Footer />
+      {introDone && <FloatingWhatsAppButton />}
     </>
   )
 }

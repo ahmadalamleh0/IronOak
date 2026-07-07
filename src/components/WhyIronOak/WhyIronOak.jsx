@@ -2,28 +2,25 @@ import { useEffect, useRef, useState } from 'react'
 import { IconKey, IconClock, IconShieldCheck, IconFileContract } from '../icons/index.jsx'
 import SectionHeading from '../SectionHeading/SectionHeading.jsx'
 
+const RM =
+  typeof window !== 'undefined' &&
+  window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
 const EASE = 'cubic-bezier(0.16,1,0.3,1)'
 
-const useRevealOnScroll = (threshold = 0.25) => {
+const useRevealOnScroll = (threshold = 0.2) => {
   const ref = useRef(null)
   const [inView, setInView] = useState(false)
-
   useEffect(() => {
     const el = ref.current
     if (!el) return
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setInView(true)
-          observer.disconnect()
-        }
-      },
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setInView(true); obs.disconnect() } },
       { threshold },
     )
-    observer.observe(el)
-    return () => observer.disconnect()
+    obs.observe(el)
+    return () => obs.disconnect()
   }, [])
-
   return [ref, inView]
 }
 
@@ -65,28 +62,45 @@ const WhyIronOak = () => {
         />
 
         <div ref={gridRef} className="mt-14 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
-          {points.map(({ icon: Icon, title, text }, i) => (
-            <div
-              key={title}
-              className="flex flex-col items-center text-center"
-              style={{
-                opacity: gridInView ? 1 : 0,
-                transform: gridInView ? 'translateY(0)' : 'translateY(20px)',
-                transition: `opacity 800ms ${EASE} ${i * 110}ms, transform 800ms ${EASE} ${i * 110}ms`,
-              }}
-            >
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-gold-400/30">
-                <Icon className="h-5 w-5 text-gold-300" />
-              </div>
-              <h3
-                style={{ fontFamily: 'var(--font-heading)' }}
-                className="mt-4 text-lg font-normal tracking-wide text-gold-100"
+          {points.map(({ icon: Icon, title, text }, i) => {
+            const delay = i * 110
+            const active = RM || gridInView
+
+            return (
+              <div
+                key={title}
+                className="flex flex-col items-center text-center"
+                style={{
+                  opacity:    active ? 1 : 0,
+                  transform:  active ? 'translateY(0)' : 'translateY(22px)',
+                  filter:     RM ? 'none' : active ? 'blur(0px)' : 'blur(5px)',
+                  transition: RM
+                    ? 'none'
+                    : `opacity 750ms ${EASE} ${delay}ms, transform 750ms ${EASE} ${delay}ms, filter 700ms ease ${delay}ms`,
+                }}
               >
-                {title}
-              </h3>
-              <p className="mt-2 max-w-[200px] text-sm leading-relaxed text-gold-100/60">{text}</p>
-            </div>
-          ))}
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-gold-400/30">
+                  <Icon className="h-5 w-5 text-gold-300" />
+                </div>
+
+                {/* Premium serif title — upgraded from Bebas Neue */}
+                <h3
+                  style={{
+                    fontFamily: 'var(--font-display)',
+                    fontSize: '1.25rem',
+                    fontWeight: 600,
+                    letterSpacing: '0.01em',
+                    lineHeight: 1.2,
+                  }}
+                  className="mt-4 text-gold-100"
+                >
+                  {title}
+                </h3>
+
+                <p className="mt-2 max-w-[200px] text-sm leading-relaxed text-gold-100/60">{text}</p>
+              </div>
+            )
+          })}
         </div>
       </div>
     </section>
