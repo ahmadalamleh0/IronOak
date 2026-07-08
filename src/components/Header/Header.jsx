@@ -142,6 +142,16 @@ const SCOPED_CSS = `
     box-shadow: 0 4px 22px rgba(169, 128, 47, 0.54);
   }
 
+  /* ── Spacer (mobile only — hidden on desktop) ───────────── */
+  .ironhawkNavSpacer {
+    display: none;
+  }
+
+  /* ── Call button (mobile only) ──────────────────────────── */
+  .ironhawkNavCall {
+    display: none;
+  }
+
   /* ── Hamburger (mobile only) ─────────────────────────────── */
   .ironhawkNavHamburger {
     display: none;
@@ -245,7 +255,7 @@ const SCOPED_CSS = `
       width: calc(100% - 28px);
       height: 52px;
       padding: 0 8px 0 16px;
-      gap: 10px;
+      gap: 8px;
     }
 
     .ironhawkNavLinks {
@@ -256,8 +266,36 @@ const SCOPED_CSS = `
       display: none;
     }
 
+    /* Spacer pushes call + hamburger to the far right */
+    .ironhawkNavSpacer {
+      flex: 1;
+    }
+
+    .ironhawkNavCall {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid rgba(201,162,74,0.30);
+      background: rgba(201,162,74,0.08);
+      color: #C9A24A;
+      text-decoration: none;
+      flex-shrink: 0;
+      transition: background 160ms ease, border-color 160ms ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .ironhawkNavCall:hover {
+      background: rgba(201,162,74,0.15);
+      border-color: rgba(201,162,74,0.50);
+    }
+
     .ironhawkNavHamburger {
       display: flex;
+      width: 44px;
+      height: 44px;
     }
 
     .ironhawkNavMobileMenu {
@@ -315,6 +353,20 @@ const Header = ({ ready = false }) => {
           <Link to="/#contact" className="ironhawkNavCta">
             Get a Quote
           </Link>
+
+          {/* Mobile: push call + hamburger to the right */}
+          <div className="ironhawkNavSpacer" aria-hidden="true" />
+
+          {/* Mobile call button */}
+          <a
+            href="tel:+14165709074"
+            className="ironhawkNavCall"
+            aria-label="Call IronOak"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .98h3a2 2 0 012 1.72c.127.96.362 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+            </svg>
+          </a>
 
           {/* Mobile hamburger */}
           <button

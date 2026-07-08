@@ -74,6 +74,44 @@ const SCOPED_CSS = `
   .io-qt-input::placeholder,
   .io-qt-textarea::placeholder { color: #A8A59E; }
 
+  /* Project size slider */
+  .io-qt-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 6px;
+    border-radius: 3px;
+    outline: none;
+    cursor: pointer;
+  }
+  .io-qt-slider::-webkit-slider-runnable-track {
+    height: 6px;
+    border-radius: 3px;
+  }
+  .io-qt-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #C9A24A;
+    border: 3px solid #fff;
+    box-shadow: 0 2px 12px rgba(201,162,74,0.50);
+    cursor: pointer;
+    margin-top: -10px;
+    transition: transform 120ms ease;
+  }
+  .io-qt-slider::-webkit-slider-thumb:hover { transform: scale(1.12); }
+  .io-qt-slider::-moz-range-thumb {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #C9A24A;
+    border: 3px solid #fff;
+    box-shadow: 0 2px 12px rgba(201,162,74,0.50);
+    cursor: pointer;
+  }
+
   /* Option button focus ring */
   .io-qt-opt:focus-visible {
     outline: 2px solid rgba(201,162,74,0.75);
@@ -173,7 +211,15 @@ const GTA_CITIES = [
 
 // ── Sub-components ────────────────────────────────────────────────────────────
 
-// 4-segment progress bar
+const getAreaLabel = (v) => {
+  if (v <= 30)  return 'Small — about a room or two'
+  if (v <= 80)  return 'Medium — a few rooms'
+  if (v <= 200) return 'Large — a full unit or floor'
+  if (v <= 350) return 'Very large — multiple units or levels'
+  return 'Major project — full property or large site'
+}
+
+// 5-segment progress bar
 const ProgressBar = ({ step }) => (
   <div style={{ marginBottom: '28px' }}>
     <p style={{
@@ -182,10 +228,10 @@ const ProgressBar = ({ step }) => (
       letterSpacing: '0.22em', textTransform: 'uppercase',
       color: C.gold, margin: '0 0 10px',
     }}>
-      Step {step} of 4{step === 4 ? ' · Last bit' : ''}
+      Step {step} of 5{step === 5 ? ' · Last bit' : ''}
     </p>
-    <div style={{ display: 'flex', gap: '5px' }}>
-      {[1, 2, 3, 4].map((i) => (
+    <div style={{ display: 'flex', gap: '4px' }}>
+      {[1, 2, 3, 4, 5].map((i) => (
         <div key={i} style={{
           flex: 1, height: '3px', borderRadius: '2px',
           background: i <= step ? C.gold : 'rgba(7,17,29,0.09)',
@@ -379,7 +425,10 @@ const Contact = () => {
     setTimeout(() => animateTo(step + 1), 300)
   }
 
-  const canStep3 =
+  const areaV   = answers.areaSize ?? 40
+  const areaPct = ((areaV - 10) / (500 - 10)) * 100
+
+  const canStep4 =
     !!answers.timeline &&
     !!answers.location &&
     (answers.location !== 'Other' || otherCity.trim().length > 0)
@@ -545,8 +594,64 @@ const Contact = () => {
                   </>
                 )}
 
-                {/* ── STEP 3: Job details ── */}
+                {/* ── STEP 3: Project size ── */}
                 {step === 3 && (
+                  <>
+                    <QHead
+                      main="How big is"
+                      highlight="the project?"
+                      sub="Best guess is fine — we'll confirm the details with you."
+                    />
+                    <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+                      <div style={{
+                        fontFamily: '"Inter Tight", Inter, Arial, sans-serif',
+                        fontWeight: 900,
+                        fontSize: 'clamp(2.6rem, 8vw, 3.4rem)',
+                        letterSpacing: '-0.04em', lineHeight: 1,
+                        color: C.navy,
+                      }}>
+                        {areaV}
+                        <span style={{
+                          fontFamily: '"Manrope", system-ui, sans-serif',
+                          fontSize: '1.2rem', fontWeight: 500,
+                          color: C.stone, marginLeft: '6px',
+                        }}>m²</span>
+                      </div>
+                      <p style={{
+                        fontFamily: '"Manrope", system-ui, sans-serif',
+                        fontSize: '0.82rem', color: C.stone,
+                        margin: '8px 0 0',
+                      }}>
+                        {getAreaLabel(areaV)}
+                      </p>
+                    </div>
+
+                    <div>
+                      <input
+                        type="range"
+                        min="10" max="500" step="5"
+                        value={areaV}
+                        className="io-qt-slider"
+                        onChange={(e) => setAnswers((p) => ({ ...p, areaSize: Number(e.target.value) }))}
+                        style={{
+                          background: `linear-gradient(90deg, ${C.gold} ${areaPct}%, rgba(7,17,29,0.12) ${areaPct}%)`,
+                        }}
+                        aria-label="Project size in square metres"
+                      />
+                      <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '10px' }}>
+                        {['Small', 'Medium', 'Large', 'Major Project'].map((lab) => (
+                          <span key={lab} style={{
+                            fontFamily: '"Manrope", system-ui, sans-serif',
+                            fontSize: '0.62rem', color: C.stone, fontWeight: 500,
+                          }}>{lab}</span>
+                        ))}
+                      </div>
+                    </div>
+                  </>
+                )}
+
+                {/* ── STEP 4: Job details ── */}
+                {step === 4 && (
                   <>
                     <QHead
                       main="Tell us about"
@@ -627,8 +732,8 @@ const Contact = () => {
                   </>
                 )}
 
-                {/* ── STEP 4: Contact ── */}
-                {step === 4 && (
+                {/* ── STEP 5: Contact ── */}
+                {step === 5 && (
                   <>
                     <QHead
                       main="Where do we"
@@ -684,17 +789,23 @@ const Contact = () => {
                     </button>
 
                     {step === 3 && (
+                      <button type="button" onClick={() => animateTo(4)} className="io-qt-btn">
+                        Continue <ArrowRight />
+                      </button>
+                    )}
+
+                    {step === 4 && (
                       <button
                         type="button"
-                        onClick={() => animateTo(4)}
-                        disabled={!canStep3}
+                        onClick={() => animateTo(5)}
+                        disabled={!canStep4}
                         className="io-qt-btn"
                       >
                         Continue <ArrowRight />
                       </button>
                     )}
 
-                    {step === 4 && (
+                    {step === 5 && (
                       <button
                         type="button"
                         onClick={handleSubmit}

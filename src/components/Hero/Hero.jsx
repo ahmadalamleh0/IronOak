@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react'
+import { useRef, useEffect } from 'react'
 import Header from '../Header/Header.jsx'
 
 const RM =
@@ -54,16 +54,14 @@ const DOT = (
 )
 
 const Hero = ({ ready = false }) => {
-  const [videoLoaded, setVideoLoaded] = useState(false)
   const videoRef = useRef(null)
 
-  // On mobile Safari autoplay can silently fail — kick-start playback once ready
+  // Kick-start playback on mobile where autoplay can silently fail
   useEffect(() => {
     const vid = videoRef.current
     if (!vid) return
-    const tryPlay = () => {
-      vid.play().catch(() => {}) // silent — user gesture may be needed on some browsers
-    }
+    const tryPlay = () => vid.play().catch(() => {})
+    // Already enough data buffered → play immediately
     if (vid.readyState >= 3) {
       tryPlay()
     } else {
@@ -96,8 +94,8 @@ const Hero = ({ ready = false }) => {
       />
 
       {/* ── Background video ── */}
-      {/* poster ensures no black frame on mobile while the video decodes.          */}
-      {/* onPlaying (not onLoadedData) fires only when pixels are actually rendering */}
+      {/* Always opacity:1 — the poster attribute shows the fallback image while    */}
+      {/* the video decodes, preventing any black frame on iOS/Android.             */}
       <video
         ref={videoRef}
         autoPlay
@@ -107,7 +105,6 @@ const Hero = ({ ready = false }) => {
         preload="auto"
         poster="/images/hero-background.jpg"
         aria-hidden="true"
-        onPlaying={() => setVideoLoaded(true)}
         style={{
           position: 'absolute',
           inset: 0,
@@ -115,8 +112,6 @@ const Hero = ({ ready = false }) => {
           height: '100%',
           objectFit: 'cover',
           filter: 'saturate(0.78) contrast(1.04) brightness(0.90)',
-          opacity: videoLoaded ? 1 : 0,
-          transition: 'opacity 900ms ease',
         }}
       >
         <source src="/videos/IronOak_video.mp4" type="video/mp4" />
@@ -274,7 +269,7 @@ const Hero = ({ ready = false }) => {
         {/* CTA — single ghost button */}
         <div style={{ ...btnFade, marginTop: '34px' }}>
           <a
-            href="#services"
+            href="#contact"
             style={{
               display: 'inline-flex',
               alignItems: 'center',
@@ -303,7 +298,7 @@ const Hero = ({ ready = false }) => {
               e.currentTarget.style.color = 'rgba(244,241,234,0.90)'
             }}
           >
-            Explore Services
+            Get a Free Quote
           </a>
         </div>
 
