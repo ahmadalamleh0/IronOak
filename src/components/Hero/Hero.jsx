@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import Header from '../Header/Header.jsx'
 
 const RM =
@@ -55,6 +55,22 @@ const DOT = (
 
 const Hero = ({ ready = false }) => {
   const [videoLoaded, setVideoLoaded] = useState(false)
+  const videoRef = useRef(null)
+
+  // On mobile Safari autoplay can silently fail — kick-start playback once ready
+  useEffect(() => {
+    const vid = videoRef.current
+    if (!vid) return
+    const tryPlay = () => {
+      vid.play().catch(() => {}) // silent — user gesture may be needed on some browsers
+    }
+    if (vid.readyState >= 3) {
+      tryPlay()
+    } else {
+      vid.addEventListener('canplay', tryPlay, { once: true })
+    }
+    return () => vid.removeEventListener('canplay', tryPlay)
+  }, [])
 
   // Animation schedule — each element gets its own timing
   const brandMask   = maskReveal(ready,  80, 700)
@@ -79,14 +95,19 @@ const Hero = ({ ready = false }) => {
         }}
       />
 
-      {/* ── Background video — fades in over image once loaded ── */}
+      {/* ── Background video ── */}
+      {/* poster ensures no black frame on mobile while the video decodes.          */}
+      {/* onPlaying (not onLoadedData) fires only when pixels are actually rendering */}
       <video
+        ref={videoRef}
         autoPlay
         muted
         loop
         playsInline
+        preload="auto"
+        poster="/images/hero-background.jpg"
         aria-hidden="true"
-        onLoadedData={() => setVideoLoaded(true)}
+        onPlaying={() => setVideoLoaded(true)}
         style={{
           position: 'absolute',
           inset: 0,
@@ -95,7 +116,7 @@ const Hero = ({ ready = false }) => {
           objectFit: 'cover',
           filter: 'saturate(0.78) contrast(1.04) brightness(0.90)',
           opacity: videoLoaded ? 1 : 0,
-          transition: 'opacity 1200ms ease',
+          transition: 'opacity 900ms ease',
         }}
       >
         <source src="/videos/IronOak_video.mp4" type="video/mp4" />
@@ -213,7 +234,8 @@ const Hero = ({ ready = false }) => {
           </div>
 
           {/* Line 2 — "taking pride in." — italic serif */}
-          <div style={{ ...head2.outer, marginTop: '4px' }}>
+          {/* Extra paddingBottom gives descenders (p, g) room inside overflow:hidden */}
+          <div style={{ ...head2.outer, marginTop: '4px', paddingBottom: '0.26em' }}>
             <span
               style={{
                 ...head2.inner,

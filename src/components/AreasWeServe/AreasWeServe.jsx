@@ -28,13 +28,15 @@ const SCOPED_CSS = `
   .io-sa-bottom    { grid-column: 1 / 3; grid-row: 3; margin-top: 60px; }
 
   @media (max-width: 920px) {
-    /* Collapse to single column — DOM order gives correct stack */
+    /* Flexbox column so we can reorder: header → grid → map → card */
     .io-sa-layout {
-      display: block;
+      display: flex;
+      flex-direction: column;
     }
-    .io-sa-grid-wrap { padding-top: 36px; }
-    .io-sa-card      { margin-top: 40px; }
-    .io-sa-bottom    { margin-top: 48px; }
+    .io-sa-header    { order: 1; }
+    .io-sa-grid-wrap { order: 2; padding-top: 36px; }
+    .io-sa-bottom    { order: 3; margin-top: 48px; }
+    .io-sa-card      { order: 4; margin-top: 40px; }
   }
 
   /* ── City grid ── */

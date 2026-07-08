@@ -34,9 +34,9 @@ const Home = () => {
         <PropertySolutions />
         <PropertyTypes />
         <WhyIronOak />
+        <Contact />
         <Reviews />
         <AreasWeServe />
-        <Contact />
         <LocationMap />
       </main>
       <Footer />

@@ -51,17 +51,22 @@ const SCOPED_CSS = `
     .io-rev-grid {
       display: flex;
       overflow-x: auto;
+      overflow-y: hidden;
       scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
       -ms-overflow-style: none;
       gap: 12px;
+      touch-action: pan-x;
+      overscroll-behavior-x: contain;
     }
     .io-rev-grid::-webkit-scrollbar { display: none; }
     .io-rev-card {
       flex: 0 0 85%;
       scroll-snap-align: start;
       min-height: 220px;
+      /* disable vertical lift on touch — feels like vertical drag otherwise */
+      transform: none !important;
     }
   }
 
