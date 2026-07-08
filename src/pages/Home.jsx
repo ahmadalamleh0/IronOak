@@ -3,11 +3,13 @@ import { useLocation } from 'react-router-dom'
 import LogoReveal from '../components/LogoReveal/LogoReveal.jsx'
 import Hero from '../components/Hero/Hero.jsx'
 import TrustStrip from '../components/TrustStrip/TrustStrip.jsx'
-import Services from '../components/Services/Services.jsx'
-import WhyIronOak from '../components/WhyIronOak/WhyIronOak.jsx'
+import Statement from '../components/Statement/Statement.jsx'
+import PropertySolutions from '../components/PropertySolutions/PropertySolutions.jsx'
 import PropertyTypes from '../components/PropertyTypes/PropertyTypes.jsx'
-import Contact from '../components/Contact/Contact.jsx'
+import Reviews from '../components/Reviews/Reviews.jsx'
+import WhyIronOak from '../components/WhyIronOak/WhyIronOak.jsx'
 import AreasWeServe from '../components/AreasWeServe/AreasWeServe.jsx'
+import Contact from '../components/Contact/Contact.jsx'
 import LocationMap from '../components/LocationMap/LocationMap.jsx'
 import Footer from '../components/Footer/Footer.jsx'
 import FloatingWhatsAppButton from '../components/FloatingWhatsAppButton/FloatingWhatsAppButton.jsx'
@@ -16,8 +18,6 @@ const Home = () => {
   const [introDone, setIntroDone] = useState(false)
   const location = useLocation()
 
-  // when arriving from another page with a #hash (e.g. /services/x -> /#contact),
-  // scroll to that section once the homepage has mounted
   useEffect(() => {
     if (!location.hash) return
     const target = document.querySelector(location.hash)
@@ -30,9 +30,11 @@ const Home = () => {
       <main>
         <Hero ready={introDone} />
         <TrustStrip />
-        <Services />
-        <WhyIronOak />
+        <Statement />
+        <PropertySolutions />
         <PropertyTypes />
+        <WhyIronOak />
+        <Reviews />
         <AreasWeServe />
         <Contact />
         <LocationMap />

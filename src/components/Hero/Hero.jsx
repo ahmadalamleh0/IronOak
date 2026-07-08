@@ -5,13 +5,15 @@ const RM =
   typeof window !== 'undefined' &&
   window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
-// Mask-reveal: overflow:hidden wrapper + child slides up from beneath the fold line.
-// Degrades to a simple opacity fade when prefers-reduced-motion is set.
-const maskReveal = (ready, delay, dur = 920) =>
+// Mask reveal — content slides up from beneath the fold line
+const maskReveal = (ready, delay, dur = 940) =>
   RM
     ? {
         outer: {},
-        inner: { opacity: ready ? 1 : 0, transition: ready ? `opacity 500ms ease ${delay}ms` : 'none' },
+        inner: {
+          opacity: ready ? 1 : 0,
+          transition: ready ? `opacity 500ms ease ${delay}ms` : 'none',
+        },
       }
     : {
         outer: { overflow: 'hidden', paddingBottom: '0.09em', paddingTop: '0.02em' },
@@ -25,31 +27,55 @@ const maskReveal = (ready, delay, dur = 920) =>
         },
       }
 
-const fadeUp = (ready, delay) => ({
+// Simple fade-up
+const fade = (ready, delay, dur = 680) => ({
   opacity: ready ? 1 : 0,
-  transform: RM ? 'none' : ready ? 'translateY(0)' : 'translateY(18px)',
+  transform: RM ? 'none' : ready ? 'translateY(0)' : 'translateY(12px)',
   transition: ready
-    ? `opacity 700ms ease ${delay}ms${RM ? '' : `, transform 700ms cubic-bezier(0.16,1,0.3,1) ${delay}ms`}`
+    ? `opacity ${dur}ms ease ${delay}ms${RM ? '' : `, transform ${dur}ms cubic-bezier(0.16,1,0.3,1) ${delay}ms`}`
     : 'none',
 })
 
-const textShadow = { textShadow: '0 2px 20px rgba(0,0,0,0.65), 0 1px 5px rgba(0,0,0,0.9)' }
+const ts = { textShadow: '0 2px 24px rgba(0,0,0,0.8), 0 1px 5px rgba(0,0,0,0.95)' }
+
+const DOT = (
+  <span
+    aria-hidden="true"
+    style={{
+      display: 'inline-block',
+      width: '3px',
+      height: '3px',
+      borderRadius: '50%',
+      background: 'rgba(201,162,74,0.55)',
+      flexShrink: 0,
+      margin: '0 2px',
+    }}
+  />
+)
 
 const Hero = ({ ready = false }) => {
   const [videoLoaded, setVideoLoaded] = useState(false)
 
-  const eyebrow = maskReveal(ready, 80, 700)
-  const headline = maskReveal(ready, 300, 1000)
+  // Animation schedule — each element gets its own timing
+  const brandMask   = maskReveal(ready,  80, 700)
+  const descFade    = fade(ready, 220)
+  const head1       = maskReveal(ready, 400, 980)
+  const head2       = maskReveal(ready, 570, 980)
+  const bodyFade    = fade(ready, 780)
+  const btnFade     = fade(ready, 960)
+  const pillFade    = fade(ready, 1180, 600)
 
   return (
     <section className="hero-svh relative flex w-full overflow-hidden bg-ink-950">
 
-      {/* ── Background image — permanent fallback ── */}
+      {/* ── Background image ── */}
       <div
-        className={`hero-bg-photo absolute inset-0${RM ? '' : ' motion-safe:animate-[skyline-drift_30s_ease-in-out_infinite]'}`}
+        className="absolute inset-0"
         style={{
-          backgroundImage: 'url(/images/hero-skyline.jpg)',
-          filter: 'saturate(0.7) contrast(0.98) brightness(1.12)',
+          backgroundImage: 'url(/images/hero-background.jpg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          filter: 'saturate(0.78) contrast(1.04) brightness(0.90)',
         }}
       />
 
@@ -61,77 +87,263 @@ const Hero = ({ ready = false }) => {
         playsInline
         aria-hidden="true"
         onLoadedData={() => setVideoLoaded(true)}
-        className={RM ? '' : 'motion-safe:animate-[skyline-drift_30s_ease-in-out_infinite]'}
         style={{
           position: 'absolute',
           inset: 0,
           width: '100%',
           height: '100%',
           objectFit: 'cover',
-          filter: 'saturate(0.7) contrast(0.98) brightness(1.12)',
+          filter: 'saturate(0.78) contrast(1.04) brightness(0.90)',
           opacity: videoLoaded ? 1 : 0,
           transition: 'opacity 1200ms ease',
         }}
       >
-        <source src="/videos/hero-background.mp4" type="video/mp4" />
+        <source src="/videos/IronOak_video.mp4" type="video/mp4" />
       </video>
 
-      {/* ── Dark overlay ── */}
+      {/* ── Dark overlay — cinematic vignette ── */}
       <div
+        aria-hidden="true"
         className="pointer-events-none absolute inset-0"
         style={{
+          background:
+            'linear-gradient(180deg, rgba(5,9,16,0.54) 0%, rgba(5,9,16,0.10) 32%, rgba(5,9,16,0.22) 62%, rgba(5,9,16,0.80) 100%)',
           opacity: ready ? 1 : 0,
           transition: ready ? 'opacity 1200ms ease' : 'none',
-          background: [
-            'radial-gradient(ellipse 65% 55% at 50% 48%, rgba(5,9,16,0.62) 0%, rgba(5,9,16,0.38) 55%, rgba(5,9,16,0.16) 100%)',
-            'linear-gradient(0deg, rgba(5,9,16,0.42) 0%, rgba(5,9,16,0.2) 100%)',
-          ].join(', '),
         }}
       />
 
       {/* ── Navigation ── */}
       <Header ready={ready} />
 
-      {/* ── Hero content ── */}
+      {/* ── Hero content — centered ── */}
       <div className="relative z-10 flex w-full flex-1 flex-col items-center justify-center px-6 py-28 text-center">
 
-        {/* Eyebrow label */}
-        <div style={eyebrow.outer}>
-          <span
-            style={{ ...eyebrow.inner, ...textShadow }}
-            className="inline-block text-xs font-semibold uppercase tracking-[0.38em] text-gold-300 sm:text-sm"
-          >
-            Property Care &amp; Maintenance
-          </span>
-        </div>
-
-        {/* Headline — mask reveal */}
-        <div className="mt-7 max-w-xs sm:max-w-lg lg:max-w-2xl" style={headline.outer}>
-          <h1
+        {/* Brand wordmark — IRONOAK */}
+        <div style={brandMask.outer}>
+          <div
             style={{
-              ...headline.inner,
-              ...textShadow,
-              fontFamily: '"Inter Tight", Inter, Arial, sans-serif',
-              fontWeight: 900,
-              letterSpacing: '-0.04em',
-              lineHeight: 0.95,
-              fontSize: 'clamp(2.1rem, 5.2vw, 3.6rem)',
+              ...brandMask.inner,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '14px',
             }}
-            className="text-white"
           >
-            <em style={{ fontStyle: 'italic', color: '#D8B866', fontWeight: 900 }}>Reliable</em>
-            {' '}care for homes, buildings, and commercial spaces.
-          </h1>
+            <span
+              style={{
+                width: '52px',
+                height: '1px',
+                background: 'rgba(201,162,74,0.75)',
+                flexShrink: 0,
+              }}
+            />
+            <span
+              style={{
+                ...ts,
+                fontFamily: '"Manrope", system-ui, sans-serif',
+                fontSize: '1.0rem',
+                fontWeight: 800,
+                letterSpacing: '0.46em',
+                textTransform: 'uppercase',
+                color: '#C9A24A',
+              }}
+            >
+              IRONOAK
+            </span>
+            <span
+              style={{
+                width: '52px',
+                height: '1px',
+                background: 'rgba(201,162,74,0.75)',
+                flexShrink: 0,
+              }}
+            />
+          </div>
         </div>
 
-        {/* CTA — fade-up after headline */}
-        <div className="mt-9" style={fadeUp(ready, 640)}>
+        {/* Descriptor — PROPERTY SERVICES INC. */}
+        <p
+          style={{
+            ...descFade,
+            ...ts,
+            fontFamily: '"Manrope", system-ui, sans-serif',
+            fontSize: '0.56rem',
+            fontWeight: 600,
+            letterSpacing: '0.36em',
+            textTransform: 'uppercase',
+            color: 'rgba(201,162,74,0.55)',
+            margin: '8px 0 0',
+          }}
+        >
+          PROPERTY SERVICES INC.
+        </p>
+
+        {/* Thin vertical breathing space */}
+        <div
+          aria-hidden="true"
+          style={{
+            width: '1px',
+            height: '30px',
+            background:
+              'linear-gradient(180deg, transparent 0%, rgba(201,162,74,0.42) 50%, transparent 100%)',
+            margin: '24px auto',
+          }}
+        />
+
+        {/* ── Main headline ── */}
+        <h1 style={{ margin: 0, maxWidth: '820px', width: '100%' }}>
+
+          {/* Line 1 — "Properties worth" — bold display */}
+          <div style={head1.outer}>
+            <span
+              style={{
+                ...head1.inner,
+                ...ts,
+                fontFamily: '"Inter Tight", Inter, Arial, sans-serif',
+                fontWeight: 900,
+                fontSize: 'clamp(3rem, 7.6vw, 6.2rem)',
+                letterSpacing: '-0.04em',
+                lineHeight: 0.94,
+                color: '#F4F1EA',
+              }}
+            >
+              Properties worth
+            </span>
+          </div>
+
+          {/* Line 2 — "taking pride in." — italic serif */}
+          <div style={{ ...head2.outer, marginTop: '4px' }}>
+            <span
+              style={{
+                ...head2.inner,
+                ...ts,
+                fontFamily: '"Cormorant Garamond", "Cormorant", Georgia, serif',
+                fontStyle: 'italic',
+                fontWeight: 600,
+                fontSize: 'clamp(2.8rem, 7.1vw, 5.8rem)',
+                letterSpacing: '0em',
+                lineHeight: 1.0,
+                color: 'rgba(244,241,234,0.88)',
+              }}
+            >
+              taking <span style={{ color: '#C9A24A' }}>pride</span> in.
+            </span>
+          </div>
+        </h1>
+
+        {/* Supporting copy */}
+        <p
+          style={{
+            ...bodyFade,
+            ...ts,
+            fontFamily: '"Manrope", system-ui, sans-serif',
+            fontSize: 'clamp(0.875rem, 1.7vw, 1rem)',
+            lineHeight: 1.74,
+            color: 'rgba(244,241,234,0.82)',
+            maxWidth: '460px',
+            marginTop: '28px',
+          }}
+        >
+          Repairs, maintenance, renovations, and upgrades for homes, condos,
+          and commercial spaces — delivered by one trusted team.
+        </p>
+
+        {/* CTA — single ghost button */}
+        <div style={{ ...btnFade, marginTop: '34px' }}>
           <a
-            href="#contact"
-            className="inline-flex items-center justify-center rounded-sm border border-gold-300/40 bg-gradient-to-b from-gold-300 to-gold-400 px-7 py-2.5 text-sm font-semibold tracking-wide text-ink-950 shadow-[0_4px_14px_-8px_rgba(169,128,47,0.35)] transition-all duration-300 hover:border-gold-300/70 hover:shadow-[0_6px_18px_-8px_rgba(169,128,47,0.45)]"
+            href="#services"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              padding: '13px 38px',
+              borderRadius: '4px',
+              background: 'rgba(255,255,255,0.07)',
+              border: '1px solid rgba(244,241,234,0.32)',
+              fontFamily: '"Manrope", system-ui, sans-serif',
+              fontSize: '0.72rem',
+              fontWeight: 600,
+              letterSpacing: '0.16em',
+              textTransform: 'uppercase',
+              color: 'rgba(244,241,234,0.90)',
+              textDecoration: 'none',
+              transition: 'border-color 220ms ease, background 220ms ease, color 220ms ease',
+              whiteSpace: 'nowrap',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderColor = 'rgba(244,241,234,0.60)'
+              e.currentTarget.style.background = 'rgba(255,255,255,0.13)'
+              e.currentTarget.style.color = '#F4F1EA'
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.borderColor = 'rgba(244,241,234,0.32)'
+              e.currentTarget.style.background = 'rgba(255,255,255,0.07)'
+              e.currentTarget.style.color = 'rgba(244,241,234,0.90)'
+            }}
           >
-            Request a Quote
+            Explore Services
           </a>
+        </div>
+
+        {/* Trust pill */}
+        <div
+          style={{
+            ...pillFade,
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexWrap: 'wrap',
+            gap: '8px 12px',
+            marginTop: '28px',
+            padding: '8px 22px',
+            borderRadius: '100px',
+            border: '1px solid rgba(201,162,74,0.22)',
+            background: 'rgba(7,17,29,0.42)',
+            backdropFilter: 'blur(14px)',
+            WebkitBackdropFilter: 'blur(14px)',
+          }}
+        >
+          <span
+            style={{
+              fontFamily: '"Manrope", system-ui, sans-serif',
+              fontSize: '0.6rem',
+              fontWeight: 600,
+              letterSpacing: '0.13em',
+              textTransform: 'uppercase',
+              color: 'rgba(244,241,234,0.66)',
+              whiteSpace: 'nowrap',
+            }}
+          >
+            10+ Years Experience
+          </span>
+          {DOT}
+          <span
+            style={{
+              fontFamily: '"Manrope", system-ui, sans-serif',
+              fontSize: '0.6rem',
+              fontWeight: 600,
+              letterSpacing: '0.13em',
+              textTransform: 'uppercase',
+              color: 'rgba(244,241,234,0.66)',
+              whiteSpace: 'nowrap',
+            }}
+          >
+            Licensed &amp; Insured
+          </span>
+          {DOT}
+          <span
+            style={{
+              fontFamily: '"Manrope", system-ui, sans-serif',
+              fontSize: '0.6rem',
+              fontWeight: 600,
+              letterSpacing: '0.13em',
+              textTransform: 'uppercase',
+              color: 'rgba(244,241,234,0.66)',
+              whiteSpace: 'nowrap',
+            }}
+          >
+            Residential &amp; Commercial
+          </span>
         </div>
 
       </div>
