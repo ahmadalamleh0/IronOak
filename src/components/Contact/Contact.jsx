@@ -119,6 +119,13 @@ const SCOPED_CSS = `
   }
   .io-qt-opt { -webkit-tap-highlight-color: transparent; }
 
+  /* Service card hover — icon always stays full color */
+  .io-qt-svc-card:hover:not(.io-qt-svc-card--sel) {
+    border-color: rgba(201,162,74,0.38);
+    background: rgba(201,162,74,0.04);
+    box-shadow: 0 2px 8px rgba(7,17,29,0.07);
+  }
+
   /* Primary CTA */
   .io-qt-btn {
     display: inline-flex;
@@ -275,19 +282,20 @@ const SvcCard = ({ icon, label, selected, onClick }) => (
   <button
     type="button"
     onClick={onClick}
-    className="io-qt-opt"
+    className={`io-qt-opt io-qt-svc-card${selected ? ' io-qt-svc-card--sel' : ''}`}
     style={{
       display: 'flex', alignItems: 'center', gap: '10px',
       width: '100%', padding: '10px 12px',
       borderRadius: '9px', textAlign: 'left', cursor: 'pointer',
-      border: `1.5px solid ${selected ? 'rgba(201,162,74,0.60)' : 'rgba(7,17,29,0.09)'}`,
-      background: selected ? 'rgba(201,162,74,0.06)' : '#F9F8F6',
-      transition: 'border-color 140ms ease, background 140ms ease',
+      border: selected ? '2px solid rgba(201,162,74,0.72)' : '1.5px solid rgba(7,17,29,0.09)',
+      background: selected ? 'rgba(201,162,74,0.10)' : '#F9F8F6',
+      boxShadow: selected ? '0 0 0 3px rgba(201,162,74,0.11), 0 4px 14px rgba(201,162,74,0.14)' : 'none',
+      transition: 'border-color 140ms ease, background 140ms ease, box-shadow 140ms ease',
       fontFamily: '"Manrope", system-ui, sans-serif',
       WebkitTapHighlightColor: 'transparent',
     }}
   >
-    {/* Icon container — fixed 28×28, greyscale when idle, full colour when selected */}
+    {/* Icon — always full color, no filters */}
     <span style={{
       flexShrink: 0,
       width: '28px', height: '28px',
@@ -302,10 +310,6 @@ const SvcCard = ({ icon, label, selected, onClick }) => (
         style={{
           width: '24px', height: '24px',
           objectFit: 'contain', display: 'block',
-          filter: selected
-            ? 'none'
-            : 'grayscale(1) opacity(0.55)',
-          transition: 'filter 140ms ease',
         }}
       />
     </span>
