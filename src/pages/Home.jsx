@@ -10,6 +10,7 @@ import Reviews from '../components/Reviews/Reviews.jsx'
 import WhyIronOak from '../components/WhyIronOak/WhyIronOak.jsx'
 import BuildingStatement from '../components/BuildingStatement/BuildingStatement.jsx'
 import AreasWeServe from '../components/AreasWeServe/AreasWeServe.jsx'
+import WaysToConnect from '../components/WaysToConnect/WaysToConnect.jsx'
 import Contact from '../components/Contact/Contact.jsx'
 import LocationMap from '../components/LocationMap/LocationMap.jsx'
 import Footer from '../components/Footer/Footer.jsx'
@@ -39,6 +40,7 @@ const Home = () => {
         <Contact />
         <Reviews />
         <AreasWeServe />
+        <WaysToConnect />
         <LocationMap />
       </main>
       <Footer />

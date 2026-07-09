@@ -1,4 +1,3 @@
-import { useRef, useEffect } from 'react'
 import Header from '../Header/Header.jsx'
 
 const RM =
@@ -36,7 +35,7 @@ const fade = (ready, delay, dur = 680) => ({
     : 'none',
 })
 
-const ts = { textShadow: '0 2px 24px rgba(0,0,0,0.8), 0 1px 5px rgba(0,0,0,0.95)' }
+const ts = { textShadow: '0 2px 24px rgba(0,0,0,0.85), 0 1px 5px rgba(0,0,0,0.95)' }
 
 const DOT = (
   <span
@@ -54,76 +53,46 @@ const DOT = (
 )
 
 const Hero = ({ ready = false }) => {
-  const videoRef = useRef(null)
-
-  // Kick-start playback on mobile where autoplay can silently fail
-  useEffect(() => {
-    const vid = videoRef.current
-    if (!vid) return
-    const tryPlay = () => vid.play().catch(() => {})
-    // Already enough data buffered → play immediately
-    if (vid.readyState >= 3) {
-      tryPlay()
-    } else {
-      vid.addEventListener('canplay', tryPlay, { once: true })
-    }
-    return () => vid.removeEventListener('canplay', tryPlay)
-  }, [])
-
   // Animation schedule — each element gets its own timing
-  const brandMask   = maskReveal(ready,  80, 700)
-  const descFade    = fade(ready, 220)
-  const head1       = maskReveal(ready, 400, 980)
-  const head2       = maskReveal(ready, 570, 980)
-  const bodyFade    = fade(ready, 780)
-  const btnFade     = fade(ready, 960)
-  const pillFade    = fade(ready, 1180, 600)
+  const brandMask = maskReveal(ready,  80, 700)
+  const descFade  = fade(ready, 220)
+  const head1     = maskReveal(ready, 400, 980)
+  const head2     = maskReveal(ready, 570, 980)
+  const bodyFade  = fade(ready, 780)
+  const btnFade   = fade(ready, 960)
+  const pillFade  = fade(ready, 1180, 600)
 
   return (
     <section className="hero-svh relative flex w-full overflow-hidden bg-ink-950">
 
-      {/* ── Background image ── */}
+      {/* ── Hero background image ── */}
       <div
-        className="absolute inset-0"
-        style={{
-          backgroundImage: 'url(/images/hero-background.jpg)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          filter: 'saturate(0.78) contrast(1.04) brightness(0.90)',
-        }}
-      />
-
-      {/* ── Background video ── */}
-      {/* Always opacity:1 — the poster attribute shows the fallback image while    */}
-      {/* the video decodes, preventing any black frame on iOS/Android.             */}
-      <video
-        ref={videoRef}
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="auto"
-        poster="/images/hero-background.jpg"
         aria-hidden="true"
         style={{
           position: 'absolute',
           inset: 0,
-          width: '100%',
-          height: '100%',
-          objectFit: 'cover',
-          filter: 'saturate(0.78) contrast(1.04) brightness(0.90)',
+          backgroundImage: 'url(/images/hero-bg.png)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center center',
+          backgroundRepeat: 'no-repeat',
+          // Slightly cool + deepen the warm image to not fight the gold text
+          filter: 'brightness(0.82) saturate(0.92)',
         }}
-      >
-        <source src="/videos/IronOak_video.mp4" type="video/mp4" />
-      </video>
+      />
 
-      {/* ── Dark overlay — cinematic vignette ── */}
+      {/* ── Overlay — dark at top for nav, stronger at bottom to frame content ── */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0"
         style={{
-          background:
-            'linear-gradient(180deg, rgba(5,9,16,0.54) 0%, rgba(5,9,16,0.10) 32%, rgba(5,9,16,0.22) 62%, rgba(5,9,16,0.80) 100%)',
+          background: [
+            'linear-gradient(180deg,',
+            '  rgba(5,9,16,0.68) 0%,',
+            '  rgba(5,9,16,0.32) 28%,',
+            '  rgba(5,9,16,0.42) 55%,',
+            '  rgba(5,9,16,0.78) 100%',
+            ')',
+          ].join(''),
           opacity: ready ? 1 : 0,
           transition: ready ? 'opacity 1200ms ease' : 'none',
         }}
@@ -210,7 +179,7 @@ const Hero = ({ ready = false }) => {
         {/* ── Main headline ── */}
         <h1 style={{ margin: 0, maxWidth: '820px', width: '100%' }}>
 
-          {/* Line 1 — "Properties worth" — bold display */}
+          {/* Line 1 */}
           <div style={head1.outer}>
             <span
               style={{
@@ -224,12 +193,11 @@ const Hero = ({ ready = false }) => {
                 color: '#F4F1EA',
               }}
             >
-              Properties worth
+              Keep every space
             </span>
           </div>
 
-          {/* Line 2 — "taking pride in." — italic serif */}
-          {/* Extra paddingBottom gives descenders (p, g) room inside overflow:hidden */}
+          {/* Line 2 — italic serif, extra paddingBottom for descenders */}
           <div style={{ ...head2.outer, marginTop: '4px', paddingBottom: '0.26em' }}>
             <span
               style={{
@@ -244,7 +212,7 @@ const Hero = ({ ready = false }) => {
                 color: 'rgba(244,241,234,0.88)',
               }}
             >
-              taking <span style={{ color: '#C9A24A' }}>pride</span> in.
+              at its <span style={{ color: '#C9A24A' }}>Best.</span>
             </span>
           </div>
         </h1>
@@ -263,10 +231,10 @@ const Hero = ({ ready = false }) => {
           }}
         >
           Repairs, maintenance, renovations, and upgrades for homes, condos,
-          and commercial spaces — delivered by one trusted team.
+          and commercial spaces, delivered by one trusted team.
         </p>
 
-        {/* CTA — single ghost button */}
+        {/* CTA */}
         <div style={{ ...btnFade, marginTop: '34px' }}>
           <a
             href="#contact"
@@ -286,15 +254,15 @@ const Hero = ({ ready = false }) => {
               textDecoration: 'none',
               transition: 'background 200ms ease, box-shadow 200ms ease',
               whiteSpace: 'nowrap',
-              boxShadow: '0 2px 16px rgba(0,0,0,0.18)',
+              boxShadow: '0 2px 16px rgba(0,0,0,0.22)',
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.background = '#ffffff'
-              e.currentTarget.style.boxShadow = '0 4px 24px rgba(0,0,0,0.28)'
+              e.currentTarget.style.boxShadow = '0 4px 28px rgba(0,0,0,0.32)'
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.background = 'rgba(255,255,255,0.95)'
-              e.currentTarget.style.boxShadow = '0 2px 16px rgba(0,0,0,0.18)'
+              e.currentTarget.style.boxShadow = '0 2px 16px rgba(0,0,0,0.22)'
             }}
           >
             Tell Us About Your Project
@@ -314,50 +282,20 @@ const Hero = ({ ready = false }) => {
             padding: '8px 22px',
             borderRadius: '100px',
             border: '1px solid rgba(201,162,74,0.22)',
-            background: 'rgba(7,17,29,0.42)',
+            background: 'rgba(7,17,29,0.48)',
             backdropFilter: 'blur(14px)',
             WebkitBackdropFilter: 'blur(14px)',
           }}
         >
-          <span
-            style={{
-              fontFamily: '"Manrope", system-ui, sans-serif',
-              fontSize: '0.6rem',
-              fontWeight: 600,
-              letterSpacing: '0.13em',
-              textTransform: 'uppercase',
-              color: 'rgba(244,241,234,0.66)',
-              whiteSpace: 'nowrap',
-            }}
-          >
+          <span style={{ fontFamily: '"Manrope", system-ui, sans-serif', fontSize: '0.6rem', fontWeight: 600, letterSpacing: '0.13em', textTransform: 'uppercase', color: 'rgba(244,241,234,0.66)', whiteSpace: 'nowrap' }}>
             10+ Years Experience
           </span>
           {DOT}
-          <span
-            style={{
-              fontFamily: '"Manrope", system-ui, sans-serif',
-              fontSize: '0.6rem',
-              fontWeight: 600,
-              letterSpacing: '0.13em',
-              textTransform: 'uppercase',
-              color: 'rgba(244,241,234,0.66)',
-              whiteSpace: 'nowrap',
-            }}
-          >
+          <span style={{ fontFamily: '"Manrope", system-ui, sans-serif', fontSize: '0.6rem', fontWeight: 600, letterSpacing: '0.13em', textTransform: 'uppercase', color: 'rgba(244,241,234,0.66)', whiteSpace: 'nowrap' }}>
             Licensed &amp; Insured
           </span>
           {DOT}
-          <span
-            style={{
-              fontFamily: '"Manrope", system-ui, sans-serif',
-              fontSize: '0.6rem',
-              fontWeight: 600,
-              letterSpacing: '0.13em',
-              textTransform: 'uppercase',
-              color: 'rgba(244,241,234,0.66)',
-              whiteSpace: 'nowrap',
-            }}
-          >
+          <span style={{ fontFamily: '"Manrope", system-ui, sans-serif', fontSize: '0.6rem', fontWeight: 600, letterSpacing: '0.13em', textTransform: 'uppercase', color: 'rgba(244,241,234,0.66)', whiteSpace: 'nowrap' }}>
             Residential &amp; Commercial
           </span>
         </div>
