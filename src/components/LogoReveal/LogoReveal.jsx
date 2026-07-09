@@ -46,33 +46,33 @@ const LogoReveal = ({
           clipPath: 'inset(0% 0% 0% 0%)',
           scale: 1,
           filter: 'blur(0px)',
-          duration: 1.1,
+          duration: 0.9,
           ease: 'power3.out',
         })
-        .to(gold, { autoAlpha: 1, duration: 0.75, ease: 'power2.out' }, '-=0.45')
+        .to(gold, { autoAlpha: 1, duration: 0.6, ease: 'power2.out' }, '-=0.40')
         .fromTo(
           wordmarkRef.current,
           { autoAlpha: 0, y: 14, letterSpacing: '0.1em' },
-          { autoAlpha: 1, y: 0, letterSpacing: '0.01em', duration: 0.7 },
-          '-=0.35',
+          { autoAlpha: 1, y: 0, letterSpacing: '0.01em', duration: 0.55 },
+          '-=0.30',
         )
         .fromTo(
           subtextRef.current,
           { autoAlpha: 0, y: 8 },
-          { autoAlpha: 1, y: 0, duration: 0.5 },
-          '-=0.3',
+          { autoAlpha: 1, y: 0, duration: 0.4 },
+          '-=0.25',
         )
         .fromTo(
           taglineRef.current,
           { autoAlpha: 0, y: 8 },
-          { autoAlpha: 1, y: 0, duration: 0.55 },
-          '-=0.22',
+          { autoAlpha: 1, y: 0, duration: 0.4 },
+          '-=0.18',
         )
-        .to({}, { duration: 1.15 })
+        .to({}, { duration: 0.6 })
         .to(containerRef.current, {
           yPercent: -100,
           autoAlpha: 0,
-          duration: 0.8,
+          duration: 0.65,
           ease: 'power3.inOut',
         })
     })

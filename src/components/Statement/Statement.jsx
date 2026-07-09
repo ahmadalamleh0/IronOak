@@ -67,9 +67,9 @@ const Statement = () => {
       // Word-by-word mask reveal — each word slides up independently
       gsap.from(words, {
         yPercent: 110,
-        duration: 0.9,
+        duration: mobile ? 0.7 : 0.9,
         ease: 'power3.out',
-        stagger: 0.12,
+        stagger: mobile ? 0.09 : 0.12,
         scrollTrigger: {
           trigger: headlineRef.current,
           start: 'top 84%',
@@ -77,13 +77,13 @@ const Statement = () => {
       })
 
       if (mobile) {
-        // Phrase-by-phrase stagger on mobile — smooth, not chunky
+        // Phrase-by-phrase stagger on mobile — fast and punchy
         gsap.from(phrases, {
           opacity: 0,
-          y: 9,
-          duration: 0.62,
+          y: 7,
+          duration: 0.48,
           ease: 'power2.out',
-          stagger: 0.11,
+          stagger: 0.08,
           scrollTrigger: {
             trigger: paraRef.current,
             start: 'top 89%',
@@ -96,7 +96,7 @@ const Statement = () => {
           y: 16,
           duration: 0.75,
           ease: 'power2.out',
-          delay: 0.55,
+          delay: 0.45,
           scrollTrigger: {
             trigger: paraRef.current,
             start: 'top 89%',

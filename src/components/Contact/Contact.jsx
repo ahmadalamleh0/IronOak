@@ -307,6 +307,8 @@ const SvcCard = ({ icon, label, selected, onClick }) => (
         aria-hidden="true"
         width="24"
         height="24"
+        loading="lazy"
+        decoding="async"
         style={{
           width: '24px', height: '24px',
           objectFit: 'contain', display: 'block',

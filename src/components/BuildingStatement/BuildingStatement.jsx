@@ -9,6 +9,8 @@ const BuildingStatement = () => (
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'flex-start',
+      contentVisibility: 'auto',
+      containIntrinsicSize: '0 600px',
     }}
   >
     {/* Background image — building at bottom, sky at top */}
