@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { IconMail, IconPhone, IconClock } from '../icons/index.jsx'
 
 // ── Palette ──────────────────────────────────────────────────────────────────
 const C = {
@@ -170,24 +169,24 @@ const SCOPED_CSS = `
 
 // ── Data ─────────────────────────────────────────────────────────────────────
 const SERVICES = [
-  { emoji: '🛠',  label: 'Repairs & Maintenance'    },
-  { emoji: '🏗',  label: 'Renovations'               },
-  { emoji: '⚡',  label: 'Installations & Upgrades'  },
-  { emoji: '🧱',  label: 'Construction'              },
-  { emoji: '🏠',  label: 'Residential Services'      },
-  { emoji: '🏢',  label: 'Commercial Services'       },
-  { emoji: '🔧',  label: 'Building Maintenance'      },
-  { emoji: '🚿',  label: 'Plumbing'                  },
-  { emoji: '💡',  label: 'Electrical'                },
-  { emoji: '🪚',  label: 'Carpentry & Millwork'      },
-  { emoji: '🎨',  label: 'Painting & Finishing'      },
-  { emoji: '🧩',  label: 'Flooring & Tile'           },
-  { emoji: '🪵',  label: 'Drywall & Repairs'         },
-  { emoji: '🌿',  label: 'Exterior Improvements'     },
-  { emoji: '❄️', label: 'Seasonal Services'          },
-  { emoji: '📹',  label: 'CCTV Installation'         },
-  { emoji: '📋',  label: 'Custom Projects'           },
-  { emoji: '🚨',  label: 'Urgent Repairs'            },
+  { icon: '/img/repairs-maintenance.png',  label: 'Repairs & Maintenance'   },
+  { icon: '/img/renovations.png',          label: 'Renovations'              },
+  { icon: '/img/installations-upgrades.png', label: 'Installations & Upgrades' },
+  { icon: '/img/construction.png',         label: 'Construction'             },
+  { icon: '/img/residential-services.png', label: 'Residential Services'     },
+  { icon: '/img/commercial-services.png',  label: 'Commercial Services'      },
+  { icon: '/img/repairs-maintenance.png',  label: 'Building Maintenance'     },
+  { icon: '/img/plumbing.png',             label: 'Plumbing'                 },
+  { icon: '/img/electrical.png',           label: 'Electrical'               },
+  { icon: '/img/carpentry-millwork.png',   label: 'Carpentry & Millwork'     },
+  { icon: '/img/painting-finishing.png',   label: 'Painting & Finishing'     },
+  { icon: '/img/flooring-tile.png',        label: 'Flooring & Tile'          },
+  { icon: '/img/drywall.png',              label: 'Drywall & Repairs'        },
+  { icon: '/img/exterior-improvements.png', label: 'Exterior Improvements'   },
+  { icon: '/img/seasonal.png',             label: 'Seasonal Services'        },
+  { icon: '/img/cctv.png',                 label: 'CCTV Installation'        },
+  { icon: '/img/custom-projects.png',      label: 'Custom Projects'          },
+  { icon: '/img/urgent.png',               label: 'Urgent Repairs'           },
 ]
 
 const PROPERTY_TYPES = [
@@ -271,29 +270,56 @@ const QHead = ({ main, highlight, sub }) => (
   </div>
 )
 
-// Compact emoji + label option (service grid)
-const SvcCard = ({ emoji, label, selected, onClick }) => (
+// Service option card — PNG icon + label
+const SvcCard = ({ icon, label, selected, onClick }) => (
   <button
     type="button"
     onClick={onClick}
     className="io-qt-opt"
     style={{
-      display: 'flex', alignItems: 'center', gap: '9px',
+      display: 'flex', alignItems: 'center', gap: '10px',
       width: '100%', padding: '10px 12px',
       borderRadius: '9px', textAlign: 'left', cursor: 'pointer',
-      border: `1.5px solid ${selected ? 'rgba(201,162,74,0.62)' : 'rgba(7,17,29,0.10)'}`,
+      border: `1.5px solid ${selected ? 'rgba(201,162,74,0.60)' : 'rgba(7,17,29,0.09)'}`,
       background: selected ? 'rgba(201,162,74,0.06)' : '#F9F8F6',
       transition: 'border-color 140ms ease, background 140ms ease',
       fontFamily: '"Manrope", system-ui, sans-serif',
+      WebkitTapHighlightColor: 'transparent',
     }}
   >
-    <span style={{ fontSize: '1.05rem', lineHeight: 1, flexShrink: 0 }}>{emoji}</span>
+    {/* Icon container — fixed 28×28, greyscale when idle, full colour when selected */}
+    <span style={{
+      flexShrink: 0,
+      width: '28px', height: '28px',
+      display: 'flex', alignItems: 'center', justifyContent: 'center',
+    }}>
+      <img
+        src={icon}
+        alt=""
+        aria-hidden="true"
+        width="24"
+        height="24"
+        style={{
+          width: '24px', height: '24px',
+          objectFit: 'contain', display: 'block',
+          filter: selected
+            ? 'none'
+            : 'grayscale(1) opacity(0.55)',
+          transition: 'filter 140ms ease',
+        }}
+      />
+    </span>
+
     <span style={{
       fontSize: '0.77rem', fontWeight: selected ? 700 : 500,
       color: selected ? C.navy : '#3A4148', lineHeight: 1.25,
-    }}>{label}</span>
+      flex: 1,
+    }}>
+      {label}
+    </span>
+
     {selected && (
-      <svg style={{ flexShrink: 0, marginLeft: 'auto' }} viewBox="0 0 14 14" width="13" height="13" fill="none" stroke={C.gold} strokeWidth="2.3" strokeLinecap="round" strokeLinejoin="round">
+      <svg style={{ flexShrink: 0 }} viewBox="0 0 14 14" width="13" height="13" fill="none" stroke={C.gold} strokeWidth="2.3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <path d="M2.5 7l3 3 6-5"/>
       </svg>
     )}
@@ -363,40 +389,168 @@ const ArrowLeft = () => (
   </svg>
 )
 
-// ── Contact info bar (bottom) ─────────────────────────────────────────────────
+const CD_CSS = `
+  .io-cd-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  @media (max-width: 720px) {
+    .io-cd-grid { grid-template-columns: 1fr; }
+  }
+
+  .io-cd-card {
+    display: flex;
+    flex-direction: column;
+    padding: 32px 28px;
+    border-radius: 16px;
+    border: 1px solid rgba(201,162,74,0.12);
+    background: rgba(255,255,255,0.025);
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 200ms ease, border-color 200ms ease, transform 200ms ease, box-shadow 200ms ease;
+  }
+  .io-cd-card:hover {
+    background: rgba(201,162,74,0.07);
+    border-color: rgba(201,162,74,0.30);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.22);
+  }
+
+  .io-cd-card-featured {
+    border-color: rgba(201,162,74,0.28);
+    background: rgba(201,162,74,0.055);
+  }
+  .io-cd-card-featured:hover {
+    border-color: rgba(201,162,74,0.48);
+    background: rgba(201,162,74,0.10);
+  }
+
+  .io-cd-icon-wrap {
+    width: 46px; height: 46px; border-radius: 11px;
+    background: rgba(201,162,74,0.09);
+    border: 1px solid rgba(201,162,74,0.20);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 24px;
+    flex-shrink: 0;
+  }
+  .io-cd-card-featured .io-cd-icon-wrap {
+    background: rgba(201,162,74,0.14);
+    border-color: rgba(201,162,74,0.35);
+  }
+
+  .io-cd-label {
+    font-family: "Inter Tight", Inter, Arial, sans-serif;
+    font-size: clamp(1.05rem, 2vw, 1.2rem);
+    font-weight: 800; letter-spacing: -0.02em; line-height: 1.1;
+    color: #F4F1EA; margin: 0 0 8px;
+  }
+
+  .io-cd-sub {
+    font-family: "Manrope", system-ui, sans-serif;
+    font-size: 0.88rem; line-height: 1.55;
+    color: rgba(244,241,234,0.48);
+    margin: 0; flex: 1;
+  }
+
+  .io-cd-cta-line {
+    display: flex; align-items: center; gap: 6px;
+    margin-top: 24px; padding-top: 20px;
+    border-top: 1px solid rgba(201,162,74,0.10);
+    font-family: "Manrope", system-ui, sans-serif;
+    font-size: 0.67rem; font-weight: 700; letter-spacing: 0.10em;
+    text-transform: uppercase; color: #C9A24A;
+  }
+`
+
+// ── Contact action section ────────────────────────────────────────────────────
 const ContactDetails = () => (
-  <section style={{ backgroundColor: C.graphite, padding: 'clamp(48px, 7vw, 72px) 24px' }}>
+  <section style={{ background: '#07111D', padding: 'clamp(72px, 10vw, 104px) 24px' }}>
+    <style>{CD_CSS}</style>
     <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '14px' }}>
-        {[
-          { Icon: IconMail,  label: 'Email', value: 'naveed.robert@gmail.com', href: 'mailto:naveed.robert@gmail.com' },
-          { Icon: IconPhone, label: 'Phone', value: '416-570-9074',            href: 'tel:+14165709074'               },
-          { Icon: IconClock, label: 'Hours', value: 'Mon–Fri, 8am–6pm',        href: null                             },
-        ].map(({ Icon, label, value, href }) => (
-          <div key={label} style={{
-            display: 'flex', alignItems: 'flex-start', gap: '14px',
-            padding: '20px', borderRadius: '10px',
-            border: '1px solid rgba(201,162,74,0.10)',
-            background: 'rgba(255,255,255,0.03)',
-          }}>
-            <div style={{
-              flexShrink: 0, width: '34px', height: '34px', borderRadius: '50%',
-              border: '1px solid rgba(201,162,74,0.22)',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-            }}>
-              <Icon className="h-4 w-4" style={{ color: C.gold }} />
-            </div>
-            <div>
-              <p style={{ fontSize: '0.60rem', fontWeight: 700, letterSpacing: '0.22em', textTransform: 'uppercase', color: C.warm, margin: '0 0 5px' }}>
-                {label}
-              </p>
-              {href
-                ? <a href={href} style={{ fontSize: '0.875rem', color: C.soft, textDecoration: 'none' }}>{value}</a>
-                : <p style={{ fontSize: '0.875rem', color: C.soft, margin: 0 }}>{value}</p>
-              }
-            </div>
+
+      {/* Heading */}
+      <div style={{ textAlign: 'center', marginBottom: '52px' }}>
+        <p style={{
+          fontFamily: '"Manrope", system-ui, sans-serif',
+          fontSize: '0.60rem', fontWeight: 700, letterSpacing: '0.28em',
+          textTransform: 'uppercase', color: '#C9A24A', margin: '0 0 14px',
+        }}>
+          Get in Touch
+        </p>
+        <h2 style={{
+          fontFamily: '"Inter Tight", Inter, Arial, sans-serif',
+          fontWeight: 900, fontSize: 'clamp(1.85rem, 4vw, 2.8rem)',
+          letterSpacing: '-0.035em', lineHeight: 1.07,
+          color: '#F4F1EA', margin: 0,
+        }}>
+          Ways to Connect
+        </h2>
+      </div>
+
+      {/* 3 CTA cards */}
+      <div className="io-cd-grid">
+
+        {/* Call Us */}
+        <a href="tel:+14165709074" className="io-cd-card">
+          <div className="io-cd-icon-wrap">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#C9A24A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .98h3a2 2 0 012 1.72c.127.96.362 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+            </svg>
           </div>
-        ))}
+          <p className="io-cd-label">Call Us</p>
+          <p className="io-cd-sub">
+            (416) 570-9074
+            <br />
+            <span style={{ fontSize: '0.80rem', opacity: 0.70 }}>Mon–Fri, 8am–6pm</span>
+          </p>
+          <div className="io-cd-cta-line">
+            Call now
+            <svg viewBox="0 0 16 16" width="10" height="10" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M4 8h8M8 4l4 4-4 4"/>
+            </svg>
+          </div>
+        </a>
+
+        {/* Get a Free Quote — featured centre card */}
+        <a href="#contact" className="io-cd-card io-cd-card-featured">
+          <div className="io-cd-icon-wrap">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#C9A24A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M9 11l3 3L22 4"/>
+              <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+            </svg>
+          </div>
+          <p className="io-cd-label">Get a Free Quote</p>
+          <p className="io-cd-sub">
+            5 quick questions.
+            <br />No commitment, no fluff.
+          </p>
+          <div className="io-cd-cta-line">
+            Start now
+            <svg viewBox="0 0 16 16" width="10" height="10" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M4 8h8M8 4l4 4-4 4"/>
+            </svg>
+          </div>
+        </a>
+
+        {/* Email Us */}
+        <a href="mailto:naveed.robert@gmail.com" className="io-cd-card">
+          <div className="io-cd-icon-wrap">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#C9A24A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <rect x="2" y="4" width="20" height="16" rx="2"/>
+              <path d="M2 8l10 6 10-6"/>
+            </svg>
+          </div>
+          <p className="io-cd-label">Email Us</p>
+          <p className="io-cd-sub">naveed.robert@gmail.com</p>
+          <div className="io-cd-cta-line">
+            Send email
+            <svg viewBox="0 0 16 16" width="10" height="10" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M4 8h8M8 4l4 4-4 4"/>
+            </svg>
+          </div>
+        </a>
+
       </div>
     </div>
   </section>
@@ -559,10 +713,10 @@ const Contact = () => {
                       sub="Pick the service that fits best. You can always add more later."
                     />
                     <div className="io-qt-svc-grid">
-                      {SERVICES.map(({ emoji, label }) => (
+                      {SERVICES.map(({ icon, label }) => (
                         <SvcCard
                           key={label}
-                          emoji={emoji}
+                          icon={icon}
                           label={label}
                           selected={answers.service === label}
                           onClick={() => autoNext('service', label)}

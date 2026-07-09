@@ -8,6 +8,7 @@ import PropertySolutions from '../components/PropertySolutions/PropertySolutions
 import PropertyTypes from '../components/PropertyTypes/PropertyTypes.jsx'
 import Reviews from '../components/Reviews/Reviews.jsx'
 import WhyIronOak from '../components/WhyIronOak/WhyIronOak.jsx'
+import BuildingStatement from '../components/BuildingStatement/BuildingStatement.jsx'
 import AreasWeServe from '../components/AreasWeServe/AreasWeServe.jsx'
 import Contact from '../components/Contact/Contact.jsx'
 import LocationMap from '../components/LocationMap/LocationMap.jsx'
@@ -34,6 +35,7 @@ const Home = () => {
         <PropertySolutions />
         <PropertyTypes />
         <WhyIronOak />
+        <BuildingStatement />
         <Contact />
         <Reviews />
         <AreasWeServe />

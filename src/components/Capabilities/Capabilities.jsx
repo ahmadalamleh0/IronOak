@@ -110,27 +110,41 @@ const CAPABILITIES = [
 // ── Capability card ────────────────────────────────────────────────────────────
 const CapabilityCard = ({ Icon, num, title, description, cardRef }) => {
   const [hovered, setHovered] = useState(false)
-  const iconRef = useRef(null)
+  const touchTimer = useRef(null)
+
+  const activate   = () => setHovered(true)
+  const deactivate = () => setHovered(false)
+
+  // Mobile: brief highlight on tap, then release
+  const onTouchStart = () => { activate() }
+  const onTouchEnd   = () => {
+    clearTimeout(touchTimer.current)
+    touchTimer.current = setTimeout(deactivate, 380)
+  }
 
   return (
     <div
       ref={cardRef}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      onMouseEnter={activate}
+      onMouseLeave={deactivate}
+      onTouchStart={onTouchStart}
+      onTouchEnd={onTouchEnd}
+      onTouchCancel={deactivate}
       style={{
         position: 'relative',
         display: 'flex',
         flexDirection: 'column',
         padding: '26px 26px 28px',
         borderRadius: '12px',
-        background: hovered ? 'rgba(255,255,255,0.94)' : 'rgba(255,255,255,0.72)',
-        border: `1px solid ${hovered ? 'rgba(201,162,74,0.36)' : 'rgba(29,36,44,0.1)'}`,
+        background: hovered ? 'rgba(255,255,255,0.96)' : 'rgba(255,255,255,0.78)',
+        border: `1px solid ${hovered ? 'rgba(201,162,74,0.38)' : 'rgba(29,36,44,0.1)'}`,
         boxShadow: hovered
           ? '0 14px 38px rgba(7,17,29,0.12), 0 2px 8px rgba(7,17,29,0.06)'
           : '0 1px 12px rgba(7,17,29,0.06)',
         transform: hovered ? 'translateY(-5px)' : 'translateY(0)',
         transition:
-          'transform 300ms cubic-bezier(0.16,1,0.3,1), box-shadow 300ms ease, background 250ms ease, border-color 250ms ease',
+          'transform 200ms cubic-bezier(0.16,1,0.3,1), box-shadow 200ms ease, background 160ms ease, border-color 160ms ease',
+        WebkitTapHighlightColor: 'transparent',
       }}
     >
       {/* Card number — top right */}
@@ -144,8 +158,8 @@ const CapabilityCard = ({ Icon, num, title, description, cardRef }) => {
           fontSize: '0.68rem',
           fontWeight: 700,
           letterSpacing: '0.12em',
-          color: hovered ? 'rgba(201,162,74,0.65)' : 'rgba(29,36,44,0.22)',
-          transition: 'color 250ms ease',
+          color: hovered ? 'rgba(201,162,74,0.70)' : 'rgba(29,36,44,0.22)',
+          transition: 'color 160ms ease',
           userSelect: 'none',
         }}
       >
@@ -154,13 +168,12 @@ const CapabilityCard = ({ Icon, num, title, description, cardRef }) => {
 
       {/* Icon container */}
       <div
-        ref={iconRef}
         style={{
           width: '50px',
           height: '50px',
           borderRadius: '12px',
-          border: `1px solid ${hovered ? 'rgba(201,162,74,0.38)' : 'rgba(29,36,44,0.1)'}`,
-          background: hovered ? 'rgba(201,162,74,0.08)' : 'rgba(29,36,44,0.04)',
+          border: `1px solid ${hovered ? 'rgba(201,162,74,0.40)' : 'rgba(29,36,44,0.1)'}`,
+          background: hovered ? 'rgba(201,162,74,0.09)' : 'rgba(29,36,44,0.04)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -168,7 +181,7 @@ const CapabilityCard = ({ Icon, num, title, description, cardRef }) => {
           marginBottom: '18px',
           transform: hovered ? 'translateY(-2px)' : 'translateY(0)',
           transition:
-            'color 250ms ease, background 250ms ease, border-color 250ms ease, transform 300ms cubic-bezier(0.16,1,0.3,1)',
+            'color 160ms ease, background 160ms ease, border-color 160ms ease, transform 200ms cubic-bezier(0.16,1,0.3,1)',
           flexShrink: 0,
         }}
       >
@@ -200,7 +213,7 @@ const CapabilityCard = ({ Icon, num, title, description, cardRef }) => {
           marginBottom: '13px',
           transformOrigin: 'left center',
           transform: hovered ? 'scaleX(1.5)' : 'scaleX(1)',
-          transition: 'transform 300ms cubic-bezier(0.16,1,0.3,1)',
+          transition: 'transform 200ms cubic-bezier(0.16,1,0.3,1)',
         }}
       />
 

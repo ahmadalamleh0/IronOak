@@ -273,32 +273,31 @@ const Hero = ({ ready = false }) => {
             style={{
               display: 'inline-flex',
               alignItems: 'center',
-              padding: '13px 38px',
+              padding: '14px 38px',
               borderRadius: '4px',
-              background: 'rgba(255,255,255,0.07)',
-              border: '1px solid rgba(244,241,234,0.32)',
+              background: 'rgba(255,255,255,0.95)',
+              border: '1px solid rgba(255,255,255,0.95)',
               fontFamily: '"Manrope", system-ui, sans-serif',
               fontSize: '0.72rem',
-              fontWeight: 600,
-              letterSpacing: '0.16em',
+              fontWeight: 700,
+              letterSpacing: '0.14em',
               textTransform: 'uppercase',
-              color: 'rgba(244,241,234,0.90)',
+              color: '#07111D',
               textDecoration: 'none',
-              transition: 'border-color 220ms ease, background 220ms ease, color 220ms ease',
+              transition: 'background 200ms ease, box-shadow 200ms ease',
               whiteSpace: 'nowrap',
+              boxShadow: '0 2px 16px rgba(0,0,0,0.18)',
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = 'rgba(244,241,234,0.60)'
-              e.currentTarget.style.background = 'rgba(255,255,255,0.13)'
-              e.currentTarget.style.color = '#F4F1EA'
+              e.currentTarget.style.background = '#ffffff'
+              e.currentTarget.style.boxShadow = '0 4px 24px rgba(0,0,0,0.28)'
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = 'rgba(244,241,234,0.32)'
-              e.currentTarget.style.background = 'rgba(255,255,255,0.07)'
-              e.currentTarget.style.color = 'rgba(244,241,234,0.90)'
+              e.currentTarget.style.background = 'rgba(255,255,255,0.95)'
+              e.currentTarget.style.boxShadow = '0 2px 16px rgba(0,0,0,0.18)'
             }}
           >
-            Get a Free Quote
+            Tell Us About Your Project
           </a>
         </div>
 

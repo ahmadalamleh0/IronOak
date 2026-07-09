@@ -175,7 +175,6 @@ const Statement = () => {
             <span
               key={i}
               ref={(el) => { phraseRefs.current[i] = el }}
-              style={{ display: 'inline', whiteSpace: 'nowrap' }}
             >
               {phrase}
             </span>

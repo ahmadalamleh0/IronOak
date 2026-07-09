@@ -61,7 +61,7 @@ const CSS = `
     align-items: center;
     flex-shrink: 0;
     white-space: nowrap;
-    animation: io-scroll 24s linear infinite;
+    animation: io-scroll 20s linear infinite;
     will-change: transform;
   }
   .io-banner-item {
