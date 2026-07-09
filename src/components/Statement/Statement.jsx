@@ -4,6 +4,14 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
+const PHRASES = [
+  "Whether it’s a quick repair, ",
+  "a complete renovation, ",
+  "or ongoing property maintenance, ",
+  "IronOak delivers skilled professionals ",
+  "for residential and commercial properties.",
+]
+
 // Each word gets an overflow:hidden mask + inner animated span
 const WordMask = ({ children, innerRef }) => (
   <span
@@ -25,13 +33,17 @@ const Statement = () => {
   const headlineRef = useRef(null)
   const ruleRef     = useRef(null)
   const paraRef     = useRef(null)
+  const phraseRefs  = useRef([])
   // 4 word refs: [One, Team., Every, Trade.]
   const w = useRef([null, null, null, null])
 
   useEffect(() => {
-    const rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const rm     = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const mobile = window.matchMedia('(max-width: 680px)').matches
+
     const ctx = gsap.context(() => {
-      const words = w.current.filter(Boolean)
+      const words   = w.current.filter(Boolean)
+      const phrases = phraseRefs.current.filter(Boolean)
 
       // Gold rule draws in from center
       gsap.from(ruleRef.current, {
@@ -64,18 +76,33 @@ const Statement = () => {
         },
       })
 
-      // Paragraph fades up after all words have started
-      gsap.from(paraRef.current, {
-        opacity: 0,
-        y: 16,
-        duration: 0.75,
-        ease: 'power2.out',
-        delay: 0.55,
-        scrollTrigger: {
-          trigger: paraRef.current,
-          start: 'top 89%',
-        },
-      })
+      if (mobile) {
+        // Phrase-by-phrase stagger on mobile — smooth, not chunky
+        gsap.from(phrases, {
+          opacity: 0,
+          y: 9,
+          duration: 0.62,
+          ease: 'power2.out',
+          stagger: 0.11,
+          scrollTrigger: {
+            trigger: paraRef.current,
+            start: 'top 89%',
+          },
+        })
+      } else {
+        // Desktop: single block fade-up
+        gsap.from(paraRef.current, {
+          opacity: 0,
+          y: 16,
+          duration: 0.75,
+          ease: 'power2.out',
+          delay: 0.55,
+          scrollTrigger: {
+            trigger: paraRef.current,
+            start: 'top 89%',
+          },
+        })
+      }
     }, sectionRef)
 
     return () => ctx.revert()
@@ -132,7 +159,7 @@ const Statement = () => {
           </span>
         </h2>
 
-        {/* Supporting paragraph */}
+        {/* Supporting paragraph — phrase spans for mobile stagger animation */}
         <p
           ref={paraRef}
           style={{
@@ -144,9 +171,15 @@ const Statement = () => {
             margin: '0 auto',
           }}
         >
-          Whether it&apos;s a quick repair, a complete renovation, or ongoing
-          property maintenance, IronOak delivers skilled professionals for
-          virtually every aspect of residential and commercial properties.
+          {PHRASES.map((phrase, i) => (
+            <span
+              key={i}
+              ref={(el) => { phraseRefs.current[i] = el }}
+              style={{ display: 'inline', whiteSpace: 'nowrap' }}
+            >
+              {phrase}
+            </span>
+          ))}
         </p>
 
       </div>

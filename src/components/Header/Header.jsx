@@ -268,6 +268,7 @@ const SCOPED_CSS = `
 
     /* Spacer pushes call + hamburger to the far right */
     .ironhawkNavSpacer {
+      display: block;
       flex: 1;
     }
 
