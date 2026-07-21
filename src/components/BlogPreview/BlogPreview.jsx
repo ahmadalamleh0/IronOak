@@ -1,37 +1,8 @@
 import { useEffect, useRef } from 'react'
+import { Link } from 'react-router-dom'
+import { getFeaturedArticles } from '../../data/articles.js'
 
-const ARTICLES = [
-  {
-    slug: 'seasonal-property-maintenance-checklist',
-    category: 'Property Maintenance',
-    title: 'The Essential Property Maintenance Checklist for Every Season',
-    excerpt:
-      'A practical guide to keeping residential and commercial properties protected and performing well throughout the year.',
-    readTime: '5 min read',
-    image: '/images/property-residential.jpg',
-    imageAlt: 'Residential property exterior',
-  },
-  {
-    slug: 'repair-replace-or-upgrade',
-    category: 'Repairs & Upgrades',
-    title: 'When Should You Repair, Replace, or Upgrade?',
-    excerpt:
-      'Learn how to evaluate common property issues and make smarter long-term decisions that protect your investment.',
-    readTime: '4 min read',
-    image: '/services/exterior-garage.jpg',
-    imageAlt: 'Property exterior — garage and repairs',
-  },
-  {
-    slug: 'preventive-maintenance-commercial-properties',
-    category: 'Commercial Properties',
-    title: 'How Preventive Maintenance Reduces Operating Costs',
-    excerpt:
-      'Discover how a proactive maintenance plan prevents expensive repairs, reduces downtime, and keeps tenants satisfied.',
-    readTime: '6 min read',
-    image: '/images/property-commercial.jpg',
-    imageAlt: 'Commercial building exterior',
-  },
-]
+const ARTICLES = getFeaturedArticles(3)
 
 const CSS = `
 .io-blog-section {
@@ -110,7 +81,19 @@ const CSS = `
   .io-blog-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 540px) {
-  .io-blog-grid { grid-template-columns: 1fr; }
+  .io-blog-grid {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 6px;
+    scrollbar-width: none;
+  }
+  .io-blog-grid::-webkit-scrollbar { display: none; }
+  .io-blog-card {
+    flex: 0 0 86%;
+    scroll-snap-align: start;
+  }
 }
 
 /* Card */
@@ -279,10 +262,10 @@ export default function BlogPreview() {
                 and protecting the long-term value of your property.
               </p>
             </div>
-            <a href="/blog" className="io-blog-view-all" aria-label="View all articles">
+            <Link to="/insights" className="io-blog-view-all" aria-label="View all articles">
               View All Articles
               <span className="io-blog-arrow" aria-hidden="true">→</span>
-            </a>
+            </Link>
           </div>
 
           <div className="io-blog-grid" ref={gridRef}>
@@ -290,29 +273,24 @@ export default function BlogPreview() {
               <article key={article.slug} className="io-blog-card">
                 <div className="io-blog-img-wrap">
                   <img
-                    src={article.image}
-                    alt={article.imageAlt}
+                    src={article.featuredImage}
+                    alt={article.featuredImageAlt}
                     loading="lazy"
                     decoding="async"
                   />
                 </div>
                 <div className="io-blog-body">
                   <p className="io-blog-cat">{article.category}</p>
-                  <a
-                    href={`/blog/${article.slug}`}
-                    className="io-blog-title"
-                    tabIndex={-1}
-                    aria-hidden="true"
-                  >
-                    {article.title}
-                  </a>
+                  <Link to={`/insights/${article.slug}`} className="io-blog-title">
+                    {article.shortTitle || article.title}
+                  </Link>
                   <p className="io-blog-excerpt">{article.excerpt}</p>
                   <div className="io-blog-card-footer">
-                    <span className="io-blog-meta">{article.readTime}</span>
-                    <a href={`/blog/${article.slug}`} className="io-blog-read">
+                    <span className="io-blog-meta">{article.readingTime}</span>
+                    <Link to={`/insights/${article.slug}`} className="io-blog-read">
                       Read Article
                       <span className="io-blog-arrow" aria-hidden="true">→</span>
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </article>

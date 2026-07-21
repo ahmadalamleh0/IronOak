@@ -1,6 +1,8 @@
 import { Routes, Route } from 'react-router-dom'
 import Home from './pages/Home.jsx'
 import ServicePage from './pages/ServicePage.jsx'
+import InsightsPage from './pages/InsightsPage.jsx'
+import ArticlePage from './pages/ArticlePage.jsx'
 import NotFound from './pages/NotFound.jsx'
 import ScrollToTop from './components/ScrollToTop/ScrollToTop.jsx'
 
@@ -11,6 +13,8 @@ function App() {
       <Routes>
       <Route path="/"                element={<Home />} />
       <Route path="/services/:slug"  element={<ServicePage />} />
+      <Route path="/insights"        element={<InsightsPage />} />
+      <Route path="/insights/:slug"  element={<ArticlePage />} />
       <Route path="*"                element={<NotFound />} />
     </Routes>
     </>
