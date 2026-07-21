@@ -30,20 +30,20 @@ const SERVICES = [
     description: 'Thoughtfully managed renovation work for suites, guest rooms, interior upgrades, and property improvement projects of every scale.',
   },
   {
-    id:          'construction-project-management',
-    num:         '03',
-    category:    'Capital Projects',
-    title:       'Construction & Project Management',
-    slug:        '/services/construction-project-management',
-    description: 'Coordinated capital projects and multi-site work delivered through structured planning, professional oversight, and dependable execution.',
-  },
-  {
     id:          'interior-finishing',
-    num:         '04',
+    num:         '03',
     category:    'Interior Finishing',
     title:       'Interior Finishing',
     slug:        '/services/interior-finishing',
     description: 'Professional finishing work for flooring, carpet replacement, wallcoverings, painting, and complete interior refreshes.',
+  },
+  {
+    id:          'capital-project-management',
+    num:         '04',
+    category:    'Capital Projects',
+    title:       'Capital Projects & Project Management',
+    slug:        '/services/capital-project-management',
+    description: 'Structured planning, multi-trade coordination, and dependable delivery for commercial, condominium, hospitality, and multi-site property improvements.',
   },
   {
     id:          'installations-property-systems',
@@ -176,7 +176,7 @@ const IllustrationRenovations = () => (
   </svg>
 )
 
-/* 03 — Construction & Project Management */
+/* 03 — Capital Projects & Project Management */
 const IllustrationConstruction = () => (
   <svg viewBox="0 0 480 360" fill="none" xmlns="http://www.w3.org/2000/svg"
        style={{ width: '100%', height: 'auto', display: 'block' }} aria-hidden="true">

@@ -3,8 +3,12 @@ import { Link, useParams } from 'react-router-dom'
 import Header from '../components/Header/Header.jsx'
 import Footer from '../components/Footer/Footer.jsx'
 import FloatingWhatsAppButton from '../components/FloatingWhatsAppButton/FloatingWhatsAppButton.jsx'
+import RichServiceTemplate from '../components/ServicePage/RichServiceTemplate.jsx'
 import { SERVICE_PAGES } from '../data/servicePages.js'
+import { getArticleBySlug } from '../data/articles.js'
 import { ILLUSTRATION_COMPONENTS, SVG_ANIM_CSS } from '../components/ServicesIllustrations/index.jsx'
+
+const SITE_URL = 'https://www.ironoakpropertyservices.ca'
 
 /* ─────────────────────────────────────────────────────────────────────────
    Scoped styles — all prefixed with .sp- (service page)
@@ -411,7 +415,25 @@ export default function ServicePage() {
     }
     setOG('og:title',       service.meta.title)
     setOG('og:description', service.meta.description)
-    setOG('og:url',         `https://www.ironoakpropertyservices.ca/services/${service.slug}`)
+    setOG('og:url',         `${SITE_URL}/services/${service.slug}`)
+
+    let canonical = document.querySelector('link[rel="canonical"]')
+    if (!canonical) { canonical = document.createElement('link'); canonical.setAttribute('rel', 'canonical'); document.head.appendChild(canonical) }
+    canonical.setAttribute('href', `${SITE_URL}/services/${service.slug}`)
+
+    const breadcrumbJson = document.createElement('script')
+    breadcrumbJson.type = 'application/ld+json'
+    breadcrumbJson.text = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+        { '@type': 'ListItem', position: 2, name: 'Services', item: `${SITE_URL}/#services-explorer` },
+        { '@type': 'ListItem', position: 3, name: service.title, item: `${SITE_URL}/services/${service.slug}` },
+      ],
+    })
+    document.head.appendChild(breadcrumbJson)
+    return () => breadcrumbJson.remove()
   }, [slug, service])
 
   /* ── Invalid slug → not-found state ── */
@@ -434,7 +456,22 @@ export default function ServicePage() {
   }
 
   const relatedServices = service.related.map((i) => SERVICE_PAGES[i])
-  const { sections }    = service
+
+  /* ── Premium light-theme master template (data-driven via richContent) ── */
+  if (service.richContent) {
+    const relatedArticle = service.richContent.relatedArticleSlug
+      ? getArticleBySlug(service.richContent.relatedArticleSlug)
+      : null
+    return (
+      <RichServiceTemplate
+        service={service}
+        relatedServices={relatedServices}
+        relatedArticle={relatedArticle}
+      />
+    )
+  }
+
+  const { sections } = service
 
   return (
     <>

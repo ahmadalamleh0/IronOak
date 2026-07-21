@@ -46,7 +46,7 @@ export const ARTICLES = [
       ],
       [
         'The framework below outlines how a ',
-        { text: 'multi-site project coordination', to: '/services/construction-project-management' },
+        { text: 'multi-site project coordination', to: '/services/capital-project-management' },
         ' approach differs from a single renovation, and what to plan for before work begins at the first location.',
       ],
     ],
@@ -178,7 +178,7 @@ export const ARTICLES = [
     ],
 
     relatedServices: [
-      { label: 'Construction & Project Management', slug: 'construction-project-management' },
+      { label: 'Capital Projects & Project Management', slug: 'capital-project-management' },
       { label: 'Installations & Property Systems', slug: 'installations-property-systems' },
       { label: 'Interior Finishing', slug: 'interior-finishing' },
     ],
@@ -372,7 +372,7 @@ export const ARTICLES = [
           ],
           [
             'Recognizing that shift early, rather than continuing to fund small repairs indefinitely, is often the more cost-effective path, and it is a conversation worth having with a ',
-            { text: 'construction and project management', to: '/services/construction-project-management' },
+            { text: 'capital project management', to: '/services/capital-project-management' },
             ' partner once the pattern becomes clear.',
           ],
         ],
@@ -390,7 +390,7 @@ export const ARTICLES = [
 
     relatedServices: [
       { label: 'Property Maintenance & Repairs', slug: 'property-maintenance-repairs' },
-      { label: 'Construction & Project Management', slug: 'construction-project-management' },
+      { label: 'Capital Projects & Project Management', slug: 'capital-project-management' },
       { label: 'Installations & Property Systems', slug: 'installations-property-systems' },
     ],
     relatedArticleSlugs: [
@@ -529,7 +529,7 @@ export const ARTICLES = [
           ],
           [
             'A deficiency inspection at the end of each phase, along with straightforward documentation of what was installed and where, makes it easier to maintain that consistency if additional areas are finished later — which is common in ',
-            { text: 'multi-site or phased property work', to: '/services/construction-project-management' },
+            { text: 'multi-site or phased property work', to: '/services/capital-project-management' },
             '.',
           ],
         ],
@@ -548,7 +548,7 @@ export const ARTICLES = [
     relatedServices: [
       { label: 'Interior Finishing', slug: 'interior-finishing' },
       { label: 'Renovations & Remodeling', slug: 'renovations-remodeling' },
-      { label: 'Construction & Project Management', slug: 'construction-project-management' },
+      { label: 'Capital Projects & Project Management', slug: 'capital-project-management' },
     ],
     relatedArticleSlugs: [
       'preventative-maintenance-checklist-for-condominiums',
