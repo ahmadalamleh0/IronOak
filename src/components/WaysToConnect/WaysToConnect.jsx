@@ -25,6 +25,10 @@ const CD_CSS = `
     transform: translateY(-3px);
     box-shadow: 0 12px 32px rgba(0,0,0,0.22);
   }
+  .io-cd-card:focus-visible {
+    outline: 2px solid rgba(201,162,74,0.70);
+    outline-offset: 3px;
+  }
 
   .io-cd-card-featured {
     border-color: rgba(201,162,74,0.28);
@@ -72,55 +76,43 @@ const CD_CSS = `
   }
 `
 
+const ArrowIcon = () => (
+  <svg viewBox="0 0 16 16" width="10" height="10" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M4 8h8M8 4l4 4-4 4"/>
+  </svg>
+)
+
 const WaysToConnect = () => (
-  <section style={{ background: '#07111D', padding: 'clamp(72px, 10vw, 104px) 24px' }}>
+  <section id="ways-to-connect" style={{ background: '#07111D', padding: 'clamp(72px, 10vw, 104px) 24px' }}>
     <style>{CD_CSS}</style>
     <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
 
       {/* Heading */}
-      <div style={{ textAlign: 'center', marginBottom: '52px' }}>
-        <p style={{
-          fontFamily: '"Manrope", system-ui, sans-serif',
-          fontSize: '0.60rem', fontWeight: 700, letterSpacing: '0.28em',
-          textTransform: 'uppercase', color: '#C9A24A', margin: '0 0 14px',
-        }}>
-          Get in Touch
-        </p>
+      <div style={{ textAlign: 'center', marginBottom: '52px', maxWidth: '640px', margin: '0 auto 52px' }}>
         <h2 style={{
           fontFamily: '"Inter Tight", Inter, Arial, sans-serif',
-          fontWeight: 900, fontSize: 'clamp(1.85rem, 4vw, 2.8rem)',
+          fontWeight: 900,
+          fontSize: 'clamp(1.85rem, 4vw, 2.8rem)',
           letterSpacing: '-0.035em', lineHeight: 1.07,
-          color: '#F4F1EA', margin: 0,
+          color: '#F4F1EA', margin: '0 0 16px',
         }}>
-          Ways to Connect
+          Have a property project in mind?
         </h2>
+        <p style={{
+          fontFamily: '"Manrope", system-ui, sans-serif',
+          fontSize: 'clamp(0.875rem, 1.5vw, 1rem)',
+          lineHeight: 1.74,
+          color: 'rgba(244,241,234,0.50)',
+          margin: 0,
+        }}>
+          Tell us what needs attention. We'll help you understand the next step.
+        </p>
       </div>
 
       {/* 3 CTA cards */}
       <div className="io-cd-grid">
 
-        {/* Call Us */}
-        <a href="tel:+14165709074" className="io-cd-card">
-          <div className="io-cd-icon-wrap">
-            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#C9A24A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .98h3a2 2 0 012 1.72c.127.96.362 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
-            </svg>
-          </div>
-          <p className="io-cd-label">Call Us</p>
-          <p className="io-cd-sub">
-            (416) 570-9074
-            <br />
-            <span style={{ fontSize: '0.80rem', opacity: 0.70 }}>Mon–Fri, 8am–6pm</span>
-          </p>
-          <div className="io-cd-cta-line">
-            Call now
-            <svg viewBox="0 0 16 16" width="10" height="10" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <path d="M4 8h8M8 4l4 4-4 4"/>
-            </svg>
-          </div>
-        </a>
-
-        {/* Get a Free Quote — featured centre card */}
+        {/* Request a Quote — featured centre */}
         <a href="#contact" className="io-cd-card io-cd-card-featured">
           <div className="io-cd-icon-wrap">
             <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#C9A24A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -128,34 +120,45 @@ const WaysToConnect = () => (
               <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
             </svg>
           </div>
-          <p className="io-cd-label">Get a Free Quote</p>
+          <p className="io-cd-label">Request a Quote</p>
           <p className="io-cd-sub">
-            5 quick questions.
-            <br />No commitment, no fluff.
+            Tell us about your project.<br />No commitment required.
           </p>
           <div className="io-cd-cta-line">
-            Start now
-            <svg viewBox="0 0 16 16" width="10" height="10" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <path d="M4 8h8M8 4l4 4-4 4"/>
-            </svg>
+            Get started <ArrowIcon />
           </div>
         </a>
 
-        {/* Email Us */}
-        <a href="mailto:naveed.robert@gmail.com" className="io-cd-card">
+        {/* Call IronOak */}
+        <a href="tel:+14165709074" className="io-cd-card">
+          <div className="io-cd-icon-wrap">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#C9A24A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .98h3a2 2 0 012 1.72c.127.96.362 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+            </svg>
+          </div>
+          <p className="io-cd-label">Call IronOak</p>
+          <p className="io-cd-sub">
+            (416) 570-9074
+            <br />
+            <span style={{ fontSize: '0.80rem', opacity: 0.70 }}>Mon–Fri, 8am–6pm</span>
+          </p>
+          <div className="io-cd-cta-line">
+            Call now <ArrowIcon />
+          </div>
+        </a>
+
+        {/* Send a Message */}
+        <a href="mailto:info@ironoakpropertyservices.com" className="io-cd-card">
           <div className="io-cd-icon-wrap">
             <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#C9A24A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <rect x="2" y="4" width="20" height="16" rx="2"/>
               <path d="M2 8l10 6 10-6"/>
             </svg>
           </div>
-          <p className="io-cd-label">Email Us</p>
-          <p className="io-cd-sub">naveed.robert@gmail.com</p>
+          <p className="io-cd-label">Send a Message</p>
+          <p className="io-cd-sub">info@ironoakpropertyservices.com</p>
           <div className="io-cd-cta-line">
-            Send email
-            <svg viewBox="0 0 16 16" width="10" height="10" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <path d="M4 8h8M8 4l4 4-4 4"/>
-            </svg>
+            Send email <ArrowIcon />
           </div>
         </a>
 

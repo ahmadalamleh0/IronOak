@@ -197,11 +197,11 @@ const SERVICES = [
 ]
 
 const PROPERTY_TYPES = [
-  { emoji: '🏠', label: 'Residential Home'                    },
-  { emoji: '🏢', label: 'Condo / Apartment'                   },
-  { emoji: '🏬', label: 'Commercial Building'                  },
-  { emoji: '🏭', label: 'Industrial / Mixed-Use'               },
-  { emoji: '🏘', label: 'Property Management / Multi-Unit'     },
+  { emoji: '🏠', label: 'Residential Home'                                                           },
+  { emoji: '🏢', label: 'Condo / Apartment'                                                          },
+  { emoji: '🏬', label: 'Commercial Building'                                                         },
+  { emoji: '🏭', label: 'Industrial / Mixed-Use'                                                      },
+  { emoji: '🏘', label: 'Property Management / Multi-Unit', image: '/img/property-multi-unit.jpg'    },
 ]
 
 const TIMELINE = ['ASAP', 'This week', 'This month', 'Flexible']
@@ -333,7 +333,7 @@ const SvcCard = ({ icon, label, selected, onClick }) => (
 )
 
 // Larger option card (property type)
-const PropCard = ({ emoji, label, selected, onClick }) => (
+const PropCard = ({ emoji, label, image, selected, onClick }) => (
   <button
     type="button"
     onClick={onClick}
@@ -348,7 +348,16 @@ const PropCard = ({ emoji, label, selected, onClick }) => (
       fontFamily: '"Manrope", system-ui, sans-serif',
     }}
   >
-    <span style={{ fontSize: '1.25rem', lineHeight: 1, flexShrink: 0 }}>{emoji}</span>
+    {image ? (
+      <img
+        src={image}
+        alt=""
+        aria-hidden="true"
+        style={{ width: '28px', height: '28px', borderRadius: '6px', objectFit: 'cover', flexShrink: 0 }}
+      />
+    ) : (
+      <span style={{ fontSize: '1.25rem', lineHeight: 1, flexShrink: 0 }}>{emoji}</span>
+    )}
     <span style={{
       fontSize: '0.875rem', fontWeight: selected ? 700 : 500,
       color: selected ? C.navy : '#3A4148', flex: 1,
@@ -456,7 +465,7 @@ const Contact = () => {
       {/* ── Quote form section ── */}
       <section
         id="contact"
-        style={{ background: C.cream, padding: 'clamp(80px, 10vw, 120px) 24px' }}
+        style={{ background: C.cream, padding: 'clamp(80px, 10vw, 120px) 24px', overflowX: 'clip' }}
       >
         <div style={{ maxWidth: '580px', margin: '0 auto' }}>
 
@@ -574,10 +583,11 @@ const Contact = () => {
                       sub="Tell us what kind of space this is for."
                     />
                     <div className="io-qt-prop-grid">
-                      {PROPERTY_TYPES.map(({ emoji, label }) => (
+                      {PROPERTY_TYPES.map(({ emoji, label, image }) => (
                         <PropCard
                           key={label}
                           emoji={emoji}
+                          image={image}
                           label={label}
                           selected={answers.propertyType === label}
                           onClick={() => autoNext('propertyType', label)}
@@ -649,7 +659,7 @@ const Contact = () => {
                     <QHead
                       main="Tell us about"
                       highlight="the job."
-                      sub="Best guess is fine — we'll confirm everything with you."
+                      sub="Best guess is fine. We'll confirm everything with you."
                     />
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '22px' }}>
 
@@ -731,7 +741,7 @@ const Contact = () => {
                     <QHead
                       main="Where do we"
                       highlight="reach you?"
-                      sub="Your quote is almost ready — let us know how to get back to you."
+                      sub="Almost there! Your quote will be ready today. Let us know how to get back to you."
                     />
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                       <input

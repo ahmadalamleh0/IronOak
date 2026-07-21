@@ -19,7 +19,8 @@ const WordMask = ({ children, innerRef }) => (
       display: 'inline-block',
       overflow: 'hidden',
       verticalAlign: 'bottom',
-      paddingBottom: '0.08em',
+      paddingBottom: '0.2em',
+      paddingRight: '0.06em',
     }}
   >
     <span ref={innerRef} style={{ display: 'inline-block' }}>
@@ -140,7 +141,7 @@ const Statement = () => {
             fontWeight: 900,
             fontSize: 'clamp(3rem, 9vw, 7.8rem)',
             letterSpacing: '-0.04em',
-            lineHeight: 0.91,
+            lineHeight: 0.97,
             color: '#07111D',
           }}
         >

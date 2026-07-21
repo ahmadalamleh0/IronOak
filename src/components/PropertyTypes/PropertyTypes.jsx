@@ -49,10 +49,18 @@ const SCOPED_CSS = `
     transform: scale(1.04);
   }
 
-  /* Label bar — separate dark block below the image gap */
+  /* Label bar — glossy dark block below the image */
   .io-pt-bar {
     border-radius: 5px;
-    background: #07111D;
+    background:
+      linear-gradient(180deg,
+        rgba(255,255,255,0.10) 0%,
+        rgba(255,255,255,0.03) 45%,
+        rgba(0,0,0,0.10) 100%
+      ),
+      #07111D;
+    border: 1px solid rgba(255,255,255,0.07);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.10), 0 2px 8px rgba(0,0,0,0.18);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -87,6 +95,7 @@ const SCOPED_CSS = `
 
   @media (prefers-reduced-motion: reduce) {
     .io-pt-img,
+    .io-pt-bar,
     .io-pt-bar::before { transition: none !important; }
   }
 `
@@ -168,7 +177,7 @@ const PropertyTypes = () => {
                 />
               </div>
 
-              {/* Label bar — separate element below, with gap from CSS */}
+              {/* Glass label bar — separate element below */}
               <div className="io-pt-bar">
                 <span className="io-pt-label">{label}</span>
               </div>

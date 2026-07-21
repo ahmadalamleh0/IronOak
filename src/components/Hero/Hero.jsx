@@ -187,18 +187,18 @@ const Hero = ({ ready = false }) => {
                 ...ts,
                 fontFamily: '"Inter Tight", Inter, Arial, sans-serif',
                 fontWeight: 900,
-                fontSize: 'clamp(3rem, 7.6vw, 6.2rem)',
+                fontSize: 'clamp(2.6rem, 6.8vw, 5.6rem)',
                 letterSpacing: '-0.04em',
-                lineHeight: 0.94,
+                lineHeight: 1.04,
                 color: '#F4F1EA',
               }}
             >
-              Keep every space
+              Elevating Standards
             </span>
           </div>
 
-          {/* Line 2 — italic serif, extra paddingBottom for descenders */}
-          <div style={{ ...head2.outer, marginTop: '4px', paddingBottom: '0.26em' }}>
+          {/* Line 2 — italic serif */}
+          <div style={{ ...head2.outer, marginTop: '-4px', paddingBottom: '0.26em' }}>
             <span
               style={{
                 ...head2.inner,
@@ -206,13 +206,13 @@ const Hero = ({ ready = false }) => {
                 fontFamily: '"Cormorant Garamond", "Cormorant", Georgia, serif',
                 fontStyle: 'italic',
                 fontWeight: 600,
-                fontSize: 'clamp(2.8rem, 7.1vw, 5.8rem)',
+                fontSize: 'clamp(2.4rem, 6.2vw, 5.2rem)',
                 letterSpacing: '0em',
                 lineHeight: 1.0,
-                color: 'rgba(244,241,234,0.88)',
+                color: '#F4F1EA',
               }}
             >
-              at its <span style={{ color: '#C9A24A' }}>Best.</span>
+              in property care.
             </span>
           </div>
         </h1>
@@ -288,7 +288,7 @@ const Hero = ({ ready = false }) => {
           }}
         >
           <span style={{ fontFamily: '"Manrope", system-ui, sans-serif', fontSize: '0.6rem', fontWeight: 600, letterSpacing: '0.13em', textTransform: 'uppercase', color: 'rgba(244,241,234,0.66)', whiteSpace: 'nowrap' }}>
-            10+ Years Experience
+            5+ Years Experience
           </span>
           {DOT}
           <span style={{ fontFamily: '"Manrope", system-ui, sans-serif', fontSize: '0.6rem', fontWeight: 600, letterSpacing: '0.13em', textTransform: 'uppercase', color: 'rgba(244,241,234,0.66)', whiteSpace: 'nowrap' }}>

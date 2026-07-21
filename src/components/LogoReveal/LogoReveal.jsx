@@ -18,6 +18,12 @@ const LogoReveal = ({
   onCompleteRef.current = onComplete
 
   useEffect(() => {
+    // Already played this session — fire onComplete immediately without animation
+    if (sessionStorage.getItem('io-intro-done') === '1') {
+      onCompleteRef.current?.()
+      return
+    }
+
     document.body.style.overflow = 'hidden'
 
     const ctx = gsap.context(() => {

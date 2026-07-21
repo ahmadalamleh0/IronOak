@@ -53,9 +53,9 @@ const Footer = () => {
     <footer className="relative border-t border-gold-400/15 bg-ink-950">
       <div className="bg-grain pointer-events-none absolute inset-0 opacity-50" />
 
-      <div className="relative mx-auto max-w-6xl px-6 py-16 sm:px-10 lg:px-16">
+      <div className="relative mx-auto max-w-6xl px-6 py-10 sm:px-10 lg:px-16">
         {/* Grid columns with stagger */}
-        <div ref={gridRef} className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4">
+        <div ref={gridRef} className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
 
           {/* Brand column */}
           <div
@@ -141,7 +141,7 @@ const Footer = () => {
         {/* Bottom bar */}
         <div
           ref={barRef}
-          className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-gold-400/10 pt-8 text-xs text-gold-100/40 sm:flex-row"
+          className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-gold-400/10 pt-8 text-xs text-gold-100/40 sm:flex-row"
           style={{
             opacity:    RM || barInView ? 1 : 0,
             transition: RM ? 'none' : `opacity 600ms ease 200ms`,

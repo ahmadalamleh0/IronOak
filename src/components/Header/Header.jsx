@@ -40,10 +40,10 @@ const SCOPED_CSS = `
     padding: 0 8px 0 22px;
     height: 58px;
     border-radius: 999px;
-    background: rgba(10, 13, 18, 0.84);
+    background: rgba(7, 17, 29, 0.92);
     backdrop-filter: blur(22px) saturate(1.5);
     -webkit-backdrop-filter: blur(22px) saturate(1.5);
-    border: 1px solid rgba(255, 255, 255, 0.075);
+    border: 1px solid rgba(255, 255, 255, 0.07);
     box-shadow:
       0 4px 36px rgba(0, 0, 0, 0.42),
       0 1px 6px rgba(0, 0, 0, 0.26),
@@ -189,7 +189,7 @@ const SCOPED_CSS = `
     max-width: 420px;
     z-index: 49;
     border-radius: 20px;
-    background: rgba(10, 13, 18, 0.97);
+    background: rgba(7, 17, 29, 0.97);
     backdrop-filter: blur(24px) saturate(1.5);
     -webkit-backdrop-filter: blur(24px) saturate(1.5);
     border: 1px solid rgba(255, 255, 255, 0.08);

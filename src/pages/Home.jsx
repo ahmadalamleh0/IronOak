@@ -6,18 +6,25 @@ import TrustStrip from '../components/TrustStrip/TrustStrip.jsx'
 import Statement from '../components/Statement/Statement.jsx'
 import PropertySolutions from '../components/PropertySolutions/PropertySolutions.jsx'
 import PropertyTypes from '../components/PropertyTypes/PropertyTypes.jsx'
-import Reviews from '../components/Reviews/Reviews.jsx'
 import WhyIronOak from '../components/WhyIronOak/WhyIronOak.jsx'
+import HowItWorks from '../components/HowItWorks/HowItWorks.jsx'
 import BuildingStatement from '../components/BuildingStatement/BuildingStatement.jsx'
-import AreasWeServe from '../components/AreasWeServe/AreasWeServe.jsx'
-import WaysToConnect from '../components/WaysToConnect/WaysToConnect.jsx'
 import Contact from '../components/Contact/Contact.jsx'
-import LocationMap from '../components/LocationMap/LocationMap.jsx'
+import Reviews from '../components/Reviews/Reviews.jsx'
+import AreasWeServe from '../components/AreasWeServe/AreasWeServe.jsx'
+import ServicesExplorer from '../components/ServicesExplorer/ServicesExplorer.jsx'
+import ContactFAQSection from '../components/ContactFAQ/ContactFAQSection.jsx'
+import BlogPreview from '../components/BlogPreview/BlogPreview.jsx'
 import Footer from '../components/Footer/Footer.jsx'
 import FloatingWhatsAppButton from '../components/FloatingWhatsAppButton/FloatingWhatsAppButton.jsx'
 
+const INTRO_KEY = 'io-intro-done'
+
 const Home = () => {
-  const [introDone, setIntroDone] = useState(false)
+  // Persist across remounts (navigating to a service page and back)
+  const [introDone, setIntroDone] = useState(
+    () => sessionStorage.getItem(INTRO_KEY) === '1'
+  )
   const location = useLocation()
 
   useEffect(() => {
@@ -28,20 +35,25 @@ const Home = () => {
 
   return (
     <>
-      <LogoReveal onComplete={() => setIntroDone(true)} />
+      <LogoReveal onComplete={() => {
+        sessionStorage.setItem(INTRO_KEY, '1')
+        setIntroDone(true)
+      }} />
       <main>
         <Hero ready={introDone} />
         <TrustStrip />
         <Statement />
-        <PropertySolutions />
+        <ServicesExplorer />
         <PropertyTypes />
+        <PropertySolutions />
         <WhyIronOak />
+        <HowItWorks />
         <BuildingStatement />
         <Contact />
         <Reviews />
         <AreasWeServe />
-        <WaysToConnect />
-        <LocationMap />
+        <ContactFAQSection />
+        <BlogPreview />
       </main>
       <Footer />
       {introDone && <FloatingWhatsAppButton />}

@@ -7,33 +7,23 @@ gsap.registerPlugin(ScrollTrigger)
 const CAPABILITIES = [
   {
     num: '01',
-    title: 'Residential Services',
-    tags: ['Complete home repairs', 'renovations', 'maintenance', 'improvements'],
+    title: 'Multi-Trade Coordination',
+    tags: ['PLANNING', 'TRADE COORDINATION', 'QUALITY CONTROL'],
   },
   {
     num: '02',
-    title: 'Commercial Services',
-    tags: ['Offices', 'retail', 'industrial', 'multi-unit properties'],
+    title: 'Capital Project Delivery',
+    tags: ['SCOPING', 'SCHEDULING', 'EXECUTION'],
   },
   {
     num: '03',
-    title: 'Repairs & Maintenance',
-    tags: ['Fast', 'reliable', 'ongoing support', 'preventative upkeep'],
+    title: 'Multi-Site Rollouts',
+    tags: ['ONE POINT OF CONTACT', 'CONSISTENT STANDARDS', 'PHASED DELIVERY'],
   },
   {
     num: '04',
-    title: 'Installations & Upgrades',
-    tags: ['Fixtures', 'finishes', 'system upgrades', 'security solutions'],
-  },
-  {
-    num: '05',
-    title: 'Construction & Renovation',
-    tags: ['Interior transformations', 'exterior work', 'built with precision'],
-  },
-  {
-    num: '06',
-    title: 'Outdoor & Property Care',
-    tags: ['Landscaping', 'hardscaping', 'seasonal services', 'exterior improvements'],
+    title: 'Ongoing Property Support',
+    tags: ['PREVENTATIVE CARE', 'RESPONSIVE SUPPORT', 'LONG-TERM VALUE'],
   },
 ]
 
@@ -322,7 +312,7 @@ const PropertySolutions = () => {
             color: 'rgba(244,241,234,0.48)',
             maxWidth: '460px', margin: 0,
           }}>
-            From everyday repairs to full-scale improvements, IronOak brings the right team for the job.
+            One accountable partner managing the people, schedules, and moving parts your property project requires.
           </p>
 
         </div>

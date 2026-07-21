@@ -11,22 +11,22 @@ const SCOPED_CSS = `
     z-index: 9999;
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 13px 20px 13px 16px;
+    gap: 9px;
+    padding: 12px 18px 12px 14px;
     border-radius: 40px;
     background: linear-gradient(135deg, #25D366 0%, #1db954 100%);
     color: #fff;
     text-decoration: none;
     font-family: "Manrope", "Inter", system-ui, sans-serif;
-    font-size: 0.8rem;
+    font-size: 0.74rem;
     font-weight: 700;
     letter-spacing: 0.04em;
     white-space: nowrap;
     border: none;
     cursor: pointer;
     box-shadow:
-      0 4px 18px rgba(37, 211, 102, 0.38),
-      0 1px 4px rgba(0, 0, 0, 0.18);
+      0 3px 12px rgba(37, 211, 102, 0.17),
+      0 1px 3px rgba(0, 0, 0, 0.14);
     animation: ironhawkWaFadeIn 420ms cubic-bezier(0.16, 1, 0.3, 1) both;
     transition:
       transform 200ms cubic-bezier(0.16, 1, 0.3, 1),
@@ -38,8 +38,8 @@ const SCOPED_CSS = `
   .ironhawkWhatsappButton:hover {
     transform: translateY(-3px) scale(1.03);
     box-shadow:
-      0 8px 28px rgba(37, 211, 102, 0.52),
-      0 2px 8px rgba(0, 0, 0, 0.2);
+      0 5px 18px rgba(37, 211, 102, 0.26),
+      0 2px 6px rgba(0, 0, 0, 0.16);
   }
 
   .ironhawkWhatsappButton:active {
@@ -54,8 +54,8 @@ const SCOPED_CSS = `
   @media (max-width: 767px) {
     .ironhawkWhatsappButton {
       right: 16px;
-      bottom: 24px;
-      padding: 14px;
+      bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+      padding: 13px;
       border-radius: 50%;
       gap: 0;
     }
@@ -69,8 +69,8 @@ const WhatsAppIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
-    width="22"
-    height="22"
+    width="20"
+    height="20"
     fill="currentColor"
     aria-hidden="true"
     style={{ flexShrink: 0 }}

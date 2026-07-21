@@ -234,12 +234,13 @@ const ReviewCard = ({ name, initials, quote, tag, cardRef }) => (
     {/* Quote */}
     <p style={{
       flex: 1,
-      fontFamily: '"Cormorant Garamond", Georgia, serif',
-      fontStyle: 'italic',
-      fontSize: 'clamp(0.93rem, 1.45vw, 1.03rem)',
-      lineHeight: 1.68,
-      color: 'rgba(244,241,234,0.78)',
+      fontFamily: '"Manrope", system-ui, sans-serif',
+      fontWeight: 400,
+      fontSize: 'clamp(0.875rem, 1.35vw, 0.975rem)',
+      lineHeight: 1.78,
+      color: 'rgba(244,241,234,0.82)',
       margin: '12px 0 16px',
+      letterSpacing: '0.005em',
     }}>
       &ldquo;{quote}&rdquo;
     </p>
