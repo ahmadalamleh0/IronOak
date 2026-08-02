@@ -101,6 +101,7 @@ export const SERVICE_PAGES = [
     richContent: {
       heroImage:          '/services/capital-project-management-hero.jpg',
       heroImageAlt:       'Looking up at a modern glass office tower with a construction crane reflected in the facade against a blue sky',
+      heroHeading:        ['Capital Projects &', 'Project Management'],
       heroSupportingLine: 'Commercial • Condominium • Hospitality • Multi-Site',
 
       intro: [
@@ -144,20 +145,6 @@ export const SERVICE_PAGES = [
         ],
       },
 
-      environments: {
-        eyebrow: 'Built for Active Properties',
-        heading: 'Built for environments that need to keep operating.',
-        body:    'Capital work often takes place around residents, customers, employees, guests, and daily building operations. Planning should account for access, communication, work zones, deliveries, and phased completion.',
-        items: [
-          'Condominium Communities',
-          'Commercial Buildings',
-          'Retail Locations',
-          'Hospitality Properties',
-          'Multi-Unit Residential',
-          'Managed Property Portfolios',
-        ],
-      },
-
       benefits: {
         heading: 'Why coordinated project delivery matters',
         items: [
@@ -168,24 +155,13 @@ export const SERVICE_PAGES = [
         ],
       },
 
-      process: {
-        heading: 'A structured path from planning to closeout.',
-        steps: [
-          { num: '01', title: 'Discovery and Site Review',     body: 'Understand the locations, objectives, existing conditions, and operational requirements.' },
-          { num: '02', title: 'Scope and Project Plan',        body: 'Confirm the work, materials, scheduling approach, phasing, and completion standards.' },
-          { num: '03', title: 'Coordination and Execution',    body: 'Organize trades, site access, deliveries, communication, and progress across the project.' },
-          { num: '04', title: 'Review and Closeout',           body: 'Complete inspections, address deficiencies, document completion, and hand over the finished work.' },
-        ],
-      },
-
       typicalProjects: {
         heading: 'Typical capital projects',
         groups: [
-          { title: 'Multi-Site Upgrades', body: 'Lighting retrofits, CCTV programs, fixture installations, equipment upgrades, and consistent work delivered across multiple locations.' },
-          { title: 'Condominium & Hospitality Improvements', body: 'Hallway carpet and wallcovering replacement, guest-room or suite renovations, common-area upgrades, and interior refresh programs.' },
-          { title: 'Commercial Interior Programs', body: 'Flooring, painting, wall finishes, fixtures, lighting, and coordinated improvements for active commercial properties.' },
+          { num: '01', title: 'Commercial Interior Programs', body: 'Interior upgrades delivered with coordinated trades, finishes and minimal operational disruption.', image: '/services/capital-project-commercial-interior.jpg', imageAlt: 'Freshly finished hotel corridor with new carpet and guest room doors' },
+          { num: '02', title: 'Condominium & Hospitality Improvements', body: 'Hallway, common-area and guest-facing improvements planned around occupied properties.', image: '/services/capital-project-condo-hospitality.webp', imageAlt: 'Renovated hotel corridor with wood-paneled walls and patterned carpet' },
+          { num: '03', title: 'Multi-Site Upgrades', body: 'Lighting retrofits, CCTV programs, fixture installations, equipment upgrades, and consistent work delivered across multiple locations.', image: '/services/capital-project-multi-site.jpg', imageAlt: 'Aerial view of a multi-tenant commercial plaza with coordinated brick facade and signage' },
         ],
-        note: 'Project scope and availability depend on the property, location, and specific requirements.',
       },
 
       relatedArticleSlug: 'how-to-plan-a-multi-site-property-upgrade',
@@ -265,6 +241,100 @@ export const SERVICE_PAGES = [
         { q: 'Can you upgrade lighting across multiple floors?',   a: 'Yes. We coordinate multi-floor and multi-phase lighting projects. Reach out with your scope and we will outline the process.' },
       ],
     },
+
+    /* richContent — same premium template used by Capital Projects & Project
+       Management, with copy and a unique "Approach Note" section adapted for
+       installation work. */
+    richContent: {
+      heroImage:          null,
+      heroImageAlt:       'Technician installing property systems equipment in a commercial building',
+      heroHeading:        ['Installations &', 'Property Systems'],
+      heroSupportingLine: 'Commercial • Condominium • Hospitality • Multi-Site',
+
+      intro: [
+        { label: 'Assess',    body: 'Review the property, existing systems, access conditions, and installation requirements before work begins.' },
+        { label: 'Install',   body: 'Complete installation work to spec, coordinated around building access, trades, and operational schedules.' },
+        { label: 'Integrate', body: 'Test, commission, and hand over each system with clear documentation and support.' },
+      ],
+
+      positioning: {
+        heading: ['New systems.', 'Zero disruption.'],
+        body: 'From CCTV and lighting to property hardware and equipment, IronOak plans and installs system upgrades around occupied buildings, active operations, and everyday property use.',
+      },
+
+      typicalProjects: {
+        heading: 'Typical installation & systems work',
+        groups: [
+          { num: '01', title: 'Security & CCTV Systems', body: 'Coordinated camera and security installations for commercial and multi-residential properties.', image: null, imageAlt: 'Security camera installed in a commercial building hallway' },
+          { num: '02', title: 'Lighting & Fixture Upgrades', body: 'Interior and exterior fixture replacements and upgrade programs planned around property operations.', image: null, imageAlt: 'Technician upgrading a commercial lighting fixture' },
+          { num: '03', title: 'Property Equipment & Systems', body: 'Installation and replacement of building equipment, hardware and operational systems.', image: null, imageAlt: 'Building equipment and systems installed in a commercial property' },
+        ],
+      },
+
+      serviceList: {
+        heading: 'Installation & systems services',
+        body:    'Coordinated installation support for individual properties, managed portfolios, and multi-location programs.',
+        items: [
+          'CCTV and security system installation',
+          'Access control and entry systems',
+          'Interior and exterior lighting upgrades',
+          'Fixture replacement programs',
+          'Property equipment installation',
+          'Building hardware upgrades',
+          'Interior building systems',
+          'Access-related installations',
+          'Replacement and upgrade programs',
+          'Multi-location installation rollouts',
+        ],
+      },
+
+      overview: {
+        eyebrow:    'Property Systems Installation',
+        heading:    'Installed to standard. Planned around the property.',
+        paragraphs: [
+          'Every installation begins with understanding the property, the systems involved, and how the work fits around daily operations.',
+          'IronOak coordinates access, scheduling, and trades from initial assessment through testing, commissioning, and handover.',
+        ],
+        image:    null,
+        imageAlt: 'Technician installing a security camera in a commercial hallway ceiling',
+      },
+
+      approachNote: {
+        eyebrow: 'How We Install',
+        heading: 'Planned around the building, not just the system.',
+        body:    'Every installation is scheduled around occupancy, access, and daily operations, so the work gets done without getting in the way.',
+        items: [
+          { label: 'Scheduled Access',    body: 'Work planned around occupied hours and building access.' },
+          { label: 'Clear Communication', body: 'Tenants, staff, and site contacts kept informed throughout.' },
+          { label: 'Tested & Documented', body: 'Every system commissioned and handed over with documentation.' },
+        ],
+      },
+
+      benefits: {
+        heading: 'Why coordinated installation matters',
+        items: [
+          { title: 'One Point of Contact', body: 'Clear communication through one accountable lead for every installation.' },
+          { title: 'Minimal Disruption',    body: 'Work scheduled around occupancy, access, and daily operations.' },
+          { title: 'Consistent Standards',  body: 'Installation quality and materials aligned across every location.' },
+          { title: 'Tested & Handed Over',  body: 'Every system commissioned, documented, and confirmed before closeout.' },
+        ],
+      },
+
+      faqs: [
+        { q: 'What types of systems can IronOak install?', a: 'CCTV and security systems, interior and exterior lighting, fixtures, property hardware, access-related installations, and related building systems and equipment.' },
+        { q: 'Can installations be scheduled around occupied buildings?', a: 'Yes. Installation work is planned around occupancy, access conditions, and daily operations to minimize disruption.' },
+        { q: 'Do you coordinate installations across multiple properties?', a: 'Yes. Multi-location installation programs can be planned with consistent standards, scheduling, and site coordination.' },
+        { q: 'Are installed systems tested before handover?', a: 'Yes. Systems are tested and commissioned, with documentation provided at handover.' },
+        { q: 'How does the process begin?', a: 'The process begins with a conversation about the property, the systems involved, and your timeline. A site assessment may be recommended depending on scope.' },
+      ],
+
+      finalCta: {
+        heading:      'Planning an installation or upgrade?',
+        body:         "Tell us about the property and the systems you need installed. We'll help you understand the next step.",
+        phoneDisplay: '(416) 570-9074',
+        phoneHref:    'tel:+14165709074',
+      },
+    },
   },
 
   /* 06 ─────────────────────────────────────────────────────────────────── */
@@ -294,6 +364,94 @@ export const SERVICE_PAGES = [
         { q: 'Can you coordinate exterior work during winter months?', a: 'We plan exterior work around seasonal conditions and can advise on timing based on your specific scope. Contact us to discuss.' },
         { q: 'Do you handle permits for exterior improvements?',       a: 'We can assist with permit coordination where required. Reach out with your project details for more information.' },
       ],
+    },
+
+    /* richContent — same premium template used by Capital Projects & Project
+       Management, with copy and a unique "Photo Banner" section adapted for
+       exterior work. */
+    richContent: {
+      heroImage:          null,
+      heroImageAlt:       'Exterior entrance of a modern commercial building',
+      heroHeading:        ['Exterior &', 'Outdoor Improvements'],
+      heroSupportingLine: 'Commercial • Condominium • Hospitality • Multi-Site',
+
+      intro: [
+        { label: 'Evaluate', body: 'Review the property exterior, condition, and priorities before scoping the work.' },
+        { label: 'Improve',  body: 'Complete exterior upgrades and repairs coordinated around property operations.' },
+        { label: 'Protect',  body: 'Deliver lasting results that protect the property’s appearance and long-term value.' },
+      ],
+
+      positioning: {
+        heading: ['First impressions.', 'Lasting condition.'],
+        body: 'The exterior of a property shapes how it is experienced long before anyone steps inside. IronOak plans and delivers exterior improvements that protect appearance, function, and long-term value.',
+      },
+
+      typicalProjects: {
+        heading: 'Typical exterior improvement work',
+        groups: [
+          { num: '01', title: 'Entrances & Common Areas', body: 'Improvements to high-traffic exterior areas that shape the first impression of the property.', image: null, imageAlt: 'Renovated commercial building entrance' },
+          { num: '02', title: 'Exterior Lighting & Features', body: 'Coordinated upgrades to lighting, fixtures and property elements.', image: null, imageAlt: 'Exterior lighting fixture installed on a commercial building' },
+          { num: '03', title: 'Site & Building Improvements', body: 'Exterior repairs and enhancement work planned around active properties.', image: null, imageAlt: 'Exterior repair and improvement work on a commercial property' },
+        ],
+      },
+
+      serviceList: {
+        heading: 'Exterior & outdoor services',
+        body:    'Coordinated exterior improvement support for individual properties, managed portfolios, and multi-site programs.',
+        items: [
+          'Entrance and common-area improvements',
+          'Exterior lighting installation',
+          'Walkway and property feature upgrades',
+          'Exterior repairs and finishing',
+          'Site enhancement programs',
+          'Building exterior improvements',
+          'Coordinated multi-site exterior programs',
+          'Exterior fixture replacement',
+        ],
+      },
+
+      overview: {
+        eyebrow:    'Exterior Improvement Delivery',
+        heading:    'Planned around the property, not just the season.',
+        paragraphs: [
+          'Every exterior project begins with understanding the property, its condition, and how the work fits around ongoing operations.',
+          'IronOak coordinates scheduling, trades, and site conditions from initial review through completion and final review.',
+        ],
+        image:    null,
+        imageAlt: 'Exterior improvement work in progress on a commercial building',
+      },
+
+      photoBanner: {
+        heading: 'The first thing people see.',
+        body:    'Entrances, walkways, and exterior condition shape how a property is perceived before anyone steps inside. Exterior work is planned to protect that impression.',
+        image:    null,
+        imageAlt: 'Wide exterior view of a well-maintained commercial property entrance',
+      },
+
+      benefits: {
+        heading: 'Why coordinated exterior work matters',
+        items: [
+          { title: 'One Point of Contact',    body: 'Clear communication through one accountable lead for every project.' },
+          { title: 'Condition-First Planning', body: 'Work scoped around property condition, priorities, and access.' },
+          { title: 'Consistent Standards',    body: 'Materials and finishing quality aligned across every site.' },
+          { title: 'Lasting Results',         body: 'Work delivered to protect appearance, function, and value over time.' },
+        ],
+      },
+
+      faqs: [
+        { q: 'What exterior work does IronOak handle?', a: 'Entrance and common-area improvements, exterior lighting, walkways and property features, exterior repairs, finishing, and coordinated site enhancement programs.' },
+        { q: 'Can exterior work be scheduled around seasonal conditions?', a: 'Yes. Exterior work is planned around seasonal and site conditions, with timing discussed based on your specific scope.' },
+        { q: 'Do you coordinate exterior programs across multiple properties?', a: 'Yes. Multi-site exterior improvement programs can be planned with consistent standards and coordinated scheduling.' },
+        { q: 'Can you work around an active, occupied property?', a: 'Yes. Exterior work is planned around access, daily operations, and property use to minimize disruption.' },
+        { q: 'How does the process begin?', a: 'The process begins with a conversation about the property, its exterior condition, and your priorities. A site review may be recommended depending on scope.' },
+      ],
+
+      finalCta: {
+        heading:      'Planning an exterior improvement project?',
+        body:         "Tell us about the property and the exterior work you have in mind. We'll help you understand the next step.",
+        phoneDisplay: '(416) 570-9074',
+        phoneHref:    'tel:+14165709074',
+      },
     },
   },
 

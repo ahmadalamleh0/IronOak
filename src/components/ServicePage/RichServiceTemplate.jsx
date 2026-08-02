@@ -1,9 +1,13 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Header from '../Header/Header.jsx'
 import Footer from '../Footer/Footer.jsx'
 import FloatingWhatsAppButton from '../FloatingWhatsAppButton/FloatingWhatsAppButton.jsx'
 import LogoMark from '../Logo/LogoMark.jsx'
+
+gsap.registerPlugin(ScrollTrigger)
 
 /**
  * RichServiceTemplate — premium, primarily-cream master template for service
@@ -39,6 +43,21 @@ const CSS = `
 }
 @media (max-width: 640px) {
   .rp-hero-img { object-position: center top; }
+}
+.rp-hero-img-placeholder {
+  background: linear-gradient(135deg, #101c30 0%, #07111D 100%);
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 20px;
+  box-sizing: border-box;
+}
+.rp-hero-img-placeholder span {
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(232,201,122,0.5);
 }
 .rp-hero-overlay {
   position: absolute;
@@ -205,13 +224,17 @@ const CSS = `
 .rp-positioning { position: relative; text-align: center; overflow: hidden; }
 .rp-positioning-watermark {
   position: absolute;
-  top: 50%; left: 50%;
-  width: min(560px, 70vw);
-  transform: translate(-50%, -50%);
-  opacity: 0.05;
+  top: 50%; left: 4%;
+  width: min(480px, 58vw);
+  transform: translate(-20%, -50%);
+  opacity: 0.10;
   pointer-events: none;
 }
+@media (max-width: 640px) {
+  .rp-positioning-watermark { left: -8%; width: min(360px, 70vw); }
+}
 .rp-positioning-inner { position: relative; max-width: 700px; margin: 0 auto; }
+.rp-positioning-rule { width: 44px; height: 2px; border-radius: 1px; background: linear-gradient(90deg, #A9802F, #E8C97A); margin: 0 auto 24px; }
 .rp-positioning h2 { font-family: "Inter Tight", Inter, Arial, sans-serif; font-size: clamp(1.7rem, 3.6vw, 2.6rem); font-weight: 900; letter-spacing: -0.03em; line-height: 1.15; color: #07111D; margin: 0 0 20px; }
 .rp-positioning p { font-size: clamp(0.92rem, 1.3vw, 1.02rem); line-height: 1.75; color: rgba(7,17,29,0.58); margin: 0 auto; max-width: 560px; }
 
@@ -260,31 +283,6 @@ const CSS = `
   .rp-list-grid { grid-template-columns: 1fr; }
 }
 
-/* ── Environments — compact wrapping row ───────────────────── */
-.rp-section-compact { padding: clamp(40px, 5vh, 56px) 0; }
-.rp-env-row {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  row-gap: 10px;
-  margin-top: clamp(18px, 2.5vh, 24px);
-}
-.rp-env-item { display: inline-flex; align-items: center; gap: clamp(16px, 2.5vw, 28px); }
-.rp-env-label {
-  font-family: "Inter Tight", Inter, Arial, sans-serif;
-  font-size: 0.98rem;
-  font-weight: 800;
-  letter-spacing: -0.005em;
-  color: #07111D;
-  white-space: nowrap;
-}
-.rp-env-dot { color: rgba(169,128,47,0.55); font-size: 0.8rem; }
-@media (max-width: 640px) {
-  .rp-env-label { white-space: normal; }
-  .rp-env-item { width: 50%; padding-right: 12px; box-sizing: border-box; }
-  .rp-env-item .rp-env-dot { display: none; }
-}
-
 /* ── Dark benefits ─────────────────────────────────────────── */
 .rp-benefits-grid {
   display: grid;
@@ -304,48 +302,89 @@ const CSS = `
 @media (max-width: 900px) { .rp-benefits-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 480px) { .rp-benefits-grid { grid-template-columns: 1fr; } }
 
-/* ── Process ───────────────────────────────────────────────── */
-.rp-process-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: clamp(20px, 3vw, 28px);
-  margin-top: clamp(32px, 5vh, 48px);
-}
-.rp-process-step { position: relative; padding-top: 22px; }
-.rp-process-step::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0;
-  width: 32px; height: 2px;
-  background: #A9802F;
-}
-.rp-process-num { font-size: 0.66rem; font-weight: 800; letter-spacing: 0.2em; color: rgba(7,17,29,0.35); margin: 0 0 10px; }
-.rp-process-title { font-family: "Inter Tight", Inter, Arial, sans-serif; font-size: 1.02rem; font-weight: 800; letter-spacing: -0.015em; color: #07111D; margin: 0 0 10px; line-height: 1.3; }
-.rp-process-body { font-size: 0.86rem; line-height: 1.65; color: rgba(7,17,29,0.55); margin: 0; }
-@media (max-width: 860px) { .rp-process-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 480px) { .rp-process-grid { grid-template-columns: 1fr; } }
-
-/* ── Typical projects — 3 editorial groups ────────────────── */
+/* ── Typical projects — visual cards ──────────────────────── */
 .rp-typical-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: clamp(28px, 4vw, 40px);
-  margin: clamp(28px, 4vh, 40px) 0 24px;
+  margin: clamp(28px, 4vh, 40px) 0 28px;
 }
-.rp-typical-group { padding-top: 20px; border-top: 2px solid rgba(169,128,47,0.45); }
+.rp-typical-card { display: flex; flex-direction: column; }
+.rp-typical-img-wrap {
+  border-radius: 14px;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  border: 1px solid rgba(7,17,29,0.08);
+  box-shadow: 0 12px 28px rgba(7,17,29,0.10);
+  margin-bottom: 18px;
+}
+.rp-typical-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.rp-typical-img-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #DED8C7;
+}
+.rp-typical-img-placeholder span {
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(7,17,29,0.38);
+}
+.rp-typical-num { font-size: 0.66rem; font-weight: 800; letter-spacing: 0.2em; color: #A9802F; margin: 0 0 8px; }
 .rp-typical-title {
   font-family: "Inter Tight", Inter, Arial, sans-serif;
   font-size: 1.02rem;
   font-weight: 800;
   letter-spacing: -0.01em;
   color: #07111D;
-  margin: 0 0 10px;
+  margin: 0 0 8px;
   line-height: 1.3;
 }
-.rp-typical-body { font-size: 0.87rem; line-height: 1.68; color: rgba(7,17,29,0.55); margin: 0; }
-.rp-typical-note { font-size: 0.80rem; color: rgba(7,17,29,0.42); font-style: italic; margin: 0; }
+.rp-typical-body { font-size: 0.87rem; line-height: 1.6; color: rgba(7,17,29,0.55); margin: 0; }
 @media (max-width: 760px) {
-  .rp-typical-grid { grid-template-columns: 1fr; gap: 24px; }
+  .rp-typical-grid { grid-template-columns: 1fr; gap: 36px; }
+}
+
+/* ── Approach note — compact statement + 3-item row (per-service unique section) ── */
+.rp-approach-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(24px, 3.5vw, 36px);
+  margin-top: clamp(28px, 4vh, 40px);
+}
+.rp-approach-item { padding-top: 16px; border-top: 2px solid rgba(169,128,47,0.4); }
+.rp-approach-label {
+  font-family: "Inter Tight", Inter, Arial, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: #07111D;
+  margin: 0 0 8px;
+}
+.rp-approach-body { font-size: 0.85rem; line-height: 1.6; color: rgba(7,17,29,0.55); margin: 0; }
+@media (max-width: 760px) {
+  .rp-approach-grid { grid-template-columns: 1fr; gap: 24px; }
+}
+
+/* ── Photo banner — full-bleed image + short caption (per-service unique section) ── */
+.rp-photobanner-img-wrap {
+  border-radius: 14px;
+  overflow: hidden;
+  aspect-ratio: 21 / 9;
+  border: 1px solid rgba(7,17,29,0.08);
+  box-shadow: 0 16px 36px rgba(7,17,29,0.12);
+  margin-bottom: clamp(24px, 3.5vh, 32px);
+}
+.rp-photobanner-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.rp-photobanner-caption { max-width: 620px; margin: 0 auto; text-align: center; }
+.rp-photobanner-caption .rp-h2 { margin: 0 0 12px; }
+.rp-photobanner-caption p { margin: 0 auto; }
+@media (max-width: 760px) {
+  .rp-photobanner-img-wrap { aspect-ratio: 4 / 3; }
 }
 
 /* ── Related insight ───────────────────────────────────────── */
@@ -475,6 +514,97 @@ const FaqItem = ({ q, a, isOpen, onToggle, idx }) => (
   </div>
 )
 
+// Each word gets an overflow:hidden mask + inner animated span — mirrors Statement.jsx
+const WordMask = ({ children, innerRef }) => (
+  <span style={{ display: 'inline-block', overflow: 'hidden', verticalAlign: 'bottom', paddingBottom: '0.15em' }}>
+    <span ref={innerRef} style={{ display: 'inline-block' }}>{children}</span>
+  </span>
+)
+
+const PositioningStatement = ({ heading, body }) => {
+  const sectionRef  = useRef(null)
+  const headlineRef = useRef(null)
+  const ruleRef     = useRef(null)
+  const paraRef     = useRef(null)
+  const wordRefs    = useRef([])
+
+  useEffect(() => {
+    const rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+    const ctx = gsap.context(() => {
+      const words = wordRefs.current.filter(Boolean)
+
+      gsap.from(ruleRef.current, {
+        scaleX: 0,
+        duration: 0.7,
+        ease: 'power2.out',
+        transformOrigin: 'center center',
+        scrollTrigger: { trigger: sectionRef.current, start: 'top 82%' },
+      })
+
+      if (rm) {
+        gsap.from([...words, paraRef.current], {
+          opacity: 0,
+          duration: 0.5,
+          stagger: 0.06,
+          scrollTrigger: { trigger: headlineRef.current, start: 'top 85%' },
+        })
+        return
+      }
+
+      gsap.from(words, {
+        yPercent: 110,
+        duration: 0.85,
+        ease: 'power3.out',
+        stagger: 0.05,
+        scrollTrigger: { trigger: headlineRef.current, start: 'top 84%' },
+      })
+
+      gsap.from(paraRef.current, {
+        opacity: 0,
+        y: 16,
+        duration: 0.75,
+        ease: 'power2.out',
+        delay: 0.35,
+        scrollTrigger: { trigger: paraRef.current, start: 'top 89%' },
+      })
+    }, sectionRef)
+
+    return () => ctx.revert()
+  }, [])
+
+  let wordIndex = -1
+
+  return (
+    <section ref={sectionRef} className="rp-section rp-section-sage rp-positioning" aria-label="Positioning statement">
+      <div className="rp-positioning-watermark" aria-hidden="true"><LogoMark /></div>
+      <div className="rp-inner rp-positioning-inner">
+        <div ref={ruleRef} className="rp-positioning-rule" aria-hidden="true" />
+        <h2 ref={headlineRef}>
+          {heading.map((line, li) => {
+            const words = line.split(' ')
+            return (
+              <span key={li} style={{ display: 'block' }}>
+                {words.map((word, wi) => {
+                  wordIndex += 1
+                  const idx = wordIndex
+                  return (
+                    <span key={wi}>
+                      <WordMask innerRef={(el) => { wordRefs.current[idx] = el }}>{word}</WordMask>
+                      {wi < words.length - 1 ? ' ' : ''}
+                    </span>
+                  )
+                })}
+              </span>
+            )
+          })}
+        </h2>
+        <p ref={paraRef}>{body}</p>
+      </div>
+    </section>
+  )
+}
+
 export default function RichServiceTemplate({ service, relatedServices, relatedArticle }) {
   const [openFaq, setOpenFaq] = useState(null)
   const rc = service.richContent
@@ -487,7 +617,11 @@ export default function RichServiceTemplate({ service, relatedServices, relatedA
 
         {/* ════ HERO ════ */}
         <section className="rp-hero" aria-labelledby="rp-title">
-          <img className="rp-hero-img" src={rc.heroImage} alt={rc.heroImageAlt} loading="eager" decoding="async" />
+          {rc.heroImage ? (
+            <img className="rp-hero-img" src={rc.heroImage} alt={rc.heroImageAlt} loading="eager" decoding="async" />
+          ) : (
+            <div className="rp-hero-img rp-hero-img-placeholder" aria-hidden="true"><span>Photography pending</span></div>
+          )}
           <div className="rp-hero-overlay" aria-hidden="true" />
           <div className="rp-hero-content">
             <div className="rp-inner">
@@ -501,7 +635,8 @@ export default function RichServiceTemplate({ service, relatedServices, relatedA
 
               <p className="rp-eyebrow">{service.category}</p>
               <h1 className="rp-h1" id="rp-title">
-                Capital Projects &amp;<br />Project Management
+                {rc.heroHeading[0]}
+                {rc.heroHeading[1] && <><br />{rc.heroHeading[1]}</>}
               </h1>
               <p className="rp-hero-desc">{service.description}</p>
 
@@ -518,7 +653,7 @@ export default function RichServiceTemplate({ service, relatedServices, relatedA
         </section>
 
         {/* ════ THREE-PART INTRODUCTION ════ */}
-        <section className="rp-section" aria-label="How IronOak approaches capital projects">
+        <section className="rp-section" aria-label="How IronOak approaches this work">
           <div className="rp-inner">
             <div className="rp-intro-grid">
               {rc.intro.map((item) => (
@@ -532,33 +667,34 @@ export default function RichServiceTemplate({ service, relatedServices, relatedA
         </section>
 
         {/* ════ POSITIONING STATEMENT ════ */}
-        <section className="rp-section rp-section-sage rp-positioning" aria-label="Positioning statement">
-          <div className="rp-positioning-watermark" aria-hidden="true"><LogoMark /></div>
-          <div className="rp-inner rp-positioning-inner">
-            <h2>{rc.positioning.heading[0]}<br />{rc.positioning.heading[1]}</h2>
-            <p>{rc.positioning.body}</p>
-          </div>
-        </section>
+        <PositioningStatement heading={rc.positioning.heading} body={rc.positioning.body} />
 
-        {/* ════ CAPITAL PROJECT OVERVIEW ════ */}
-        <section className="rp-section" aria-labelledby="rp-overview-h">
+        {/* ════ TYPICAL SERVICE WORK (photography-led) ════ */}
+        <section className="rp-section rp-section-sage" aria-labelledby="rp-typical-h">
           <div className="rp-inner">
-            <div className="rp-overview-grid">
-              <div className="rp-overview-text">
-                <p className="rp-section-eyebrow">{rc.overview.eyebrow}</p>
-                <h2 className="rp-h2" id="rp-overview-h">{rc.overview.heading}</h2>
-                {rc.overview.paragraphs.map((p, i) => (
-                  <p key={i} className="rp-overview-p">{p}</p>
-                ))}
-              </div>
-              <div className="rp-overview-img-wrap">
-                <img src={rc.overview.image} alt={rc.overview.imageAlt} loading="lazy" decoding="async" />
-              </div>
+            <h2 className="rp-h2" id="rp-typical-h">{rc.typicalProjects.heading}</h2>
+            <div className="rp-typical-grid">
+              {rc.typicalProjects.groups.map((group) => (
+                <div key={group.title} className="rp-typical-card">
+                  <div className="rp-typical-img-wrap">
+                    {group.image ? (
+                      <img src={group.image} alt={group.imageAlt || group.title} loading="lazy" decoding="async" />
+                    ) : (
+                      <div className="rp-typical-img-placeholder" aria-hidden="true">
+                        <span>Image coming soon</span>
+                      </div>
+                    )}
+                  </div>
+                  <p className="rp-typical-num">{group.num}</p>
+                  <h3 className="rp-typical-title">{group.title}</h3>
+                  <p className="rp-typical-body">{group.body}</p>
+                </div>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* ════ CAPITAL PROJECT SERVICES ════ */}
+        {/* ════ SERVICE SCOPE LIST ════ */}
         <section className="rp-section rp-section-sage" aria-labelledby="rp-services-h">
           <div className="rp-inner">
             <h2 className="rp-h2" id="rp-services-h">{rc.serviceList.heading}</h2>
@@ -574,22 +710,65 @@ export default function RichServiceTemplate({ service, relatedServices, relatedA
           </div>
         </section>
 
-        {/* ════ ACTIVE PROPERTY ENVIRONMENTS ════ */}
-        <section className="rp-section rp-section-compact" aria-labelledby="rp-env-h">
+        {/* ════ SERVICE OVERVIEW ════ */}
+        <section className="rp-section" aria-labelledby="rp-overview-h">
           <div className="rp-inner">
-            <p className="rp-section-eyebrow">{rc.environments.eyebrow}</p>
-            <h2 className="rp-h2" id="rp-env-h">{rc.environments.heading}</h2>
-            <p className="rp-section-body">{rc.environments.body}</p>
-            <div className="rp-env-row" role="list">
-              {rc.environments.items.map((item, i) => (
-                <span key={item} className="rp-env-item" role="listitem">
-                  <span className="rp-env-label">{item}</span>
-                  {i < rc.environments.items.length - 1 && <span className="rp-env-dot" aria-hidden="true">•</span>}
-                </span>
-              ))}
+            <div className="rp-overview-grid">
+              <div className="rp-overview-text">
+                <p className="rp-section-eyebrow">{rc.overview.eyebrow}</p>
+                <h2 className="rp-h2" id="rp-overview-h">{rc.overview.heading}</h2>
+                {rc.overview.paragraphs.map((p, i) => (
+                  <p key={i} className="rp-overview-p">{p}</p>
+                ))}
+              </div>
+              <div className="rp-overview-img-wrap">
+                {rc.overview.image ? (
+                  <img src={rc.overview.image} alt={rc.overview.imageAlt} loading="lazy" decoding="async" />
+                ) : (
+                  <div className="rp-typical-img-placeholder" aria-hidden="true"><span>Image coming soon</span></div>
+                )}
+              </div>
             </div>
           </div>
         </section>
+
+        {/* ════ APPROACH NOTE (optional, per-service unique section) ════ */}
+        {rc.approachNote && (
+          <section className="rp-section" aria-labelledby="rp-approach-h">
+            <div className="rp-inner">
+              <p className="rp-section-eyebrow">{rc.approachNote.eyebrow}</p>
+              <h2 className="rp-h2" id="rp-approach-h">{rc.approachNote.heading}</h2>
+              <p className="rp-section-body">{rc.approachNote.body}</p>
+              <div className="rp-approach-grid">
+                {rc.approachNote.items.map((item) => (
+                  <div key={item.label} className="rp-approach-item">
+                    <p className="rp-approach-label">{item.label}</p>
+                    <p className="rp-approach-body">{item.body}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* ════ PHOTO BANNER (optional, per-service unique section) ════ */}
+        {rc.photoBanner && (
+          <section className="rp-section rp-photobanner" aria-label={rc.photoBanner.heading}>
+            <div className="rp-inner">
+              <div className="rp-photobanner-img-wrap">
+                {rc.photoBanner.image ? (
+                  <img src={rc.photoBanner.image} alt={rc.photoBanner.imageAlt} loading="lazy" decoding="async" />
+                ) : (
+                  <div className="rp-typical-img-placeholder" aria-hidden="true"><span>Image coming soon</span></div>
+                )}
+              </div>
+              <div className="rp-photobanner-caption">
+                <h2 className="rp-h2">{rc.photoBanner.heading}</h2>
+                <p className="rp-section-body">{rc.photoBanner.body}</p>
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* ════ DARK BENEFITS ════ */}
         <section className="rp-section rp-section-dark" aria-labelledby="rp-benefits-h">
@@ -604,38 +783,6 @@ export default function RichServiceTemplate({ service, relatedServices, relatedA
                 </div>
               ))}
             </div>
-          </div>
-        </section>
-
-        {/* ════ PROCESS ════ */}
-        <section className="rp-section" aria-labelledby="rp-process-h">
-          <div className="rp-inner">
-            <h2 className="rp-h2" id="rp-process-h">{rc.process.heading}</h2>
-            <div className="rp-process-grid">
-              {rc.process.steps.map((step) => (
-                <div key={step.num} className="rp-process-step">
-                  <p className="rp-process-num">{step.num}</p>
-                  <p className="rp-process-title">{step.title}</p>
-                  <p className="rp-process-body">{step.body}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ════ TYPICAL CAPITAL PROJECTS ════ */}
-        <section className="rp-section rp-section-sage" aria-labelledby="rp-typical-h">
-          <div className="rp-inner">
-            <h2 className="rp-h2" id="rp-typical-h">{rc.typicalProjects.heading}</h2>
-            <div className="rp-typical-grid">
-              {rc.typicalProjects.groups.map((group) => (
-                <div key={group.title} className="rp-typical-group">
-                  <h3 className="rp-typical-title">{group.title}</h3>
-                  <p className="rp-typical-body">{group.body}</p>
-                </div>
-              ))}
-            </div>
-            <p className="rp-typical-note">{rc.typicalProjects.note}</p>
           </div>
         </section>
 

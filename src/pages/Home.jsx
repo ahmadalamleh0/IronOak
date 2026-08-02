@@ -46,10 +46,10 @@ const Home = () => {
         <ServicesExplorer />
         <PropertyTypes />
         <PropertySolutions />
-        <WhyIronOak />
+        <Contact />
         <HowItWorks />
         <BuildingStatement />
-        <Contact />
+        <WhyIronOak />
         <Reviews />
         <AreasWeServe />
         <ContactFAQSection />
