@@ -179,7 +179,7 @@ export const ARTICLES = [
 
     relatedServices: [
       { label: 'Capital Projects & Project Management', slug: 'capital-project-management' },
-      { label: 'Installations & Property Systems', slug: 'installations-property-systems' },
+      { label: 'Installations & Building Systems', slug: 'installations-property-systems' },
       { label: 'Interior Finishing', slug: 'interior-finishing' },
     ],
     relatedArticleSlugs: [
@@ -391,7 +391,7 @@ export const ARTICLES = [
     relatedServices: [
       { label: 'Property Maintenance & Repairs', slug: 'property-maintenance-repairs' },
       { label: 'Capital Projects & Project Management', slug: 'capital-project-management' },
-      { label: 'Installations & Property Systems', slug: 'installations-property-systems' },
+      { label: 'Installations & Building Systems', slug: 'installations-property-systems' },
     ],
     relatedArticleSlugs: [
       'how-to-plan-a-multi-site-property-upgrade',

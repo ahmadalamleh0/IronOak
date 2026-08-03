@@ -50,7 +50,7 @@ const SERVICES = [
     id:          'installations-property-systems',
     num:         '04',
     category:    'Property Systems',
-    title:       'Installations & Property Systems',
+    title:       'Installations & Building Systems',
     slug:        '/services/installations-property-systems',
     description: 'Clean, dependable installation of CCTV systems, retrofit lighting, fixtures, equipment, and essential property upgrades.',
   },

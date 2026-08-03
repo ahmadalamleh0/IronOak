@@ -218,11 +218,11 @@ export const SERVICE_PAGES = [
     slug:               'installations-property-systems',
     num:                '05',
     category:           'Property Systems',
-    title:              'Installations & Property Systems',
+    title:              'Installations & Building Systems',
     description:        'Clean, dependable installation of CCTV systems, retrofit lighting, fixtures, equipment, and essential property upgrades.',
     illustrationIndex:  4,
     meta: {
-      title:       'Installations & Property Systems | IronOak Property Services',
+      title:       'Installations & Building Systems | IronOak Property Services',
       description: 'IronOak installs CCTV systems, retrofit lighting, fixtures, and property systems for commercial and residential properties.',
     },
     related: [0, 5, 6],
@@ -246,9 +246,9 @@ export const SERVICE_PAGES = [
        Management, with copy and a unique "Approach Note" section adapted for
        installation work. */
     richContent: {
-      heroImage:          null,
-      heroImageAlt:       'Technician installing property systems equipment in a commercial building',
-      heroHeading:        ['Installations &', 'Property Systems'],
+      heroImage:          '/services/installations-property-systems-hero.webp',
+      heroImageAlt:       'Elevated view of a modern glass building entrance with automated pedestrian doors',
+      heroHeading:        ['Installations &', 'Building Systems'],
       heroSupportingLine: 'Commercial • Condominium • Hospitality • Multi-Site',
 
       intro: [
@@ -258,21 +258,21 @@ export const SERVICE_PAGES = [
       ],
 
       positioning: {
-        heading: ['New systems.', 'Zero disruption.'],
+        heading: ['Upgrades planned around your operation.'],
         body: 'From CCTV and lighting to property hardware and equipment, IronOak plans and installs system upgrades around occupied buildings, active operations, and everyday property use.',
       },
 
       typicalProjects: {
         heading: 'Typical installation & systems work',
         groups: [
-          { num: '01', title: 'Security & CCTV Systems', body: 'Coordinated camera and security installations for commercial and multi-residential properties.', image: null, imageAlt: 'Security camera installed in a commercial building hallway' },
-          { num: '02', title: 'Lighting & Fixture Upgrades', body: 'Interior and exterior fixture replacements and upgrade programs planned around property operations.', image: null, imageAlt: 'Technician upgrading a commercial lighting fixture' },
-          { num: '03', title: 'Property Equipment & Systems', body: 'Installation and replacement of building equipment, hardware and operational systems.', image: null, imageAlt: 'Building equipment and systems installed in a commercial property' },
+          { num: '01', title: 'Security & CCTV Systems', body: 'Coordinated camera and security installations for commercial and multi-residential properties.', image: '/services/installations-security-cctv.webp', imageAlt: 'Dome security camera mounted on the ceiling of a modern hotel lobby corridor' },
+          { num: '02', title: 'Lighting & Fixture Upgrades', body: 'Interior and exterior fixture replacements and upgrade programs planned around property operations.', image: '/services/installations-lighting-fixtures.jpg', imageAlt: 'Condominium corridor with recessed downlights and cove wall lighting along a textured plaster wall' },
+          { num: '03', title: 'Access Control & Entry Systems', body: 'Entry, intercom and access-control installations designed for secure, reliable day-to-day property operations.', image: '/services/installations-access-control.png', imageAlt: 'Modern commercial building entrance with automated glass doors and an access-control panel' },
         ],
       },
 
       serviceList: {
-        heading: 'Installation & systems services',
+        heading: 'Installation & systems scope',
         body:    'Coordinated installation support for individual properties, managed portfolios, and multi-location programs.',
         items: [
           'CCTV and security system installation',
@@ -295,8 +295,8 @@ export const SERVICE_PAGES = [
           'Every installation begins with understanding the property, the systems involved, and how the work fits around daily operations.',
           'IronOak coordinates access, scheduling, and trades from initial assessment through testing, commissioning, and handover.',
         ],
-        image:    null,
-        imageAlt: 'Technician installing a security camera in a commercial hallway ceiling',
+        image:    '/services/installations-overview.jpg',
+        imageAlt: 'Elegant condominium elevator lobby with marble walls and flooring',
       },
 
       approachNote: {
@@ -370,8 +370,8 @@ export const SERVICE_PAGES = [
        Management, with copy and a unique "Photo Banner" section adapted for
        exterior work. */
     richContent: {
-      heroImage:          null,
-      heroImageAlt:       'Exterior entrance of a modern commercial building',
+      heroImage:          '/services/exterior-outdoor-improvements-hero.webp',
+      heroImageAlt:       'Close-up of an architectural wall light fixture on a stone building facade beside a landscaped entrance',
       heroHeading:        ['Exterior &', 'Outdoor Improvements'],
       heroSupportingLine: 'Commercial • Condominium • Hospitality • Multi-Site',
 
@@ -389,9 +389,9 @@ export const SERVICE_PAGES = [
       typicalProjects: {
         heading: 'Typical exterior improvement work',
         groups: [
-          { num: '01', title: 'Entrances & Common Areas', body: 'Improvements to high-traffic exterior areas that shape the first impression of the property.', image: null, imageAlt: 'Renovated commercial building entrance' },
-          { num: '02', title: 'Exterior Lighting & Features', body: 'Coordinated upgrades to lighting, fixtures and property elements.', image: null, imageAlt: 'Exterior lighting fixture installed on a commercial building' },
-          { num: '03', title: 'Site & Building Improvements', body: 'Exterior repairs and enhancement work planned around active properties.', image: null, imageAlt: 'Exterior repair and improvement work on a commercial property' },
+          { num: '01', title: 'Entrances & Common Areas', body: 'Improvements to high-traffic exterior areas that shape the first impression of the property.', image: '/services/exterior-entrances-common-areas.jpg', imageAlt: 'Illuminated glass entrance of a modern commercial building at dusk, reflecting the surrounding facade' },
+          { num: '02', title: 'Exterior Lighting & Features', body: 'Coordinated upgrades to lighting, fixtures and property elements.', image: '/services/exterior-lighting-features.jpg', imageAlt: 'LED wall lighting illuminating a commercial building entrance and facade at night' },
+          { num: '03', title: 'Walkways & Access Areas', body: 'Upgrades to exterior paths, access points and surrounding surfaces that improve safety, usability and presentation.', image: '/services/exterior-walkways-access-areas.jpg', imageAlt: 'Covered walkway through a landscaped courtyard with brick archways' },
         ],
       },
 
@@ -410,22 +410,11 @@ export const SERVICE_PAGES = [
         ],
       },
 
-      overview: {
-        eyebrow:    'Exterior Improvement Delivery',
-        heading:    'Planned around the property, not just the season.',
-        paragraphs: [
-          'Every exterior project begins with understanding the property, its condition, and how the work fits around ongoing operations.',
-          'IronOak coordinates scheduling, trades, and site conditions from initial review through completion and final review.',
-        ],
-        image:    null,
-        imageAlt: 'Exterior improvement work in progress on a commercial building',
-      },
-
       photoBanner: {
         heading: 'The first thing people see.',
         body:    'Entrances, walkways, and exterior condition shape how a property is perceived before anyone steps inside. Exterior work is planned to protect that impression.',
-        image:    null,
-        imageAlt: 'Wide exterior view of a well-maintained commercial property entrance',
+        image:    '/services/exterior-photo-banner.jpg',
+        imageAlt: 'Modern property walkway with uplighting along the walls leading to the entrance stairs',
       },
 
       benefits: {

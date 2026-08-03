@@ -72,26 +72,6 @@ const CSS = `
   width: 100%;
   padding: clamp(120px, 16vh, 160px) 0 clamp(48px, 6vh, 64px);
 }
-.rp-breadcrumb {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 20px;
-  flex-wrap: wrap;
-}
-.rp-breadcrumb a, .rp-breadcrumb span {
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-decoration: none;
-  color: rgba(244,241,234,0.55);
-  transition: color 180ms ease;
-}
-.rp-breadcrumb a:hover { color: #E8C97A; }
-.rp-breadcrumb a:focus-visible { outline: 2px solid rgba(201,162,74,0.7); outline-offset: 2px; border-radius: 3px; }
-.rp-breadcrumb-sep { color: rgba(244,241,234,0.30); font-size: 0.65rem; }
-.rp-breadcrumb-current { color: rgba(244,241,234,0.85) !important; }
-
 .rp-eyebrow {
   font-size: 0.64rem;
   font-weight: 800;
@@ -140,24 +120,21 @@ const CSS = `
 }
 .rp-btn-primary:hover { transform: translateY(-1px) scale(1.015); box-shadow: 0 6px 24px rgba(169,128,47,0.56); }
 .rp-btn-primary:focus-visible { outline: 2px solid rgba(201,162,74,0.8); outline-offset: 3px; }
-.rp-btn-secondary {
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  height: 50px;
-  padding: 0 6px;
-  font-family: "Manrope", system-ui, sans-serif;
-  font-size: 0.76rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: rgba(244,241,234,0.85);
-  text-decoration: none;
-  border-bottom: 1px solid rgba(244,241,234,0.25);
-  transition: color 180ms ease, border-color 180ms ease;
+
+/* Hero CTA — deliberately understated; the bold gold button is reserved for the final CTA */
+.rp-hero-ctas .rp-btn-primary {
+  background: transparent;
+  border: 1px solid rgba(244,241,234,0.28);
+  color: rgba(244,241,234,0.80);
+  box-shadow: none;
 }
-.rp-btn-secondary:hover { color: #E8C97A; border-color: rgba(201,162,74,0.6); }
-.rp-btn-secondary:focus-visible { outline: 2px solid rgba(201,162,74,0.8); outline-offset: 3px; }
+.rp-hero-ctas .rp-btn-primary:hover {
+  border-color: rgba(201,162,74,0.55);
+  color: #E8C97A;
+  transform: none;
+  box-shadow: none;
+}
+
 .rp-hero-props {
   font-size: 0.72rem;
   font-weight: 700;
@@ -485,15 +462,9 @@ const CSS = `
 
 @media (max-width: 600px) {
   .rp-hero-ctas { flex-direction: column; align-items: flex-start; gap: 14px; }
-  .rp-btn-primary, .rp-btn-secondary { width: 100%; justify-content: center; }
+  .rp-btn-primary { width: 100%; justify-content: center; }
 }
 `
-
-const PhoneIcon = () => (
-  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .98h3a2 2 0 012 1.72c.127.96.362 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
-  </svg>
-)
 
 const FaqItem = ({ q, a, isOpen, onToggle, idx }) => (
   <div className="rp-faq-item">
@@ -625,14 +596,6 @@ export default function RichServiceTemplate({ service, relatedServices, relatedA
           <div className="rp-hero-overlay" aria-hidden="true" />
           <div className="rp-hero-content">
             <div className="rp-inner">
-              <nav className="rp-breadcrumb" aria-label="Breadcrumb">
-                <Link to="/">Home</Link>
-                <span className="rp-breadcrumb-sep" aria-hidden="true">/</span>
-                <Link to="/#services-explorer">Services</Link>
-                <span className="rp-breadcrumb-sep" aria-hidden="true">/</span>
-                <span className="rp-breadcrumb-current" aria-current="page">{service.title}</span>
-              </nav>
-
               <p className="rp-eyebrow">{service.category}</p>
               <h1 className="rp-h1" id="rp-title">
                 {rc.heroHeading[0]}
@@ -642,9 +605,6 @@ export default function RichServiceTemplate({ service, relatedServices, relatedA
 
               <div className="rp-hero-ctas">
                 <Link to="/#contact" className="rp-btn-primary">Discuss Your Project</Link>
-                <a href={rc.finalCta.phoneHref} className="rp-btn-secondary">
-                  <PhoneIcon /> Call IronOak
-                </a>
               </div>
 
               <p className="rp-hero-props">{rc.heroSupportingLine}</p>
@@ -678,7 +638,7 @@ export default function RichServiceTemplate({ service, relatedServices, relatedA
                 <div key={group.title} className="rp-typical-card">
                   <div className="rp-typical-img-wrap">
                     {group.image ? (
-                      <img src={group.image} alt={group.imageAlt || group.title} loading="lazy" decoding="async" />
+                      <img src={group.image} alt={group.imageAlt || group.title} loading="lazy" decoding="async" style={group.imagePosition ? { objectPosition: group.imagePosition } : undefined} />
                     ) : (
                       <div className="rp-typical-img-placeholder" aria-hidden="true">
                         <span>Image coming soon</span>
@@ -710,27 +670,29 @@ export default function RichServiceTemplate({ service, relatedServices, relatedA
           </div>
         </section>
 
-        {/* ════ SERVICE OVERVIEW ════ */}
-        <section className="rp-section" aria-labelledby="rp-overview-h">
-          <div className="rp-inner">
-            <div className="rp-overview-grid">
-              <div className="rp-overview-text">
-                <p className="rp-section-eyebrow">{rc.overview.eyebrow}</p>
-                <h2 className="rp-h2" id="rp-overview-h">{rc.overview.heading}</h2>
-                {rc.overview.paragraphs.map((p, i) => (
-                  <p key={i} className="rp-overview-p">{p}</p>
-                ))}
-              </div>
-              <div className="rp-overview-img-wrap">
-                {rc.overview.image ? (
-                  <img src={rc.overview.image} alt={rc.overview.imageAlt} loading="lazy" decoding="async" />
-                ) : (
-                  <div className="rp-typical-img-placeholder" aria-hidden="true"><span>Image coming soon</span></div>
-                )}
+        {/* ════ SERVICE OVERVIEW (optional) ════ */}
+        {rc.overview && (
+          <section className="rp-section" aria-labelledby="rp-overview-h">
+            <div className="rp-inner">
+              <div className="rp-overview-grid">
+                <div className="rp-overview-text">
+                  <p className="rp-section-eyebrow">{rc.overview.eyebrow}</p>
+                  <h2 className="rp-h2" id="rp-overview-h">{rc.overview.heading}</h2>
+                  {rc.overview.paragraphs.map((p, i) => (
+                    <p key={i} className="rp-overview-p">{p}</p>
+                  ))}
+                </div>
+                <div className="rp-overview-img-wrap">
+                  {rc.overview.image ? (
+                    <img src={rc.overview.image} alt={rc.overview.imageAlt} loading="lazy" decoding="async" />
+                  ) : (
+                    <div className="rp-typical-img-placeholder" aria-hidden="true"><span>Image coming soon</span></div>
+                  )}
+                </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
+        )}
 
         {/* ════ APPROACH NOTE (optional, per-service unique section) ════ */}
         {rc.approachNote && (
