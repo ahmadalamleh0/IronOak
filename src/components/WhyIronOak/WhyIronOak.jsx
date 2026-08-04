@@ -107,6 +107,7 @@ const WhyIronOak = () => {
     <section
       ref={sectionRef}
       id="why-ironoak"
+      data-navbar="invert"
       style={{ background: '#07111D', padding: 'clamp(80px, 10vw, 120px) 24px' }}
     >
       <style>{SCOPED_CSS}</style>

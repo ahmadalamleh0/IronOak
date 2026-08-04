@@ -35,7 +35,7 @@ const columns = [
       'Cleaning & Property Care',
       'Custom Service Plans',
     ],
-    hrefs: ['/#services', '/#services', '/#services', '/#services', '/#services', '/#services'],
+    hrefs: ['/#services-explorer', '/#services-explorer', '/#services-explorer', '/#services-explorer', '/#services-explorer', '/#services-explorer'],
   },
   {
     title: 'Company',
@@ -50,7 +50,7 @@ const Footer = () => {
   const year = new Date().getFullYear()
 
   return (
-    <footer className="relative border-t border-gold-400/15 bg-ink-950">
+    <footer className="relative border-t border-gold-400/15 bg-ink-950" data-navbar="invert">
       <div className="bg-grain pointer-events-none absolute inset-0 opacity-50" />
 
       <div className="relative mx-auto max-w-6xl px-6 py-10 sm:px-10 lg:px-16">

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import LogoMark from '../Logo/LogoMark.jsx'
 
@@ -49,6 +49,19 @@ const SCOPED_CSS = `
       0 1px 6px rgba(0, 0, 0, 0.26),
       inset 0 1px 0 rgba(255, 255, 255, 0.04);
     animation: ironhawkNavIn 620ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    transition: background 420ms ease, border-color 420ms ease, box-shadow 420ms ease;
+  }
+
+  /* ── Inverted (over a dark-navy section) ─────────────────────
+     Logo, gold accents and the CTA button are left untouched —
+     only the pill background and neutral text/icon colors flip. */
+  .ironhawkPillNav.is-inverted {
+    background: rgba(244, 241, 234, 0.94);
+    border-color: rgba(7, 17, 29, 0.08);
+    box-shadow:
+      0 4px 32px rgba(7, 17, 29, 0.14),
+      0 1px 6px rgba(7, 17, 29, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.6);
   }
 
   /* ── Logo ─────────────────────────────────────────────────── */
@@ -76,6 +89,16 @@ const SCOPED_CSS = `
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     filter: drop-shadow(0 1px 0 rgba(255, 245, 214, 0.2)) drop-shadow(0 2px 3px rgba(0, 0, 0, 0.5));
+    transition: filter 420ms ease;
+  }
+
+  .is-inverted .ironhawkNavBrand {
+    background: none;
+    -webkit-background-clip: initial;
+    background-clip: initial;
+    -webkit-text-fill-color: #07111D;
+    color: #07111D;
+    filter: none;
   }
 
   .ironhawkNavSub {
@@ -86,7 +109,10 @@ const SCOPED_CSS = `
     font-weight: 600;
     margin-top: 4px;
     font-family: "Manrope", "Inter", system-ui, sans-serif;
+    transition: color 420ms ease;
   }
+
+  .is-inverted .ironhawkNavSub { color: rgba(7, 17, 29, 0.55); }
 
   /* ── Center links ─────────────────────────────────────────── */
   .ironhawkNavLinks {
@@ -107,12 +133,18 @@ const SCOPED_CSS = `
     color: rgba(255, 255, 255, 0.6);
     text-decoration: none;
     white-space: nowrap;
-    transition: background 180ms ease, color 180ms ease;
+    transition: background 180ms ease, color 420ms ease;
   }
 
   .ironhawkNavLink:hover {
     color: #D8B866;
     background: rgba(255, 255, 255, 0.05);
+  }
+
+  .is-inverted .ironhawkNavLink { color: rgba(7, 17, 29, 0.62); }
+  .is-inverted .ironhawkNavLink:hover {
+    color: #A9802F;
+    background: rgba(7, 17, 29, 0.05);
   }
 
   /* ── CTA ──────────────────────────────────────────────────── */
@@ -165,13 +197,23 @@ const SCOPED_CSS = `
     color: rgba(255, 255, 255, 0.8);
     cursor: pointer;
     flex-shrink: 0;
-    transition: background 160ms ease, border-color 160ms ease;
+    transition: background 160ms ease, border-color 160ms ease, color 420ms ease;
     -webkit-tap-highlight-color: transparent;
   }
 
   .ironhawkNavHamburger:hover {
     background: rgba(255, 255, 255, 0.09);
     border-color: rgba(255, 255, 255, 0.22);
+  }
+
+  .is-inverted .ironhawkNavHamburger {
+    border-color: rgba(7, 17, 29, 0.14);
+    background: rgba(7, 17, 29, 0.045);
+    color: rgba(7, 17, 29, 0.75);
+  }
+  .is-inverted .ironhawkNavHamburger:hover {
+    background: rgba(7, 17, 29, 0.09);
+    border-color: rgba(7, 17, 29, 0.24);
   }
 
   /* ── Mobile dropdown ─────────────────────────────────────── */
@@ -313,13 +355,63 @@ const SCOPED_CSS = `
 `
 
 const NAV_LINKS = [
-  { label: 'Services',    href: '/#services'    },
+  { label: 'Services',    href: '/#services-explorer' },
   { label: 'Why IronOak', href: '/#why-ironoak' },
   { label: 'Contact',     href: '/#contact'     },
 ]
 
 const Header = ({ ready = false }) => {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [inverted, setInverted] = useState(false)
+
+  /* Flip the pill to cream whenever a dark-navy section (marked
+     data-navbar="invert" by the page) sits behind it. Detection uses a
+     thin IntersectionObserver band at the pill's own screen position
+     instead of hard-coded scroll offsets, so it works regardless of
+     page length or section order. */
+  useEffect(() => {
+    if (!ready) return
+
+    let observer
+    const active = new Set()
+
+    const setup = () => {
+      if (observer) observer.disconnect()
+      active.clear()
+
+      const sections = Array.from(document.querySelectorAll('[data-navbar="invert"]'))
+      if (!sections.length) {
+        setInverted(false)
+        return
+      }
+
+      const mobile = window.innerWidth <= 680
+      const lineY  = mobile ? 40 : 49   // vertical center of the fixed pill
+      const half   = 6
+      const winH   = window.innerHeight
+      const topMargin    = -Math.max(0, Math.round(lineY - half))
+      const bottomMargin = -Math.max(0, Math.round(winH - (lineY + half)))
+
+      observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) active.add(entry.target)
+            else active.delete(entry.target)
+          })
+          setInverted(active.size > 0)
+        },
+        { threshold: 0, rootMargin: `${topMargin}px 0px ${bottomMargin}px 0px` }
+      )
+      sections.forEach((el) => observer.observe(el))
+    }
+
+    setup()
+    window.addEventListener('resize', setup)
+    return () => {
+      window.removeEventListener('resize', setup)
+      if (observer) observer.disconnect()
+    }
+  }, [ready])
 
   if (!ready) return null
 
@@ -331,10 +423,10 @@ const Header = ({ ready = false }) => {
 
       <nav aria-label="Main navigation">
         {/* ── Pill bar ── */}
-        <div className="ironhawkPillNav">
+        <div className={`ironhawkPillNav${inverted ? ' is-inverted' : ''}`}>
           {/* Logo */}
           <Link to="/" className="ironhawkNavLogo" onClick={closeMenu}>
-            <LogoMark className="h-auto w-8" />
+            <LogoMark className="h-auto w-8" inverted={inverted} />
             <div className="ironhawkNavWordmark">
               <span className="ironhawkNavBrand">IronOak</span>
               <span className="ironhawkNavSub">Property Services Inc.</span>

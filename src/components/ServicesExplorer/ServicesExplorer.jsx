@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigationType } from 'react-router-dom'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import {
@@ -15,6 +15,7 @@ import {
 gsap.registerPlugin(ScrollTrigger)
 
 const SCROLL_PER = 680   // px per service; (N-1) × 680 = 4080px total pin
+const CARD_RETURN_KEY = 'io-home-card-idx'   // shared with ScrollToTop.jsx
 
 /* ─────────────────────────────────────────────────────────────────
    Service data
@@ -23,44 +24,44 @@ const SCROLL_PER = 680   // px per service; (N-1) × 680 = 4080px total pin
 ───────────────────────────────────────────────────────────────── */
 const SERVICES = [
   {
-    id:          'property-maintenance-repairs',
-    num:         '01',
-    category:    'Property Maintenance',
-    title:       'Property Maintenance & Repairs',
-    slug:        '/services/property-maintenance-repairs',
-    description: 'Reliable repairs, preventative maintenance, and ongoing property support to keep residential, commercial, and condominium spaces performing at their best.',
-  },
-  {
     id:          'interior-finishing',
-    num:         '02',
+    num:         '01',
     category:    'Interior Finishing',
     title:       'Interior Finishing',
     slug:        '/services/interior-finishing',
     description: 'Professional finishing work for flooring, carpet replacement, wallcoverings, painting, and complete interior refreshes.',
   },
   {
-    id:          'capital-project-management',
-    num:         '03',
-    category:    'Capital Projects',
-    title:       'Capital Projects & Project Management',
-    slug:        '/services/capital-project-management',
-    description: 'Structured planning, multi-trade coordination, and dependable delivery for commercial, condominium, hospitality, and multi-site property improvements.',
+    id:          'exterior-outdoor-improvements',
+    num:         '02',
+    category:    'Exterior Improvements',
+    title:       'Exterior & Outdoor Improvements',
+    slug:        '/services/exterior-outdoor-improvements',
+    description: 'Exterior upgrades and outdoor property improvements designed to improve function, appearance, and long-term value.',
   },
   {
     id:          'installations-property-systems',
-    num:         '04',
+    num:         '03',
     category:    'Property Systems',
     title:       'Installations & Building Systems',
     slug:        '/services/installations-property-systems',
     description: 'Clean, dependable installation of CCTV systems, retrofit lighting, fixtures, equipment, and essential property upgrades.',
   },
   {
-    id:          'exterior-outdoor-improvements',
+    id:          'capital-project-management',
+    num:         '04',
+    category:    'Capital Projects',
+    title:       'Capital Projects & Project Management',
+    slug:        '/services/capital-project-management',
+    description: 'Structured planning, multi-trade coordination, and dependable delivery for commercial, condominium, hospitality, and multi-site property improvements.',
+  },
+  {
+    id:          'property-maintenance-repairs',
     num:         '05',
-    category:    'Exterior Improvements',
-    title:       'Exterior & Outdoor Improvements',
-    slug:        '/services/exterior-outdoor-improvements',
-    description: 'Exterior upgrades and outdoor property improvements designed to improve function, appearance, and long-term value.',
+    category:    'Property Maintenance',
+    title:       'Property Maintenance & Repairs',
+    slug:        '/services/property-maintenance-repairs',
+    description: 'Reliable repairs, preventative maintenance, and ongoing property support to keep residential, commercial, and condominium spaces performing at their best.',
   },
   {
     id:          'specialty-custom-projects',
@@ -78,11 +79,11 @@ const N = SERVICES.length
    IllustrationRenovations (its own icon) now that Renovations & Remodeling
    has been removed from this explorer. */
 const ILLUSTRATION_LIST = [
-  IllustrationMaintenance,
   IllustrationInterior,
-  IllustrationRenovations,
-  IllustrationInstallations,
   IllustrationExterior,
+  IllustrationInstallations,
+  IllustrationRenovations,
+  IllustrationMaintenance,
   IllustrationSpecialty,
 ]
 const ILLUSTRATIONS = ILLUSTRATION_LIST.map((Comp, i) => <Comp key={i} />)
@@ -337,6 +338,12 @@ export default function ServicesExplorer() {
   const svgRefs      = useRef([])   // 7 illus divs (right column)
   const activeRef    = useRef(0)    // avoids stale closure in onUpdate
   const [activeIdx, setActiveIdx]   = useState(0)
+  const navType = useNavigationType()
+
+  /* Remember which card was open so browser-back can return to it. */
+  const rememberCard = (idx) => {
+    sessionStorage.setItem(CARD_RETURN_KEY, String(idx))
+  }
 
   useEffect(() => {
     const section = sectionRef.current
@@ -434,6 +441,26 @@ export default function ServicesExplorer() {
         },
       })
 
+      /* ── Restore the exact card on browser-back ──
+         Pin-spacing height doesn't exist until this ScrollTrigger has been
+         created, so a raw scrollY restore (done elsewhere, pre-mount) can
+         land short/clamped. Once `st` exists we know its true scroll range
+         and can jump straight to the saved card's slice of it. */
+      if (navType === 'POP') {
+        const savedIdx = sessionStorage.getItem(CARD_RETURN_KEY)
+        if (savedIdx !== null) {
+          sessionStorage.removeItem(CARD_RETURN_KEY)
+          const idx = Math.min(N - 1, Math.max(0, parseInt(savedIdx, 10)))
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              ScrollTrigger.refresh()
+              const target = st.start + ((idx + 0.5) / N) * (st.end - st.start)
+              window.scrollTo(0, target)
+            })
+          })
+        }
+      }
+
       /* ── Cleanup ── */
       return () => {
         st.kill()
@@ -457,6 +484,7 @@ export default function ServicesExplorer() {
         ref={sectionRef}
         id="services-explorer"
         className="io-pin-section"
+        data-navbar="invert"
         aria-label="Services"
       >
         {/* Persistent label */}
@@ -486,6 +514,7 @@ export default function ServicesExplorer() {
                     className="io-pin-cta"
                     tabIndex={i !== activeIdx ? -1 : 0}
                     aria-label={`Explore ${svc.title}`}
+                    onClick={() => rememberCard(i)}
                   >
                     Explore Service
                     <span className="io-pin-arr" aria-hidden="true">→</span>
@@ -524,7 +553,7 @@ export default function ServicesExplorer() {
       </section>
 
       {/* ════ MOBILE: stacked editorial panels ════ */}
-      <section className="io-pin-mobile" id="services-explorer-mobile" aria-label="Services">
+      <section className="io-pin-mobile" id="services-explorer-mobile" data-navbar="invert" aria-label="Services">
         <p className="io-mob-eyebrow">Our Services</p>
         {SERVICES.map((svc, i) => (
           <article key={svc.id} className="io-mob-panel">

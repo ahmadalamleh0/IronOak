@@ -274,6 +274,7 @@ export default function ContactFAQSection() {
     <section
       ref={sectionRef}
       id="faq"
+      data-navbar="invert"
       style={{ background: '#050B12', padding: 'clamp(72px,9vw,100px) 24px' }}
     >
       <style>{CSS}</style>

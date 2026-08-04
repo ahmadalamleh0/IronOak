@@ -40,6 +40,7 @@ export const SERVICE_PAGES = [
     richContent: {
       heroImage:            '/services/property-maintenance-repairs-hero.jpeg',
       heroImageAlt:         'Interior building repair work with exposed ceiling framing and drywall in a commercial property',
+      heroOverlayLight:     true,
       heroHeading:          ['Property Maintenance &', 'Repairs'],
       heroSupportingLine:   'Commercial • Condominium • Hospitality • Multi-Site',
       animatedIntro:        true,
@@ -57,6 +58,7 @@ export const SERVICE_PAGES = [
 
       typicalProjects: {
         heading: 'Typical maintenance and repair work',
+        wideCards: true,
         groups: [
           { num: '01', title: 'Cleaning & Upkeep', body: 'Ongoing cleaning and upkeep services that help keep shared spaces, exteriors and high-traffic areas presentable and well maintained.', image: '/services/maintenance-cleaning-upkeep.jpg', imageAlt: 'Commercial cleaning cart staged in front of elevators in a building lobby' },
           { num: '02', title: 'Repairs & Handyman Services', body: 'Day-to-day building repairs, handyman work and corrective maintenance handled across active commercial and multi-residential properties.', image: '/services/maintenance-repairs-handyman.jpg', imageAlt: 'Metal ductwork with zone dampers installed in an open commercial ceiling' },
@@ -100,16 +102,6 @@ export const SERVICE_PAGES = [
         image:    '/services/maintenance-photo-banner.jpg',
         imageAlt: 'Active commercial repair and maintenance work with equipment and ladders in an open building space',
         aspectRatio: '3 / 2',
-      },
-
-      benefits: {
-        heading: 'Why coordinated maintenance matters',
-        items: [
-          { title: 'One Point of Contact', body: 'Clear communication through one accountable lead for every request.' },
-          { title: 'Minimal Disruption',    body: 'Work scheduled around occupancy, access, and daily operations.' },
-          { title: 'Consistent Standards',  body: 'Repair quality and materials aligned across every property.' },
-          { title: 'Proactive Upkeep',      body: 'Planned maintenance that helps prevent small issues from becoming larger ones.' },
-        ],
       },
 
       faqEyebrow: 'MAINTENANCE QUESTIONS',
@@ -220,6 +212,7 @@ export const SERVICE_PAGES = [
 
       typicalProjects: {
         heading: 'Typical capital projects',
+        wideCards: true,
         groups: [
           { num: '01', title: 'Commercial Interior Programs', body: 'Interior upgrades delivered with coordinated trades, finishes and minimal operational disruption.', image: '/services/capital-project-commercial-interior.jpg', imageAlt: 'Freshly finished hotel corridor with new carpet and guest room doors' },
           { num: '02', title: 'Condominium & Hospitality Improvements', body: 'Hallway, common-area and guest-facing improvements planned around occupied properties.', image: '/services/capital-project-condo-hospitality.webp', imageAlt: 'Renovated hotel corridor with wood-paneled walls and patterned carpet' },
@@ -280,6 +273,7 @@ export const SERVICE_PAGES = [
     richContent: {
       heroImage:            '/services/interior-finishing-hero.webp',
       heroImageAlt:         'Commercial interior surface and wall finishing work in progress',
+      heroOverlayLight:     true,
       heroHeading:          ['Interior', 'Finishing'],
       heroSupportingLine:   'Commercial • Condominium • Hospitality • Multi-Site',
 
@@ -292,10 +286,12 @@ export const SERVICE_PAGES = [
       positioning: {
         heading: ['Finishes that improve', 'how a property looks, feels and performs.'],
         body: 'IronOak delivers durable, polished interior finishes coordinated around occupied properties, consistent standards, and everyday use.',
+        watermarkLg: true,
       },
 
       typicalProjects: {
         heading: 'Typical interior finishing work',
+        wideCards: true,
         groups: [
           { num: '01', title: 'Walls & Surface Finishes', body: 'Painting, wallcoverings and surface improvements that refresh and protect active interiors.', image: '/services/interior-walls-surfaces.webp', imageAlt: 'Patterned commercial vinyl wallcovering behind a bar counter with stools' },
           { num: '02', title: 'Flooring & Carpet', body: 'Flooring and carpet replacement planned around access, occupancy and operating schedules.', image: '/services/interior-flooring-carpet.jpg', imageAlt: 'Patterned carpet installation in an elegant hotel guest-room corridor' },
@@ -392,6 +388,7 @@ export const SERVICE_PAGES = [
     richContent: {
       heroImage:          '/services/installations-property-systems-hero.webp',
       heroImageAlt:       'Elevated view of a modern glass building entrance with automated pedestrian doors',
+      heroOverlayLight:   true,
       heroHeading:        ['Installations &', 'Building Systems'],
       heroSupportingLine: 'Commercial • Condominium • Hospitality • Multi-Site',
 
@@ -408,6 +405,7 @@ export const SERVICE_PAGES = [
 
       typicalProjects: {
         heading: 'Typical installation & systems work',
+        wideCards: true,
         groups: [
           { num: '01', title: 'Security & CCTV Systems', body: 'Coordinated camera and security installations for commercial and multi-residential properties.', image: '/services/installations-security-cctv.webp', imageAlt: 'Dome security camera mounted on the ceiling of a modern hotel lobby corridor' },
           { num: '02', title: 'Lighting & Fixture Upgrades', body: 'Interior and exterior fixture replacements and upgrade programs planned around property operations.', image: '/services/installations-lighting-fixtures.jpg', imageAlt: 'Condominium corridor with recessed downlights and cove wall lighting along a textured plaster wall' },
@@ -464,12 +462,12 @@ export const SERVICE_PAGES = [
         ],
       },
 
+      faqEyebrow: 'INSTALLATION QUESTIONS',
+      faqIntro:   'Details about system types, occupied-building scheduling, and testing before handover.',
       faqs: [
         { q: 'What types of systems can IronOak install?', a: 'CCTV and security systems, interior and exterior lighting, fixtures, property hardware, access-related installations, and related building systems and equipment.' },
         { q: 'Can installations be scheduled around occupied buildings?', a: 'Yes. Installation work is planned around occupancy, access conditions, and daily operations to minimize disruption.' },
-        { q: 'Do you coordinate installations across multiple properties?', a: 'Yes. Multi-location installation programs can be planned with consistent standards, scheduling, and site coordination.' },
         { q: 'Are installed systems tested before handover?', a: 'Yes. Systems are tested and commissioned, with documentation provided at handover.' },
-        { q: 'How does the process begin?', a: 'The process begins with a conversation about the property, the systems involved, and your timeline. A site assessment may be recommended depending on scope.' },
       ],
 
       finalCta: {
@@ -532,6 +530,7 @@ export const SERVICE_PAGES = [
 
       typicalProjects: {
         heading: 'Typical exterior improvement work',
+        wideCards: true,
         groups: [
           { num: '01', title: 'Entrances & Common Areas', body: 'Improvements to high-traffic exterior areas that shape the first impression of the property.', image: '/services/exterior-entrances-common-areas.jpg', imageAlt: 'Illuminated glass entrance of a modern commercial building at dusk, reflecting the surrounding facade' },
           { num: '02', title: 'Exterior Lighting & Features', body: 'Coordinated upgrades to lighting, fixtures and property elements.', image: '/services/exterior-lighting-features.jpg', imageAlt: 'LED wall lighting illuminating a commercial building entrance and facade at night' },
@@ -558,6 +557,7 @@ export const SERVICE_PAGES = [
       photoBanner: {
         heading: 'Seasonal property care, planned around the year.',
         body:    'IronOak provides seasonal upkeep that helps managed properties stay clean, presentable and prepared as conditions change throughout the year.',
+        sideBySide: true,
         list: [
           'Spring & fall property cleanup',
           'Gutter cleaning',
@@ -568,6 +568,8 @@ export const SERVICE_PAGES = [
         ],
         image:    '/services/exterior-seasonal-services.avif',
         imageAlt: 'Collage of a tree across four seasons, from bare winter branches to autumn leaves',
+        aspectRatio: '4 / 3',
+        maxWidth:    '640px',
       },
 
       benefits: {
@@ -580,12 +582,12 @@ export const SERVICE_PAGES = [
         ],
       },
 
+      faqEyebrow: 'EXTERIOR QUESTIONS',
+      faqIntro:   'Answers about exterior scope, seasonal timing, and working around an active property.',
       faqs: [
         { q: 'What exterior work does IronOak handle?', a: 'Entrance and common-area improvements, exterior lighting, walkways and property features, exterior repairs, finishing, and coordinated site enhancement programs.' },
         { q: 'Can exterior work be scheduled around seasonal conditions?', a: 'Yes. Exterior work is planned around seasonal and site conditions, with timing discussed based on your specific scope.' },
-        { q: 'Do you coordinate exterior programs across multiple properties?', a: 'Yes. Multi-site exterior improvement programs can be planned with consistent standards and coordinated scheduling.' },
         { q: 'Can you work around an active, occupied property?', a: 'Yes. Exterior work is planned around access, daily operations, and property use to minimize disruption.' },
-        { q: 'How does the process begin?', a: 'The process begins with a conversation about the property, its exterior condition, and your priorities. A site review may be recommended depending on scope.' },
       ],
 
       finalCta: {
@@ -647,6 +649,7 @@ export const SERVICE_PAGES = [
 
       typicalProjects: {
         heading: 'Typical specialty and custom work',
+        wideCards: true,
         groups: [
           { num: '01', title: 'Custom Property Features', body: 'Purpose-built features and improvements developed around the property’s specific needs.', image: '/services/specialty-custom-features.jpg', imageAlt: 'Custom bronze-toned elevator interior with integrated linear lighting' },
           { num: '02', title: 'Carpentry & Millwork', body: 'Custom millwork, built-ins, wood features and finish carpentry developed around the property’s specific requirements.', image: '/services/specialty-carpentry-millwork.avif', imageAlt: 'Custom wood slat wall with built-in millwork and integrated lighting' },
@@ -679,22 +682,12 @@ export const SERVICE_PAGES = [
         ],
       },
 
-      benefits: {
-        heading: 'Why a coordinated approach matters',
-        items: [
-          { title: 'One Point of Contact',      body: 'Clear communication through one accountable lead for every project.' },
-          { title: 'Flexible Scoping',          body: 'Project scope shaped around unusual or non-standard requirements.' },
-          { title: 'Multi-Trade Coordination',  body: 'Trades and specialists coordinated through a single structured plan.' },
-          { title: 'Defined Delivery',          body: 'Unusual requirements turned into a clear, deliverable project plan.' },
-        ],
-      },
-
+      faqEyebrow: 'SPECIALTY PROJECT QUESTIONS',
+      faqIntro:   'Answers about project scope, custom pricing, and how unusual requirements get defined.',
       faqs: [
         { q: 'What counts as a "specialty" project?', a: 'Specialty projects fall outside standard service scopes — unique property features, bespoke installations, or requirements that do not fit a standard category. If you are not sure whether your project fits, reach out and we will discuss.' },
         { q: 'Can you help define the scope of an unusual request?', a: 'Yes. IronOak helps shape an unusual requirement into a defined, coordinated project scope before work begins.' },
-        { q: 'Do you coordinate multiple trades for custom projects?', a: 'Yes. Specialty and custom projects are coordinated across the trades required to deliver the work.' },
         { q: 'How is a custom project priced?', a: 'Custom projects are scoped and priced individually based on your specific requirements. Contact us to start with a conversation.' },
-        { q: 'How does the process begin?', a: 'The process begins with a conversation about the property, the idea, and the outcome you are looking for. A site review may be recommended depending on scope.' },
       ],
 
       finalCta: {

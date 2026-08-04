@@ -214,6 +214,17 @@ const CSS = `
 @media (max-width: 640px) {
   .rp-positioning-watermark { left: -8%; width: min(360px, 70vw); }
 }
+.rp-positioning-watermark-lg { opacity: 0.055; }
+@media (min-width: 641px) {
+  .rp-positioning-watermark-lg {
+    width: min(920px, 78vw);
+    left: -8%;
+    transform: translate(-30%, -50%);
+  }
+}
+@media (max-width: 640px) {
+  .rp-positioning-watermark-lg { width: min(220px, 52vw); opacity: 0.05; }
+}
 .rp-positioning-inner { position: relative; max-width: 700px; margin: 0 auto; }
 .rp-positioning-rule { width: 44px; height: 2px; border-radius: 1px; background: linear-gradient(90deg, #A9802F, #E8C97A); margin: 0 auto 24px; }
 .rp-positioning h2 { font-family: "Inter Tight", Inter, Arial, sans-serif; font-size: clamp(1.7rem, 3.6vw, 2.6rem); font-weight: 900; letter-spacing: -0.03em; line-height: 1.15; color: #07111D; margin: 0 0 20px; }
@@ -379,6 +390,17 @@ const CSS = `
 @media (max-width: 760px) {
   .rp-typical-grid { grid-template-columns: 1fr; gap: 36px; }
 }
+/* Dark variant (opt-in per service, e.g. typicalProjects.dark) */
+.rp-section-dark .rp-typical-num { color: #E8C97A; }
+.rp-section-dark .rp-typical-title { color: #F4F1EA; }
+.rp-section-dark .rp-typical-body { color: rgba(244,241,234,0.55); }
+.rp-section-dark .rp-typical-img-wrap { border-color: rgba(244,241,234,0.12); }
+/* Wide 2-up variant (opt-in per service, e.g. typicalProjects.wideCards) — larger,
+   more premium cards on laptop/desktop; stays 2-up at large widths per design intent. */
+.rp-typical-grid-2col { grid-template-columns: repeat(2, 1fr); }
+@media (max-width: 760px) {
+  .rp-typical-grid-2col { grid-template-columns: 1fr; }
+}
 
 /* ── Approach note — compact statement + 3-item row (per-service unique section) ── */
 .rp-approach-grid {
@@ -445,6 +467,27 @@ const CSS = `
 }
 @media (max-width: 560px) {
   .rp-photobanner-list { grid-template-columns: 1fr; }
+}
+
+/* ── Photo banner — side-by-side variant (image left, copy right) ── */
+@media (min-width: 861px) {
+  .rp-photobanner-sidebyside .rp-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(32px, 5vw, 64px);
+    align-items: center;
+  }
+  .rp-photobanner-sidebyside .rp-photobanner-img-wrap {
+    margin-bottom: 0;
+    max-width: none !important;
+  }
+  .rp-photobanner-sidebyside .rp-photobanner-caption {
+    max-width: none;
+    margin: 0;
+    text-align: left;
+  }
+  .rp-photobanner-sidebyside .rp-photobanner-caption p { margin: 0; }
+  .rp-photobanner-sidebyside .rp-photobanner-list { margin-left: 0; margin-right: 0; }
 }
 
 /* ── Process chain — light horizontal stage list (per-service unique section) ── */
@@ -619,8 +662,10 @@ const CSS = `
 .rp-relsvc-row:first-child { border-top: 1px solid rgba(9,19,31,0.10); }
 .rp-relsvc-row:hover { padding-left: 8px; }
 .rp-relsvc-row:focus-visible { outline: 2px solid rgba(201,162,74,0.6); outline-offset: -2px; }
+.rp-relsvc-left { display: flex; align-items: center; gap: 14px; min-width: 0; }
+.rp-relsvc-icon { flex-shrink: 0; display: flex; color: #A9802F; opacity: 0.72; }
 .rp-relsvc-label { font-family: "Inter Tight", Inter, Arial, sans-serif; font-size: 1.02rem; font-weight: 800; letter-spacing: -0.015em; }
-.rp-relsvc-arrow { color: #A9802F; font-size: 0.9rem; }
+.rp-relsvc-arrow { color: #A9802F; font-size: 0.9rem; flex-shrink: 0; }
 
 /* ── Final CTA ─────────────────────────────────────────────── */
 .rp-final-cta { text-align: center; background: #0a0d12; }
@@ -683,18 +728,43 @@ const WordMask = ({ children, innerRef }) => (
   </span>
 )
 
-const PositioningStatement = ({ heading, body }) => {
-  const sectionRef  = useRef(null)
-  const headlineRef = useRef(null)
-  const ruleRef     = useRef(null)
-  const paraRef     = useRef(null)
-  const wordRefs    = useRef([])
+const PositioningStatement = ({ heading, body, watermarkLg = false }) => {
+  const sectionRef   = useRef(null)
+  const headlineRef  = useRef(null)
+  const ruleRef      = useRef(null)
+  const paraRef      = useRef(null)
+  const wordRefs     = useRef([])
+  const watermarkRef = useRef(null)
 
   useEffect(() => {
     const rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
     const ctx = gsap.context(() => {
       const words = wordRefs.current.filter(Boolean)
+
+      if (watermarkLg && watermarkRef.current) {
+        if (rm) {
+          gsap.set(watermarkRef.current, { opacity: 1 })
+        } else {
+          gsap.from(watermarkRef.current, {
+            opacity: 0,
+            x: -36,
+            duration: 1.1,
+            ease: 'power2.out',
+            scrollTrigger: { trigger: sectionRef.current, start: 'top 85%' },
+          })
+          gsap.to(watermarkRef.current, {
+            y: 26,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: 'top bottom',
+              end: 'bottom top',
+              scrub: 0.6,
+            },
+          })
+        }
+      }
 
       gsap.from(ruleRef.current, {
         scaleX: 0,
@@ -733,13 +803,17 @@ const PositioningStatement = ({ heading, body }) => {
     }, sectionRef)
 
     return () => ctx.revert()
-  }, [])
+  }, [watermarkLg])
 
   let wordIndex = -1
 
   return (
     <section ref={sectionRef} className="rp-section rp-section-sage rp-positioning" aria-label="Positioning statement">
-      <div className="rp-positioning-watermark" aria-hidden="true"><LogoMark /></div>
+      <div
+        ref={watermarkRef}
+        className={`rp-positioning-watermark${watermarkLg ? ' rp-positioning-watermark-lg' : ''}`}
+        aria-hidden="true"
+      ><LogoMark /></div>
       <div className="rp-inner rp-positioning-inner">
         <div ref={ruleRef} className="rp-positioning-rule" aria-hidden="true" />
         <h2 ref={headlineRef}>
@@ -822,6 +896,60 @@ const IntroGrid = ({ items, animated }) => {
   )
 }
 
+/* ── Related-services row icons — small, subtle, one per service slug ── */
+const IconWrench = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M14.7 6.3a4 4 0 00-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 005.4-5.4l-2.5 2.5-2-2 2.5-2.5z" />
+  </svg>
+)
+const IconSettings = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <circle cx="12" cy="12" r="3" />
+    <path d="M19.4 13.5a1.7 1.7 0 00.3 1.9l.1.1a2 2 0 11-2.9 2.9l-.1-.1a1.7 1.7 0 00-1.9-.3 1.7 1.7 0 00-1 1.6V20a2 2 0 11-4 0v-.1a1.7 1.7 0 00-1-1.6 1.7 1.7 0 00-1.9.3l-.1.1a2 2 0 11-2.9-2.9l.1-.1a1.7 1.7 0 00.3-1.9 1.7 1.7 0 00-1.6-1H2a2 2 0 110-4h.1a1.7 1.7 0 001.6-1 1.7 1.7 0 00-.3-1.9l-.1-.1a2 2 0 112.9-2.9l.1.1a1.7 1.7 0 001.9.3H8.5a1.7 1.7 0 001-1.6V2a2 2 0 114 0v.1a1.7 1.7 0 001 1.6 1.7 1.7 0 001.9-.3l.1-.1a2 2 0 112.9 2.9l-.1.1a1.7 1.7 0 00-.3 1.9v.1a1.7 1.7 0 001.6 1H22a2 2 0 110 4h-.1a1.7 1.7 0 00-1.6 1z" />
+  </svg>
+)
+const IconBuilding = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <rect x="4" y="3" width="16" height="18" rx="1" />
+    <path d="M9 8h1M14 8h1M9 12h1M14 12h1" />
+    <path d="M10 21v-3h4v3" />
+  </svg>
+)
+const IconPaintRoller = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <rect x="3" y="4" width="13" height="6" rx="1.5" />
+    <path d="M8.5 10v4" />
+    <rect x="5.5" y="14" width="6" height="7" rx="1" />
+  </svg>
+)
+const IconClipboard = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <rect x="6" y="4" width="12" height="16" rx="1.5" />
+    <path d="M9 4V3a1 1 0 011-1h4a1 1 0 011 1v1" />
+    <path d="M9 10h6M9 13h6M9 16h3" />
+  </svg>
+)
+const IconSparkle = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M12 3l1.6 4.4L18 9l-4.4 1.6L12 15l-1.6-4.4L6 9l4.4-1.6L12 3z" />
+    <path d="M19 15l.6 1.7 1.7.6-1.7.6-.6 1.7-.6-1.7-1.7-.6 1.7-.6.6-1.7z" />
+  </svg>
+)
+
+const RELSVC_ICONS = {
+  'property-maintenance-repairs':   IconWrench,
+  'installations-property-systems': IconSettings,
+  'exterior-outdoor-improvements':  IconBuilding,
+  'interior-finishing':             IconPaintRoller,
+  'capital-project-management':     IconClipboard,
+  'specialty-custom-projects':      IconSparkle,
+}
+
+const RelSvcIcon = ({ slug }) => {
+  const Icon = RELSVC_ICONS[slug]
+  return Icon ? <Icon /> : null
+}
+
 const ImgPlaceholder = ({ label }) => (
   <div className="rp-typical-img-placeholder" aria-hidden="true">
     {label && <span className="rp-placeholder-label">{label}</span>}
@@ -830,9 +958,18 @@ const ImgPlaceholder = ({ label }) => (
 )
 
 const PhotoBanner = ({ pb }) => (
-  <section className="rp-section rp-photobanner" aria-label={pb.heading}>
+  <section
+    className={`rp-section rp-photobanner${pb.sideBySide ? ' rp-photobanner-sidebyside' : ''}`}
+    aria-label={pb.heading}
+  >
     <div className="rp-inner">
-      <div className="rp-photobanner-img-wrap" style={pb.aspectRatio ? { aspectRatio: pb.aspectRatio } : undefined}>
+      <div
+        className="rp-photobanner-img-wrap"
+        style={{
+          ...(pb.aspectRatio ? { aspectRatio: pb.aspectRatio } : null),
+          ...(pb.maxWidth ? { maxWidth: pb.maxWidth, margin: '0 auto', marginBottom: 'clamp(24px, 3.5vh, 32px)' } : null),
+        }}
+      >
         {pb.image ? (
           <img src={pb.image} alt={pb.imageAlt} loading="lazy" decoding="async" style={pb.imagePosition ? { objectPosition: pb.imagePosition } : undefined} />
         ) : (
@@ -872,7 +1009,15 @@ export default function RichServiceTemplate({ service, relatedServices, relatedA
               <span className="rp-placeholder-note">Photography pending</span>
             </div>
           )}
-          <div className="rp-hero-overlay" aria-hidden="true" />
+          <div
+            className="rp-hero-overlay"
+            aria-hidden="true"
+            style={rc.heroOverlayLight ? {
+              background:
+                'linear-gradient(180deg, rgba(7,17,29,0.38) 0%, rgba(7,17,29,0.22) 35%, rgba(7,17,29,0.62) 100%),' +
+                'linear-gradient(90deg, rgba(7,17,29,0.38) 0%, rgba(7,17,29,0.08) 45%, rgba(7,17,29,0.08) 100%)',
+            } : undefined}
+          />
           <div className="rp-hero-content">
             <div className="rp-inner">
               <p className="rp-eyebrow">{service.category}</p>
@@ -895,13 +1040,17 @@ export default function RichServiceTemplate({ service, relatedServices, relatedA
         <IntroGrid items={rc.intro} animated={!!rc.animatedIntro} />
 
         {/* ════ POSITIONING STATEMENT ════ */}
-        <PositioningStatement heading={rc.positioning.heading} body={rc.positioning.body} />
+        <PositioningStatement heading={rc.positioning.heading} body={rc.positioning.body} watermarkLg={rc.positioning.watermarkLg} />
 
         {/* ════ TYPICAL SERVICE WORK (photography-led) ════ */}
-        <section className="rp-section rp-section-sage" aria-labelledby="rp-typical-h">
+        <section
+          className={`rp-section ${rc.typicalProjects.dark ? 'rp-section-dark' : 'rp-section-sage'}`}
+          data-navbar={rc.typicalProjects.dark ? 'invert' : undefined}
+          aria-labelledby="rp-typical-h"
+        >
           <div className="rp-inner">
             <h2 className="rp-h2" id="rp-typical-h">{rc.typicalProjects.heading}</h2>
-            <div className="rp-typical-grid">
+            <div className={`rp-typical-grid${rc.typicalProjects.wideCards ? ' rp-typical-grid-2col' : ''}`}>
               {rc.typicalProjects.groups.map((group) => (
                 <div key={group.title} className="rp-typical-card">
                   <div className="rp-typical-img-wrap" style={group.objectFit === 'contain' ? { background: '#DED8C7' } : undefined}>
@@ -1022,21 +1171,23 @@ export default function RichServiceTemplate({ service, relatedServices, relatedA
           </section>
         )}
 
-        {/* ════ DARK BENEFITS ════ */}
-        <section className="rp-section rp-section-dark" aria-labelledby="rp-benefits-h">
-          <div className="rp-inner">
-            <h2 className="rp-h2" id="rp-benefits-h">{rc.benefits.heading}</h2>
-            <div className="rp-benefits-grid">
-              {rc.benefits.items.map((b, i) => (
-                <div key={b.title} className="rp-benefit-card">
-                  <p className="rp-benefit-num">{String(i + 1).padStart(2, '0')}</p>
-                  <p className="rp-benefit-title">{b.title}</p>
-                  <p className="rp-benefit-body">{b.body}</p>
-                </div>
-              ))}
+        {/* ════ DARK BENEFITS (optional) ════ */}
+        {rc.benefits && (
+          <section className="rp-section rp-section-dark" data-navbar="invert" aria-labelledby="rp-benefits-h">
+            <div className="rp-inner">
+              <h2 className="rp-h2" id="rp-benefits-h">{rc.benefits.heading}</h2>
+              <div className="rp-benefits-grid">
+                {rc.benefits.items.map((b, i) => (
+                  <div key={b.title} className="rp-benefit-card">
+                    <p className="rp-benefit-num">{String(i + 1).padStart(2, '0')}</p>
+                    <p className="rp-benefit-title">{b.title}</p>
+                    <p className="rp-benefit-body">{b.body}</p>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        )}
 
         {rc.photoBanner && rc.photoBannerAfterBenefits && <PhotoBanner pb={rc.photoBanner} />}
 
@@ -1113,7 +1264,10 @@ export default function RichServiceTemplate({ service, relatedServices, relatedA
             <div className="rp-relsvc-list">
               {relatedServices.map((rel) => (
                 <Link key={rel.slug} to={`/services/${rel.slug}`} className="rp-relsvc-row">
-                  <span className="rp-relsvc-label">{rel.title}</span>
+                  <span className="rp-relsvc-left">
+                    <span className="rp-relsvc-icon"><RelSvcIcon slug={rel.slug} /></span>
+                    <span className="rp-relsvc-label">{rel.title}</span>
+                  </span>
                   <span className="rp-relsvc-arrow" aria-hidden="true">→</span>
                 </Link>
               ))}
@@ -1122,7 +1276,7 @@ export default function RichServiceTemplate({ service, relatedServices, relatedA
         </section>
 
         {/* ════ FINAL CTA ════ */}
-        <section className="rp-section rp-section-dark rp-final-cta" aria-label="Request a quote">
+        <section className="rp-section rp-section-dark rp-final-cta" data-navbar="invert" aria-label="Request a quote">
           <div className="rp-inner">
             <div className="rp-final-cta-inner">
               <h2 className="rp-final-cta-h">{rc.finalCta.heading}</h2>

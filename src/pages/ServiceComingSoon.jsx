@@ -85,7 +85,7 @@ const ServiceComingSoon = () => {
               Request a Quote
             </Link>
             <Link
-              to="/#services"
+              to="/#services-explorer"
               className="inline-flex items-center justify-center rounded-sm border border-gold-300/40 px-7 py-3 text-sm font-semibold tracking-wide text-gold-200 transition-colors duration-300 hover:border-gold-300/80 hover:bg-gold-300/5"
             >
               View All Services

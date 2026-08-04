@@ -19,7 +19,7 @@ const maskStyle = {
  * engraved bevel and a subtle metallic gold fill — without ever touching
  * the artwork itself.
  */
-const LogoMark = forwardRef(({ className = '' }, ref) => {
+const LogoMark = forwardRef(({ className = '', inverted = false }, ref) => {
   const rootRef = useRef(null)
   const goldRef = useRef(null)
 
@@ -40,7 +40,7 @@ const LogoMark = forwardRef(({ className = '' }, ref) => {
         className="absolute inset-0 -translate-x-[1px] -translate-y-[1px] opacity-[0.12]"
         style={{ ...maskStyle, background: '#fff8e8' }}
       />
-      {/* base engraved fill, visible before the gold settles in */}
+      {/* base engraved fill, visible before the gold/navy fill settles in */}
       <div
         className="absolute inset-0"
         style={{
@@ -48,15 +48,17 @@ const LogoMark = forwardRef(({ className = '' }, ref) => {
           background: 'linear-gradient(160deg, #1b2430 0%, #0e131a 100%)',
         }}
       />
-      {/* subtle metallic gold fill */}
+      {/* metallic fill — gold on a dark bar, dark navy on an inverted (cream) bar */}
       <div
         ref={goldRef}
         className="absolute inset-0"
         style={{
           ...maskStyle,
-          background:
-            'linear-gradient(180deg, #ecdcb0 0%, #cda968 45%, #a9802f 60%, #ddc28c 100%)',
+          background: inverted
+            ? 'linear-gradient(180deg, #253550 0%, #13202f 45%, #07111D 60%, #1c2c42 100%)'
+            : 'linear-gradient(180deg, #ecdcb0 0%, #cda968 45%, #a9802f 60%, #ddc28c 100%)',
           filter: 'drop-shadow(0 1px 2px rgba(0,0,0,0.3))',
+          transition: 'background 420ms ease',
         }}
       />
     </div>
