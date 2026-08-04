@@ -47,17 +47,21 @@ const CSS = `
 .rp-hero-img-placeholder {
   background: linear-gradient(135deg, #101c30 0%, #07111D 100%);
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
-  padding: 20px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  padding: clamp(96px, 16vh, 140px) 20px 20px;
   box-sizing: border-box;
+  text-align: center;
 }
-.rp-hero-img-placeholder span {
-  font-size: 0.64rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: rgba(232,201,122,0.5);
+.rp-hero-img-placeholder .rp-placeholder-label {
+  font-size: 0.85rem;
+  color: rgba(244,241,234,0.55);
+  max-width: 320px;
+}
+.rp-hero-img-placeholder .rp-placeholder-note {
+  color: rgba(232,201,122,0.55);
 }
 .rp-hero-overlay {
   position: absolute;
@@ -260,6 +264,43 @@ const CSS = `
   .rp-list-grid { grid-template-columns: 1fr; }
 }
 
+/* ── Service list — emphasized variant (opt-in per service) ── */
+.rp-list-grid-emphasized {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: clamp(32px, 5vh, 48px);
+  border-top: 1px solid rgba(9,19,31,0.10);
+}
+.rp-list-row-emphasized {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 8px;
+  padding: clamp(24px, 3.5vh, 32px) 20px;
+  border-bottom: 1px solid rgba(9,19,31,0.10);
+}
+.rp-list-row-emphasized:nth-child(odd) { border-right: 1px solid rgba(9,19,31,0.10); }
+.rp-list-num-emphasized {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  color: #A9802F;
+}
+.rp-list-label-emphasized {
+  font-family: "Inter Tight", Inter, Arial, sans-serif;
+  font-size: clamp(1.05rem, 1.8vw, 1.3rem);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: #07111D;
+  line-height: 1.3;
+}
+@media (max-width: 700px) {
+  .rp-list-grid-emphasized { grid-template-columns: 1fr; }
+  .rp-list-row-emphasized:nth-child(odd) { border-right: none; }
+}
+
 /* ── Dark benefits ─────────────────────────────────────────── */
 .rp-benefits-grid {
   display: grid;
@@ -282,8 +323,8 @@ const CSS = `
 /* ── Typical projects — visual cards ──────────────────────── */
 .rp-typical-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: clamp(28px, 4vw, 40px);
+  grid-template-columns: repeat(auto-fit, minmax(215px, 1fr));
+  gap: clamp(24px, 3.5vw, 40px);
   margin: clamp(28px, 4vh, 40px) 0 28px;
 }
 .rp-typical-card { display: flex; flex-direction: column; }
@@ -300,16 +341,29 @@ const CSS = `
   width: 100%;
   height: 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 8px;
+  padding: 20px;
+  box-sizing: border-box;
+  text-align: center;
   background: #DED8C7;
 }
-.rp-typical-img-placeholder span {
-  font-size: 0.66rem;
+.rp-placeholder-label {
+  font-family: "Inter Tight", Inter, Arial, sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: rgba(7,17,29,0.55);
+  line-height: 1.35;
+  max-width: 220px;
+}
+.rp-placeholder-note {
+  font-size: 0.62rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(7,17,29,0.38);
+  color: rgba(7,17,29,0.34);
 }
 .rp-typical-num { font-size: 0.66rem; font-weight: 800; letter-spacing: 0.2em; color: #A9802F; margin: 0 0 8px; }
 .rp-typical-title {
@@ -329,7 +383,7 @@ const CSS = `
 /* ── Approach note — compact statement + 3-item row (per-service unique section) ── */
 .rp-approach-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: clamp(24px, 3.5vw, 36px);
   margin-top: clamp(28px, 4vh, 40px);
 }
@@ -360,8 +414,65 @@ const CSS = `
 .rp-photobanner-caption { max-width: 620px; margin: 0 auto; text-align: center; }
 .rp-photobanner-caption .rp-h2 { margin: 0 0 12px; }
 .rp-photobanner-caption p { margin: 0 auto; }
+.rp-photobanner-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px 32px;
+  max-width: 560px;
+  margin: 24px auto 0;
+  padding: 0;
+  text-align: left;
+}
+.rp-photobanner-list li {
+  list-style: none;
+  position: relative;
+  padding-left: 16px;
+  font-size: 0.87rem;
+  line-height: 1.5;
+  color: rgba(7,17,29,0.6);
+}
+.rp-photobanner-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.65em;
+  width: 6px;
+  height: 1.5px;
+  background: #A9802F;
+}
 @media (max-width: 760px) {
   .rp-photobanner-img-wrap { aspect-ratio: 4 / 3; }
+}
+@media (max-width: 560px) {
+  .rp-photobanner-list { grid-template-columns: 1fr; }
+}
+
+/* ── Process chain — light horizontal stage list (per-service unique section) ── */
+.rp-process-chain {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: clamp(12px, 2.5vw, 20px);
+  margin-top: clamp(28px, 4vh, 40px);
+}
+.rp-process-step { display: flex; align-items: flex-start; gap: clamp(12px, 2.5vw, 20px); }
+.rp-process-step-inner { max-width: 190px; }
+.rp-process-num { font-size: 0.66rem; font-weight: 800; letter-spacing: 0.2em; color: #A9802F; margin: 0 0 8px; }
+.rp-process-label {
+  font-family: "Inter Tight", Inter, Arial, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: #07111D;
+  line-height: 1.3;
+  margin: 0;
+}
+.rp-process-arrow { color: rgba(169,128,47,0.45); font-size: 1.1rem; padding-top: 22px; flex-shrink: 0; }
+@media (max-width: 760px) {
+  .rp-process-chain { flex-direction: column; gap: 20px; }
+  .rp-process-step { width: 100%; }
+  .rp-process-step-inner { max-width: none; }
+  .rp-process-arrow { display: none; }
 }
 
 /* ── Related insight ───────────────────────────────────────── */
@@ -432,6 +543,67 @@ const CSS = `
   .rp-faq-a-wrap { transition: none; }
 }
 
+/* ── FAQ — centered accordion variant (opt-in via richContent.faqEyebrow) ── */
+.rp-faq2-section { text-align: center; }
+.rp-faq2-section .rp-section-body { margin: 0 auto; }
+.rp-faq2-list {
+  max-width: 700px;
+  margin: clamp(28px, 4vh, 40px) auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  text-align: left;
+}
+.rp-faq2-item {
+  border: 1px solid rgba(9,19,31,0.12);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: border-color 200ms ease;
+}
+.rp-faq2-item.is-open { border-color: rgba(169,128,47,0.4); }
+.rp-faq2-q {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 19px 22px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: "Inter Tight", Inter, Arial, sans-serif;
+  font-size: 0.98rem;
+  font-weight: 700;
+  letter-spacing: -0.005em;
+  color: #07111D;
+}
+.rp-faq2-q:focus-visible { outline: 2px solid rgba(201,162,74,0.6); outline-offset: -2px; }
+.rp-faq2-icon { position: relative; width: 15px; height: 15px; flex-shrink: 0; }
+.rp-faq2-icon::before,
+.rp-faq2-icon::after {
+  content: '';
+  position: absolute;
+  background: #07111D;
+  border-radius: 1px;
+  transition: transform 260ms cubic-bezier(0.16,1,0.3,1);
+}
+.rp-faq2-icon::before { left: 0; top: 50%; width: 100%; height: 2px; transform: translateY(-50%); }
+.rp-faq2-icon::after { top: 0; left: 50%; width: 2px; height: 100%; transform: translateX(-50%); }
+.rp-faq2-item.is-open .rp-faq2-icon::after { transform: translateX(-50%) scaleY(0); }
+.rp-faq2-item.is-open .rp-faq2-icon::before { background: #A9802F; }
+.rp-faq2-a-wrap { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 280ms cubic-bezier(0.16,1,0.3,1); }
+.rp-faq2-item.is-open .rp-faq2-a-wrap { grid-template-rows: 1fr; }
+.rp-faq2-a-inner { overflow: hidden; }
+.rp-faq2-a-inner p { margin: 0; padding: 0 22px 20px; font-size: 0.89rem; line-height: 1.68; color: rgba(7,17,29,0.58); }
+@media (prefers-reduced-motion: reduce) {
+  .rp-faq2-a-wrap, .rp-faq2-icon::before, .rp-faq2-icon::after { transition: none; }
+}
+@media (max-width: 600px) {
+  .rp-faq2-q { padding: 16px 18px; font-size: 0.92rem; }
+  .rp-faq2-a-inner p { padding: 0 18px 16px; }
+}
+
 /* ── Related services (compact) ───────────────────────────── */
 .rp-relsvc-list { display: flex; flex-direction: column; margin-top: clamp(20px, 3vh, 28px); }
 .rp-relsvc-row {
@@ -451,7 +623,7 @@ const CSS = `
 .rp-relsvc-arrow { color: #A9802F; font-size: 0.9rem; }
 
 /* ── Final CTA ─────────────────────────────────────────────── */
-.rp-final-cta { text-align: center; }
+.rp-final-cta { text-align: center; background: #0a0d12; }
 .rp-final-cta-inner { max-width: 540px; margin: 0 auto; }
 .rp-final-cta-h { font-family: "Inter Tight", Inter, Arial, sans-serif; font-size: clamp(1.8rem, 3.6vw, 2.6rem); font-weight: 900; letter-spacing: -0.03em; line-height: 1.08; color: #F4F1EA; margin: 0 0 16px; }
 .rp-final-cta-p { font-size: clamp(0.9rem, 1.3vw, 1rem); line-height: 1.72; color: rgba(244,241,234,0.55); margin: 0 0 32px; }
@@ -481,6 +653,25 @@ const FaqItem = ({ q, a, isOpen, onToggle, idx }) => (
     </button>
     <div className={`rp-faq-a-wrap${isOpen ? ' is-open' : ''}`} id={`rp-faq-a-${idx}`} role="region" aria-labelledby={`rp-faq-q-${idx}`}>
       <div className="rp-faq-a-inner"><p>{a}</p></div>
+    </div>
+  </div>
+)
+
+const FaqItem2 = ({ q, a, isOpen, onToggle, idx }) => (
+  <div className={`rp-faq2-item${isOpen ? ' is-open' : ''}`}>
+    <button
+      type="button"
+      className="rp-faq2-q"
+      onClick={onToggle}
+      aria-expanded={isOpen}
+      aria-controls={`rp-faq2-a-${idx}`}
+      id={`rp-faq2-q-${idx}`}
+    >
+      <span>{q}</span>
+      <span className="rp-faq2-icon" aria-hidden="true" />
+    </button>
+    <div className="rp-faq2-a-wrap" id={`rp-faq2-a-${idx}`} role="region" aria-labelledby={`rp-faq2-q-${idx}`}>
+      <div className="rp-faq2-a-inner"><p>{a}</p></div>
     </div>
   </div>
 )
@@ -576,6 +767,91 @@ const PositioningStatement = ({ heading, body }) => {
   )
 }
 
+/* Three-part intro. `animated` is opt-in per service — when false, renders
+   exactly as before with no GSAP involvement, so unflagged pages are untouched. */
+const IntroGrid = ({ items, animated }) => {
+  const sectionRef = useRef(null)
+  const itemRefs   = useRef([])
+
+  useEffect(() => {
+    if (!animated) return
+    const rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+    const ctx = gsap.context(() => {
+      const els = itemRefs.current.filter(Boolean)
+
+      if (rm) {
+        gsap.set(els, { opacity: 1, x: 0 })
+        return
+      }
+
+      els.forEach((el, i) => {
+        gsap.set(el, { opacity: 0, x: i % 2 === 0 ? -32 : 32 })
+      })
+
+      gsap.to(els, {
+        x: 0,
+        opacity: 1,
+        duration: 0.8,
+        ease: 'power2.out',
+        stagger: 0.12,
+        scrollTrigger: { trigger: sectionRef.current, start: 'top 85%' },
+      })
+    }, sectionRef)
+
+    return () => ctx.revert()
+  }, [animated])
+
+  return (
+    <section ref={sectionRef} className="rp-section" aria-label="How IronOak approaches this work">
+      <div className="rp-inner">
+        <div className="rp-intro-grid">
+          {items.map((item, i) => (
+            <div
+              key={item.label}
+              ref={(el) => { itemRefs.current[i] = el }}
+              className="rp-intro-col"
+            >
+              <p className="rp-intro-word">{item.label}</p>
+              <p className="rp-intro-body">{item.body}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+const ImgPlaceholder = ({ label }) => (
+  <div className="rp-typical-img-placeholder" aria-hidden="true">
+    {label && <span className="rp-placeholder-label">{label}</span>}
+    <span className="rp-placeholder-note">Image coming soon</span>
+  </div>
+)
+
+const PhotoBanner = ({ pb }) => (
+  <section className="rp-section rp-photobanner" aria-label={pb.heading}>
+    <div className="rp-inner">
+      <div className="rp-photobanner-img-wrap" style={pb.aspectRatio ? { aspectRatio: pb.aspectRatio } : undefined}>
+        {pb.image ? (
+          <img src={pb.image} alt={pb.imageAlt} loading="lazy" decoding="async" style={pb.imagePosition ? { objectPosition: pb.imagePosition } : undefined} />
+        ) : (
+          <ImgPlaceholder label={pb.placeholderLabel} />
+        )}
+      </div>
+      <div className="rp-photobanner-caption">
+        <h2 className="rp-h2">{pb.heading}</h2>
+        <p className="rp-section-body">{pb.body}</p>
+        {pb.list && (
+          <ul className="rp-photobanner-list">
+            {pb.list.map((item) => <li key={item}>{item}</li>)}
+          </ul>
+        )}
+      </div>
+    </div>
+  </section>
+)
+
 export default function RichServiceTemplate({ service, relatedServices, relatedArticle }) {
   const [openFaq, setOpenFaq] = useState(null)
   const rc = service.richContent
@@ -591,7 +867,10 @@ export default function RichServiceTemplate({ service, relatedServices, relatedA
           {rc.heroImage ? (
             <img className="rp-hero-img" src={rc.heroImage} alt={rc.heroImageAlt} loading="eager" decoding="async" />
           ) : (
-            <div className="rp-hero-img rp-hero-img-placeholder" aria-hidden="true"><span>Photography pending</span></div>
+            <div className="rp-hero-img rp-hero-img-placeholder" aria-hidden="true">
+              {rc.heroPlaceholderLabel && <span className="rp-placeholder-label">{rc.heroPlaceholderLabel}</span>}
+              <span className="rp-placeholder-note">Photography pending</span>
+            </div>
           )}
           <div className="rp-hero-overlay" aria-hidden="true" />
           <div className="rp-hero-content">
@@ -613,18 +892,7 @@ export default function RichServiceTemplate({ service, relatedServices, relatedA
         </section>
 
         {/* ════ THREE-PART INTRODUCTION ════ */}
-        <section className="rp-section" aria-label="How IronOak approaches this work">
-          <div className="rp-inner">
-            <div className="rp-intro-grid">
-              {rc.intro.map((item) => (
-                <div key={item.label} className="rp-intro-col">
-                  <p className="rp-intro-word">{item.label}</p>
-                  <p className="rp-intro-body">{item.body}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+        <IntroGrid items={rc.intro} animated={!!rc.animatedIntro} />
 
         {/* ════ POSITIONING STATEMENT ════ */}
         <PositioningStatement heading={rc.positioning.heading} body={rc.positioning.body} />
@@ -636,13 +904,20 @@ export default function RichServiceTemplate({ service, relatedServices, relatedA
             <div className="rp-typical-grid">
               {rc.typicalProjects.groups.map((group) => (
                 <div key={group.title} className="rp-typical-card">
-                  <div className="rp-typical-img-wrap">
+                  <div className="rp-typical-img-wrap" style={group.objectFit === 'contain' ? { background: '#DED8C7' } : undefined}>
                     {group.image ? (
-                      <img src={group.image} alt={group.imageAlt || group.title} loading="lazy" decoding="async" style={group.imagePosition ? { objectPosition: group.imagePosition } : undefined} />
+                      <img
+                        src={group.image}
+                        alt={group.imageAlt || group.title}
+                        loading="lazy"
+                        decoding="async"
+                        style={{
+                          ...(group.imagePosition ? { objectPosition: group.imagePosition } : null),
+                          ...(group.objectFit ? { objectFit: group.objectFit } : null),
+                        }}
+                      />
                     ) : (
-                      <div className="rp-typical-img-placeholder" aria-hidden="true">
-                        <span>Image coming soon</span>
-                      </div>
+                      <ImgPlaceholder label={group.placeholderLabel || group.title} />
                     )}
                   </div>
                   <p className="rp-typical-num">{group.num}</p>
@@ -659,14 +934,25 @@ export default function RichServiceTemplate({ service, relatedServices, relatedA
           <div className="rp-inner">
             <h2 className="rp-h2" id="rp-services-h">{rc.serviceList.heading}</h2>
             <p className="rp-section-body">{rc.serviceList.body}</p>
-            <div className="rp-list-grid" role="list">
-              {rc.serviceList.items.map((item, i) => (
-                <div key={item} className="rp-list-row" role="listitem">
-                  <span className="rp-list-num">{String(i + 1).padStart(2, '0')}</span>
-                  <span className="rp-list-label">{item}</span>
-                </div>
-              ))}
-            </div>
+            {rc.serviceList.emphasized ? (
+              <div className="rp-list-grid-emphasized" role="list">
+                {rc.serviceList.items.map((item, i) => (
+                  <div key={item} className="rp-list-row-emphasized" role="listitem">
+                    <span className="rp-list-num-emphasized">{String(i + 1).padStart(2, '0')}</span>
+                    <span className="rp-list-label-emphasized">{item}</span>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="rp-list-grid" role="list">
+                {rc.serviceList.items.map((item, i) => (
+                  <div key={item} className="rp-list-row" role="listitem">
+                    <span className="rp-list-num">{String(i + 1).padStart(2, '0')}</span>
+                    <span className="rp-list-label">{item}</span>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </section>
 
@@ -686,7 +972,7 @@ export default function RichServiceTemplate({ service, relatedServices, relatedA
                   {rc.overview.image ? (
                     <img src={rc.overview.image} alt={rc.overview.imageAlt} loading="lazy" decoding="async" />
                   ) : (
-                    <div className="rp-typical-img-placeholder" aria-hidden="true"><span>Image coming soon</span></div>
+                    <ImgPlaceholder label={rc.overview.placeholderLabel} />
                   )}
                 </div>
               </div>
@@ -714,19 +1000,23 @@ export default function RichServiceTemplate({ service, relatedServices, relatedA
         )}
 
         {/* ════ PHOTO BANNER (optional, per-service unique section) ════ */}
-        {rc.photoBanner && (
-          <section className="rp-section rp-photobanner" aria-label={rc.photoBanner.heading}>
+        {rc.photoBanner && !rc.photoBannerAfterBenefits && <PhotoBanner pb={rc.photoBanner} />}
+
+        {/* ════ PROCESS CHAIN (optional, per-service unique section) ════ */}
+        {rc.processSteps && (
+          <section className="rp-section" aria-labelledby="rp-process-h">
             <div className="rp-inner">
-              <div className="rp-photobanner-img-wrap">
-                {rc.photoBanner.image ? (
-                  <img src={rc.photoBanner.image} alt={rc.photoBanner.imageAlt} loading="lazy" decoding="async" />
-                ) : (
-                  <div className="rp-typical-img-placeholder" aria-hidden="true"><span>Image coming soon</span></div>
-                )}
-              </div>
-              <div className="rp-photobanner-caption">
-                <h2 className="rp-h2">{rc.photoBanner.heading}</h2>
-                <p className="rp-section-body">{rc.photoBanner.body}</p>
+              <h2 className="rp-h2" id="rp-process-h">{rc.processSteps.heading}</h2>
+              <div className="rp-process-chain">
+                {rc.processSteps.steps.map((step, i) => (
+                  <div key={step.label} className="rp-process-step">
+                    <div className="rp-process-step-inner">
+                      <p className="rp-process-num">{step.num}</p>
+                      <p className="rp-process-label">{step.label}</p>
+                    </div>
+                    {i < rc.processSteps.steps.length - 1 && <span className="rp-process-arrow" aria-hidden="true">→</span>}
+                  </div>
+                ))}
               </div>
             </div>
           </section>
@@ -747,6 +1037,8 @@ export default function RichServiceTemplate({ service, relatedServices, relatedA
             </div>
           </div>
         </section>
+
+        {rc.photoBanner && rc.photoBannerAfterBenefits && <PhotoBanner pb={rc.photoBanner} />}
 
         {/* ════ RELATED INSIGHT ════ */}
         {relatedArticle && (
@@ -771,24 +1063,48 @@ export default function RichServiceTemplate({ service, relatedServices, relatedA
           </section>
         )}
 
-        {/* ════ FAQ ════ */}
-        <section className="rp-section" aria-labelledby="rp-faq-h">
-          <div className="rp-inner">
-            <h2 className="rp-h2" id="rp-faq-h">Frequently asked questions</h2>
-            <div className="rp-faq-list">
-              {rc.faqs.map((faq, i) => (
-                <FaqItem
-                  key={faq.q}
-                  idx={i}
-                  q={faq.q}
-                  a={faq.a}
-                  isOpen={openFaq === i}
-                  onToggle={() => setOpenFaq((prev) => (prev === i ? null : i))}
-                />
-              ))}
-            </div>
-          </div>
-        </section>
+        {/* ════ FAQ (optional) ════ */}
+        {rc.faqs && rc.faqs.length > 0 && (
+          rc.faqEyebrow ? (
+            <section className="rp-section rp-faq2-section" aria-labelledby="rp-faq-h">
+              <div className="rp-inner-narrow">
+                <p className="rp-section-eyebrow">{rc.faqEyebrow}</p>
+                <h2 className="rp-h2" id="rp-faq-h">Frequently asked questions</h2>
+                {rc.faqIntro && <p className="rp-section-body">{rc.faqIntro}</p>}
+                <div className="rp-faq2-list">
+                  {rc.faqs.map((faq, i) => (
+                    <FaqItem2
+                      key={faq.q}
+                      idx={i}
+                      q={faq.q}
+                      a={faq.a}
+                      isOpen={openFaq === i}
+                      onToggle={() => setOpenFaq((prev) => (prev === i ? null : i))}
+                    />
+                  ))}
+                </div>
+              </div>
+            </section>
+          ) : (
+            <section className="rp-section" aria-labelledby="rp-faq-h">
+              <div className="rp-inner">
+                <h2 className="rp-h2" id="rp-faq-h">Frequently asked questions</h2>
+                <div className="rp-faq-list">
+                  {rc.faqs.map((faq, i) => (
+                    <FaqItem
+                      key={faq.q}
+                      idx={i}
+                      q={faq.q}
+                      a={faq.a}
+                      isOpen={openFaq === i}
+                      onToggle={() => setOpenFaq((prev) => (prev === i ? null : i))}
+                    />
+                  ))}
+                </div>
+              </div>
+            </section>
+          )
+        )}
 
         {/* ════ RELATED SERVICES ════ */}
         <section className="rp-section" aria-labelledby="rp-relsvc-h">

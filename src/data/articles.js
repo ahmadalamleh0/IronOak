@@ -516,7 +516,7 @@ export const ARTICLES = [
           ],
           [
             'Bundling this work with a broader ',
-            { text: 'renovation or remodeling', to: '/services/renovations-remodeling' },
+            { text: 'renovation or remodeling', to: '/services/capital-project-management' },
             ' project, where one is already planned, is usually more efficient than scheduling each finish separately over time.',
           ],
         ],
@@ -547,7 +547,6 @@ export const ARTICLES = [
 
     relatedServices: [
       { label: 'Interior Finishing', slug: 'interior-finishing' },
-      { label: 'Renovations & Remodeling', slug: 'renovations-remodeling' },
       { label: 'Capital Projects & Project Management', slug: 'capital-project-management' },
     ],
     relatedArticleSlugs: [

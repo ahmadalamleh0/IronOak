@@ -112,7 +112,7 @@ export const IllustrationMaintenance = () => (
   />
 )
 
-/* ─── 02 · Renovations & Remodeling ─────────────────────────────────────── */
+/* ─── Now used for Capital Projects & Project Management (see ServicesExplorer) ─── */
 export const IllustrationRenovations = () => (
   <img src="/services/construction-site.svg" alt=""
        style={{ width: '100%', height: 'auto', display: 'block' }} aria-hidden="true" />
