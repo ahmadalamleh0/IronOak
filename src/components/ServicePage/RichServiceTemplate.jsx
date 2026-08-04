@@ -186,15 +186,23 @@ const CSS = `
 }
 .rp-intro-col { padding-left: clamp(0px, 3vw, 32px); border-left: 1px solid rgba(201,162,74,0.28); }
 .rp-intro-col:first-child { padding-left: 0; border-left: none; }
+.rp-intro-word-wrap { display: inline-block; width: fit-content; }
 .rp-intro-word {
   font-family: "Inter Tight", Inter, Arial, sans-serif;
   font-size: clamp(1.7rem, 3vw, 2.3rem);
   font-weight: 900;
   letter-spacing: -0.03em;
   color: #07111D;
-  margin: 0 0 16px;
+  margin: 0 0 2px;
 }
-.rp-intro-body { font-size: 0.92rem; line-height: 1.7; color: rgba(7,17,29,0.55); margin: 0; }
+.rp-intro-rule {
+  display: block;
+  width: 120%;
+  margin-left: -10%;
+  height: 14px;
+  overflow: visible;
+}
+.rp-intro-body { font-size: 0.92rem; line-height: 1.7; color: rgba(7,17,29,0.55); margin: 14px 0 0; }
 @media (max-width: 760px) {
   .rp-intro-grid { grid-template-columns: 1fr; gap: 28px; }
   .rp-intro-col { padding-left: 0; border-left: none; padding-top: 24px; border-top: 1px solid rgba(201,162,74,0.28); }
@@ -239,6 +247,22 @@ const CSS = `
 }
 .rp-overview-text { max-width: 480px; }
 .rp-overview-p { font-size: 0.96rem; line-height: 1.78; color: rgba(7,17,29,0.60); margin: 0 0 18px; }
+.rp-introfeature-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+  font-family: "Manrope", system-ui, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #A9802F;
+  text-decoration: none;
+  border-bottom: 1.5px solid rgba(169,128,47,0.30);
+  padding-bottom: 3px;
+  transition: color 180ms ease, border-color 180ms ease, gap 180ms ease;
+}
+.rp-introfeature-cta:hover { color: #8a6a26; gap: 13px; border-color: rgba(169,128,47,0.60); }
 .rp-overview-img-wrap {
   border-radius: 14px;
   overflow: hidden;
@@ -250,6 +274,7 @@ const CSS = `
 @media (max-width: 860px) {
   .rp-overview-grid { grid-template-columns: 1fr; }
   .rp-overview-img-wrap { max-height: 420px; order: -1; }
+  .rp-overview-img-wrap img { object-position: var(--rp-ov-mobile-pos, center); }
   .rp-overview-text { max-width: 100%; }
 }
 
@@ -310,6 +335,133 @@ const CSS = `
 @media (max-width: 700px) {
   .rp-list-grid-emphasized { grid-template-columns: 1fr; }
   .rp-list-row-emphasized:nth-child(odd) { border-right: none; }
+}
+
+/* ── Capabilities icon grid (optional, per-service) ──────────── */
+.rp-cap-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(18px, 2.5vw, 24px);
+  margin-top: clamp(32px, 4vh, 44px);
+}
+.rp-cap-card {
+  text-align: center;
+  padding: clamp(28px, 3vw, 34px) 18px;
+  border: 1px solid rgba(9,19,31,0.10);
+  border-radius: 14px;
+  background: #FDFCF8;
+  transition: border-color 200ms ease, box-shadow 200ms ease, transform 200ms ease;
+}
+.rp-cap-card:hover {
+  border-color: rgba(201,162,74,0.35);
+  box-shadow: 0 10px 26px rgba(7,17,29,0.07);
+  transform: translateY(-2px);
+}
+.rp-cap-icon-wrap {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 20px;
+  border-radius: 12px;
+  border: 1px solid rgba(201,162,74,0.30);
+  background: rgba(201,162,74,0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #A9802F;
+}
+.rp-cap-icon-img { width: 30px; height: 30px; object-fit: contain; display: block; }
+.rp-cap-title {
+  font-family: "Inter Tight", Inter, Arial, sans-serif;
+  font-size: 0.92rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: #07111D;
+  margin: 0;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(201,162,74,0.30);
+  display: inline-block;
+}
+.rp-cap-body {
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: rgba(7,17,29,0.55);
+  margin: 12px 0 0;
+}
+@media (max-width: 900px) {
+  .rp-cap-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 520px) {
+  .rp-cap-grid { grid-template-columns: 1fr; }
+}
+
+/* ── Industries strip (optional, per-service) — moving marquee,
+   same mechanics as the homepage TrustStrip banner ── */
+.rp-industries { padding: 0; border-top: 1px solid rgba(9,19,31,0.08); }
+.rp-industries-eyebrow-wrap { text-align: center; padding: clamp(26px, 3.5vh, 34px) 0 18px; }
+.rp-industries-title {
+  font-family: "Manrope", system-ui, sans-serif;
+  font-size: 0.60rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #A9802F;
+  margin: 0;
+}
+@keyframes rp-industries-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.rp-industries-banner {
+  background: #0D1520;
+  height: 62px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.rp-industries-banner::before,
+.rp-industries-banner::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 180px;
+  z-index: 2;
+  pointer-events: none;
+}
+@media (max-width: 600px) {
+  .rp-industries-banner::before,
+  .rp-industries-banner::after { width: 72px; }
+}
+.rp-industries-banner::before {
+  left: 0;
+  background: linear-gradient(to right, #F4F1EA 0%, rgba(244,241,234,0.85) 30%, rgba(244,241,234,0.30) 70%, transparent 100%);
+}
+.rp-industries-banner::after {
+  right: 0;
+  background: linear-gradient(to left, #F4F1EA 0%, rgba(244,241,234,0.85) 30%, rgba(244,241,234,0.30) 70%, transparent 100%);
+}
+.rp-industries-track {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  white-space: nowrap;
+  animation: rp-industries-scroll 20s linear infinite;
+  will-change: transform;
+}
+.rp-industries-item2 { display: inline-flex; align-items: center; flex-shrink: 0; }
+.rp-industries-label {
+  font-family: "Manrope", system-ui, sans-serif;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #F4F1EA;
+  white-space: nowrap;
+}
+.rp-industries-sep { display: inline-flex; align-items: center; justify-content: center; width: 56px; flex-shrink: 0; }
+.rp-industries-diamond { display: block; width: 5px; height: 5px; border-radius: 1px; background: rgba(201,162,74,0.52); transform: rotate(45deg); flex-shrink: 0; }
+@media (prefers-reduced-motion: reduce) {
+  .rp-industries-track { animation-play-state: paused; }
 }
 
 /* ── Dark benefits ─────────────────────────────────────────── */
@@ -667,6 +819,50 @@ const CSS = `
 .rp-relsvc-label { font-family: "Inter Tight", Inter, Arial, sans-serif; font-size: 1.02rem; font-weight: 800; letter-spacing: -0.015em; }
 .rp-relsvc-arrow { color: #A9802F; font-size: 0.9rem; flex-shrink: 0; }
 
+/* ── CCTV packages / "Every System Includes" (optional, per-service) ── */
+.rp-cctv { text-align: center; }
+.rp-cctv .rp-h2 { margin: 0 0 12px; }
+.rp-cctv .rp-section-body { max-width: 620px; margin: 0 auto; }
+.rp-cctv-includes {
+  margin: clamp(32px, 5vh, 44px) auto 0;
+  max-width: 520px;
+  text-align: left;
+  background: #FDFCF8;
+  border: 1px solid rgba(9,19,31,0.08);
+  border-radius: 16px;
+  padding: clamp(24px, 4vw, 34px) clamp(24px, 4vw, 38px);
+  box-shadow: 0 10px 30px rgba(7,17,29,0.06);
+}
+.rp-cctv-includes-title {
+  font-family: "Inter Tight", Inter, Arial, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #A9802F;
+  margin: 0 0 18px;
+}
+.rp-cctv-includes-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px; }
+.rp-cctv-includes-list li { display: flex; align-items: flex-start; gap: 12px; }
+.rp-cctv-check {
+  flex-shrink: 0;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: rgba(201,162,74,0.12);
+  color: #A9802F;
+  display: flex; align-items: center; justify-content: center;
+  margin-top: 1px;
+}
+.rp-cctv-includes-list span:last-child {
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: rgba(7,17,29,0.75);
+  font-weight: 500;
+}
+@media (max-width: 640px) {
+  .rp-cctv-includes { padding: 24px 22px; }
+}
+
 /* ── Final CTA ─────────────────────────────────────────────── */
 .rp-final-cta { text-align: center; background: #0a0d12; }
 .rp-final-cta-inner { max-width: 540px; margin: 0 auto; }
@@ -728,7 +924,7 @@ const WordMask = ({ children, innerRef }) => (
   </span>
 )
 
-const PositioningStatement = ({ heading, body, watermarkLg = false }) => {
+const PositioningStatement = ({ eyebrow, heading, body, watermarkLg = false, ctaLabel, ctaHref }) => {
   const sectionRef   = useRef(null)
   const headlineRef  = useRef(null)
   const ruleRef      = useRef(null)
@@ -816,6 +1012,7 @@ const PositioningStatement = ({ heading, body, watermarkLg = false }) => {
       ><LogoMark /></div>
       <div className="rp-inner rp-positioning-inner">
         <div ref={ruleRef} className="rp-positioning-rule" aria-hidden="true" />
+        {eyebrow && <p className="rp-section-eyebrow">{eyebrow}</p>}
         <h2 ref={headlineRef}>
           {heading.map((line, li) => {
             const words = line.split(' ')
@@ -836,6 +1033,11 @@ const PositioningStatement = ({ heading, body, watermarkLg = false }) => {
           })}
         </h2>
         <p ref={paraRef}>{body}</p>
+        {ctaLabel && (
+          <a href={ctaHref || '#'} className="rp-introfeature-cta" style={{ marginTop: '4px' }}>
+            {ctaLabel} <span aria-hidden="true">→</span>
+          </a>
+        )}
       </div>
     </section>
   )
@@ -843,38 +1045,54 @@ const PositioningStatement = ({ heading, body, watermarkLg = false }) => {
 
 /* Three-part intro. `animated` is opt-in per service — when false, renders
    exactly as before with no GSAP involvement, so unflagged pages are untouched. */
-const IntroGrid = ({ items, animated }) => {
+const IntroGrid = ({ items }) => {
   const sectionRef = useRef(null)
   const itemRefs   = useRef([])
+  const ruleRefs   = useRef([])
 
   useEffect(() => {
-    if (!animated) return
     const rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
     const ctx = gsap.context(() => {
-      const els = itemRefs.current.filter(Boolean)
+      const els   = itemRefs.current.filter(Boolean)
+      const rules = ruleRefs.current.filter(Boolean)
 
       if (rm) {
         gsap.set(els, { opacity: 1, x: 0 })
+        rules.forEach((rule) => gsap.set(rule, { strokeDashoffset: 0 }))
         return
       }
 
       els.forEach((el, i) => {
-        gsap.set(el, { opacity: 0, x: i % 2 === 0 ? -32 : 32 })
-      })
+        const fromX = i % 2 === 0 ? 52 : -52   // 1st right, 2nd left, 3rd right...
+        gsap.set(el, { opacity: 0, x: fromX })
 
-      gsap.to(els, {
-        x: 0,
-        opacity: 1,
-        duration: 0.8,
-        ease: 'power2.out',
-        stagger: 0.12,
-        scrollTrigger: { trigger: sectionRef.current, start: 'top 85%' },
+        gsap.to(el, {
+          x: 0,
+          opacity: 1,
+          duration: 0.95,
+          ease: 'power3.out',
+          delay: i * 0.13,
+          scrollTrigger: { trigger: el, start: 'top 88%' },
+        })
+
+        const rule = ruleRefs.current[i]
+        if (rule) {
+          const len = rule.getTotalLength()
+          gsap.set(rule, { strokeDasharray: len, strokeDashoffset: len })
+          gsap.to(rule, {
+            strokeDashoffset: 0,
+            duration: 0.7,
+            ease: 'power2.inOut',
+            delay: i * 0.13 + 0.55,
+            scrollTrigger: { trigger: el, start: 'top 88%' },
+          })
+        }
       })
     }, sectionRef)
 
     return () => ctx.revert()
-  }, [animated])
+  }, [])
 
   return (
     <section ref={sectionRef} className="rp-section" aria-label="How IronOak approaches this work">
@@ -886,7 +1104,26 @@ const IntroGrid = ({ items, animated }) => {
               ref={(el) => { itemRefs.current[i] = el }}
               className="rp-intro-col"
             >
-              <p className="rp-intro-word">{item.label}</p>
+              <div className="rp-intro-word-wrap">
+                <p className="rp-intro-word">{item.label}</p>
+                <svg className="rp-intro-rule" viewBox="0 0 120 16" preserveAspectRatio="none" aria-hidden="true">
+                  <defs>
+                    <linearGradient id={`rp-intro-rule-grad-${i}`} x1="0" y1="0" x2="1" y2="0">
+                      <stop offset="0%" stopColor="#A9802F" />
+                      <stop offset="100%" stopColor="#E8C97A" />
+                    </linearGradient>
+                  </defs>
+                  <path
+                    ref={(el) => { ruleRefs.current[i] = el }}
+                    d="M2,8 C13,6.5 19,9 32,7.5 C45,6 53,9 66,7.5 C79,6 88,9 100,7.5 C106,6.5 111,8 116,7"
+                    fill="none"
+                    stroke={`url(#rp-intro-rule-grad-${i})`}
+                    strokeWidth="2.6"
+                    strokeLinecap="round"
+                    vectorEffect="non-scaling-stroke"
+                  />
+                </svg>
+              </div>
               <p className="rp-intro-body">{item.body}</p>
             </div>
           ))}
@@ -950,6 +1187,40 @@ const RelSvcIcon = ({ slug }) => {
   return Icon ? <Icon /> : null
 }
 
+/* ── Capabilities-grid icons (optional per-service icon section) ── */
+const IconCamera = () => (
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <rect x="2" y="7" width="14" height="10" rx="2" />
+    <path d="M16 10l5-2.5v9L16 14" />
+    <circle cx="9" cy="12" r="2.5" />
+  </svg>
+)
+const IconMonitor = () => (
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <rect x="3" y="4" width="18" height="12" rx="1.5" />
+    <path d="M8 20h8M12 16v4" />
+    <path d="M8.5 10.5l2 2 4.5-4.5" />
+  </svg>
+)
+const IconShield = () => (
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z" />
+    <path d="M9.5 12l1.8 1.8L15 10" />
+  </svg>
+)
+const IconClipboardCheck = () => (
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <rect x="6" y="4" width="12" height="16" rx="1.5" />
+    <path d="M9 4V3a1 1 0 011-1h4a1 1 0 011 1v1" />
+    <path d="M9 13l2 2 4-4" />
+  </svg>
+)
+const CAP_ICONS = { camera: IconCamera, monitor: IconMonitor, shield: IconShield, clipboardCheck: IconClipboardCheck }
+const CapIcon = ({ name }) => {
+  const Icon = CAP_ICONS[name]
+  return Icon ? <Icon /> : null
+}
+
 const ImgPlaceholder = ({ label }) => (
   <div className="rp-typical-img-placeholder" aria-hidden="true">
     {label && <span className="rp-placeholder-label">{label}</span>}
@@ -989,6 +1260,32 @@ const PhotoBanner = ({ pb }) => (
   </section>
 )
 
+const OverviewSection = ({ overview }) => (
+  <section className="rp-section" aria-labelledby="rp-overview-h">
+    <div className="rp-inner">
+      <div className="rp-overview-grid">
+        <div className="rp-overview-text">
+          <p className="rp-section-eyebrow">{overview.eyebrow}</p>
+          <h2 className="rp-h2" id="rp-overview-h">{overview.heading}</h2>
+          {overview.paragraphs.map((p, i) => (
+            <p key={i} className="rp-overview-p">{p}</p>
+          ))}
+        </div>
+        <div
+          className="rp-overview-img-wrap"
+          style={overview.imagePositionMobile ? { '--rp-ov-mobile-pos': overview.imagePositionMobile } : undefined}
+        >
+          {overview.image ? (
+            <img src={overview.image} alt={overview.imageAlt} loading="lazy" decoding="async" />
+          ) : (
+            <ImgPlaceholder label={overview.placeholderLabel} />
+          )}
+        </div>
+      </div>
+    </div>
+  </section>
+)
+
 export default function RichServiceTemplate({ service, relatedServices, relatedArticle }) {
   const [openFaq, setOpenFaq] = useState(null)
   const rc = service.richContent
@@ -1001,8 +1298,28 @@ export default function RichServiceTemplate({ service, relatedServices, relatedA
 
         {/* ════ HERO ════ */}
         <section className="rp-hero" aria-labelledby="rp-title">
-          {rc.heroImage ? (
-            <img className="rp-hero-img" src={rc.heroImage} alt={rc.heroImageAlt} loading="eager" decoding="async" />
+          {rc.heroVideo ? (
+            <video
+              className="rp-hero-img"
+              src={rc.heroVideo}
+              poster={rc.heroImage}
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="auto"
+              aria-label={rc.heroImageAlt}
+              style={rc.heroImagePosition ? { objectPosition: rc.heroImagePosition } : undefined}
+            />
+          ) : rc.heroImage ? (
+            <img
+              className="rp-hero-img"
+              src={rc.heroImage}
+              alt={rc.heroImageAlt}
+              loading="eager"
+              decoding="async"
+              style={rc.heroImagePosition ? { objectPosition: rc.heroImagePosition } : undefined}
+            />
           ) : (
             <div className="rp-hero-img rp-hero-img-placeholder" aria-hidden="true">
               {rc.heroPlaceholderLabel && <span className="rp-placeholder-label">{rc.heroPlaceholderLabel}</span>}
@@ -1036,11 +1353,32 @@ export default function RichServiceTemplate({ service, relatedServices, relatedA
           </div>
         </section>
 
-        {/* ════ THREE-PART INTRODUCTION ════ */}
-        <IntroGrid items={rc.intro} animated={!!rc.animatedIntro} />
+        {/* ════ POSITIONING STATEMENT — early variant (optional, before Assess/Install/Integrate) ════ */}
+        {rc.positioning && rc.positioning.early && (
+          <PositioningStatement
+            eyebrow={rc.positioning.eyebrow}
+            heading={rc.positioning.heading}
+            body={rc.positioning.body}
+            watermarkLg={rc.positioning.watermarkLg}
+            ctaLabel={rc.positioning.ctaLabel}
+            ctaHref={rc.positioning.ctaHref}
+          />
+        )}
 
-        {/* ════ POSITIONING STATEMENT ════ */}
-        <PositioningStatement heading={rc.positioning.heading} body={rc.positioning.body} watermarkLg={rc.positioning.watermarkLg} />
+        {/* ════ THREE-PART INTRODUCTION (optional) ════ */}
+        {rc.intro && <IntroGrid items={rc.intro} />}
+
+        {/* ════ POSITIONING STATEMENT — default position (optional) ════ */}
+        {rc.positioning && !rc.positioning.early && (
+          <PositioningStatement
+            eyebrow={rc.positioning.eyebrow}
+            heading={rc.positioning.heading}
+            body={rc.positioning.body}
+            watermarkLg={rc.positioning.watermarkLg}
+            ctaLabel={rc.positioning.ctaLabel}
+            ctaHref={rc.positioning.ctaHref}
+          />
+        )}
 
         {/* ════ TYPICAL SERVICE WORK (photography-led) ════ */}
         <section
@@ -1078,52 +1416,107 @@ export default function RichServiceTemplate({ service, relatedServices, relatedA
           </div>
         </section>
 
-        {/* ════ SERVICE SCOPE LIST ════ */}
-        <section className="rp-section rp-section-sage" aria-labelledby="rp-services-h">
-          <div className="rp-inner">
-            <h2 className="rp-h2" id="rp-services-h">{rc.serviceList.heading}</h2>
-            <p className="rp-section-body">{rc.serviceList.body}</p>
-            {rc.serviceList.emphasized ? (
-              <div className="rp-list-grid-emphasized" role="list">
-                {rc.serviceList.items.map((item, i) => (
-                  <div key={item} className="rp-list-row-emphasized" role="listitem">
-                    <span className="rp-list-num-emphasized">{String(i + 1).padStart(2, '0')}</span>
-                    <span className="rp-list-label-emphasized">{item}</span>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <div className="rp-list-grid" role="list">
-                {rc.serviceList.items.map((item, i) => (
-                  <div key={item} className="rp-list-row" role="listitem">
-                    <span className="rp-list-num">{String(i + 1).padStart(2, '0')}</span>
-                    <span className="rp-list-label">{item}</span>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        </section>
-
-        {/* ════ SERVICE OVERVIEW (optional) ════ */}
-        {rc.overview && (
-          <section className="rp-section" aria-labelledby="rp-overview-h">
+        {/* ════ SERVICE SCOPE LIST (optional) ════ */}
+        {rc.serviceList && (
+          <section className="rp-section rp-section-sage" aria-labelledby="rp-services-h">
             <div className="rp-inner">
-              <div className="rp-overview-grid">
-                <div className="rp-overview-text">
-                  <p className="rp-section-eyebrow">{rc.overview.eyebrow}</p>
-                  <h2 className="rp-h2" id="rp-overview-h">{rc.overview.heading}</h2>
-                  {rc.overview.paragraphs.map((p, i) => (
-                    <p key={i} className="rp-overview-p">{p}</p>
+              <h2 className="rp-h2" id="rp-services-h">{rc.serviceList.heading}</h2>
+              <p className="rp-section-body">{rc.serviceList.body}</p>
+              {rc.serviceList.emphasized ? (
+                <div className="rp-list-grid-emphasized" role="list">
+                  {rc.serviceList.items.map((item, i) => (
+                    <div key={item} className="rp-list-row-emphasized" role="listitem">
+                      <span className="rp-list-num-emphasized">{String(i + 1).padStart(2, '0')}</span>
+                      <span className="rp-list-label-emphasized">{item}</span>
+                    </div>
                   ))}
                 </div>
-                <div className="rp-overview-img-wrap">
-                  {rc.overview.image ? (
-                    <img src={rc.overview.image} alt={rc.overview.imageAlt} loading="lazy" decoding="async" />
-                  ) : (
-                    <ImgPlaceholder label={rc.overview.placeholderLabel} />
-                  )}
+              ) : (
+                <div className="rp-list-grid" role="list">
+                  {rc.serviceList.items.map((item, i) => (
+                    <div key={item} className="rp-list-row" role="listitem">
+                      <span className="rp-list-num">{String(i + 1).padStart(2, '0')}</span>
+                      <span className="rp-list-label">{item}</span>
+                    </div>
+                  ))}
                 </div>
+              )}
+            </div>
+          </section>
+        )}
+
+        {/* ════ CAPABILITIES (icon grid, optional, per-service unique section) ════ */}
+        {rc.capabilities && (
+          <section className="rp-section rp-section-sage" aria-labelledby="rp-cap-h">
+            <div className="rp-inner">
+              {rc.capabilities.eyebrow && <p className="rp-section-eyebrow">{rc.capabilities.eyebrow}</p>}
+              <h2 className="rp-h2" id="rp-cap-h">{rc.capabilities.heading}</h2>
+              {rc.capabilities.body && <p className="rp-section-body">{rc.capabilities.body}</p>}
+              <div className="rp-cap-grid">
+                {rc.capabilities.items.map((item) => (
+                  <div key={item.title} className="rp-cap-card">
+                    <div className="rp-cap-icon-wrap">
+                      {item.image ? (
+                        <img className="rp-cap-icon-img" src={item.image} alt="" aria-hidden="true" loading="lazy" decoding="async" />
+                      ) : (
+                        <CapIcon name={item.icon} />
+                      )}
+                    </div>
+                    <p className="rp-cap-title">{item.title}</p>
+                    <p className="rp-cap-body">{item.body}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* ════ INDUSTRIES STRIP (optional, per-service unique section) ════ */}
+        {rc.industries && (
+          <section className="rp-industries">
+            <div className="rp-industries-eyebrow-wrap">
+              <p className="rp-industries-title">{rc.industries.heading}</p>
+            </div>
+            <div className="rp-industries-banner" role="region" aria-label={rc.industries.heading}>
+              <ul style={{ position: 'absolute', width: '1px', height: '1px', overflow: 'hidden', clip: 'rect(0,0,0,0)', whiteSpace: 'nowrap' }}>
+                {rc.industries.items.map((item) => <li key={item}>{item}</li>)}
+              </ul>
+              <div className="rp-industries-track" aria-hidden="true">
+                {[...rc.industries.items, ...rc.industries.items].map((item, i) => (
+                  <span key={i} className="rp-industries-item2">
+                    <span className="rp-industries-label">{item}</span>
+                    <span className="rp-industries-sep" aria-hidden="true"><span className="rp-industries-diamond" /></span>
+                  </span>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* ════ SERVICE OVERVIEW (optional) ════ */}
+        {rc.overview && !rc.overviewAfterBenefits && <OverviewSection overview={rc.overview} />}
+
+        {/* ════ CCTV PACKAGES (optional, per-service unique section) ════ */}
+        {rc.cctvPackages && (
+          <section className="rp-section rp-cctv rp-section-dark" data-navbar="invert" aria-labelledby="rp-cctv-h">
+            <div className="rp-inner-narrow">
+              <p className="rp-section-eyebrow">{rc.cctvPackages.eyebrow}</p>
+              <h2 className="rp-h2" id="rp-cctv-h">{rc.cctvPackages.heading}</h2>
+              <p className="rp-section-body">{rc.cctvPackages.body}</p>
+              <div className="rp-cctv-includes">
+                <p className="rp-cctv-includes-title">{rc.cctvPackages.includesTitle || 'Every System Includes'}</p>
+                <ul className="rp-cctv-includes-list">
+                  {rc.cctvPackages.includes.map((item) => (
+                    <li key={item}>
+                      <span className="rp-cctv-check" aria-hidden="true">
+                        <svg viewBox="0 0 14 14" width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M2.5 7l3 3 6-5" />
+                        </svg>
+                      </span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           </section>
@@ -1188,6 +1581,8 @@ export default function RichServiceTemplate({ service, relatedServices, relatedA
             </div>
           </section>
         )}
+
+        {rc.overview && rc.overviewAfterBenefits && <OverviewSection overview={rc.overview} />}
 
         {rc.photoBanner && rc.photoBannerAfterBenefits && <PhotoBanner pb={rc.photoBanner} />}
 

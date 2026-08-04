@@ -43,7 +43,6 @@ export const SERVICE_PAGES = [
       heroOverlayLight:     true,
       heroHeading:          ['Property Maintenance &', 'Repairs'],
       heroSupportingLine:   'Commercial • Condominium • Hospitality • Multi-Site',
-      animatedIntro:        true,
 
       intro: [
         { label: 'Inspect', body: 'Assess the property, the issue, and the priorities before work begins.' },
@@ -272,7 +271,8 @@ export const SERVICE_PAGES = [
        a unique visual-split "Overview" section adapted for finish materials. */
     richContent: {
       heroImage:            '/services/interior-finishing-hero.webp',
-      heroImageAlt:         'Commercial interior surface and wall finishing work in progress',
+      heroImageAlt:         'Interior finishing work in a commercial space',
+      heroImagePosition:    '25% 30%',
       heroOverlayLight:     true,
       heroHeading:          ['Interior', 'Finishing'],
       heroSupportingLine:   'Commercial • Condominium • Hospitality • Multi-Site',
@@ -297,6 +297,7 @@ export const SERVICE_PAGES = [
           { num: '02', title: 'Flooring & Carpet', body: 'Flooring and carpet replacement planned around access, occupancy and operating schedules.', image: '/services/interior-flooring-carpet.jpg', imageAlt: 'Patterned carpet installation in an elegant hotel guest-room corridor' },
           { num: '03', title: 'Common-Area Refreshes', body: 'Coordinated finish upgrades for corridors, lobbies, shared spaces and guest-facing environments.', image: '/services/interior-common-area-refreshes.webp', imageAlt: 'Premium commercial washroom with marble vanities and backlit mirrors' },
           { num: '04', title: 'Painting & Finishing', body: 'Professional painting and finishing work that refreshes interiors, improves presentation and supports long-term property upkeep.', image: '/services/interior-painting-finishing.jpg', imageAlt: 'Commercial office painting work in progress with ladder and supplies staged on protective floor covering' },
+          { num: '05', title: 'Lighting & Fixture Upgrades', body: 'Interior lighting and fixture upgrades coordinated with finish improvements to refresh the appearance and functionality of shared spaces.', image: '/services/interior-lighting-fixtures.jpg', imageAlt: 'Condominium corridor with recessed downlights and cove wall lighting along a textured plaster wall' },
         ],
       },
 
@@ -315,6 +316,7 @@ export const SERVICE_PAGES = [
         ],
       },
 
+      overviewAfterBenefits: true,
       overview: {
         eyebrow:    'Materials & Finishes',
         heading:    'Built for appearance. Selected for everyday use.',
@@ -387,10 +389,20 @@ export const SERVICE_PAGES = [
        installation work. */
     richContent: {
       heroImage:          '/services/installations-property-systems-hero.webp',
-      heroImageAlt:       'Elevated view of a modern glass building entrance with automated pedestrian doors',
+      heroVideo:          '/services/installations-hero.mp4',
+      heroImageAlt:       'Security camera system overview',
       heroOverlayLight:   true,
       heroHeading:        ['Installations &', 'Building Systems'],
       heroSupportingLine: 'Commercial • Condominium • Hospitality • Multi-Site',
+
+      positioning: {
+        early:    true,
+        eyebrow:  'SECURITY VIDEO MONITORING',
+        heading:  ['Advanced Security Video Monitoring'],
+        body:     'IronOak combines high-definition CCTV systems, intelligent video alerts and reliable remote access to help protect commercial properties, condominiums, construction sites and large facilities. Smart detection can identify meaningful activity, line crossings and changes within monitored areas, helping property teams respond quickly and maintain clearer visibility across the site.',
+        ctaLabel: 'Explore CCTV solutions',
+        ctaHref:  '#rp-cctv-h',
+      },
 
       intro: [
         { label: 'Assess',    body: 'Review the property, existing systems, access conditions, and installation requirements before work begins.' },
@@ -398,36 +410,32 @@ export const SERVICE_PAGES = [
         { label: 'Integrate', body: 'Test, commission, and hand over each system with clear documentation and support.' },
       ],
 
-      positioning: {
-        heading: ['Upgrades planned around your operation.'],
-        body: 'From CCTV and lighting to property hardware and equipment, IronOak plans and installs system upgrades around occupied buildings, active operations, and everyday property use.',
-      },
-
       typicalProjects: {
         heading: 'Typical installation & systems work',
         wideCards: true,
         groups: [
           { num: '01', title: 'Security & CCTV Systems', body: 'Coordinated camera and security installations for commercial and multi-residential properties.', image: '/services/installations-security-cctv.webp', imageAlt: 'Dome security camera mounted on the ceiling of a modern hotel lobby corridor' },
-          { num: '02', title: 'Lighting & Fixture Upgrades', body: 'Interior and exterior fixture replacements and upgrade programs planned around property operations.', image: '/services/installations-lighting-fixtures.jpg', imageAlt: 'Condominium corridor with recessed downlights and cove wall lighting along a textured plaster wall' },
+          { num: '02', title: 'Long-Range Security Cameras & Surveillance Systems', body: 'Warehouses, parking lots, stadiums and other large perimeters require broader security coverage. IronOak installs long-range camera and surveillance systems designed to capture clear, detailed footage across larger areas.', image: '/services/installations-long-range-cameras.jpg', imageAlt: 'Two long-range security cameras mounted on the exterior wall of a commercial building' },
           { num: '03', title: 'Access Control & Entry Systems', body: 'Entry, intercom and access-control installations designed for secure, reliable day-to-day property operations.', image: '/services/installations-access-control.png', imageAlt: 'Modern commercial building entrance with automated glass doors and an access-control panel' },
+          { num: '04', title: 'Monitoring & Surveillance Support', body: 'CCTV monitoring support, surveillance planning and camera-system coordination for commercial and multi-residential properties.', image: '/services/installations-monitoring-surveillance.jpg', imageAlt: 'Security operations desk with multiple monitors displaying live CCTV camera feeds' },
         ],
       },
 
-      serviceList: {
-        heading: 'Installation & systems scope',
-        body:    'Coordinated installation support for individual properties, managed portfolios, and multi-location programs.',
+      capabilities: {
+        eyebrow: 'SYSTEM CAPABILITIES',
+        heading: 'Security & system solutions',
+        body:    'CCTV, surveillance and access-control support built around how your property actually operates.',
         items: [
-          'CCTV and security system installation',
-          'Access control and entry systems',
-          'Interior and exterior lighting upgrades',
-          'Fixture replacement programs',
-          'Property equipment installation',
-          'Building hardware upgrades',
-          'Interior building systems',
-          'Access-related installations',
-          'Replacement and upgrade programs',
-          'Multi-location installation rollouts',
+          { image: '/services/icon-ai-video-monitoring.png',   title: 'AI-Powered Video Monitoring Systems', body: 'High-definition video surveillance with live operator support.' },
+          { image: '/services/icon-remote-surveillance.png',   title: 'Remote Video Surveillance',            body: '24/7 monitoring with AI-assisted alerts and live deterrence.' },
+          { image: '/services/icon-managed-access-control.png', title: 'Managed Access Control',               body: 'Secure, seamless access management for entry points and controlled areas.' },
+          { image: '/services/icon-inspection-compliance.png', title: 'Inspection & Compliance Support',      body: 'Remote inspection, oversight and compliance support for monitored environments.' },
         ],
+      },
+
+      industries: {
+        heading: 'Industries We Serve',
+        items: ['Retail', 'Construction Sites', 'Industrial Facilities', 'Condos & Apartments', 'Commercial Buildings', 'Hospitality'],
       },
 
       overview: {
@@ -438,28 +446,7 @@ export const SERVICE_PAGES = [
           'IronOak coordinates access, scheduling, and trades from initial assessment through testing, commissioning, and handover.',
         ],
         image:    '/services/installations-overview.jpg',
-        imageAlt: 'Elegant condominium elevator lobby with marble walls and flooring',
-      },
-
-      approachNote: {
-        eyebrow: 'How We Install',
-        heading: 'Planned around the building, not just the system.',
-        body:    'Every installation is scheduled around occupancy, access, and daily operations, so the work gets done without getting in the way.',
-        items: [
-          { label: 'Scheduled Access',    body: 'Work planned around occupied hours and building access.' },
-          { label: 'Clear Communication', body: 'Tenants, staff, and site contacts kept informed throughout.' },
-          { label: 'Tested & Documented', body: 'Every system commissioned and handed over with documentation.' },
-        ],
-      },
-
-      benefits: {
-        heading: 'Why coordinated installation matters',
-        items: [
-          { title: 'One Point of Contact', body: 'Clear communication through one accountable lead for every installation.' },
-          { title: 'Minimal Disruption',    body: 'Work scheduled around occupancy, access, and daily operations.' },
-          { title: 'Consistent Standards',  body: 'Installation quality and materials aligned across every location.' },
-          { title: 'Tested & Handed Over',  body: 'Every system commissioned, documented, and confirmed before closeout.' },
-        ],
+        imageAlt: 'Smart security camera with AI analytics overlay in a modern office corridor',
       },
 
       faqEyebrow: 'INSTALLATION QUESTIONS',
@@ -469,6 +456,20 @@ export const SERVICE_PAGES = [
         { q: 'Can installations be scheduled around occupied buildings?', a: 'Yes. Installation work is planned around occupancy, access conditions, and daily operations to minimize disruption.' },
         { q: 'Are installed systems tested before handover?', a: 'Yes. Systems are tested and commissioned, with documentation provided at handover.' },
       ],
+
+      cctvPackages: {
+        eyebrow:  'CCTV & Security Cameras',
+        heading:  '4K security camera solutions for Toronto homes and businesses',
+        body:     'IronOak provides tailored CCTV and security camera solutions, scoped around your site’s layout, coverage needs and operational requirements.',
+        includesTitle: 'Every System Includes',
+        includes: [
+          'Private, secure system — no cloud dependency',
+          'Easy access on Windows, Mac, Android and iOS',
+          'Smart alerts when line-crossing detection is triggered',
+          'Professional installation included',
+          'Lifetime technical support',
+        ],
+      },
 
       finalCta: {
         heading:      'Planning an installation or upgrade?',

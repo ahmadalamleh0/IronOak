@@ -206,6 +206,8 @@ const PROPERTY_TYPES = [
 
 const TIMELINE = ['ASAP', 'This week', 'This month', 'Flexible']
 
+const CAMERA_COUNTS = ['2–4 cameras', '5–8 cameras', '9–16 cameras', '16+ cameras', 'Not sure yet']
+
 const GTA_CITIES = [
   'Toronto','North York','Scarborough','Etobicoke',
   'Mississauga','Brampton','Vaughan','Woodbridge',
@@ -225,8 +227,8 @@ const getAreaLabel = (v) => {
   return 'Major project — full property or large site'
 }
 
-// 5-segment progress bar
-const ProgressBar = ({ step }) => (
+// segmented progress bar — total adapts when the CCTV step is inserted
+const ProgressBar = ({ step, total }) => (
   <div style={{ marginBottom: '28px' }}>
     <p style={{
       fontFamily: '"Manrope", system-ui, sans-serif',
@@ -234,10 +236,10 @@ const ProgressBar = ({ step }) => (
       letterSpacing: '0.22em', textTransform: 'uppercase',
       color: C.gold, margin: '0 0 10px',
     }}>
-      Step {step} of 5{step === 5 ? ' · Last bit' : ''}
+      Step {step} of {total}{step === total ? ' · Last bit' : ''}
     </p>
     <div style={{ display: 'flex', gap: '4px' }}>
-      {[1, 2, 3, 4, 5].map((i) => (
+      {Array.from({ length: total }, (_, i) => i + 1).map((i) => (
         <div key={i} style={{
           flex: 1, height: '3px', borderRadius: '2px',
           background: i <= step ? C.gold : 'rgba(7,17,29,0.09)',
@@ -430,7 +432,23 @@ const Contact = () => {
   const areaV   = answers.areaSize ?? 40
   const areaPct = ((areaV - 10) / (500 - 10)) * 100
 
-  const canStep4 =
+  // CCTV/security-camera selections get one extra step (camera count) right
+  // after the service question, shifting every step after it by one.
+  const isCCTV = answers.service === 'CCTV Installation'
+  const totalSteps = isCCTV ? 6 : 5
+
+  const stepType = (() => {
+    if (step === 1) return 'service'
+    const rest = isCCTV
+      ? ['cameraCount', 'propertyType', 'projectSize', 'jobDetails', 'contact']
+      : ['propertyType', 'projectSize', 'jobDetails', 'contact']
+    return rest[step - 2] || null
+  })()
+
+  const canProceedCameraCount = !!answers.cameraCount
+  const hasContinueButton = ['cameraCount', 'projectSize', 'jobDetails', 'contact'].includes(stepType)
+
+  const canProceedJobDetails =
     !!answers.timeline &&
     !!answers.location &&
     (answers.location !== 'Other' || otherCity.trim().length > 0)
@@ -550,7 +568,7 @@ const Contact = () => {
                 padding: 'clamp(24px, 4vw, 36px) clamp(20px, 4vw, 32px)',
                 boxShadow: '0 4px 40px rgba(7,17,29,0.09), 0 1px 6px rgba(7,17,29,0.05)',
               }}>
-                <ProgressBar step={step} />
+                <ProgressBar step={step} total={totalSteps} />
 
                 {/* ── STEP 1: Service ── */}
                 {step === 1 && (
@@ -574,8 +592,49 @@ const Contact = () => {
                   </>
                 )}
 
-                {/* ── STEP 2: Property type ── */}
-                {step === 2 && (
+                {/* ── STEP (CCTV only): Camera count ── */}
+                {stepType === 'cameraCount' && (
+                  <>
+                    <QHead
+                      main="How many"
+                      highlight="cameras?"
+                      sub="A rough estimate is fine — we'll confirm exact coverage with you."
+                    />
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '22px' }}>
+                      <div>
+                        <span className="io-qt-label">Camera count</span>
+                        <div className="io-qt-chips">
+                          {CAMERA_COUNTS.map((c) => (
+                            <Chip
+                              key={c}
+                              label={c}
+                              selected={answers.cameraCount === c}
+                              onClick={() => setAnswers((p) => ({ ...p, cameraCount: c }))}
+                            />
+                          ))}
+                        </div>
+                      </div>
+                      <div>
+                        <span className="io-qt-label">
+                          Coverage notes{' '}
+                          <span style={{ fontWeight: 400, color: C.soft, textTransform: 'none', letterSpacing: 0 }}>
+                            (optional)
+                          </span>
+                        </span>
+                        <textarea
+                          value={answers.cameraNotes || ''}
+                          onChange={(e) => setAnswers((p) => ({ ...p, cameraNotes: e.target.value }))}
+                          className="io-qt-textarea"
+                          placeholder="Entry points, parking areas, blind spots — anything to cover…"
+                          rows={3}
+                        />
+                      </div>
+                    </div>
+                  </>
+                )}
+
+                {/* ── STEP: Property type ── */}
+                {stepType === 'propertyType' && (
                   <>
                     <QHead
                       main="What type of"
@@ -597,8 +656,8 @@ const Contact = () => {
                   </>
                 )}
 
-                {/* ── STEP 3: Project size ── */}
-                {step === 3 && (
+                {/* ── STEP: Project size ── */}
+                {stepType === 'projectSize' && (
                   <>
                     <QHead
                       main="How big is"
@@ -653,8 +712,8 @@ const Contact = () => {
                   </>
                 )}
 
-                {/* ── STEP 4: Job details ── */}
-                {step === 4 && (
+                {/* ── STEP: Job details ── */}
+                {stepType === 'jobDetails' && (
                   <>
                     <QHead
                       main="Tell us about"
@@ -735,8 +794,8 @@ const Contact = () => {
                   </>
                 )}
 
-                {/* ── STEP 5: Contact ── */}
-                {step === 5 && (
+                {/* ── STEP: Contact ── */}
+                {stepType === 'contact' && (
                   <>
                     <QHead
                       main="Where do we"
@@ -784,31 +843,42 @@ const Contact = () => {
                 {step > 1 && (
                   <div style={{
                     display: 'flex', alignItems: 'center',
-                    justifyContent: step >= 3 ? 'space-between' : 'flex-start',
+                    justifyContent: hasContinueButton ? 'space-between' : 'flex-start',
                     marginTop: '26px',
                   }}>
                     <button type="button" onClick={() => animateTo(step - 1)} className="io-qt-back">
                       <ArrowLeft /> Back
                     </button>
 
-                    {step === 3 && (
-                      <button type="button" onClick={() => animateTo(4)} className="io-qt-btn">
-                        Continue <ArrowRight />
-                      </button>
-                    )}
-
-                    {step === 4 && (
+                    {stepType === 'cameraCount' && (
                       <button
                         type="button"
-                        onClick={() => animateTo(5)}
-                        disabled={!canStep4}
+                        onClick={() => animateTo(step + 1)}
+                        disabled={!canProceedCameraCount}
                         className="io-qt-btn"
                       >
                         Continue <ArrowRight />
                       </button>
                     )}
 
-                    {step === 5 && (
+                    {stepType === 'projectSize' && (
+                      <button type="button" onClick={() => animateTo(step + 1)} className="io-qt-btn">
+                        Continue <ArrowRight />
+                      </button>
+                    )}
+
+                    {stepType === 'jobDetails' && (
+                      <button
+                        type="button"
+                        onClick={() => animateTo(step + 1)}
+                        disabled={!canProceedJobDetails}
+                        className="io-qt-btn"
+                      >
+                        Continue <ArrowRight />
+                      </button>
+                    )}
+
+                    {stepType === 'contact' && (
                       <button
                         type="button"
                         onClick={handleSubmit}
