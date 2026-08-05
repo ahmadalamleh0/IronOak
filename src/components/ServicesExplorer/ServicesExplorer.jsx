@@ -8,7 +8,6 @@ import {
   IllustrationInterior,
   IllustrationInstallations,
   IllustrationExterior,
-  IllustrationSpecialty,
   SVG_ANIM_CSS,
 } from '../ServicesIllustrations/index.jsx'
 
@@ -51,9 +50,9 @@ const SERVICES = [
     id:          'capital-project-management',
     num:         '04',
     category:    'Capital Projects',
-    title:       'Capital Projects & Project Management',
+    title:       'Capital Projects & Custom Solutions',
     slug:        '/services/capital-project-management',
-    description: 'Structured planning, multi-trade coordination, and dependable delivery for commercial, condominium, hospitality, and multi-site property improvements.',
+    description: 'Coordinated capital improvements, multi-site rollout programs and custom property solutions delivered with consistent scope, scheduling and execution.',
   },
   {
     id:          'property-maintenance-repairs',
@@ -62,14 +61,6 @@ const SERVICES = [
     title:       'Property Maintenance & Repairs',
     slug:        '/services/property-maintenance-repairs',
     description: 'Reliable repairs, preventative maintenance, and ongoing property support to keep residential, commercial, and condominium spaces performing at their best.',
-  },
-  {
-    id:          'specialty-custom-projects',
-    num:         '06',
-    category:    'Custom Projects',
-    title:       'Specialty & Custom Projects',
-    slug:        '/services/specialty-custom-projects',
-    description: 'Custom-scoped solutions for unique commercial, condominium, multi-site, and operational property requirements.',
   },
 ]
 
@@ -84,7 +75,6 @@ const ILLUSTRATION_LIST = [
   IllustrationInstallations,
   IllustrationRenovations,
   IllustrationMaintenance,
-  IllustrationSpecialty,
 ]
 const ILLUSTRATIONS = ILLUSTRATION_LIST.map((Comp, i) => <Comp key={i} />)
 

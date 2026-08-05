@@ -238,6 +238,10 @@ const Hero = ({ ready = false }) => {
         <div style={{ ...btnFade, marginTop: '34px' }}>
           <a
             href="#contact"
+            onClick={(e) => {
+              e.preventDefault()
+              document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+            }}
             style={{
               display: 'inline-flex',
               alignItems: 'center',

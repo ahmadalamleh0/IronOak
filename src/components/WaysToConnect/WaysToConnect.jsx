@@ -113,7 +113,14 @@ const WaysToConnect = () => (
       <div className="io-cd-grid">
 
         {/* Request a Quote — featured centre */}
-        <a href="#contact" className="io-cd-card io-cd-card-featured">
+        <a
+          href="#contact"
+          className="io-cd-card io-cd-card-featured"
+          onClick={(e) => {
+            e.preventDefault()
+            document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+          }}
+        >
           <div className="io-cd-icon-wrap">
             <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#C9A24A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <path d="M9 11l3 3L22 4"/>

@@ -261,7 +261,14 @@ const AreasWeServe = () => {
                 Request a quote and our team will confirm availability for your location.
               </p>
 
-              <a href="#contact" className="io-sa-cta">
+              <a
+                href="#contact"
+                className="io-sa-cta"
+                onClick={(e) => {
+                  e.preventDefault()
+                  document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                }}
+              >
                 Request a Quote
                 <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <line x1="5" y1="12" x2="19" y2="12"/>

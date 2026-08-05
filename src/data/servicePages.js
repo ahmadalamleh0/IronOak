@@ -38,8 +38,8 @@ export const SERVICE_PAGES = [
     /* richContent — same premium template used across the site, with copy and
        a unique "Approach Note" section adapted for maintenance & repair work. */
     richContent: {
-      heroImage:            '/services/property-maintenance-repairs-hero.jpeg',
-      heroImageAlt:         'Interior building repair work with exposed ceiling framing and drywall in a commercial property',
+      heroImage:            '/services/property-maintenance-repairs-hero.png',
+      heroImageAlt:         'Building maintenance crew cleaning windows on a commercial facade with a city skyline in the background',
       heroOverlayLight:     true,
       heroHeading:          ['Property Maintenance &', 'Repairs'],
       heroSupportingLine:   'Commercial • Condominium • Hospitality • Multi-Site',
@@ -125,23 +125,23 @@ export const SERVICE_PAGES = [
     slug:               'capital-project-management',
     num:                '04',
     category:           'Capital Projects',
-    title:              'Capital Projects & Project Management',
-    description:        'Structured planning, multi-trade coordination, and dependable delivery for commercial, condominium, hospitality, and multi-site property improvements.',
+    title:              'Capital Projects & Custom Solutions',
+    description:        'Coordinated capital improvements, multi-site rollout programs and custom property solutions delivered with consistent scope, scheduling and execution.',
     illustrationIndex:  3,
     meta: {
-      title:       'Capital Projects & Project Management | IronOak',
-      description: 'IronOak coordinates capital improvements, multi-site rollouts, lighting retrofits, CCTV installations, interior upgrades, and common-area projects for commercial and condominium properties.',
+      title:       'Capital Projects & Custom Solutions | IronOak',
+      description: 'IronOak coordinates capital improvements, multi-site rollout programs and custom-scoped property solutions — interior finishing, CCTV, lighting, exterior work and millwork under one plan.',
     },
     related: [3, 2, 4],
     sections: {
-      overview:    'We manage construction and capital improvement projects with a structured approach — from initial planning through to final delivery. Our team provides professional oversight at every stage, keeping multi-trade projects on schedule and within scope. Full project management service details are being prepared.',
+      overview:    'We manage larger capital-improvement projects, multi-trade scopes, and repeatable rollout programs across multiple stores, buildings or properties — as well as custom and purpose-built requirements that fall outside a standard scope. Full project management service details are being prepared.',
       includes: [
         'Capital project planning & budgeting',
-        'Multi-site construction coordination',
+        'Multi-site rollout coordination',
         'Contractor procurement & management',
-        'Progress reporting & client communication',
+        'Custom and purpose-built solutions',
       ],
-      properties:  'We work with property owners, condominium corporations, commercial operators, and real estate managers on capital programs of varying scale.',
+      properties:  'We work with property owners, condominium corporations, commercial operators, and real estate managers on capital and custom programs of varying scale.',
       process:     ['Discovery & Scope', 'Project Planning', 'Construction Execution', 'Completion & Sign-off'],
       faq: [
         { q: 'How do you handle multi-site or phased projects?', a: 'We build structured coordination plans that align timelines across sites and phases. Reach out to discuss your specific program requirements.' },
@@ -155,7 +155,7 @@ export const SERVICE_PAGES = [
     richContent: {
       heroImage:          '/services/capital-project-management-hero.jpg',
       heroImageAlt:       'Looking up at a modern glass office tower with a construction crane reflected in the facade against a blue sky',
-      heroHeading:        ['Capital Projects &', 'Project Management'],
+      heroHeading:        ['Capital Projects &', 'Custom Solutions'],
       heroSupportingLine: 'Commercial • Condominium • Hospitality • Multi-Site',
 
       intro: [
@@ -165,8 +165,8 @@ export const SERVICE_PAGES = [
       ],
 
       positioning: {
-        heading: ['Complex property upgrades.', 'One coordinated approach.'],
-        body: 'Capital projects can involve multiple locations, trades, schedules, stakeholders, and operational constraints. IronOak brings those moving parts together through clear planning, consistent standards, and dependable execution.',
+        heading: ['One coordinated program.', 'Every trade, every location.'],
+        body: 'From larger capital-improvement projects and multi-trade scopes to rollout programs across multiple stores or properties, IronOak brings interior finishing, CCTV, lighting, exterior work and custom millwork together under one coordinated project — with consistent standards from the first location to the last.',
       },
 
       overview: {
@@ -177,25 +177,43 @@ export const SERVICE_PAGES = [
           'IronOak helps coordinate the project from initial site review and scope development through scheduling, execution, progress reporting, and closeout.',
         ],
         image:    '/services/capital-project-management-overview.jpg',
-        imageAlt: 'Illuminated commercial and residential towers along a marina at night, reflecting the scale of coordinated capital projects',
+        imageAlt: 'Bright contemporary office space mid-renovation with new furniture, fresh finishes and materials staged by the windows',
+      },
+
+      typicalProjects: {
+        heading: 'Typical capital and custom project work',
+        wideCards: true,
+        groups: [
+          { num: '01', title: 'Multi-Site Upgrade Programs', body: 'Coordinated improvements delivered across multiple stores, buildings or properties with consistent scopes, schedules and quality standards.', image: '/services/capital-project-multi-site.jpg', imageAlt: 'Aerial view of a multi-tenant commercial plaza with coordinated brick facade and signage' },
+          { num: '02', title: 'Capital Improvement Projects', body: 'Larger property upgrades involving multiple trades, phases and service areas managed under one coordinated project.', image: '/services/capital-improvement-projects.webp', imageAlt: 'Large multi-trade commercial renovation in progress with exposed structural elements, millwork stations and project drawings' },
+          { num: '03', title: 'Carpentry & Millwork', body: 'Custom millwork, built-ins, finish carpentry and purpose-built features developed around the property’s specific requirements.', image: '/services/capital-project-commercial-interior.jpg', imageAlt: 'Freshly finished hotel corridor with new carpet, trim and guest room doors' },
+          { num: '04', title: 'Building Retrofits & Reconfigurations', body: 'Existing spaces, systems and property features upgraded or reconfigured to meet new operational, functional or building requirements.', image: '/services/capital-building-retrofits.webp', imageAlt: 'Commercial storefront space mid-retrofit with protected glass, staged materials and freshly finished ceiling and walls' },
+        ],
       },
 
       serviceList: {
-        heading: 'Capital project services',
-        body:    'Flexible project support for individual properties, managed portfolios, and multi-location programs.',
+        heading: 'One coordinated program. Multiple types of work.',
+        body:    'A single capital or custom project can span several types of work, coordinated under one plan and one point of contact.',
         items: [
-          'Lighting retrofit programs',
-          'CCTV and security-system installations',
-          'Carpet and flooring replacement',
-          'Wallcovering replacement',
-          'Painting and interior refreshes',
-          'Condominium common-area upgrades',
-          'Guest-room and suite renovations',
-          'Fixture and equipment installation',
-          'Commercial property improvements',
-          'Multi-site project rollouts',
-          'Deficiency and turnover programs',
-          'Trade and schedule coordination',
+          'Lighting and fixture rollout programs',
+          'Flooring, carpet and wallcovering replacements',
+          'CCTV and access-control installations',
+          'Exterior and entrance improvements',
+          'Common-area upgrade programs',
+          'Carpentry and custom millwork',
+          'Multi-building property improvements',
+          'Branded or purpose-built installations',
+        ],
+      },
+
+      processSteps: {
+        heading: 'Pilot once. Roll out consistently.',
+        body:    'IronOak can complete an initial location, establish the approved scope and standards, then coordinate the same improvement program across an entire portfolio.',
+        steps: [
+          { num: '01', label: 'Pilot Location' },
+          { num: '02', label: 'Approve the Standard' },
+          { num: '03', label: 'Coordinate the Rollout' },
+          { num: '04', label: 'Deliver Across Locations' },
         ],
       },
 
@@ -209,28 +227,18 @@ export const SERVICE_PAGES = [
         ],
       },
 
-      typicalProjects: {
-        heading: 'Typical capital projects',
-        wideCards: true,
-        groups: [
-          { num: '01', title: 'Commercial Interior Programs', body: 'Interior upgrades delivered with coordinated trades, finishes and minimal operational disruption.', image: '/services/capital-project-commercial-interior.jpg', imageAlt: 'Freshly finished hotel corridor with new carpet and guest room doors' },
-          { num: '02', title: 'Condominium & Hospitality Improvements', body: 'Hallway, common-area and guest-facing improvements planned around occupied properties.', image: '/services/capital-project-condo-hospitality.webp', imageAlt: 'Renovated hotel corridor with wood-paneled walls and patterned carpet' },
-          { num: '03', title: 'Multi-Site Upgrades', body: 'Lighting retrofits, CCTV programs, fixture installations, equipment upgrades, and consistent work delivered across multiple locations.', image: '/services/capital-project-multi-site.jpg', imageAlt: 'Aerial view of a multi-tenant commercial plaza with coordinated brick facade and signage' },
-        ],
-      },
-
       relatedArticleSlug: 'how-to-plan-a-multi-site-property-upgrade',
 
-      faqEyebrow: 'CAPITAL PROJECT QUESTIONS',
-      faqIntro:   'Helpful information about project coordination, occupied properties and multi-site delivery.',
+      faqEyebrow: 'CAPITAL & CUSTOM PROJECT QUESTIONS',
+      faqIntro:   'Helpful information about multi-site rollout programs, custom project scope and coordinated delivery.',
       faqs: [
         { q: 'Can IronOak manage the same improvement program across multiple locations?', a: 'Yes. IronOak can coordinate repeatable scopes, schedules, trades and quality standards across multi-site property portfolios.' },
-        { q: 'How do you reduce disruption during a capital project?', a: 'Projects are planned around access, occupancy and operating requirements, with phased execution used where appropriate to keep the property functioning.' },
+        { q: 'How is a custom or one-off project priced?', a: 'Custom projects are scoped and priced individually based on your specific requirements. Contact us to start with a conversation.' },
         { q: 'What does IronOak manage from planning through completion?', a: 'Depending on the project, IronOak can support scope development, scheduling, trade coordination, execution oversight, progress communication and final closeout.' },
       ],
 
       finalCta: {
-        heading:      'Planning a capital project?',
+        heading:      'Planning a capital project or a custom scope?',
         body:         "Tell us about the property, the locations, and the work you need completed. We'll help you understand the next step.",
         phoneDisplay: '(416) 570-9074',
         phoneHref:    'tel:+14165709074',
@@ -271,8 +279,7 @@ export const SERVICE_PAGES = [
        a unique visual-split "Overview" section adapted for finish materials. */
     richContent: {
       heroImage:            '/services/interior-finishing-hero.webp',
-      heroImageAlt:         'Interior finishing work in a commercial space',
-      heroImagePosition:    '25% 30%',
+      heroImageAlt:         'Bright commercial office space mid-renovation with exposed ceiling, city views and flooring materials staged on site',
       heroOverlayLight:     true,
       heroHeading:          ['Interior', 'Finishing'],
       heroSupportingLine:   'Commercial • Condominium • Hospitality • Multi-Site',
@@ -292,6 +299,7 @@ export const SERVICE_PAGES = [
       typicalProjects: {
         heading: 'Typical interior finishing work',
         wideCards: true,
+        centerLastOdd: true,
         groups: [
           { num: '01', title: 'Walls & Surface Finishes', body: 'Painting, wallcoverings and surface improvements that refresh and protect active interiors.', image: '/services/interior-walls-surfaces.webp', imageAlt: 'Patterned commercial vinyl wallcovering behind a bar counter with stools' },
           { num: '02', title: 'Flooring & Carpet', body: 'Flooring and carpet replacement planned around access, occupancy and operating schedules.', image: '/services/interior-flooring-carpet.jpg', imageAlt: 'Patterned carpet installation in an elegant hotel guest-room corridor' },
@@ -367,7 +375,7 @@ export const SERVICE_PAGES = [
       title:       'Installations & Building Systems | IronOak Property Services',
       description: 'IronOak installs CCTV systems, retrofit lighting, fixtures, and property systems for commercial and residential properties.',
     },
-    related: [0, 4, 5],
+    related: [0, 4, 1],
     sections: {
       overview:    'We handle the clean installation of security systems, lighting upgrades, fixtures, and essential property equipment. Our team coordinates all work to minimise disruption and ensure every installation meets the required standard. Full service details are being prepared.',
       includes: [
@@ -403,12 +411,6 @@ export const SERVICE_PAGES = [
         ctaLabel: 'Explore CCTV solutions',
         ctaHref:  '#rp-cctv-h',
       },
-
-      intro: [
-        { label: 'Assess',    body: 'Review the property, existing systems, access conditions, and installation requirements before work begins.' },
-        { label: 'Install',   body: 'Complete installation work to spec, coordinated around building access, trades, and operational schedules.' },
-        { label: 'Integrate', body: 'Test, commission, and hand over each system with clear documentation and support.' },
-      ],
 
       typicalProjects: {
         heading: 'Typical installation & systems work',
@@ -492,7 +494,7 @@ export const SERVICE_PAGES = [
       title:       'Exterior & Outdoor Improvements | IronOak Property Services',
       description: 'IronOak handles exterior upgrades, façade work, parking improvements, and outdoor property enhancements for lasting value.',
     },
-    related: [0, 3, 5],
+    related: [0, 3, 1],
     sections: {
       overview:    'We manage exterior improvement work that enhances the appearance, function, and long-term value of a property. From façade upgrades and pathway work to outdoor lighting and landscaping coordination, we handle the scope professionally from start to finish. Detailed service content is being prepared.',
       includes: [
@@ -514,7 +516,8 @@ export const SERVICE_PAGES = [
        exterior work. */
     richContent: {
       heroImage:          '/services/exterior-outdoor-improvements-hero.webp',
-      heroImageAlt:       'Close-up of an architectural wall light fixture on a stone building facade beside a landscaped entrance',
+      heroImageDesktop:   '/services/exterior-outdoor-improvements-hero-desktop.avif',
+      heroImageAlt:       'Modern office building entrance at night with an illuminated glass canopy and landscaped walkway',
       heroHeading:        ['Exterior &', 'Outdoor Improvements'],
       heroSupportingLine: 'Commercial • Condominium • Hospitality • Multi-Site',
 
@@ -600,103 +603,4 @@ export const SERVICE_PAGES = [
     },
   },
 
-  /* 07 ─────────────────────────────────────────────────────────────────── */
-  {
-    slug:               'specialty-custom-projects',
-    num:                '07',
-    category:           'Custom Projects',
-    title:              'Specialty & Custom Projects',
-    description:        'Custom-scoped solutions for unique commercial, condominium, multi-site, and operational property requirements.',
-    illustrationIndex:  6,
-    meta: {
-      title:       'Specialty & Custom Projects | IronOak Property Services',
-      description: 'IronOak delivers custom-scoped property solutions for unique commercial, condominium, and multi-site operational requirements.',
-    },
-    related: [1, 4, 3],
-    sections: {
-      overview:    'When a project doesn\'t fit a standard scope, we build a custom solution. Our team handles unusual project types, bespoke property requirements, and multi-faceted work that requires careful scoping and professional coordination. Full details are being prepared — contact us to discuss your specific situation.',
-      includes: [
-        'Bespoke project scoping & planning',
-        'Multi-site operational coordination',
-        'Custom commercial and condominium work',
-        'Unique or non-standard property solutions',
-      ],
-      properties:  'We take on custom work for commercial operators, condominium corporations, institutional clients, and multi-property owners with specific or complex requirements.',
-      process:     ['Briefing', 'Custom Solution Design', 'Coordinated Execution', 'Delivery & Review'],
-      faq: [
-        { q: 'What makes a project a "specialty" project?',       a: 'Specialty projects fall outside standard service scopes — unique property types, complex coordination requirements, or bespoke client needs. If you\'re not sure whether your project fits, reach out and we\'ll discuss.' },
-        { q: 'How do you price custom project work?',             a: 'Custom projects are scoped and priced individually based on your specific requirements. Contact us and we\'ll start with a conversation about what you need.' },
-      ],
-    },
-
-    /* richContent — same premium template used across the site, with copy and
-       a unique light "Process Chain" section adapted for custom project scoping. */
-    richContent: {
-      heroImage:            '/services/specialty-custom-projects-hero.jpg',
-      heroImageAlt:         'Custom wood-slat feature wall enclosure with an illuminated doorway leading to a bathroom',
-      heroHeading:          ['Specialty &', 'Custom Projects'],
-      heroSupportingLine:   'Commercial • Condominium • Hospitality • Multi-Site',
-
-      intro: [
-        { label: 'Explore',  body: 'Understand the property, the idea, and the intended outcome.' },
-        { label: 'Develop',  body: 'Shape an unusual requirement into a defined, workable project scope.' },
-        { label: 'Deliver',  body: 'Coordinate trades and execution through to completion.' },
-      ],
-
-      positioning: {
-        heading: ['When the project', 'does not fit a standard category.'],
-        body: 'IronOak helps owners and managers turn unusual requirements into a defined, coordinated, and deliverable project.',
-      },
-
-      typicalProjects: {
-        heading: 'Typical specialty and custom work',
-        wideCards: true,
-        groups: [
-          { num: '01', title: 'Custom Property Features', body: 'Purpose-built features and improvements developed around the property’s specific needs.', image: '/services/specialty-custom-features.jpg', imageAlt: 'Custom bronze-toned elevator interior with integrated linear lighting' },
-          { num: '02', title: 'Carpentry & Millwork', body: 'Custom millwork, built-ins, wood features and finish carpentry developed around the property’s specific requirements.', image: '/services/specialty-carpentry-millwork.avif', imageAlt: 'Custom wood slat wall with built-in millwork and integrated lighting' },
-          { num: '03', title: 'One-Off Improvement Projects', body: 'Unique repair, upgrade or installation projects requiring a flexible and coordinated approach.', image: '/services/specialty-one-off-improvements.jpg', imageAlt: 'Curved wood-slat feature wall in a commercial corridor with glass partitions' },
-        ],
-      },
-
-      serviceList: {
-        heading: 'Specialty project scope',
-        body:    'Custom-scoped project support for individual properties, managed portfolios, and unique operational requirements.',
-        items: [
-          'Custom property features',
-          'Bespoke installations',
-          'Branded environmental improvements',
-          'Unique finish and fixture packages',
-          'Pilot projects and prototypes',
-          'One-off building enhancements',
-          'Unusual repair or replacement needs',
-          'Multi-trade custom project coordination',
-        ],
-      },
-
-      processSteps: {
-        heading: 'From an unusual request to a workable plan.',
-        steps: [
-          { num: '01', label: 'Understand the need' },
-          { num: '02', label: 'Define the scope' },
-          { num: '03', label: 'Coordinate the solution' },
-          { num: '04', label: 'Complete the work' },
-        ],
-      },
-
-      faqEyebrow: 'SPECIALTY PROJECT QUESTIONS',
-      faqIntro:   'Answers about project scope, custom pricing, and how unusual requirements get defined.',
-      faqs: [
-        { q: 'What counts as a "specialty" project?', a: 'Specialty projects fall outside standard service scopes — unique property features, bespoke installations, or requirements that do not fit a standard category. If you are not sure whether your project fits, reach out and we will discuss.' },
-        { q: 'Can you help define the scope of an unusual request?', a: 'Yes. IronOak helps shape an unusual requirement into a defined, coordinated project scope before work begins.' },
-        { q: 'How is a custom project priced?', a: 'Custom projects are scoped and priced individually based on your specific requirements. Contact us to start with a conversation.' },
-      ],
-
-      finalCta: {
-        heading:      'Have a project that does not fit a standard category?',
-        body:         "Tell us about the property and the idea you have in mind. We'll help you understand the next step.",
-        phoneDisplay: '(416) 570-9074',
-        phoneHref:    'tel:+14165709074',
-      },
-    },
-  },
 ]

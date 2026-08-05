@@ -205,8 +205,7 @@ const CSS = `
 .rp-intro-body { font-size: 0.92rem; line-height: 1.7; color: rgba(7,17,29,0.55); margin: 14px 0 0; }
 @media (max-width: 760px) {
   .rp-intro-grid { grid-template-columns: 1fr; gap: 28px; }
-  .rp-intro-col { padding-left: 0; border-left: none; padding-top: 24px; border-top: 1px solid rgba(201,162,74,0.28); }
-  .rp-intro-col:first-child { padding-top: 0; border-top: none; }
+  .rp-intro-col { padding-left: 0; border-left: none; }
 }
 
 /* ── Positioning statement ─────────────────────────────────── */
@@ -393,6 +392,16 @@ const CSS = `
 @media (max-width: 520px) {
   .rp-cap-grid { grid-template-columns: 1fr; }
 }
+/* Bigger, more obvious cards + icons on desktop only */
+@media (min-width: 901px) {
+  .rp-cap-grid { gap: clamp(24px, 2.8vw, 32px); }
+  .rp-cap-card { padding: 42px 28px; }
+  .rp-cap-icon-wrap { width: 80px; height: 80px; border-radius: 16px; margin-bottom: 26px; }
+  .rp-cap-icon-img { width: 46px; height: 46px; }
+  .rp-cap-icon-wrap svg { width: 38px; height: 38px; }
+  .rp-cap-title { font-size: 1.08rem; }
+  .rp-cap-body { font-size: 0.9rem; }
+}
 
 /* ── Industries strip (optional, per-service) — moving marquee,
    same mechanics as the homepage TrustStrip banner ── */
@@ -552,6 +561,16 @@ const CSS = `
 .rp-typical-grid-2col { grid-template-columns: repeat(2, 1fr); }
 @media (max-width: 760px) {
   .rp-typical-grid-2col { grid-template-columns: 1fr; }
+}
+/* Centers a trailing odd-numbered-out card instead of leaving it stuck to the
+   left column (opt-in per service, e.g. typicalProjects.centerLastOdd). */
+.rp-typical-grid-2col-center-last > .rp-typical-card:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+  width: calc((100% - clamp(24px, 3.5vw, 40px)) / 2);
+  margin: 0 auto;
+}
+@media (max-width: 760px) {
+  .rp-typical-grid-2col-center-last > .rp-typical-card:last-child:nth-child(odd) { width: auto; margin: 0; }
 }
 
 /* ── Approach note — compact statement + 3-item row (per-service unique section) ── */
@@ -1166,20 +1185,12 @@ const IconClipboard = () => (
     <path d="M9 10h6M9 13h6M9 16h3" />
   </svg>
 )
-const IconSparkle = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <path d="M12 3l1.6 4.4L18 9l-4.4 1.6L12 15l-1.6-4.4L6 9l4.4-1.6L12 3z" />
-    <path d="M19 15l.6 1.7 1.7.6-1.7.6-.6 1.7-.6-1.7-1.7-.6 1.7-.6.6-1.7z" />
-  </svg>
-)
-
 const RELSVC_ICONS = {
   'property-maintenance-repairs':   IconWrench,
   'installations-property-systems': IconSettings,
   'exterior-outdoor-improvements':  IconBuilding,
   'interior-finishing':             IconPaintRoller,
   'capital-project-management':     IconClipboard,
-  'specialty-custom-projects':      IconSparkle,
 }
 
 const RelSvcIcon = ({ slug }) => {
@@ -1312,14 +1323,17 @@ export default function RichServiceTemplate({ service, relatedServices, relatedA
               style={rc.heroImagePosition ? { objectPosition: rc.heroImagePosition } : undefined}
             />
           ) : rc.heroImage ? (
-            <img
-              className="rp-hero-img"
-              src={rc.heroImage}
-              alt={rc.heroImageAlt}
-              loading="eager"
-              decoding="async"
-              style={rc.heroImagePosition ? { objectPosition: rc.heroImagePosition } : undefined}
-            />
+            <picture>
+              {rc.heroImageDesktop && <source media="(min-width: 641px)" srcSet={rc.heroImageDesktop} />}
+              <img
+                className="rp-hero-img"
+                src={rc.heroImage}
+                alt={rc.heroImageAlt}
+                loading="eager"
+                decoding="async"
+                style={rc.heroImagePosition ? { objectPosition: rc.heroImagePosition } : undefined}
+              />
+            </picture>
           ) : (
             <div className="rp-hero-img rp-hero-img-placeholder" aria-hidden="true">
               {rc.heroPlaceholderLabel && <span className="rp-placeholder-label">{rc.heroPlaceholderLabel}</span>}
@@ -1388,7 +1402,7 @@ export default function RichServiceTemplate({ service, relatedServices, relatedA
         >
           <div className="rp-inner">
             <h2 className="rp-h2" id="rp-typical-h">{rc.typicalProjects.heading}</h2>
-            <div className={`rp-typical-grid${rc.typicalProjects.wideCards ? ' rp-typical-grid-2col' : ''}`}>
+            <div className={`rp-typical-grid${rc.typicalProjects.wideCards ? ' rp-typical-grid-2col' : ''}${rc.typicalProjects.centerLastOdd ? ' rp-typical-grid-2col-center-last' : ''}`}>
               {rc.typicalProjects.groups.map((group) => (
                 <div key={group.title} className="rp-typical-card">
                   <div className="rp-typical-img-wrap" style={group.objectFit === 'contain' ? { background: '#DED8C7' } : undefined}>
@@ -1549,6 +1563,7 @@ export default function RichServiceTemplate({ service, relatedServices, relatedA
           <section className="rp-section" aria-labelledby="rp-process-h">
             <div className="rp-inner">
               <h2 className="rp-h2" id="rp-process-h">{rc.processSteps.heading}</h2>
+              {rc.processSteps.body && <p className="rp-section-body">{rc.processSteps.body}</p>}
               <div className="rp-process-chain">
                 {rc.processSteps.steps.map((step, i) => (
                   <div key={step.label} className="rp-process-step">
