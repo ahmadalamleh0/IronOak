@@ -17,6 +17,7 @@ import ContactFAQSection from '../components/ContactFAQ/ContactFAQSection.jsx'
 import BlogPreview from '../components/BlogPreview/BlogPreview.jsx'
 import Footer from '../components/Footer/Footer.jsx'
 import FloatingWhatsAppButton from '../components/FloatingWhatsAppButton/FloatingWhatsAppButton.jsx'
+import { SITE_URL, BUSINESS_NAME, BUSINESS_PHONE, BUSINESS_EMAIL, BUSINESS_LOGO, SERVICE_AREA_CITIES } from '../config/site.js'
 
 const INTRO_KEY = 'io-intro-done'
 
@@ -32,6 +33,32 @@ const Home = () => {
     const target = document.querySelector(location.hash)
     if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }, [location.hash])
+
+  /* Organization JSON-LD — real, verified business identity only. No address,
+     hours, coordinates, or ratings are included since none have been verified. */
+  useEffect(() => {
+    const orgJson = document.createElement('script')
+    orgJson.type = 'application/ld+json'
+    orgJson.text = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Organization',
+      name: BUSINESS_NAME,
+      url: SITE_URL,
+      logo: BUSINESS_LOGO,
+      telephone: BUSINESS_PHONE,
+      email: BUSINESS_EMAIL,
+      areaServed: SERVICE_AREA_CITIES.map((name) => ({ '@type': 'City', name })),
+      contactPoint: {
+        '@type': 'ContactPoint',
+        telephone: BUSINESS_PHONE,
+        email: BUSINESS_EMAIL,
+        contactType: 'customer service',
+        areaServed: 'CA',
+      },
+    })
+    document.head.appendChild(orgJson)
+    return () => orgJson.remove()
+  }, [])
 
   return (
     <>

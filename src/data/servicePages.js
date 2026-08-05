@@ -15,8 +15,8 @@ export const SERVICE_PAGES = [
     description:        'Responsive repairs, planned maintenance, and coordinated property support for commercial, condominium, hospitality, and multi-site properties.',
     illustrationIndex:  0,
     meta: {
-      title:       'Property Maintenance & Repairs | IronOak Property Services',
-      description: 'IronOak provides responsive repairs and planned maintenance for commercial, condominium, hospitality, and multi-site properties.',
+      title:       'Commercial Property Maintenance Toronto & GTA | IronOak',
+      description: 'Commercial property maintenance, repairs, plumbing, electrical, cleaning and ongoing building support across Toronto, Mississauga and the GTA.',
     },
     related: [2, 3, 4],
     sections: {
@@ -38,7 +38,7 @@ export const SERVICE_PAGES = [
     /* richContent — same premium template used across the site, with copy and
        a unique "Approach Note" section adapted for maintenance & repair work. */
     richContent: {
-      heroImage:            '/services/property-maintenance-repairs-hero.png',
+      heroImage:            '/services/property-maintenance-repairs-hero.webp',
       heroImageAlt:         'Building maintenance crew cleaning windows on a commercial facade with a city skyline in the background',
       heroOverlayLight:     true,
       heroHeading:          ['Property Maintenance &', 'Repairs'],
@@ -134,8 +134,8 @@ export const SERVICE_PAGES = [
     description:        'Coordinated capital improvements, multi-site rollout programs and custom property solutions delivered with consistent scope, scheduling and execution.',
     illustrationIndex:  3,
     meta: {
-      title:       'Capital Projects & Custom Solutions | IronOak',
-      description: 'IronOak coordinates capital improvements, multi-site rollout programs and custom-scoped property solutions — interior finishing, CCTV, lighting, exterior work and millwork under one plan.',
+      title:       'Capital Projects & Multi-Site Upgrades Toronto | IronOak',
+      description: 'IronOak coordinates capital improvements, multi-site rollout programs, building retrofits, carpentry and millwork across Toronto and the GTA.',
     },
     related: [3, 2, 4],
     sections: {
@@ -256,8 +256,8 @@ export const SERVICE_PAGES = [
     description:        'Professional finishing work for flooring, carpet replacement, wallcoverings, painting, and complete interior refreshes.',
     illustrationIndex:  2,
     meta: {
-      title:       'Interior Finishing | IronOak Property Services',
-      description: 'IronOak provides professional interior finishing services including flooring, painting, wallcoverings, and complete interior refreshes.',
+      title:       'Commercial Interior Finishing Toronto & GTA | IronOak',
+      description: 'Commercial interior finishing including painting, flooring, tile, drywall, wallcoverings and common-area upgrades across Toronto and the GTA.',
     },
     related: [0, 3, 1],
     sections: {
@@ -292,9 +292,12 @@ export const SERVICE_PAGES = [
       ],
 
       positioning: {
-        heading: ['Finishes that improve', 'how a property looks, feels and performs.'],
-        body: 'IronOak delivers durable, polished interior finishes coordinated around occupied properties, consistent standards, and everyday use.',
+        eyebrow: 'INTERIOR FINISHING & SURFACE UPGRADES',
+        heading: ['Interior Finishes Built', 'for Active Properties'],
+        body: 'IronOak coordinates painting, drywall repairs, wallcoverings, flooring, tile and carpet replacement for commercial, condominium and hospitality properties. Work can be phased around occupied corridors, lobbies, common areas and operating schedules, helping property teams refresh worn interiors while maintaining consistent finishes across the space.',
         watermarkLg: true,
+        ctaLabel: 'Explore interior finishing',
+        ctaHref: '#rp-typical-h',
       },
 
       typicalProjects: {
@@ -378,8 +381,8 @@ export const SERVICE_PAGES = [
     description:        'Clean, dependable installation of CCTV systems, retrofit lighting, fixtures, equipment, and essential property upgrades.',
     illustrationIndex:  4,
     meta: {
-      title:       'Installations & Building Systems | IronOak Property Services',
-      description: 'IronOak installs CCTV systems, retrofit lighting, fixtures, and property systems for commercial and residential properties.',
+      title:       'CCTV & Security System Installation Toronto | IronOak',
+      description: 'Professional CCTV, 4K security camera, video monitoring and access-control installation for commercial properties across Toronto and the GTA.',
     },
     related: [0, 4, 1],
     sections: {
@@ -404,7 +407,7 @@ export const SERVICE_PAGES = [
     richContent: {
       heroImage:          '/services/installations-property-systems-hero.webp',
       heroVideo:          '/services/installations-hero.mp4',
-      heroImageAlt:       'Security camera system overview',
+      heroImageAlt:       'Elevated view of a modern glass building entrance with automated pedestrian doors',
       heroOverlayLight:   true,
       heroHeading:        ['Installations &', 'Building Systems'],
       heroSupportingLine: 'Commercial • Condominium • Hospitality • Multi-Site',
@@ -424,7 +427,7 @@ export const SERVICE_PAGES = [
         groups: [
           { num: '01', title: 'Security & CCTV Systems', body: 'Coordinated camera and security installations for commercial and multi-residential properties.', image: '/services/installations-security-cctv.webp', imageAlt: 'Dome security camera mounted on the ceiling of a modern hotel lobby corridor' },
           { num: '02', title: 'Long-Range Security Cameras & Surveillance Systems', body: 'Warehouses, parking lots, stadiums and other large perimeters require broader security coverage. IronOak installs long-range camera and surveillance systems designed to capture clear, detailed footage across larger areas.', image: '/services/installations-long-range-cameras.jpg', imageAlt: 'Two long-range security cameras mounted on the exterior wall of a commercial building' },
-          { num: '03', title: 'Access Control & Entry Systems', body: 'Entry, intercom and access-control installations designed for secure, reliable day-to-day property operations.', image: '/services/installations-access-control.png', imageAlt: 'Modern commercial building entrance with automated glass doors and an access-control panel' },
+          { num: '03', title: 'Access Control & Entry Systems', body: 'Entry, intercom and access-control installations designed for secure, reliable day-to-day property operations.', image: '/services/installations-access-control.webp', imageAlt: 'Modern commercial building entrance with automated glass doors and an access-control panel' },
           { num: '04', title: 'Monitoring & Surveillance Support', body: 'CCTV monitoring support, surveillance planning and camera-system coordination for commercial and multi-residential properties.', image: '/services/installations-monitoring-surveillance.jpg', imageAlt: 'Security operations desk with multiple monitors displaying live CCTV camera feeds' },
         ],
       },
@@ -498,8 +501,8 @@ export const SERVICE_PAGES = [
     description:        'Exterior upgrades and outdoor property improvements designed to improve function, appearance, and long-term value.',
     illustrationIndex:  5,
     meta: {
-      title:       'Exterior & Outdoor Improvements | IronOak Property Services',
-      description: 'IronOak handles exterior upgrades, façade work, parking improvements, and outdoor property enhancements for lasting value.',
+      title:       'Commercial Exterior Improvements Toronto & GTA | IronOak',
+      description: 'Commercial exterior improvements, entrances, walkways, power washing and seasonal property services across Toronto and the GTA.',
     },
     related: [0, 3, 1],
     sections: {
@@ -535,8 +538,11 @@ export const SERVICE_PAGES = [
       ],
 
       positioning: {
-        heading: ['First impressions.', 'Lasting condition.'],
-        body: 'The exterior of a property shapes how it is experienced long before anyone steps inside. IronOak plans and delivers exterior improvements that protect appearance, function, and long-term value.',
+        eyebrow: 'EXTERIOR PROPERTY IMPROVEMENTS',
+        heading: ['Exterior Work That Protects', 'and Improves the Property'],
+        body: 'IronOak handles exterior repairs and improvement work across entrances, walkways, common areas and building surroundings. Services can include exterior lighting and fixtures, power washing, access-area improvements, seasonal upkeep and corrective repairs, coordinated around active properties to improve safety, presentation and long-term condition.',
+        ctaLabel: 'Explore exterior services',
+        ctaHref: '#rp-typical-h',
       },
 
       typicalProjects: {

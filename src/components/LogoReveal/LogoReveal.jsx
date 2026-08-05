@@ -18,8 +18,10 @@ const LogoReveal = ({
   onCompleteRef.current = onComplete
 
   useEffect(() => {
-    // Already played this session — fire onComplete immediately without animation
-    if (sessionStorage.getItem('io-intro-done') === '1') {
+    // Already played this session, or the visitor prefers reduced motion —
+    // fire onComplete immediately without animating the splash sequence
+    const rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (sessionStorage.getItem('io-intro-done') === '1' || rm) {
       onCompleteRef.current?.()
       return
     }
@@ -114,12 +116,14 @@ const LogoReveal = ({
           <LogoMark ref={logoRef} className="w-full" />
         </div>
 
-        <h1
+        {/* Decorative brand wordmark in the intro splash — not a heading; the
+            page's real <h1> lives in the section this reveal uncovers. */}
+        <p
           ref={wordmarkRef}
           className="text-gold-engraved font-serif text-5xl font-bold sm:text-7xl"
         >
           {brand}
-        </h1>
+        </p>
 
         <p
           ref={subtextRef}

@@ -1,5 +1,12 @@
 @import "tailwindcss";
 
+/* Defensive guard: clips any stray horizontal overflow from scroll-entrance
+   transforms without affecting layout — a no-op unless something is already
+   bleeding past the viewport edge. */
+html, body {
+  overflow-x: clip;
+}
+
 @font-face {
   font-family: "Dreamy Girls";
   src: url("/fonts/DreamyGirls.ttf") format("truetype");

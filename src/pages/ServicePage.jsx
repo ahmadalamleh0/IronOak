@@ -7,8 +7,7 @@ import RichServiceTemplate from '../components/ServicePage/RichServiceTemplate.j
 import { SERVICE_PAGES } from '../data/servicePages.js'
 import { getArticleBySlug } from '../data/articles.js'
 import { ILLUSTRATION_COMPONENTS, SVG_ANIM_CSS } from '../components/ServicesIllustrations/index.jsx'
-
-const SITE_URL = 'https://www.ironoakpropertyservices.ca'
+import { SITE_URL, BUSINESS_NAME, SERVICE_AREA_CITIES } from '../config/site.js'
 
 /* ─────────────────────────────────────────────────────────────────────────
    Scoped styles — all prefixed with .sp- (service page)
@@ -413,9 +412,23 @@ export default function ServicePage() {
       if (!el) { el = document.createElement('meta'); el.setAttribute('property', prop); document.head.appendChild(el) }
       el.setAttribute('content', val)
     }
+    const ogImage = service.richContent?.heroImage ? `${SITE_URL}${service.richContent.heroImage}` : `${SITE_URL}/images/ironoak-social-preview-v2.jpg`
+
+    setOG('og:type',        'website')
     setOG('og:title',       service.meta.title)
     setOG('og:description', service.meta.description)
     setOG('og:url',         `${SITE_URL}/services/${service.slug}`)
+    setOG('og:image',       ogImage)
+
+    const setTwitter = (name, val) => {
+      let el = document.querySelector(`meta[name="${name}"]`)
+      if (!el) { el = document.createElement('meta'); el.setAttribute('name', name); document.head.appendChild(el) }
+      el.setAttribute('content', val)
+    }
+    setTwitter('twitter:card',        'summary_large_image')
+    setTwitter('twitter:title',       service.meta.title)
+    setTwitter('twitter:description', service.meta.description)
+    setTwitter('twitter:image',       ogImage)
 
     let canonical = document.querySelector('link[rel="canonical"]')
     if (!canonical) { canonical = document.createElement('link'); canonical.setAttribute('rel', 'canonical'); document.head.appendChild(canonical) }
@@ -433,7 +446,21 @@ export default function ServicePage() {
       ],
     })
     document.head.appendChild(breadcrumbJson)
-    return () => breadcrumbJson.remove()
+
+    const serviceJson = document.createElement('script')
+    serviceJson.type = 'application/ld+json'
+    serviceJson.text = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Service',
+      name: service.title,
+      description: service.meta.description,
+      provider: { '@type': 'Organization', name: BUSINESS_NAME, url: SITE_URL },
+      areaServed: SERVICE_AREA_CITIES.map((name) => ({ '@type': 'City', name })),
+      url: `${SITE_URL}/services/${service.slug}`,
+    })
+    document.head.appendChild(serviceJson)
+
+    return () => { breadcrumbJson.remove(); serviceJson.remove() }
   }, [slug, service])
 
   /* ── Invalid slug → not-found state ── */

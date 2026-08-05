@@ -178,7 +178,7 @@ export const ARTICLES = [
     ],
 
     relatedServices: [
-      { label: 'Capital Projects & Project Management', slug: 'capital-project-management' },
+      { label: 'Capital Projects & Custom Solutions', slug: 'capital-project-management' },
       { label: 'Installations & Building Systems', slug: 'installations-property-systems' },
       { label: 'Interior Finishing', slug: 'interior-finishing' },
     ],
@@ -390,7 +390,7 @@ export const ARTICLES = [
 
     relatedServices: [
       { label: 'Property Maintenance & Repairs', slug: 'property-maintenance-repairs' },
-      { label: 'Capital Projects & Project Management', slug: 'capital-project-management' },
+      { label: 'Capital Projects & Custom Solutions', slug: 'capital-project-management' },
       { label: 'Installations & Building Systems', slug: 'installations-property-systems' },
     ],
     relatedArticleSlugs: [
@@ -547,7 +547,7 @@ export const ARTICLES = [
 
     relatedServices: [
       { label: 'Interior Finishing', slug: 'interior-finishing' },
-      { label: 'Capital Projects & Project Management', slug: 'capital-project-management' },
+      { label: 'Capital Projects & Custom Solutions', slug: 'capital-project-management' },
     ],
     relatedArticleSlugs: [
       'preventative-maintenance-checklist-for-condominiums',

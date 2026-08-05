@@ -8,9 +8,10 @@ const AREAS = [
   'Toronto',      'Mississauga',   'Brampton',      'Vaughan',
   'Markham',      'Richmond Hill', 'North York',    'Scarborough',
   'Etobicoke',    'Oakville',      'Burlington',    'Milton',
-  'Pickering',    'Ajax',          'Whitby',        'Oshawa',
-  'Newmarket',    'Aurora',        'King City',     'Caledon',
-  'Halton',       'Peel',          'York',          'Durham',
+  'Hamilton',     'Pickering',     'Ajax',          'Whitby',
+  'Oshawa',       'Newmarket',     'Aurora',        'King City',
+  'Caledon',      'Halton',        'Peel',          'York',
+  'Durham',
 ]
 
 
@@ -207,7 +208,7 @@ const AreasWeServe = () => {
               letterSpacing: '-0.035em', lineHeight: 1.07,
               color: '#07111D', margin: '0 0 18px',
             }}>
-              Service Areas
+              Serving Toronto &amp; the Greater Toronto Area
             </h2>
 
             <p style={{
@@ -218,9 +219,9 @@ const AreasWeServe = () => {
               margin: 0,
               maxWidth: '460px',
             }}>
-              IronOak provides reliable property care across Toronto and the Greater
-              Toronto Area, supporting homeowners, property managers, commercial
-              buildings, condos, and industrial properties.
+              IronOak supports properties across Toronto—including North York,
+              Scarborough and Etobicoke—as well as Mississauga, Brampton, Vaughan,
+              Markham, Richmond Hill, Oakville, Burlington, Milton and Hamilton.
             </p>
           </div>
 
@@ -312,6 +313,7 @@ const AreasWeServe = () => {
                 alt="IronOak service area map — Greater Toronto Area"
                 className="io-sa-map-img"
                 loading="lazy"
+                decoding="async"
                 draggable="false"
               />
             </div>

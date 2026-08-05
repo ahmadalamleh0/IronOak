@@ -541,14 +541,14 @@ const CSS = `
 .rp-typical-num { font-size: 0.66rem; font-weight: 800; letter-spacing: 0.2em; color: #A9802F; margin: 0 0 8px; }
 .rp-typical-title {
   font-family: "Inter Tight", Inter, Arial, sans-serif;
-  font-size: 1.02rem;
-  font-weight: 800;
-  letter-spacing: -0.01em;
+  font-size: clamp(1.15rem, 1.7vw, 1.35rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
   color: #07111D;
   margin: 0 0 8px;
-  line-height: 1.3;
+  line-height: 1.15;
 }
-.rp-typical-body { font-size: 0.87rem; line-height: 1.6; color: rgba(7,17,29,0.55); margin: 0; }
+.rp-typical-body { font-size: 0.87rem; line-height: 1.6; color: rgba(7,17,29,0.52); margin: 0; }
 @media (max-width: 760px) {
   .rp-typical-grid { grid-template-columns: 1fr; gap: 36px; }
 }
@@ -1368,6 +1368,7 @@ export default function RichServiceTemplate({ service, relatedServices, relatedA
                 alt={rc.heroImageAlt}
                 loading="eager"
                 decoding="async"
+                fetchPriority="high"
                 style={rc.heroImagePosition ? { objectPosition: rc.heroImagePosition } : undefined}
               />
             </picture>

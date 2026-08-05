@@ -4,8 +4,7 @@ import Header from '../components/Header/Header.jsx'
 import Footer from '../components/Footer/Footer.jsx'
 import FloatingWhatsAppButton from '../components/FloatingWhatsAppButton/FloatingWhatsAppButton.jsx'
 import { ARTICLES } from '../data/articles.js'
-
-const SITE_URL = 'https://www.ironoakpropertyservices.ca'
+import { SITE_URL } from '../config/site.js'
 
 /* ─────────────────────────────────────────────────────────────────────────
    Scoped styles — all prefixed with .ip- (insights page)
@@ -117,6 +116,11 @@ export default function InsightsPage() {
     setMeta('meta[property="og:title"]', 'property', 'og:title', 'Property Insights & Maintenance Guides | IronOak')
     setMeta('meta[property="og:description"]', 'property', 'og:description', description)
     setMeta('meta[property="og:url"]', 'property', 'og:url', `${SITE_URL}/insights`)
+    setMeta('meta[property="og:image"]', 'property', 'og:image', `${SITE_URL}/images/ironoak-social-preview-v2.jpg`)
+    setMeta('meta[name="twitter:card"]', 'name', 'twitter:card', 'summary_large_image')
+    setMeta('meta[name="twitter:title"]', 'name', 'twitter:title', 'Property Insights & Maintenance Guides | IronOak')
+    setMeta('meta[name="twitter:description"]', 'name', 'twitter:description', description)
+    setMeta('meta[name="twitter:image"]', 'name', 'twitter:image', `${SITE_URL}/images/ironoak-social-preview-v2.jpg`)
 
     let canonical = document.querySelector('link[rel="canonical"]')
     if (!canonical) { canonical = document.createElement('link'); canonical.setAttribute('rel', 'canonical'); document.head.appendChild(canonical) }

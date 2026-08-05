@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.ironoakpropertyservices.ca/sitemap.xml
+Sitemap: https://ironoak.netlify.app/sitemap.xml

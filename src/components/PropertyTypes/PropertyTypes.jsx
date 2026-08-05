@@ -173,6 +173,7 @@ const PropertyTypes = () => {
                   alt={label}
                   className="io-pt-img"
                   loading="lazy"
+                  decoding="async"
                   draggable="false"
                 />
               </div>

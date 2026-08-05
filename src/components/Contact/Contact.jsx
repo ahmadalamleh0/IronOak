@@ -355,6 +355,8 @@ const PropCard = ({ emoji, label, image, selected, onClick }) => (
         src={image}
         alt=""
         aria-hidden="true"
+        loading="lazy"
+        decoding="async"
         style={{ width: '28px', height: '28px', borderRadius: '6px', objectFit: 'cover', flexShrink: 0 }}
       />
     ) : (

@@ -5,8 +5,7 @@ import Footer from '../components/Footer/Footer.jsx'
 import FloatingWhatsAppButton from '../components/FloatingWhatsAppButton/FloatingWhatsAppButton.jsx'
 import NotFound from './NotFound.jsx'
 import { getArticleBySlug, getRelatedArticles } from '../data/articles.js'
-
-const SITE_URL = 'https://www.ironoakpropertyservices.ca'
+import { SITE_URL } from '../config/site.js'
 
 /* ─────────────────────────────────────────────────────────────────────────
    Scoped styles — all prefixed with .ap- (article page)
@@ -297,6 +296,10 @@ export default function ArticlePage() {
     setMeta('meta[property="og:description"]', 'property', 'og:description', article.metaDescription)
     setMeta('meta[property="og:image"]', 'property', 'og:image', `${SITE_URL}${article.featuredImage}`)
     setMeta('meta[property="og:url"]', 'property', 'og:url', `${SITE_URL}/insights/${article.slug}`)
+    setMeta('meta[name="twitter:card"]', 'name', 'twitter:card', 'summary_large_image')
+    setMeta('meta[name="twitter:title"]', 'name', 'twitter:title', article.metaTitle)
+    setMeta('meta[name="twitter:description"]', 'name', 'twitter:description', article.metaDescription)
+    setMeta('meta[name="twitter:image"]', 'name', 'twitter:image', `${SITE_URL}${article.featuredImage}`)
 
     let canonical = document.querySelector('link[rel="canonical"]')
     if (!canonical) { canonical = document.createElement('link'); canonical.setAttribute('rel', 'canonical'); document.head.appendChild(canonical) }
@@ -375,7 +378,7 @@ export default function ArticlePage() {
             </div>
 
             <div className="ap-hero-img-wrap">
-              <img src={article.featuredImage} alt={article.featuredImageAlt} loading="eager" decoding="async" />
+              <img src={article.featuredImage} alt={article.featuredImageAlt} loading="eager" decoding="async" fetchPriority="high" />
             </div>
           </div>
         </section>
