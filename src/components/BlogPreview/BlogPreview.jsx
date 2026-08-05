@@ -187,7 +187,7 @@ const CSS = `
 .io-blog-meta {
   font-family: "Manrope", system-ui, sans-serif;
   font-size: 0.73rem;
-  color: rgba(7,17,29,0.34);
+  color: rgba(7,17,29,0.62);
 }
 .io-blog-read {
   display: inline-flex;
@@ -287,7 +287,11 @@ export default function BlogPreview() {
                   <p className="io-blog-excerpt">{article.excerpt}</p>
                   <div className="io-blog-card-footer">
                     <span className="io-blog-meta">{article.readingTime}</span>
-                    <Link to={`/insights/${article.slug}`} className="io-blog-read">
+                    <Link
+                      to={`/insights/${article.slug}`}
+                      className="io-blog-read"
+                      aria-label={`Read: ${article.shortTitle || article.title}`}
+                    >
                       Read Article
                       <span className="io-blog-arrow" aria-hidden="true">→</span>
                     </Link>

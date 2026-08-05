@@ -124,11 +124,6 @@ const Footer = () => {
             <ul className="mt-5 space-y-3 text-sm text-gold-100/65">
               <li>2233 Argentia Rd, Unit 302, Mississauga, ON L5N 2X7</li>
               <li>
-                <a href="mailto:info@ironoakpropertyservices.com" className="transition-colors duration-200 hover:text-gold-200">
-                  info@ironoakpropertyservices.com
-                </a>
-              </li>
-              <li>
                 <a href="tel:+14165709074" className="transition-colors duration-200 hover:text-gold-200">
                   416-570-9074
                 </a>

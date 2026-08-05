@@ -285,7 +285,7 @@ const AreasWeServe = () => {
                 <p style={{
                   fontFamily: '"Manrope", system-ui, sans-serif',
                   fontSize: '0.68rem',
-                  color: 'rgba(244,241,234,0.30)',
+                  color: 'rgba(244,241,234,0.55)',
                   margin: '0 0 4px',
                   letterSpacing: '0.05em',
                 }}>

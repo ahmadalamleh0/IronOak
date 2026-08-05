@@ -5,10 +5,10 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 gsap.registerPlugin(ScrollTrigger)
 
 const PROPERTIES = [
-  { label: 'Commercial Buildings',              image: '/images/property-commercial.jpg'  },
-  { label: 'Condos & Apartments',               image: '/images/property-condos.jpg'      },
-  { label: 'Residential Homes',                 image: '/images/property-residential.jpg' },
-  { label: 'Industrial & Mixed-Use Properties', image: '/images/property-industrial.jpg'  },
+  { label: 'Commercial Buildings',              image: '/images/property-commercial.webp'  },
+  { label: 'Condos & Apartments',               image: '/images/property-condos.webp'      },
+  { label: 'Residential Homes',                 image: '/images/property-residential.webp' },
+  { label: 'Industrial & Mixed-Use Properties', image: '/images/property-industrial.webp'  },
 ]
 
 const SCOPED_CSS = `

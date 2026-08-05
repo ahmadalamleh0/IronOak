@@ -208,7 +208,7 @@ export const ARTICLES = [
     modifiedDate: '2026-07-21',
     readingTime: '9 min read',
     author: 'IronOak Property Services',
-    featuredImage: '/images/property-condos.jpg',
+    featuredImage: '/images/property-condos.webp',
     featuredImageAlt:
       'Condominium towers and landscaped common areas along a waterfront property at sunset',
     featured: true,

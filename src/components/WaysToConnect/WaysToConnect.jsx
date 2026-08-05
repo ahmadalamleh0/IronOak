@@ -1,7 +1,7 @@
 const CD_CSS = `
   .io-cd-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 14px;
   }
   @media (max-width: 720px) {
@@ -151,21 +151,6 @@ const WaysToConnect = () => (
           </p>
           <div className="io-cd-cta-line">
             Call now <ArrowIcon />
-          </div>
-        </a>
-
-        {/* Send a Message */}
-        <a href="mailto:info@ironoakpropertyservices.com" className="io-cd-card">
-          <div className="io-cd-icon-wrap">
-            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#C9A24A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <rect x="2" y="4" width="20" height="16" rx="2"/>
-              <path d="M2 8l10 6 10-6"/>
-            </svg>
-          </div>
-          <p className="io-cd-label">Send a Message</p>
-          <p className="io-cd-sub">info@ironoakpropertyservices.com</p>
-          <div className="io-cd-cta-line">
-            Send email <ArrowIcon />
           </div>
         </a>
 

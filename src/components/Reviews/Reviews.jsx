@@ -84,17 +84,29 @@ const SCOPED_CSS = `
     }
   }
   .io-rev-dot {
+    /* Visual dot stays 7px (::before); the button itself is a 24px hit
+       area so it's still comfortably tappable without looking bigger. */
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    flex-shrink: 0;
+  }
+  .io-rev-dot::before {
+    content: '';
     width: 7px;
     height: 7px;
     border-radius: 50%;
     background: rgba(7,17,29,0.16);
-    border: none;
-    cursor: pointer;
-    padding: 0;
     transition: background 220ms ease, transform 220ms ease, width 220ms ease;
-    flex-shrink: 0;
   }
-  .io-rev-dot-active {
+  .io-rev-dot-active::before {
     background: #C9A24A;
     transform: scale(1.25);
   }
@@ -269,21 +281,41 @@ const Reviews = () => {
   const carouselRef  = useRef(null)
   const [activeIdx, setActiveIdx] = useState(0)
 
-  // Scroll dot tracking
+  // Scroll dot tracking — offsets are read once (and on resize) instead of
+  // on every scroll tick, and the update itself is rAF-throttled so rapid
+  // scroll events don't trigger a forced-reflow read on every frame.
   useEffect(() => {
     const el = carouselRef.current
     if (!el) return
-    const onScroll = () => {
-      let closest = 0
-      let minDist = Infinity
-      Array.from(el.children).forEach((child, i) => {
-        const dist = Math.abs(child.offsetLeft - el.scrollLeft)
-        if (dist < minDist) { minDist = dist; closest = i }
-      })
-      setActiveIdx(closest)
+
+    let offsets = Array.from(el.children).map((child) => child.offsetLeft)
+    const remeasure = () => {
+      offsets = Array.from(el.children).map((child) => child.offsetLeft)
     }
+
+    let ticking = false
+    const onScroll = () => {
+      if (ticking) return
+      ticking = true
+      requestAnimationFrame(() => {
+        const scrollLeft = el.scrollLeft
+        let closest = 0
+        let minDist = Infinity
+        offsets.forEach((left, i) => {
+          const dist = Math.abs(left - scrollLeft)
+          if (dist < minDist) { minDist = dist; closest = i }
+        })
+        setActiveIdx(closest)
+        ticking = false
+      })
+    }
+
     el.addEventListener('scroll', onScroll, { passive: true })
-    return () => el.removeEventListener('scroll', onScroll)
+    window.addEventListener('resize', remeasure, { passive: true })
+    return () => {
+      el.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', remeasure)
+    }
   }, [])
 
   const scrollToCard = useCallback((idx) => {
@@ -377,7 +409,7 @@ const Reviews = () => {
               <p style={{
                 fontFamily: '"Manrope", system-ui, sans-serif',
                 fontSize: '0.58rem', fontWeight: 500,
-                color: 'rgba(244,241,234,0.38)', margin: '2px 0 0',
+                color: 'rgba(244,241,234,0.55)', margin: '2px 0 0',
               }}>IronOak Property Services</p>
             </div>
           </div>
@@ -402,7 +434,7 @@ const Reviews = () => {
               <p style={{
                 fontFamily: '"Manrope", system-ui, sans-serif',
                 fontSize: '0.58rem', fontWeight: 500,
-                color: 'rgba(244,241,234,0.38)', margin: 0,
+                color: 'rgba(244,241,234,0.55)', margin: 0,
               }}>Based on client reviews</p>
             </div>
           </div>

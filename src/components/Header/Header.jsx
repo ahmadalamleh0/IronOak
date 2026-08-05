@@ -489,13 +489,12 @@ const Header = ({ ready = false }) => {
             {/* click-outside to dismiss */}
             <div className="ironhawkNavOverlay" onClick={closeMenu} aria-hidden="true" />
 
-            <div className="ironhawkNavMobileMenu" role="menu">
+            <div className="ironhawkNavMobileMenu">
               {NAV_LINKS.map(({ label, href }) => (
                 <Link
                   key={label}
                   to={href}
                   className="ironhawkNavMobileLink"
-                  role="menuitem"
                   onClick={closeMenu}
                 >
                   {label}
@@ -505,7 +504,6 @@ const Header = ({ ready = false }) => {
               <Link
                 to="/#contact"
                 className="ironhawkNavMobileCta"
-                role="menuitem"
                 onClick={closeMenu}
               >
                 Get a Quote

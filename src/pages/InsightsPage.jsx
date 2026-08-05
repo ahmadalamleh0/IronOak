@@ -89,8 +89,8 @@ const CSS = `
 .ip-card-excerpt { font-size: 0.85rem; line-height: 1.65; color: rgba(7,17,29,0.54); margin: 0; flex: 1; }
 
 .ip-card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 18px; padding-top: 14px; border-top: 1px solid rgba(9,19,31,0.07); }
-.ip-card-meta { font-size: 0.72rem; color: rgba(7,17,29,0.38); display: flex; gap: 8px; align-items: center; }
-.ip-card-meta-dot { color: rgba(7,17,29,0.22); }
+.ip-card-meta { font-size: 0.72rem; color: rgba(7,17,29,0.62); display: flex; gap: 8px; align-items: center; }
+.ip-card-meta-dot { color: rgba(7,17,29,0.45); }
 .ip-card-read { display: inline-flex; align-items: center; gap: 5px; font-size: 0.70rem; font-weight: 800; letter-spacing: 0.10em; text-transform: uppercase; color: #A9802F; text-decoration: none; }
 .ip-card-read:focus-visible { outline: 2px solid rgba(201,162,74,0.65); border-radius: 4px; outline-offset: 2px; }
 .ip-card-arrow { display: inline-block; transition: transform 220ms ease; }
@@ -165,7 +165,11 @@ export default function InsightsPage() {
                         <span className="ip-card-meta-dot" aria-hidden="true">&middot;</span>
                         <span>{article.readingTime}</span>
                       </span>
-                      <Link to={`/insights/${article.slug}`} className="ip-card-read">
+                      <Link
+                        to={`/insights/${article.slug}`}
+                        className="ip-card-read"
+                        aria-label={`Read: ${article.shortTitle || article.title}`}
+                      >
                         Read Article
                         <span className="ip-card-arrow" aria-hidden="true">→</span>
                       </Link>

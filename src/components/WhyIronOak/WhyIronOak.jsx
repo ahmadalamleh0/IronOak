@@ -195,7 +195,7 @@ const WhyIronOak = () => {
                 fontFamily: '"Manrope", system-ui, sans-serif',
                 fontSize: '0.65rem', fontWeight: 600,
                 letterSpacing: '0.14em', textTransform: 'uppercase',
-                color: 'rgba(244,241,234,0.38)',
+                color: 'rgba(244,241,234,0.55)',
                 margin: 0,
               }}>
                 {label}

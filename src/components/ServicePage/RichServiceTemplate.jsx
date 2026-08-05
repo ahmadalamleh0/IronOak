@@ -527,7 +527,7 @@ const CSS = `
   font-family: "Inter Tight", Inter, Arial, sans-serif;
   font-size: 0.82rem;
   font-weight: 700;
-  color: rgba(7,17,29,0.55);
+  color: rgba(7,17,29,0.68);
   line-height: 1.35;
   max-width: 220px;
 }
@@ -536,7 +536,7 @@ const CSS = `
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(7,17,29,0.34);
+  color: rgba(7,17,29,0.55);
 }
 .rp-typical-num { font-size: 0.66rem; font-weight: 800; letter-spacing: 0.2em; color: #A9802F; margin: 0 0 8px; }
 .rp-typical-title {
@@ -1080,13 +1080,18 @@ const IntroGrid = ({ items }) => {
   // to the column/viewport width on some mobile browsers.
   useEffect(() => {
     const sizeRules = () => {
-      wordRefs.current.forEach((wordEl, i) => {
+      // Batch all layout reads before any writes, so sizing 3 underlines
+      // doesn't force 3 separate synchronous reflows.
+      const sizes = wordRefs.current.map((wordEl, i) => {
         const svgEl = svgRefs.current[i]
-        if (!wordEl || !svgEl) return
+        if (!wordEl || !svgEl) return null
         const w = Math.round(wordEl.offsetWidth * 1.14)
-        const h = Math.round(w * (16 / 120))
-        svgEl.style.width = `${w}px`
-        svgEl.style.height = `${h}px`
+        return { svgEl, w, h: Math.round(w * (16 / 120)) }
+      })
+      sizes.forEach((s) => {
+        if (!s) return
+        s.svgEl.style.width = `${s.w}px`
+        s.svgEl.style.height = `${s.h}px`
       })
     }
 
@@ -1334,6 +1339,27 @@ const OverviewSection = ({ overview }) => (
   </section>
 )
 
+const IndustriesStrip = ({ industries }) => (
+  <section className="rp-industries">
+    <div className="rp-industries-eyebrow-wrap">
+      <p className="rp-industries-title">{industries.heading}</p>
+    </div>
+    <div className="rp-industries-banner" role="region" aria-label={industries.heading}>
+      <ul style={{ position: 'absolute', width: '1px', height: '1px', overflow: 'hidden', clip: 'rect(0,0,0,0)', whiteSpace: 'nowrap' }}>
+        {industries.items.map((item) => <li key={item}>{item}</li>)}
+      </ul>
+      <div className="rp-industries-track" aria-hidden="true">
+        {[...industries.items, ...industries.items].map((item, i) => (
+          <span key={i} className="rp-industries-item2">
+            <span className="rp-industries-label">{item}</span>
+            <span className="rp-industries-sep" aria-hidden="true"><span className="rp-industries-diamond" /></span>
+          </span>
+        ))}
+      </div>
+    </div>
+  </section>
+)
+
 export default function RichServiceTemplate({ service, relatedServices, relatedArticle }) {
   const [openFaq, setOpenFaq] = useState(null)
   const rc = service.richContent
@@ -1468,6 +1494,9 @@ export default function RichServiceTemplate({ service, relatedServices, relatedA
           </div>
         </section>
 
+        {/* ════ INDUSTRIES STRIP — early slot (optional, per-service unique section) ════ */}
+        {rc.industries && rc.industries.beforeServiceList && <IndustriesStrip industries={rc.industries} />}
+
         {/* ════ SERVICE SCOPE LIST (optional) ════ */}
         {rc.serviceList && (
           <section className="rp-section rp-section-sage" aria-labelledby="rp-services-h">
@@ -1523,27 +1552,8 @@ export default function RichServiceTemplate({ service, relatedServices, relatedA
           </section>
         )}
 
-        {/* ════ INDUSTRIES STRIP (optional, per-service unique section) ════ */}
-        {rc.industries && (
-          <section className="rp-industries">
-            <div className="rp-industries-eyebrow-wrap">
-              <p className="rp-industries-title">{rc.industries.heading}</p>
-            </div>
-            <div className="rp-industries-banner" role="region" aria-label={rc.industries.heading}>
-              <ul style={{ position: 'absolute', width: '1px', height: '1px', overflow: 'hidden', clip: 'rect(0,0,0,0)', whiteSpace: 'nowrap' }}>
-                {rc.industries.items.map((item) => <li key={item}>{item}</li>)}
-              </ul>
-              <div className="rp-industries-track" aria-hidden="true">
-                {[...rc.industries.items, ...rc.industries.items].map((item, i) => (
-                  <span key={i} className="rp-industries-item2">
-                    <span className="rp-industries-label">{item}</span>
-                    <span className="rp-industries-sep" aria-hidden="true"><span className="rp-industries-diamond" /></span>
-                  </span>
-                ))}
-              </div>
-            </div>
-          </section>
-        )}
+        {/* ════ INDUSTRIES STRIP — default slot (optional, per-service unique section) ════ */}
+        {rc.industries && !rc.industries.beforeServiceList && <IndustriesStrip industries={rc.industries} />}
 
         {/* ════ SERVICE OVERVIEW (optional) ════ */}
         {rc.overview && !rc.overviewAfterBenefits && <OverviewSection overview={rc.overview} />}

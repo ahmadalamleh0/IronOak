@@ -51,8 +51,11 @@ export const SERVICE_PAGES = [
       ],
 
       positioning: {
-        heading: ['Keeping properties', 'operational, presentable and ready.'],
-        body: 'IronOak handles both immediate repair needs and planned maintenance work, coordinating around occupants, access, and daily property operations.',
+        eyebrow: 'ONGOING PROPERTY MAINTENANCE',
+        heading: ['Maintenance Support That', 'Keeps Properties Running'],
+        body: 'IronOak provides planned maintenance and responsive repair support across commercial, condominium and hospitality properties. From building repairs, plumbing and leak detection to electrical, mechanical, cleaning and general upkeep, work is coordinated around occupants, access requirements and day-to-day property operations.',
+        ctaLabel: 'Explore maintenance services',
+        ctaHref: '#rp-typical-h',
       },
 
       typicalProjects: {
@@ -170,8 +173,11 @@ export const SERVICE_PAGES = [
       ],
 
       positioning: {
-        heading: ['One coordinated program.', 'Every trade, every location.'],
-        body: 'From larger capital-improvement projects and multi-trade scopes to rollout programs across multiple stores or properties, IronOak brings interior finishing, CCTV, lighting, exterior work and custom millwork together under one coordinated project — with consistent standards from the first location to the last.',
+        eyebrow: 'CAPITAL PROJECT DELIVERY',
+        heading: ['Coordinated Projects Across', 'Properties, Trades and Locations'],
+        body: 'IronOak coordinates capital improvements, multi-trade scopes and multi-site upgrade programs from planning through completion. Interior finishing, CCTV, lighting, exterior improvements, flooring, millwork and other project requirements can be managed under one coordinated scope, helping property teams maintain consistent standards, schedules and communication across every location.',
+        ctaLabel: 'Explore capital project delivery',
+        ctaHref: '#rp-typical-h',
       },
 
       overview: {
@@ -330,6 +336,7 @@ export const SERVICE_PAGES = [
 
       industries: {
         heading: 'Industries We Serve',
+        beforeServiceList: true,
         items: ['Retail', 'Construction Sites', 'Industrial Facilities', 'Condos & Apartments', 'Commercial Buildings', 'Hospitality'],
       },
 

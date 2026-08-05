@@ -36,8 +36,11 @@
     <meta name="twitter:title"       content="Commercial Property Services Toronto & GTA | IronOak" />
     <meta name="twitter:description" content="IronOak provides commercial property maintenance, CCTV, interior and exterior improvements, and capital project support across Toronto and the GTA." />
     <meta name="twitter:image"       content="https://ironoak.netlify.app/images/ironoak-social-preview-v2.jpg" />
-    <!-- Preload hero image so it's ready the moment the logo reveal exits -->
-    <link rel="preload" as="image" href="/images/hero-bg.png" fetchpriority="high" />
+    <!-- Preload the homepage LCP background so it's ready the moment the logo
+         reveal exits. Matches the media query in Hero.jsx's .hero-bg-img rule
+         exactly, so each device fetches only its own file — never both. -->
+    <link rel="preload" as="image" href="/images/hero-bg-mobile.webp" fetchpriority="high" media="(max-width: 768px)" />
+    <link rel="preload" as="image" href="/images/hero-bg.webp" fetchpriority="high" media="(min-width: 769px)" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

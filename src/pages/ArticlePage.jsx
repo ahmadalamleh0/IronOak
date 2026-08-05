@@ -32,12 +32,12 @@ const CSS = `
   font-weight: 600;
   letter-spacing: 0.04em;
   text-decoration: none;
-  color: rgba(7,17,29,0.42);
+  color: rgba(7,17,29,0.62);
   transition: color 180ms ease;
 }
 .ap-breadcrumb a:hover { color: #A9802F; }
 .ap-breadcrumb a:focus-visible { outline: 2px solid rgba(201,162,74,0.6); outline-offset: 2px; border-radius: 3px; }
-.ap-breadcrumb-sep { color: rgba(7,17,29,0.20); font-size: 0.65rem; }
+.ap-breadcrumb-sep { color: rgba(7,17,29,0.45); font-size: 0.65rem; }
 .ap-breadcrumb-current { color: rgba(7,17,29,0.62) !important; }
 
 .ap-cat {
@@ -71,11 +71,11 @@ const CSS = `
   flex-wrap: wrap;
   gap: 10px 18px;
   font-size: 0.80rem;
-  color: rgba(7,17,29,0.45);
+  color: rgba(7,17,29,0.62);
   margin-bottom: clamp(28px, 4vh, 40px);
 }
-.ap-meta-dot { color: rgba(7,17,29,0.25); }
-.ap-meta-label { font-weight: 700; color: rgba(7,17,29,0.55); }
+.ap-meta-dot { color: rgba(7,17,29,0.45); }
+.ap-meta-label { font-weight: 700; color: rgba(7,17,29,0.68); }
 
 .ap-hero-img-wrap {
   width: 100%;
@@ -205,9 +205,9 @@ const CSS = `
 }
 .ap-related-card:hover { border-color: rgba(169,128,47,0.35); transform: translateY(-2px); }
 .ap-related-card:focus-visible { outline: 2px solid rgba(201,162,74,0.6); outline-offset: 3px; }
-.ap-related-cat { font-size: 0.64rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(7,17,29,0.35); }
+.ap-related-cat { font-size: 0.64rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(7,17,29,0.62); }
 .ap-related-title { font-family: "Inter Tight", Inter, Arial, sans-serif; font-size: 1.02rem; font-weight: 800; letter-spacing: -0.02em; line-height: 1.3; color: #07111D; }
-.ap-related-excerpt { font-size: 0.84rem; line-height: 1.6; color: rgba(7,17,29,0.5); }
+.ap-related-excerpt { font-size: 0.84rem; line-height: 1.6; color: rgba(7,17,29,0.62); }
 .ap-related-arrow { font-size: 0.78rem; color: #A9802F; margin-top: auto; transition: transform 200ms ease; }
 .ap-related-card:hover .ap-related-arrow { transform: translateX(4px); }
 

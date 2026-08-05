@@ -553,7 +553,7 @@ export default function ServicesExplorer() {
               {ILLUSTRATIONS[i]}
             </div>
             <p className="io-mob-desc">{svc.description}</p>
-            <Link to={svc.slug} className="io-mob-cta">
+            <Link to={svc.slug} className="io-mob-cta" aria-label={`Explore ${svc.title}`}>
               Explore Service <span aria-hidden="true">→</span>
             </Link>
           </article>

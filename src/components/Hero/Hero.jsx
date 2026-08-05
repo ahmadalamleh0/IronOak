@@ -1,5 +1,16 @@
 import Header from '../Header/Header.jsx'
 
+// Mobile gets a separately downscaled source (not the desktop file shrunk by
+// CSS) so phones don't pay for pixels they never render.
+const HERO_BG_CSS = `
+  .hero-bg-img {
+    background-image: url(/images/hero-bg-mobile.webp);
+  }
+  @media (min-width: 769px) {
+    .hero-bg-img { background-image: url(/images/hero-bg.webp); }
+  }
+`
+
 const RM =
   typeof window !== 'undefined' &&
   window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -64,14 +75,15 @@ const Hero = ({ ready = false }) => {
 
   return (
     <section className="hero-svh relative flex w-full overflow-hidden bg-ink-950">
+      <style>{HERO_BG_CSS}</style>
 
       {/* ── Hero background image ── */}
       <div
         aria-hidden="true"
+        className="hero-bg-img"
         style={{
           position: 'absolute',
           inset: 0,
-          backgroundImage: 'url(/images/hero-bg.png)',
           backgroundSize: 'cover',
           backgroundPosition: 'center center',
           backgroundRepeat: 'no-repeat',

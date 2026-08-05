@@ -320,7 +320,6 @@ const PropertySolutions = () => {
         {/* Capability rows — spotlight: mouse leaving the list clears hover */}
         <div
           ref={listRef}
-          role="list"
           onMouseLeave={() => setHoveredIdx(null)}
         >
           {CAPABILITIES.map((cap, i) => (
