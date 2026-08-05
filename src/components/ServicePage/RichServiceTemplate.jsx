@@ -179,6 +179,7 @@ const CSS = `
 .rp-section-dark .rp-section-body { color: rgba(244,241,234,0.60); }
 
 /* ── Three-part intro ──────────────────────────────────────── */
+.rp-intro-section { overflow-x: clip; }
 .rp-intro-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -186,25 +187,25 @@ const CSS = `
 }
 .rp-intro-col { padding-left: clamp(0px, 3vw, 32px); border-left: 1px solid rgba(201,162,74,0.28); }
 .rp-intro-col:first-child { padding-left: 0; border-left: none; }
-.rp-intro-word-wrap { display: inline-block; width: fit-content; }
+.rp-intro-word-wrap { position: relative; display: inline-block; }
 .rp-intro-word {
   font-family: "Inter Tight", Inter, Arial, sans-serif;
   font-size: clamp(1.7rem, 3vw, 2.3rem);
   font-weight: 900;
   letter-spacing: -0.03em;
   color: #07111D;
-  margin: 0 0 2px;
+  margin: 0 0 8px;
 }
 .rp-intro-rule {
   display: block;
-  width: 120%;
-  margin-left: -10%;
-  height: 14px;
-  overflow: visible;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
 }
-.rp-intro-body { font-size: 0.92rem; line-height: 1.7; color: rgba(7,17,29,0.55); margin: 14px 0 0; }
+.rp-intro-body { font-size: 0.92rem; line-height: 1.7; color: rgba(7,17,29,0.55); margin: 24px 0 0; }
 @media (max-width: 760px) {
-  .rp-intro-grid { grid-template-columns: 1fr; gap: 28px; }
+  .rp-intro-grid { grid-template-columns: 1fr; gap: 24px; }
   .rp-intro-col { padding-left: 0; border-left: none; }
 }
 
@@ -682,6 +683,9 @@ const CSS = `
   margin: 0;
 }
 .rp-process-arrow { color: rgba(169,128,47,0.45); font-size: 1.1rem; padding-top: 22px; flex-shrink: 0; }
+.rp-section-dark .rp-process-num { color: #E8C97A; }
+.rp-section-dark .rp-process-label { color: #F4F1EA; }
+.rp-section-dark .rp-process-arrow { color: rgba(232,201,122,0.55); }
 @media (max-width: 760px) {
   .rp-process-chain { flex-direction: column; gap: 20px; }
   .rp-process-step { width: 100%; }
@@ -1067,7 +1071,29 @@ const PositioningStatement = ({ eyebrow, heading, body, watermarkLg = false, cta
 const IntroGrid = ({ items }) => {
   const sectionRef = useRef(null)
   const itemRefs   = useRef([])
+  const wordRefs   = useRef([])
+  const svgRefs    = useRef([])
   const ruleRefs   = useRef([])
+
+  // Size each underline off the actual rendered word width (105–120% of it)
+  // instead of a CSS percentage-of-fit-content, which is what let it stretch
+  // to the column/viewport width on some mobile browsers.
+  useEffect(() => {
+    const sizeRules = () => {
+      wordRefs.current.forEach((wordEl, i) => {
+        const svgEl = svgRefs.current[i]
+        if (!wordEl || !svgEl) return
+        const w = Math.round(wordEl.offsetWidth * 1.14)
+        const h = Math.round(w * (16 / 120))
+        svgEl.style.width = `${w}px`
+        svgEl.style.height = `${h}px`
+      })
+    }
+
+    sizeRules()
+    window.addEventListener('resize', sizeRules)
+    return () => window.removeEventListener('resize', sizeRules)
+  }, [items])
 
   useEffect(() => {
     const rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -1114,7 +1140,7 @@ const IntroGrid = ({ items }) => {
   }, [])
 
   return (
-    <section ref={sectionRef} className="rp-section" aria-label="How IronOak approaches this work">
+    <section ref={sectionRef} className="rp-section rp-intro-section" aria-label="How IronOak approaches this work">
       <div className="rp-inner">
         <div className="rp-intro-grid">
           {items.map((item, i) => (
@@ -1124,8 +1150,13 @@ const IntroGrid = ({ items }) => {
               className="rp-intro-col"
             >
               <div className="rp-intro-word-wrap">
-                <p className="rp-intro-word">{item.label}</p>
-                <svg className="rp-intro-rule" viewBox="0 0 120 16" preserveAspectRatio="none" aria-hidden="true">
+                <p ref={(el) => { wordRefs.current[i] = el }} className="rp-intro-word">{item.label}</p>
+                <svg
+                  ref={(el) => { svgRefs.current[i] = el }}
+                  className="rp-intro-rule"
+                  viewBox="0 0 120 16"
+                  aria-hidden="true"
+                >
                   <defs>
                     <linearGradient id={`rp-intro-rule-grad-${i}`} x1="0" y1="0" x2="1" y2="0">
                       <stop offset="0%" stopColor="#A9802F" />
@@ -1287,7 +1318,13 @@ const OverviewSection = ({ overview }) => (
           style={overview.imagePositionMobile ? { '--rp-ov-mobile-pos': overview.imagePositionMobile } : undefined}
         >
           {overview.image ? (
-            <img src={overview.image} alt={overview.imageAlt} loading="lazy" decoding="async" />
+            <img
+              src={overview.image}
+              alt={overview.imageAlt}
+              loading="lazy"
+              decoding="async"
+              style={overview.imagePosition ? { objectPosition: overview.imagePosition } : undefined}
+            />
           ) : (
             <ImgPlaceholder label={overview.placeholderLabel} />
           )}
@@ -1560,7 +1597,11 @@ export default function RichServiceTemplate({ service, relatedServices, relatedA
 
         {/* ════ PROCESS CHAIN (optional, per-service unique section) ════ */}
         {rc.processSteps && (
-          <section className="rp-section" aria-labelledby="rp-process-h">
+          <section
+            className={`rp-section ${rc.processSteps.dark ? 'rp-section-dark' : ''}`}
+            data-navbar={rc.processSteps.dark ? 'invert' : undefined}
+            aria-labelledby="rp-process-h"
+          >
             <div className="rp-inner">
               <h2 className="rp-h2" id="rp-process-h">{rc.processSteps.heading}</h2>
               {rc.processSteps.body && <p className="rp-section-body">{rc.processSteps.body}</p>}

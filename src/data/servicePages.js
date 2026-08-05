@@ -84,6 +84,11 @@ export const SERVICE_PAGES = [
         ],
       },
 
+      industries: {
+        heading: 'Industries We Serve',
+        items: ['Retail', 'Construction Sites', 'Industrial Facilities', 'Condos & Apartments', 'Commercial Buildings', 'Hospitality'],
+      },
+
       approachNote: {
         eyebrow: 'How We Support Properties',
         heading: 'From one repair to ongoing property support.',
@@ -206,24 +211,20 @@ export const SERVICE_PAGES = [
         ],
       },
 
+      industries: {
+        heading: 'Industries We Serve',
+        items: ['Retail', 'Construction Sites', 'Industrial Facilities', 'Condos & Apartments', 'Commercial Buildings', 'Hospitality'],
+      },
+
       processSteps: {
         heading: 'Pilot once. Roll out consistently.',
         body:    'IronOak can complete an initial location, establish the approved scope and standards, then coordinate the same improvement program across an entire portfolio.',
+        dark:    true,
         steps: [
           { num: '01', label: 'Pilot Location' },
           { num: '02', label: 'Approve the Standard' },
           { num: '03', label: 'Coordinate the Rollout' },
           { num: '04', label: 'Deliver Across Locations' },
-        ],
-      },
-
-      benefits: {
-        heading: 'Why coordinated project delivery matters',
-        items: [
-          { title: 'One Point of Contact',   body: 'Clear communication through one accountable project lead.' },
-          { title: 'Consistent Standards',   body: 'Aligned materials, installation expectations, and finishing quality across locations.' },
-          { title: 'Phased Execution',       body: 'Work organized around access requirements, occupancy, and operational priorities.' },
-          { title: 'Clear Closeout',         body: 'Progress tracking, deficiency review, documentation, and final sign-off.' },
         ],
       },
 
@@ -322,6 +323,11 @@ export const SERVICE_PAGES = [
           'Corridor and lobby refreshes',
           'Multi-floor and multi-site finish programs',
         ],
+      },
+
+      industries: {
+        heading: 'Industries We Serve',
+        items: ['Retail', 'Construction Sites', 'Industrial Facilities', 'Condos & Apartments', 'Commercial Buildings', 'Hospitality'],
       },
 
       overviewAfterBenefits: true,
@@ -449,6 +455,7 @@ export const SERVICE_PAGES = [
         ],
         image:    '/services/installations-overview.jpg',
         imageAlt: 'Smart security camera with AI analytics overlay in a modern office corridor',
+        imagePosition: '25% center',
       },
 
       faqEyebrow: 'INSTALLATION QUESTIONS',
@@ -556,6 +563,11 @@ export const SERVICE_PAGES = [
           'Coordinated multi-site exterior programs',
           'Exterior fixture replacement',
         ],
+      },
+
+      industries: {
+        heading: 'Industries We Serve',
+        items: ['Retail', 'Construction Sites', 'Industrial Facilities', 'Condos & Apartments', 'Commercial Buildings', 'Hospitality'],
       },
 
       photoBanner: {
