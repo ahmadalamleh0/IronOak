@@ -58,7 +58,7 @@ const SERVICES = [
     id:          'property-maintenance-repairs',
     num:         '05',
     category:    'Property Maintenance',
-    title:       'Property Maintenance & Repairs',
+    title:       'Property Maintenance & Handyman',
     slug:        '/services/property-maintenance-repairs',
     description: 'Reliable repairs, preventative maintenance, and ongoing property support to keep residential, commercial, and condominium spaces performing at their best.',
   },

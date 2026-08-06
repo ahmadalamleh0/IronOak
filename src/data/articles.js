@@ -389,7 +389,7 @@ export const ARTICLES = [
     ],
 
     relatedServices: [
-      { label: 'Property Maintenance & Repairs', slug: 'property-maintenance-repairs' },
+      { label: 'Property Maintenance & Handyman', slug: 'property-maintenance-repairs' },
       { label: 'Capital Projects & Custom Solutions', slug: 'capital-project-management' },
       { label: 'Installations & Building Systems', slug: 'installations-property-systems' },
     ],

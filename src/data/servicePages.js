@@ -11,7 +11,7 @@ export const SERVICE_PAGES = [
     slug:               'property-maintenance-repairs',
     num:                '01',
     category:           'Property Maintenance',
-    title:              'Property Maintenance & Repairs',
+    title:              'Property Maintenance & Handyman',
     description:        'Responsive repairs, planned maintenance, and coordinated property support for commercial, condominium, hospitality, and multi-site properties.',
     illustrationIndex:  0,
     meta: {
@@ -41,7 +41,7 @@ export const SERVICE_PAGES = [
       heroImage:            '/services/property-maintenance-repairs-hero.webp',
       heroImageAlt:         'Building maintenance crew cleaning windows on a commercial facade with a city skyline in the background',
       heroOverlayLight:     true,
-      heroHeading:          ['Property Maintenance &', 'Repairs'],
+      heroHeading:          ['Property Maintenance &', 'Handyman'],
       heroSupportingLine:   'Commercial • Condominium • Hospitality • Multi-Site',
 
       intro: [
@@ -389,7 +389,7 @@ export const SERVICE_PAGES = [
     illustrationIndex:  4,
     meta: {
       title:       'CCTV & Security System Installation Toronto | IronOak',
-      description: 'Professional CCTV, 4K security camera, video monitoring and access-control installation for commercial properties across Toronto and the GTA.',
+      description: 'Professional CCTV, 4K security camera, camera system and access-control installation for commercial properties across Toronto and the GTA.',
     },
     related: [0, 4, 1],
     sections: {
@@ -421,9 +421,9 @@ export const SERVICE_PAGES = [
 
       positioning: {
         early:    true,
-        eyebrow:  'SECURITY VIDEO MONITORING',
-        heading:  ['Advanced Security Video Monitoring'],
-        body:     'IronOak combines high-definition CCTV systems, intelligent video alerts and reliable remote access to help protect commercial properties, condominiums, construction sites and large facilities. Smart detection can identify meaningful activity, line crossings and changes within monitored areas, helping property teams respond quickly and maintain clearer visibility across the site.',
+        eyebrow:  'COMMERCIAL SECURITY & CCTV',
+        heading:  ['Commercial Security & CCTV Systems'],
+        body:     'IronOak installs high-definition CCTV and 4K security camera systems for commercial properties, condominiums, construction sites and large facilities. From long-range perimeter coverage to access-control integration, every system is professionally positioned, configured and tested around the property’s layout and security requirements.',
         ctaLabel: 'Explore CCTV solutions',
         ctaHref:  '#rp-cctv-h',
       },
@@ -431,23 +431,23 @@ export const SERVICE_PAGES = [
       typicalProjects: {
         heading: 'Typical installation & systems work',
         wideCards: true,
+        centerLastOdd: true,
         groups: [
-          { num: '01', title: 'Security & CCTV Systems', body: 'Coordinated camera and security installations for commercial and multi-residential properties.', image: '/services/installations-security-cctv.webp', imageAlt: 'Dome security camera mounted on the ceiling of a modern hotel lobby corridor' },
-          { num: '02', title: 'Long-Range Security Cameras & Surveillance Systems', body: 'Warehouses, parking lots, stadiums and other large perimeters require broader security coverage. IronOak installs long-range camera and surveillance systems designed to capture clear, detailed footage across larger areas.', image: '/services/installations-long-range-cameras.jpg', imageAlt: 'Two long-range security cameras mounted on the exterior wall of a commercial building' },
+          { num: '01', title: 'Security Camera Systems', body: 'Coordinated camera and security installations for commercial and multi-residential properties.', image: '/services/installations-security-cctv.webp', imageAlt: 'Dome security camera mounted on the ceiling of a modern hotel lobby corridor' },
+          { num: '02', title: 'Long-Range Security Camera Systems', body: 'Warehouses, parking lots, stadiums and other large perimeters require broader security coverage. IronOak installs long-range camera systems designed to capture clear, detailed footage across larger areas.', image: '/services/installations-long-range-cameras.jpg', imageAlt: 'Two long-range security cameras mounted on the exterior wall of a commercial building' },
           { num: '03', title: 'Access Control & Entry Systems', body: 'Entry, intercom and access-control installations designed for secure, reliable day-to-day property operations.', image: '/services/installations-access-control.webp', imageAlt: 'Modern commercial building entrance with automated glass doors and an access-control panel' },
-          { num: '04', title: 'Monitoring & Surveillance Support', body: 'CCTV monitoring support, surveillance planning and camera-system coordination for commercial and multi-residential properties.', image: '/services/installations-monitoring-surveillance.jpg', imageAlt: 'Security operations desk with multiple monitors displaying live CCTV camera feeds' },
         ],
       },
 
       capabilities: {
         eyebrow: 'SYSTEM CAPABILITIES',
         heading: 'Security & system solutions',
-        body:    'CCTV, surveillance and access-control support built around how your property actually operates.',
+        body:    'CCTV, camera systems and access-control support built around how your property actually operates.',
         items: [
-          { image: '/services/icon-ai-video-monitoring.png',   title: 'AI-Powered Video Monitoring Systems', body: 'High-definition video surveillance with live operator support.' },
-          { image: '/services/icon-remote-surveillance.png',   title: 'Remote Video Surveillance',            body: '24/7 monitoring with AI-assisted alerts and live deterrence.' },
+          { image: '/services/icon-ai-video-monitoring.png',   title: '4K Security Camera Systems',           body: 'High-resolution camera systems designed for clear coverage across commercial and multi-residential properties.' },
+          { image: '/services/icon-remote-surveillance.png',   title: 'Camera Placement & System Configuration', body: 'Professional camera positioning, system setup and configuration designed around the property and its security requirements.' },
           { image: '/services/icon-managed-access-control.png', title: 'Managed Access Control',               body: 'Secure, seamless access management for entry points and controlled areas.' },
-          { image: '/services/icon-inspection-compliance.png', title: 'Inspection & Compliance Support',      body: 'Remote inspection, oversight and compliance support for monitored environments.' },
+          { image: '/services/icon-inspection-compliance.png', title: 'Security System Support & Maintenance', body: 'Ongoing installation-related support, troubleshooting and system adjustments to keep security systems running reliably.' },
         ],
       },
 

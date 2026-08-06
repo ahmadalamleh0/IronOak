@@ -59,7 +59,7 @@ const DotGrid = ({ id }) => (
   </>
 )
 
-/* ─── 01 · Property Maintenance & Repairs ───────────────────────────────── */
+/* ─── 01 · Property Maintenance & Handyman ──────────────────────────────── */
 const _MAINTENANCE_SVG = `<svg fill="none" viewBox="0 0 962 616" style="width:100%;height:auto;display:block" xmlns="http://www.w3.org/2000/svg">
 <g transform="matrix(1,0,0,1,-479,-232)" id="i2">
 <g id="i3" transform="matrix(1,0,0,1,1012.144,767.179)"><rect height="75.107" width="657.362" y="-37.553" x="-328.681" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="rgba(244,241,234,0.22)" fill="rgba(244,241,234,0.06)" /></g>
