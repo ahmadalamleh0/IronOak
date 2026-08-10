@@ -205,7 +205,7 @@ const Hero = ({ ready = false }) => {
                 color: '#F4F1EA',
               }}
             >
-              Elevating Standards
+              Complete Property Services
             </span>
           </div>
 
@@ -224,7 +224,7 @@ const Hero = ({ ready = false }) => {
                 color: '#F4F1EA',
               }}
             >
-              in property care.
+              across Toronto & the GTA.
             </span>
           </div>
         </h1>
@@ -242,8 +242,12 @@ const Hero = ({ ready = false }) => {
             marginTop: '28px',
           }}
         >
-          Repairs, maintenance, renovations, and upgrades for homes, condos,
-          and commercial spaces, delivered by one trusted team.
+          IronOak Property Services Inc. provides complete property solutions for
+          commercial buildings, condominiums, residential properties, and managed
+          properties across Toronto and the Greater Toronto Area. From ongoing
+          property maintenance and interior and exterior finishing to cleaning,
+          CCTV security solutions, repairs, and larger capital projects, our team
+          provides reliable support for properties of all sizes.
         </p>
 
         {/* CTA */}

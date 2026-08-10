@@ -2,7 +2,7 @@
 // links, Open Graph / Twitter URLs, and JSON-LD across every page. Update this
 // one value when a custom domain is configured; no other file should hardcode
 // the production origin.
-export const SITE_URL = 'https://ironoak.netlify.app'
+export const SITE_URL = 'https://www.ironoakproperties.ca'
 
 // Real, verified business identity — used to build the homepage Organization
 // JSON-LD and reused anywhere else that needs it, so it's only entered once.
