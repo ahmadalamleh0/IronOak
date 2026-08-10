@@ -5,11 +5,11 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 gsap.registerPlugin(ScrollTrigger)
 
 const PHRASES = [
-  "Whether it’s a quick repair, ",
-  "a complete renovation, ",
-  "or ongoing property maintenance, ",
-  "IronOak delivers skilled professionals ",
-  "for residential and commercial properties.",
+  "IronOak Property Services Inc. ",
+  "provides property maintenance, interior and exterior finishing, ",
+  "CCTV security, repairs and capital projects ",
+  "for commercial, condominium and residential properties ",
+  "across Toronto and the GTA.",
 ]
 
 // Each word gets an overflow:hidden mask + inner animated span
