@@ -2,6 +2,37 @@ import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import LogoMark from '../Logo/LogoMark.jsx'
 
+// Must match the media query in Hero.jsx's .hero-bg-img rule exactly.
+const HERO_IMG_MOBILE = '/images/hero-bg-mobile.webp'
+const HERO_IMG_DESKTOP = '/images/hero-bg.webp'
+// Cap on how long the reveal will wait for the hero image — a slow
+// connection gets a head start on the fetch, not an indefinite hold.
+const HERO_IMG_TIMEOUT = 2500
+
+// Removes the closed-curtain div painted in index.html, once our own
+// overlay is opaque and has taken over (or immediately, on the skip path).
+const hideStaticCurtain = () => {
+  const el = document.getElementById('io-curtain')
+  if (el) el.style.display = 'none'
+}
+
+// Starts fetching the hero background now, behind the closed curtain, so
+// it's ready the instant the curtain opens instead of popping in.
+const preloadHeroImage = () =>
+  new Promise((resolve) => {
+    const src = window.matchMedia('(max-width: 768px)').matches
+      ? HERO_IMG_MOBILE
+      : HERO_IMG_DESKTOP
+    const img = new Image()
+    img.onload = resolve
+    img.onerror = resolve
+    img.src = src
+    if (img.complete) resolve()
+  })
+
+const withTimeout = (promise, ms) =>
+  Promise.race([promise, new Promise((resolve) => setTimeout(resolve, ms))])
+
 const LogoReveal = ({
   brand = 'IronOak',
   subtext = 'Property Services Inc.',
@@ -22,71 +53,93 @@ const LogoReveal = ({
     // fire onComplete immediately without animating the splash sequence
     const rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (sessionStorage.getItem('io-intro-done') === '1' || rm) {
+      hideStaticCurtain()
       onCompleteRef.current?.()
       return
     }
 
     document.body.style.overflow = 'hidden'
 
-    const ctx = gsap.context(() => {
-      const { root, gold } = logoRef.current
+    let cancelled = false
+    let ctx = null
 
-      const tl = gsap.timeline({
-        defaults: { ease: 'power2.out' },
-        onComplete: () => {
-          document.body.style.overflow = ''
-          onCompleteRef.current?.()
-        },
-      })
+    // The static curtain from index.html stays up the whole time this is
+    // pending, so there's nothing to reveal prematurely while we wait.
+    withTimeout(preloadHeroImage(), HERO_IMG_TIMEOUT).then(() => {
+      if (cancelled) return
 
-      // the mark is engraved/hidden in the surface, then uncovers top-down,
-      // settling forward in scale and focus as the gold catches the light
-      tl.set(containerRef.current, { autoAlpha: 1 })
-        .set(gold, { autoAlpha: 0 })
-        .set(root, {
-          clipPath: 'inset(0% 0% 100% 0%)',
-          scale: 1.08,
-          filter: 'blur(11px)',
-          transformOrigin: '50% 100%',
+      try {
+        ctx = gsap.context(() => {
+          const { root, gold } = logoRef.current
+
+          const tl = gsap.timeline({
+            defaults: { ease: 'power2.out' },
+            onComplete: () => {
+              document.body.style.overflow = ''
+              onCompleteRef.current?.()
+            },
+          })
+
+          // the mark is engraved/hidden in the surface, then uncovers top-down,
+          // settling forward in scale and focus as the gold catches the light
+          tl.set(containerRef.current, { autoAlpha: 1 })
+            .set(gold, { autoAlpha: 0 })
+            .set(root, {
+              clipPath: 'inset(0% 0% 100% 0%)',
+              scale: 1.08,
+              filter: 'blur(11px)',
+              transformOrigin: '50% 100%',
+            })
+            .set(markWrapRef.current, { autoAlpha: 1 })
+            .to(root, {
+              clipPath: 'inset(0% 0% 0% 0%)',
+              scale: 1,
+              filter: 'blur(0px)',
+              duration: 0.9,
+              ease: 'power3.out',
+            })
+            .to(gold, { autoAlpha: 1, duration: 0.6, ease: 'power2.out' }, '-=0.40')
+            .fromTo(
+              wordmarkRef.current,
+              { autoAlpha: 0, y: 14, letterSpacing: '0.1em' },
+              { autoAlpha: 1, y: 0, letterSpacing: '0.01em', duration: 0.55 },
+              '-=0.30',
+            )
+            .fromTo(
+              subtextRef.current,
+              { autoAlpha: 0, y: 8 },
+              { autoAlpha: 1, y: 0, duration: 0.4 },
+              '-=0.25',
+            )
+            .fromTo(
+              taglineRef.current,
+              { autoAlpha: 0, y: 8 },
+              { autoAlpha: 1, y: 0, duration: 0.4 },
+              '-=0.18',
+            )
+            .to({}, { duration: 0.6 })
+            .to(containerRef.current, {
+              yPercent: -100,
+              autoAlpha: 0,
+              duration: 0.65,
+              ease: 'power3.inOut',
+            })
+
+          // Our own curtain is now opaque and in control — drop the static
+          // one painted in index.html before this bundle ever loaded.
+          hideStaticCurtain()
         })
-        .set(markWrapRef.current, { autoAlpha: 1 })
-        .to(root, {
-          clipPath: 'inset(0% 0% 0% 0%)',
-          scale: 1,
-          filter: 'blur(0px)',
-          duration: 0.9,
-          ease: 'power3.out',
-        })
-        .to(gold, { autoAlpha: 1, duration: 0.6, ease: 'power2.out' }, '-=0.40')
-        .fromTo(
-          wordmarkRef.current,
-          { autoAlpha: 0, y: 14, letterSpacing: '0.1em' },
-          { autoAlpha: 1, y: 0, letterSpacing: '0.01em', duration: 0.55 },
-          '-=0.30',
-        )
-        .fromTo(
-          subtextRef.current,
-          { autoAlpha: 0, y: 8 },
-          { autoAlpha: 1, y: 0, duration: 0.4 },
-          '-=0.25',
-        )
-        .fromTo(
-          taglineRef.current,
-          { autoAlpha: 0, y: 8 },
-          { autoAlpha: 1, y: 0, duration: 0.4 },
-          '-=0.18',
-        )
-        .to({}, { duration: 0.6 })
-        .to(containerRef.current, {
-          yPercent: -100,
-          autoAlpha: 0,
-          duration: 0.65,
-          ease: 'power3.inOut',
-        })
+      } catch (_err) {
+        // Animation setup failed — don't strand visitors behind the curtain.
+        document.body.style.overflow = ''
+        hideStaticCurtain()
+        onCompleteRef.current?.()
+      }
     })
 
     return () => {
-      ctx.revert()
+      cancelled = true
+      ctx?.revert()
       document.body.style.overflow = ''
     }
   }, [])

@@ -57,6 +57,54 @@
     />
   </head>
   <body>
+    <!-- Closed curtain, painted before any JS/CSS bundle loads or executes, so
+         the hero image behind it can never show through during the gap
+         between first paint and React mounting LogoReveal's own overlay.
+         LogoReveal.jsx hides this element the instant its own curtain takes
+         over (or immediately, on the skip-intro path below). -->
+    <div
+      id="io-curtain"
+      style="position:fixed;inset:0;z-index:2147483647;background:#0a0d12;"
+    ></div>
+    <noscript>
+      <style>
+        #io-curtain { display: none !important; }
+      </style>
+    </noscript>
+    <script>
+      (function () {
+        var curtain = document.getElementById('io-curtain');
+        if (!curtain) return;
+        // The reveal only exists on the homepage — every other route (service
+        // pages, service-area pages, etc.) has no LogoReveal to hand off to,
+        // so the curtain must never hold there or it strands visitors behind
+        // a blank screen until the fallback timer below fires.
+        if (window.location.pathname !== '/') {
+          curtain.style.display = 'none';
+          return;
+        }
+        try {
+          var skip =
+            (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) ||
+            sessionStorage.getItem('io-intro-done') === '1';
+          if (skip) {
+            curtain.style.display = 'none';
+            return;
+          }
+        } catch (e) {
+          // sessionStorage/matchMedia unavailable — fall through to the
+          // fallback timer below rather than trusting either branch.
+        }
+        // Fallback: if the app bundle fails to load, errors, or hangs, don't
+        // strand visitors behind the curtain. LogoReveal removes it well
+        // before this fires on any normal load.
+        window.setTimeout(function () {
+          var el = document.getElementById('io-curtain');
+          if (el) el.style.display = 'none';
+        }, 8000);
+      })();
+    </script>
+
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
