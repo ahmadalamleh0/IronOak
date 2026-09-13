@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { Link } from 'react-router-dom'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -13,6 +14,20 @@ const AREAS = [
   'Caledon',      'Halton',        'Peel',          'York',
   'Durham',
 ]
+
+// Areas with a dedicated /service-areas/:slug page — everything else in
+// AREAS stays plain text (no destination to link to yet).
+const AREA_SLUGS = {
+  'Toronto':       'toronto',
+  'Mississauga':   'mississauga',
+  'Brampton':      'brampton',
+  'Markham':       'markham',
+  'Richmond Hill': 'richmond-hill',
+  'Hamilton':      'hamilton',
+  'Scarborough':   'scarborough',
+  'Vaughan':       'vaughan',
+  'Oakville':      'oakville',
+}
 
 
 const SCOPED_CSS = `
@@ -93,6 +108,12 @@ const SCOPED_CSS = `
     color: #C9A24A;
     font-weight: 700;
   }
+  .io-sa-city-link { cursor: pointer; }
+  .io-sa-city-link .io-sa-name {
+    text-decoration: none;
+    text-underline-offset: 3px;
+  }
+  .io-sa-city-link:hover .io-sa-name { text-decoration: underline; }
 
   /* ── Contact card ── */
   .io-sa-card-inner {
@@ -228,14 +249,19 @@ const AreasWeServe = () => {
           {/* ═══ Col 1 Row 2: City grid ═══ */}
           <div ref={gridRef} className="io-sa-grid-wrap">
             <div className="io-sa-grid">
-              {AREAS.map((name) => (
-                <div
-                  key={name}
-                  className={`io-sa-city${name === 'Toronto' ? ' io-sa-city-gold' : ''}`}
-                >
-                  <span className="io-sa-name">{name}</span>
-                </div>
-              ))}
+              {AREAS.map((name) => {
+                const slug = AREA_SLUGS[name]
+                const className = `io-sa-city${slug ? ' io-sa-city-gold io-sa-city-link' : ''}`
+                return slug ? (
+                  <Link key={name} to={`/service-areas/${slug}`} className={className}>
+                    <span className="io-sa-name">{name}</span>
+                  </Link>
+                ) : (
+                  <div key={name} className={className}>
+                    <span className="io-sa-name">{name}</span>
+                  </div>
+                )
+              })}
             </div>
           </div>
 

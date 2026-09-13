@@ -1,57 +1,103 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://ironoak.netlify.app/</loc>
+    <loc>https://www.ironoakproperties.ca/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <url>
-    <loc>https://ironoak.netlify.app/services/property-maintenance-repairs</loc>
+    <loc>https://www.ironoakproperties.ca/services/property-maintenance-repairs</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ironoak.netlify.app/services/capital-project-management</loc>
+    <loc>https://www.ironoakproperties.ca/services/capital-project-management</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ironoak.netlify.app/services/interior-finishing</loc>
+    <loc>https://www.ironoakproperties.ca/services/interior-finishing</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ironoak.netlify.app/services/installations-property-systems</loc>
+    <loc>https://www.ironoakproperties.ca/services/installations-property-systems</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ironoak.netlify.app/services/exterior-outdoor-improvements</loc>
+    <loc>https://www.ironoakproperties.ca/services/exterior-outdoor-improvements</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://ironoak.netlify.app/insights</loc>
+    <loc>https://www.ironoakproperties.ca/service-areas/toronto</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.ironoakproperties.ca/service-areas/mississauga</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.ironoakproperties.ca/service-areas/brampton</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.ironoakproperties.ca/service-areas/markham</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.ironoakproperties.ca/service-areas/richmond-hill</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.ironoakproperties.ca/service-areas/hamilton</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.ironoakproperties.ca/service-areas/scarborough</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.ironoakproperties.ca/service-areas/vaughan</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.ironoakproperties.ca/service-areas/oakville</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.ironoakproperties.ca/insights</loc>
     <lastmod>2026-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://ironoak.netlify.app/insights/how-to-plan-a-multi-site-property-upgrade</loc>
+    <loc>https://www.ironoakproperties.ca/insights/how-to-plan-a-multi-site-property-upgrade</loc>
     <lastmod>2026-07-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://ironoak.netlify.app/insights/preventative-maintenance-checklist-for-condominiums</loc>
+    <loc>https://www.ironoakproperties.ca/insights/preventative-maintenance-checklist-for-condominiums</loc>
     <lastmod>2026-07-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://ironoak.netlify.app/insights/when-to-replace-commercial-carpet-and-wallcoverings</loc>
+    <loc>https://www.ironoakproperties.ca/insights/when-to-replace-commercial-carpet-and-wallcoverings</loc>
     <lastmod>2026-07-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

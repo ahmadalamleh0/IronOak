@@ -8,6 +8,7 @@ import ScrollToTop from './components/ScrollToTop/ScrollToTop.jsx'
 // none of this (RichServiceTemplate, article/insights rendering) is needed
 // until the visitor actually navigates there.
 const ServicePage  = lazy(() => import('./pages/ServicePage.jsx'))
+const LocationPage = lazy(() => import('./pages/LocationPage.jsx'))
 const InsightsPage = lazy(() => import('./pages/InsightsPage.jsx'))
 const ArticlePage  = lazy(() => import('./pages/ArticlePage.jsx'))
 
@@ -22,6 +23,7 @@ function App() {
         {/* Old slugs — redirect to the renamed/combined canonical route, no duplicate indexable page */}
         <Route path="/services/construction-project-management" element={<Navigate to="/services/capital-project-management" replace />} />
         <Route path="/services/specialty-custom-projects" element={<Navigate to="/services/capital-project-management" replace />} />
+        <Route path="/service-areas/:slug" element={<LocationPage />} />
         <Route path="/insights"        element={<InsightsPage />} />
         <Route path="/insights/:slug"  element={<ArticlePage />} />
         <Route path="*"                element={<NotFound />} />
