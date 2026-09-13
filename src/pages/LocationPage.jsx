@@ -8,12 +8,16 @@ import {
   LOCATION_SERVICES,
   LOCATION_PROPERTY_TYPES,
   LOCATION_PROCESS,
+  MAINTENANCE_VS_PROJECTS,
+  QUOTE_CHECKLIST,
+  LOCATION_FAQS_SHARED,
   getLocationBySlug,
 } from '../data/locationPages.js'
 import { SITE_URL, BUSINESS_NAME } from '../config/site.js'
 
-// Matches the phoneDisplay/phoneHref convention used in servicePages.js richContent
-const PHONE_DISPLAY = '(416) 570-9074'
+// Matches the phone number used across the site; formatted with a space
+// instead of a hyphen since this page's copy avoids hyphens throughout.
+const PHONE_DISPLAY = '(416) 570 9074'
 const PHONE_HREF = 'tel:+14165709074'
 
 /* Same visual language as RichServiceTemplate.jsx (cream / navy / gold) so a
@@ -41,7 +45,7 @@ const CSS = `
 
 .lp-eyebrow { font-size: 0.64rem; font-weight: 800; letter-spacing: 0.28em; text-transform: uppercase; color: #E8C97A; margin: 0 0 16px; }
 .lp-h1 { font-family: "Inter Tight", Inter, Arial, sans-serif; font-size: clamp(2.2rem, 5vw, 3.6rem); font-weight: 900; letter-spacing: -0.035em; line-height: 1.03; color: #F4F1EA; margin: 0 0 20px; max-width: 760px; }
-.lp-hero-desc { font-size: clamp(0.92rem, 1.4vw, 1.05rem); line-height: 1.72; color: rgba(244,241,234,0.70); max-width: 560px; margin: 0 0 30px; }
+.lp-hero-desc { font-size: clamp(0.92rem, 1.4vw, 1.05rem); line-height: 1.72; color: rgba(244,241,234,0.70); max-width: 580px; margin: 0 0 30px; }
 .lp-hero-ctas { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
 
 .lp-btn-primary {
@@ -64,39 +68,56 @@ const CSS = `
 .lp-btn-ghost:focus-visible { outline: 2px solid rgba(201,162,74,0.75); outline-offset: 3px; }
 
 /* ── Sections ──────────────────────────────────────────────── */
-.lp-section { padding: clamp(52px, 7vh, 80px) 0; }
+.lp-section { padding: clamp(52px, 7vh, 84px) 0; }
 .lp-section-alt { background: #EAE6D9; }
 .lp-section-dark { background: #07111D; color: #F4F1EA; }
+.lp-section-head { max-width: 680px; margin: 0 0 clamp(28px, 4vh, 40px); }
 .lp-section-eyebrow { font-size: 0.62rem; font-weight: 800; letter-spacing: 0.28em; text-transform: uppercase; color: #A9802F; margin: 0 0 14px; }
 .lp-section-dark .lp-section-eyebrow { color: #E8C97A; }
-.lp-h2 { font-family: "Inter Tight", Inter, Arial, sans-serif; font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 900; letter-spacing: -0.03em; line-height: 1.12; color: #07111D; margin: 0 0 18px; }
+.lp-h2 { font-family: "Inter Tight", Inter, Arial, sans-serif; font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 900; letter-spacing: -0.03em; line-height: 1.12; color: #07111D; margin: 0 0 16px; }
 .lp-section-dark .lp-h2 { color: #F4F1EA; }
-.lp-section-body { font-size: clamp(0.88rem, 1.3vw, 0.98rem); line-height: 1.76; color: rgba(7,17,29,0.58); max-width: 640px; margin: 0 0 16px; }
-.lp-section-body:last-child { margin-bottom: 0; }
+.lp-h3 { font-family: "Inter Tight", Inter, Arial, sans-serif; font-size: clamp(1.05rem, 1.8vw, 1.25rem); font-weight: 800; letter-spacing: -0.02em; color: #07111D; margin: clamp(36px, 5vh, 48px) 0 4px; }
+.lp-section-dark .lp-h3 { color: #F4F1EA; }
+.lp-section-body { font-size: clamp(0.88rem, 1.3vw, 0.98rem); line-height: 1.78; color: rgba(7,17,29,0.58); max-width: 640px; margin: 0; }
 .lp-section-dark .lp-section-body { color: rgba(244,241,234,0.60); }
 
-/* ── Services grid ─────────────────────────────────────────── */
-.lp-svc-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: clamp(24px, 3.5vh, 34px); }
-.lp-svc-card {
-  display: flex; flex-direction: column; gap: 8px; padding: clamp(18px, 2.2vw, 24px);
-  border: 1px solid rgba(9,19,31,0.10); border-radius: 12px; background: #FDFCF8;
-  text-decoration: none; transition: border-color 200ms ease, transform 200ms ease, box-shadow 200ms ease;
+/* ── Services (alternating image + content rows) ──────────────── */
+.lp-svc-list { display: flex; flex-direction: column; gap: clamp(44px, 6vh, 68px); margin-top: clamp(8px, 2vh, 12px); }
+.lp-svc-row { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: clamp(28px, 4vw, 52px); align-items: center; }
+.lp-svc-row.lp-svc-row-rev { grid-template-columns: 1.15fr 0.85fr; }
+.lp-svc-row.lp-svc-row-rev .lp-svc-img-wrap { order: 2; }
+.lp-svc-img-wrap { border-radius: 14px; overflow: hidden; aspect-ratio: 4 / 3; box-shadow: 0 16px 36px rgba(7,17,29,0.14); border: 1px solid rgba(7,17,29,0.08); }
+.lp-svc-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.lp-svc-title { font-family: "Inter Tight", Inter, Arial, sans-serif; font-size: clamp(1.2rem, 2vw, 1.5rem); font-weight: 900; letter-spacing: -0.02em; color: #07111D; margin: 0 0 10px; }
+.lp-svc-summary { font-size: 0.86rem; font-weight: 700; color: #A9802F; margin: 0 0 12px; }
+.lp-svc-body { font-size: 0.90rem; line-height: 1.75; color: rgba(7,17,29,0.58); margin: 0 0 18px; }
+.lp-svc-includes { list-style: none; margin: 0 0 20px; padding: 0; display: flex; flex-direction: column; gap: 9px; }
+.lp-svc-includes li { display: flex; align-items: flex-start; gap: 10px; font-size: 0.85rem; color: rgba(7,17,29,0.68); line-height: 1.5; }
+.lp-svc-dot { flex-shrink: 0; width: 6px; height: 6px; border-radius: 50%; background: #A9802F; margin-top: 7px; }
+.lp-svc-link { display: inline-flex; align-items: center; gap: 8px; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.05em; color: #A9802F; text-decoration: none; border-bottom: 1.5px solid rgba(169,128,47,0.30); padding-bottom: 3px; transition: color 180ms ease, border-color 180ms ease, gap 180ms ease; }
+.lp-svc-link:hover { color: #8a6a26; gap: 12px; border-color: rgba(169,128,47,0.6); }
+@media (max-width: 760px) {
+  .lp-svc-row, .lp-svc-row.lp-svc-row-rev { grid-template-columns: 1fr; }
+  .lp-svc-row.lp-svc-row-rev .lp-svc-img-wrap { order: 0; }
+  .lp-svc-img-wrap { max-height: 280px; }
 }
-.lp-svc-card:hover { border-color: rgba(201,162,74,0.40); transform: translateY(-2px); box-shadow: 0 10px 26px rgba(7,17,29,0.08); }
-.lp-svc-card:focus-visible { outline: 2px solid rgba(201,162,74,0.6); outline-offset: 3px; }
-.lp-svc-title { font-family: "Inter Tight", Inter, Arial, sans-serif; font-size: 1.0rem; font-weight: 800; letter-spacing: -0.015em; color: #07111D; }
-.lp-svc-blurb { font-size: 0.83rem; line-height: 1.55; color: rgba(7,17,29,0.55); }
-.lp-svc-arrow { margin-top: auto; padding-top: 6px; color: #A9802F; font-size: 0.8rem; transition: transform 200ms ease; }
-.lp-svc-card:hover .lp-svc-arrow { transform: translateX(4px); }
-@media (max-width: 640px) { .lp-svc-grid { grid-template-columns: 1fr; } }
 
 /* ── Property types ────────────────────────────────────────── */
-.lp-prop-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-top: clamp(24px, 3.5vh, 34px); }
-.lp-prop-card { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 10px; padding: 20px 12px; border-radius: 12px; border: 1px solid rgba(9,19,31,0.08); background: #FDFCF8; }
-.lp-prop-emoji { font-size: 1.6rem; line-height: 1; }
-.lp-prop-label { font-size: 0.78rem; font-weight: 700; color: #07111D; line-height: 1.3; }
-@media (max-width: 900px) { .lp-prop-grid { grid-template-columns: repeat(3, 1fr); } }
-@media (max-width: 560px) { .lp-prop-grid { grid-template-columns: repeat(2, 1fr); } }
+.lp-prop-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: clamp(24px, 3.5vh, 34px); }
+.lp-prop-card { display: flex; flex-direction: column; align-items: flex-start; text-align: left; gap: 8px; padding: clamp(18px, 2.2vw, 22px); border-radius: 12px; border: 1px solid rgba(9,19,31,0.08); background: #FDFCF8; }
+.lp-prop-emoji { font-size: 1.5rem; line-height: 1; }
+.lp-prop-label { font-family: "Inter Tight", Inter, Arial, sans-serif; font-size: 0.92rem; font-weight: 800; color: #07111D; line-height: 1.3; }
+.lp-prop-body { font-size: 0.82rem; line-height: 1.55; color: rgba(7,17,29,0.55); margin: 0; }
+@media (max-width: 820px) { .lp-prop-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px) { .lp-prop-grid { grid-template-columns: 1fr; } }
+
+/* ── Maintenance vs projects ───────────────────────────────── */
+.lp-compare-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(16px, 3vw, 24px); margin-top: clamp(24px, 3.5vh, 34px); }
+.lp-compare-card { padding: clamp(22px, 3vw, 28px); border-radius: 14px; border: 1px solid rgba(9,19,31,0.08); background: #FDFCF8; }
+.lp-compare-title { font-family: "Inter Tight", Inter, Arial, sans-serif; font-weight: 800; font-size: 1.05rem; color: #07111D; margin: 0 0 10px; }
+.lp-compare-body { font-size: 0.86rem; line-height: 1.68; color: rgba(7,17,29,0.56); margin: 0; }
+.lp-compare-closing { font-size: 0.88rem; line-height: 1.72; color: rgba(7,17,29,0.56); margin: clamp(22px, 3vh, 28px) 0 0; max-width: 720px; }
+@media (max-width: 700px) { .lp-compare-grid { grid-template-columns: 1fr; } }
 
 /* ── Process ───────────────────────────────────────────────── */
 .lp-process-row { display: flex; flex-wrap: wrap; gap: clamp(16px, 2.5vw, 24px); margin-top: clamp(24px, 3.5vh, 34px); }
@@ -105,8 +126,16 @@ const CSS = `
 .lp-process-label { font-family: "Inter Tight", Inter, Arial, sans-serif; font-size: 1.0rem; font-weight: 800; letter-spacing: -0.015em; color: #F4F1EA; margin: 0 0 8px; }
 .lp-process-body { font-size: 0.83rem; line-height: 1.58; color: rgba(244,241,234,0.55); margin: 0; }
 
+/* ── Quote checklist ───────────────────────────────────────── */
+.lp-checklist { margin-top: clamp(20px, 3vh, 26px); display: flex; flex-direction: column; }
+.lp-checklist-item { display: flex; gap: 16px; padding: 16px 0; border-top: 1px solid rgba(244,241,234,0.08); }
+.lp-checklist-item:first-child { border-top: none; }
+.lp-checklist-num { flex-shrink: 0; width: 24px; font-size: 0.78rem; font-weight: 800; color: #E8C97A; padding-top: 1px; }
+.lp-checklist-label { font-family: "Inter Tight", Inter, Arial, sans-serif; font-weight: 800; font-size: 0.90rem; color: #F4F1EA; margin: 0 0 4px; }
+.lp-checklist-body { font-size: 0.83rem; line-height: 1.6; color: rgba(244,241,234,0.55); margin: 0; }
+
 /* ── FAQ ───────────────────────────────────────────────────── */
-.lp-faq-list { margin-top: clamp(24px, 3.5vh, 34px); display: flex; flex-direction: column; gap: 12px; max-width: 760px; }
+.lp-faq-list { margin-top: clamp(24px, 3.5vh, 34px); display: flex; flex-direction: column; gap: 12px; max-width: 780px; }
 .lp-faq-item { background: #FDFCF8; border: 1px solid rgba(9,19,31,0.08); border-radius: 10px; overflow: hidden; }
 .lp-faq-q { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 20px; background: none; border: none; cursor: pointer; text-align: left; font-family: inherit; font-size: 0.92rem; font-weight: 700; color: #07111D; }
 .lp-faq-q:focus-visible { outline: 2px solid rgba(201,162,74,0.6); outline-offset: -2px; }
@@ -115,7 +144,7 @@ const CSS = `
 .lp-faq-a-wrap { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 280ms cubic-bezier(0.16,1,0.3,1); }
 .lp-faq-a-wrap.is-open { grid-template-rows: 1fr; }
 .lp-faq-a-inner { overflow: hidden; }
-.lp-faq-a-inner p { margin: 0; padding: 0 20px 18px; font-size: 0.86rem; line-height: 1.68; color: rgba(7,17,29,0.55); }
+.lp-faq-a-inner p { margin: 0; padding: 0 20px 18px; font-size: 0.86rem; line-height: 1.7; color: rgba(7,17,29,0.55); }
 @media (prefers-reduced-motion: reduce) { .lp-faq-a-wrap { transition: none; } }
 
 /* ── Nearby areas ──────────────────────────────────────────── */
@@ -138,7 +167,7 @@ const CSS = `
 .lp-final-phone:hover { color: #E8C97A; border-color: rgba(201,162,74,0.6); }
 .lp-final-phone:focus-visible { outline: 2px solid rgba(201,162,74,0.8); outline-offset: 3px; }
 
-/* ── Not-found state ───────────────────────────────────────── */
+/* ── Not found state ───────────────────────────────────────── */
 .lp-notfound { min-height: 100dvh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 120px 24px 80px; text-align: center; background: #07111D; }
 .lp-notfound-code { font-size: 0.60rem; font-weight: 800; letter-spacing: 0.30em; text-transform: uppercase; color: rgba(201,162,74,0.55); margin: 0 0 20px; }
 .lp-notfound-h { font-family: "Inter Tight", Inter, Arial, sans-serif; font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; letter-spacing: -0.04em; line-height: 0.98; color: #F4F1EA; margin: 0 0 20px; }
@@ -260,6 +289,7 @@ export default function LocationPage() {
   }
 
   const nearby = LOCATION_PAGES.filter((l) => l.slug !== location.slug)
+  const faqs = [...LOCATION_FAQS_SHARED, location.localFaq]
 
   return (
     <>
@@ -281,7 +311,7 @@ export default function LocationPage() {
             </nav>
             <p className="lp-eyebrow">{location.heroSupportingLine}</p>
             <h1 className="lp-h1" id="lp-page-title">Property Services in {location.city}</h1>
-            <p className="lp-hero-desc">{location.intro[0]}</p>
+            <p className="lp-hero-desc">{location.heroIntro}</p>
             <div className="lp-hero-ctas">
               <Link to="/#contact" className="lp-btn-primary">Request a Quote</Link>
               <Link to="/#areas-we-serve" className="lp-btn-ghost">View All Service Areas</Link>
@@ -289,56 +319,98 @@ export default function LocationPage() {
           </div>
         </section>
 
-        {/* ════ INTRO ════ */}
-        <section className="lp-section" aria-label={`Property services overview for ${location.city}`}>
+        {/* ════ OVERVIEW ════ */}
+        <section className="lp-section" aria-label="Overview">
           <div className="lp-inner">
-            <p className="lp-section-eyebrow">Local Overview</p>
-            <h2 className="lp-h2">Supporting Property Owners &amp; Managers in {location.city}</h2>
-            <p className="lp-section-body">{location.intro[1]}</p>
-          </div>
-        </section>
-
-        {/* ════ SERVICES ════ */}
-        <section className="lp-section lp-section-alt" aria-label={`Services available in ${location.city}`}>
-          <div className="lp-inner">
-            <p className="lp-section-eyebrow">What We Offer</p>
-            <h2 className="lp-h2">Services in {location.city}</h2>
-            <p className="lp-section-body">The same coordinated services IronOak provides across Toronto &amp; the GTA, available for properties in {location.city}.</p>
-            <div className="lp-svc-grid">
-              {LOCATION_SERVICES.map((svc) => (
-                <Link key={svc.slug} to={`/services/${svc.slug}`} className="lp-svc-card">
-                  <span className="lp-svc-title">{svc.title}</span>
-                  <span className="lp-svc-blurb">{svc.blurb}</span>
-                  <span className="lp-svc-arrow" aria-hidden="true">Learn more →</span>
-                </Link>
-              ))}
+            <div className="lp-section-head">
+              <p className="lp-section-eyebrow">Local Overview</p>
+              <h2 className="lp-h2">Supporting Property Owners and Managers</h2>
+              <p className="lp-section-body">{location.overview}</p>
             </div>
           </div>
         </section>
 
-        {/* ════ PROPERTY TYPES ════ */}
-        <section className="lp-section" aria-label={`Property types supported in ${location.city}`}>
+        {/* ════ SERVICES ════ */}
+        <section className="lp-section lp-section-alt" aria-label="Services">
           <div className="lp-inner">
-            <p className="lp-section-eyebrow">Who We Support</p>
-            <h2 className="lp-h2">Properties We Support in {location.city}</h2>
-            <p className="lp-section-body">{location.areaNote}</p>
-            <div className="lp-prop-grid" role="list">
-              {LOCATION_PROPERTY_TYPES.map((p) => (
-                <div key={p.label} className="lp-prop-card" role="listitem">
-                  <span className="lp-prop-emoji" aria-hidden="true">{p.emoji}</span>
-                  <span className="lp-prop-label">{p.label}</span>
+            <div className="lp-section-head">
+              <p className="lp-section-eyebrow">What We Offer</p>
+              <h2 className="lp-h2">Services We Provide</h2>
+              <p className="lp-section-body">The same five coordinated services IronOak provides across Toronto and the GTA, explained below so you know what each one actually covers before you reach out.</p>
+            </div>
+            <div className="lp-svc-list">
+              {LOCATION_SERVICES.map((svc, i) => (
+                <div key={svc.slug} className={`lp-svc-row${i % 2 === 1 ? ' lp-svc-row-rev' : ''}`}>
+                  <div className="lp-svc-img-wrap">
+                    <img src={svc.image} alt={svc.imageAlt} loading="lazy" decoding="async" />
+                  </div>
+                  <div className="lp-svc-content">
+                    <h3 className="lp-svc-title">{svc.title}</h3>
+                    <p className="lp-svc-summary">{svc.summary}</p>
+                    <p className="lp-svc-body">{svc.body}</p>
+                    <ul className="lp-svc-includes">
+                      {svc.includes.map((item) => (
+                        <li key={item}><span className="lp-svc-dot" aria-hidden="true" />{item}</li>
+                      ))}
+                    </ul>
+                    <Link to={`/services/${svc.slug}`} className="lp-svc-link">
+                      Full service details <span aria-hidden="true">→</span>
+                    </Link>
+                  </div>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* ════ PROCESS ════ */}
-        <section className="lp-section lp-section-dark" aria-label="How a quote and property assessment works">
+        {/* ════ PROPERTY TYPES ════ */}
+        <section className="lp-section" aria-label="Property types">
           <div className="lp-inner">
-            <p className="lp-section-eyebrow">How It Works</p>
-            <h2 className="lp-h2">Requesting a Quote &amp; Property Assessment</h2>
-            <p className="lp-section-body">The same straightforward process for every {location.city} property, from first request to completed work.</p>
+            <div className="lp-section-head">
+              <p className="lp-section-eyebrow">Who We Support</p>
+              <h2 className="lp-h2">Properties We Support</h2>
+              <p className="lp-section-body">{location.areaNote}</p>
+            </div>
+            <div className="lp-prop-grid" role="list">
+              {LOCATION_PROPERTY_TYPES.map((p) => (
+                <div key={p.label} className="lp-prop-card" role="listitem">
+                  <span className="lp-prop-emoji" aria-hidden="true">{p.emoji}</span>
+                  <span className="lp-prop-label">{p.label}</span>
+                  <p className="lp-prop-body">{p.body}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ════ MAINTENANCE VS PROJECTS ════ */}
+        <section className="lp-section lp-section-alt" aria-label="Ongoing maintenance or a single project">
+          <div className="lp-inner">
+            <div className="lp-section-head">
+              <p className="lp-section-eyebrow">How Requests Are Scoped</p>
+              <h2 className="lp-h2">{MAINTENANCE_VS_PROJECTS.heading}</h2>
+              <p className="lp-section-body">{MAINTENANCE_VS_PROJECTS.intro}</p>
+            </div>
+            <div className="lp-compare-grid">
+              {MAINTENANCE_VS_PROJECTS.columns.map((col) => (
+                <div key={col.title} className="lp-compare-card">
+                  <p className="lp-compare-title">{col.title}</p>
+                  <p className="lp-compare-body">{col.body}</p>
+                </div>
+              ))}
+            </div>
+            <p className="lp-compare-closing">{MAINTENANCE_VS_PROJECTS.closing}</p>
+          </div>
+        </section>
+
+        {/* ════ PROCESS + QUOTE CHECKLIST ════ */}
+        <section className="lp-section lp-section-dark" aria-label="Requesting a quote and property assessment">
+          <div className="lp-inner">
+            <div className="lp-section-head">
+              <p className="lp-section-eyebrow">How It Works</p>
+              <h2 className="lp-h2">Requesting a Quote and Property Assessment</h2>
+              <p className="lp-section-body">The same straightforward process applies to every property, from a single repair to a larger project.</p>
+            </div>
             <div className="lp-process-row" role="list">
               {LOCATION_PROCESS.map((step) => (
                 <div key={step.num} className="lp-process-step" role="listitem">
@@ -348,16 +420,32 @@ export default function LocationPage() {
                 </div>
               ))}
             </div>
+
+            <h3 className="lp-h3">{QUOTE_CHECKLIST.heading}</h3>
+            <p className="lp-section-body">{QUOTE_CHECKLIST.intro}</p>
+            <div className="lp-checklist">
+              {QUOTE_CHECKLIST.items.map((item, i) => (
+                <div key={item.label} className="lp-checklist-item">
+                  <span className="lp-checklist-num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+                  <div>
+                    <p className="lp-checklist-label">{item.label}</p>
+                    <p className="lp-checklist-body">{item.body}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
         {/* ════ FAQ ════ */}
         <section className="lp-section" aria-label="Frequently asked questions">
           <div className="lp-inner">
-            <p className="lp-section-eyebrow">FAQ</p>
-            <h2 className="lp-h2">Common Questions — {location.city}</h2>
+            <div className="lp-section-head">
+              <p className="lp-section-eyebrow">FAQ</p>
+              <h2 className="lp-h2">Frequently Asked Questions</h2>
+            </div>
             <div className="lp-faq-list">
-              {location.faqs.map((item, i) => (
+              {faqs.map((item, i) => (
                 <FaqItem key={item.q} q={item.q} a={item.a} idx={i} isOpen={openFaq === i} onToggle={() => setOpenFaq(openFaq === i ? -1 : i)} />
               ))}
             </div>
