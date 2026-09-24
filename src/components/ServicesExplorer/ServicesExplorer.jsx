@@ -139,20 +139,30 @@ const CSS = `
 }
 .io-svc-icon {
   flex-shrink: 0;
+  /* Definite width AND height (not width:auto) — an inline SVG forced to
+     width:100% while its parent's width is itself "auto" is a circular
+     sizing reference. Browsers resolve that by falling back to the SVG's
+     native pixel size (its viewBox dimensions), which is far bigger than
+     this box, so overflow:hidden was clipping most of it — including
+     whichever part the CCTV camera's rotate() animation swung into at
+     any given moment. A fixed square box removes the ambiguity, and
+     preserveAspectRatio (SVG default: meet) letterboxes non-square
+     artwork inside it without cropping anything. */
+  width: clamp(40px, 8vw, 52px);
   height: clamp(40px, 8vw, 52px);
-  width: auto;
-  max-width: 60px;
   display: flex; align-items: center; justify-content: center;
-  overflow: hidden;
+  /* Visible, not hidden: some of these illustrations animate (rotate,
+     translate) beyond their own viewBox, so a hard clip can still cut
+     off part of the motion even once sizing is correct. There's enough
+     surrounding gap in the row that a small icon briefly exceeding its
+     box during motion reads as intentional, not broken. */
+  overflow: visible;
 }
 .io-svc-icon svg, .io-svc-icon object, .io-svc-icon img {
   width: 100% !important; height: 100% !important;
   object-fit: contain !important;
   display: block;
 }
-/* The camera illustration sits high in its own viewBox; nudge it down
-   slightly so it reads as centered next to the title. */
-.io-svc-icon--camera { margin-top: 34px; }
 .io-svc-title {
   font-family: "Inter Tight", Inter, Arial, sans-serif;
   font-weight: 900; letter-spacing: -0.02em;
@@ -231,10 +241,7 @@ export default function ServicesExplorer() {
 
                 <div className="io-svc-content">
                   <div className="io-svc-title-row">
-                    <span
-                      className={`io-svc-icon${svc.id === 'installations-property-systems' ? ' io-svc-icon--camera' : ''}`}
-                      aria-hidden="true"
-                    >
+                    <span className="io-svc-icon" aria-hidden="true">
                       {ILLUSTRATIONS[i]}
                     </span>
                     <h3 className="io-svc-title">{svc.title}</h3>
