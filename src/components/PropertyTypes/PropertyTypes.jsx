@@ -136,16 +136,7 @@ const PropertyTypes = () => {
       <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
 
         {/* ── Header ── */}
-        <div ref={headerRef} style={{ maxWidth: '540px', marginBottom: '44px' }}>
-          <p style={{
-            fontFamily: '"Manrope", system-ui, sans-serif',
-            fontSize: '0.62rem', fontWeight: 700,
-            letterSpacing: '0.28em', textTransform: 'uppercase',
-            color: '#C9A24A', margin: '0 0 14px',
-          }}>
-            Who We Support
-          </p>
-
+        <div ref={headerRef} style={{ maxWidth: '540px', margin: '0 auto 44px', textAlign: 'center' }}>
           <h2 style={{
             fontFamily: '"Inter Tight", Inter, Arial, sans-serif',
             fontWeight: 900,

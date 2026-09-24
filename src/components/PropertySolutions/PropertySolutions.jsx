@@ -281,15 +281,6 @@ const PropertySolutions = () => {
         {/* Section header */}
         <div ref={headerRef} style={{ marginBottom: '32px' }}>
 
-          <p style={{
-            fontFamily: '"Manrope", system-ui, sans-serif',
-            fontSize: '0.62rem', fontWeight: 700,
-            letterSpacing: '0.30em', textTransform: 'uppercase',
-            color: '#C9A24A', margin: '0 0 10px',
-          }}>
-            Our Capabilities
-          </p>
-
           <h2 style={{
             fontFamily: '"Inter Tight", Inter, Arial, sans-serif',
             fontWeight: 900,

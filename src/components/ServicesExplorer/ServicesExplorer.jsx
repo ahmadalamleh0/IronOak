@@ -152,7 +152,7 @@ const CSS = `
 }
 /* The camera illustration sits high in its own viewBox; nudge it down
    slightly so it reads as centered next to the title. */
-.io-svc-icon--camera { margin-top: 8px; }
+.io-svc-icon--camera { margin-top: 20px; }
 .io-svc-title {
   font-family: "Inter Tight", Inter, Arial, sans-serif;
   font-weight: 900; letter-spacing: -0.02em;

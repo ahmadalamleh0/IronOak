@@ -208,73 +208,101 @@ const Stars = ({ size = 14, gap = 2 }) => (
   </div>
 )
 
-const ReviewCard = ({ name, initials, quote, tag, cardRef }) => (
-  <div ref={cardRef} className="io-rev-card">
-    {/* Top row: avatar + name + Google icon */}
-    <div style={{ display: 'flex', alignItems: 'center', marginBottom: '13px' }}>
-      {/* Avatar */}
-      <div
-        style={{
-          width: '36px', height: '36px', borderRadius: '50%',
-          background: 'linear-gradient(145deg, #1D2E44, #0A1628)',
-          border: '1.5px solid rgba(201,162,74,0.38)',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          flexShrink: 0, marginRight: '10px',
-        }}
-      >
-        <span style={{
+const ReviewCard = ({ name, initials, quote, tag, cardRef }) => {
+  const [expanded, setExpanded] = useState(false)
+  // Roughly one card's worth of text before it's worth clamping + offering "See more"
+  const needsClamp = quote.length > 180
+
+  return (
+    <div ref={cardRef} className="io-rev-card">
+      {/* Top row: avatar + name + Google icon */}
+      <div style={{ display: 'flex', alignItems: 'center', marginBottom: '13px' }}>
+        {/* Avatar */}
+        <div
+          style={{
+            width: '36px', height: '36px', borderRadius: '50%',
+            background: 'linear-gradient(145deg, #1D2E44, #0A1628)',
+            border: '1.5px solid rgba(201,162,74,0.38)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            flexShrink: 0, marginRight: '10px',
+          }}
+        >
+          <span style={{
+            fontFamily: '"Manrope", system-ui, sans-serif',
+            fontSize: '0.50rem', fontWeight: 800,
+            letterSpacing: '0.06em', color: '#C9A24A',
+          }}>{initials}</span>
+        </div>
+
+        {/* Name */}
+        <p style={{
+          flex: 1,
           fontFamily: '"Manrope", system-ui, sans-serif',
-          fontSize: '0.50rem', fontWeight: 800,
-          letterSpacing: '0.06em', color: '#C9A24A',
-        }}>{initials}</span>
+          fontSize: '0.78rem', fontWeight: 700,
+          color: '#F4F1EA', margin: 0, lineHeight: 1.2,
+        }}>{name}</p>
+
+        {/* Google G in top-right */}
+        <div style={{ flexShrink: 0, opacity: 0.88, marginLeft: '8px' }}>
+          <GoogleG size={17} />
+        </div>
       </div>
 
-      {/* Name */}
+      {/* Stars */}
+      <Stars size={13} gap={2} />
+
+      {/* Quote — clamped to a short preview until "See more" is pressed */}
       <p style={{
         flex: 1,
         fontFamily: '"Manrope", system-ui, sans-serif',
-        fontSize: '0.78rem', fontWeight: 700,
-        color: '#F4F1EA', margin: 0, lineHeight: 1.2,
-      }}>{name}</p>
+        fontWeight: 400,
+        fontSize: 'clamp(0.875rem, 1.35vw, 0.975rem)',
+        lineHeight: 1.78,
+        color: 'rgba(244,241,234,0.82)',
+        margin: '12px 0 6px',
+        letterSpacing: '0.005em',
+        whiteSpace: 'pre-line',
+        ...(needsClamp && !expanded
+          ? { display: '-webkit-box', WebkitLineClamp: 4, WebkitBoxOrient: 'vertical', overflow: 'hidden' }
+          : null),
+      }}>
+        &ldquo;{quote}&rdquo;
+      </p>
 
-      {/* Google G in top-right */}
-      <div style={{ flexShrink: 0, opacity: 0.88, marginLeft: '8px' }}>
-        <GoogleG size={17} />
-      </div>
+      {needsClamp && (
+        <button
+          type="button"
+          onClick={() => setExpanded((v) => !v)}
+          style={{
+            alignSelf: 'flex-start',
+            fontFamily: '"Manrope", system-ui, sans-serif',
+            fontSize: '0.72rem', fontWeight: 700,
+            color: '#C9A24A',
+            background: 'none', border: 'none', padding: 0,
+            margin: '0 0 12px', cursor: 'pointer',
+            textDecoration: 'underline',
+            textUnderlineOffset: '2px',
+          }}
+        >
+          {expanded ? 'See less' : 'See more'}
+        </button>
+      )}
+
+      {/* Service tag */}
+      <span style={{
+        alignSelf: 'flex-start',
+        fontFamily: '"Manrope", system-ui, sans-serif',
+        fontSize: '0.53rem', fontWeight: 700,
+        letterSpacing: '0.18em', textTransform: 'uppercase',
+        color: '#C9A24A',
+        background: 'rgba(201,162,74,0.09)',
+        border: '1px solid rgba(201,162,74,0.20)',
+        borderRadius: '4px',
+        padding: '4px 8px',
+      }}>{tag}</span>
     </div>
-
-    {/* Stars */}
-    <Stars size={13} gap={2} />
-
-    {/* Quote */}
-    <p style={{
-      flex: 1,
-      fontFamily: '"Manrope", system-ui, sans-serif',
-      fontWeight: 400,
-      fontSize: 'clamp(0.875rem, 1.35vw, 0.975rem)',
-      lineHeight: 1.78,
-      color: 'rgba(244,241,234,0.82)',
-      margin: '12px 0 16px',
-      letterSpacing: '0.005em',
-      whiteSpace: 'pre-line',
-    }}>
-      &ldquo;{quote}&rdquo;
-    </p>
-
-    {/* Service tag */}
-    <span style={{
-      alignSelf: 'flex-start',
-      fontFamily: '"Manrope", system-ui, sans-serif',
-      fontSize: '0.53rem', fontWeight: 700,
-      letterSpacing: '0.18em', textTransform: 'uppercase',
-      color: '#C9A24A',
-      background: 'rgba(201,162,74,0.09)',
-      border: '1px solid rgba(201,162,74,0.20)',
-      borderRadius: '4px',
-      padding: '4px 8px',
-    }}>{tag}</span>
-  </div>
-)
+  )
+}
 
 // ─────────────────────────────────────────────────────────────────
 const Reviews = () => {
@@ -441,11 +469,6 @@ const Reviews = () => {
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
               <Stars size={17} gap={3} />
-              <p style={{
-                fontFamily: '"Manrope", system-ui, sans-serif',
-                fontSize: '0.58rem', fontWeight: 500,
-                color: 'rgba(244,241,234,0.55)', margin: 0,
-              }}>Based on {REVIEW_COUNT} Google reviews</p>
             </div>
           </a>
 
