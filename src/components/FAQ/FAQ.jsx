@@ -5,8 +5,8 @@ const EASE = 'cubic-bezier(0.16,1,0.3,1)'
 
 const FAQS = [
   {
-    q: 'What types of projects does IronOak handle?',
-    a: 'IronOak supports a wide range of property needs, including repairs, maintenance, installations, exterior work, renovations, and custom improvements. Share the full scope of your project and our team will confirm the best approach.',
+    q: 'What types of projects do you handle?',
+    a: 'We support a wide range of property needs, including repairs, maintenance, installations, exterior work, renovations, and custom improvements. Share the full scope of your project and our team will confirm the best approach.',
   },
   {
     q: 'Do you work with both residential and commercial properties?',
@@ -17,8 +17,8 @@ const FAQS = [
     a: 'We serve Toronto and surrounding communities throughout the Greater Toronto Area. Availability may vary depending on the project type and scope.',
   },
   {
-    q: 'Can IronOak coordinate projects involving multiple trades?',
-    a: "Yes. One of IronOak's main advantages is the ability to coordinate several property services through one dependable team and one clear point of contact.",
+    q: 'Can you coordinate projects involving multiple trades?',
+    a: "Yes. One of our main advantages is the ability to coordinate several property services through one dependable team and one clear point of contact.",
   },
   {
     q: 'How quickly can the work begin?',
@@ -170,7 +170,7 @@ const FAQ = () => {
             lineHeight: 1.74, color: '#6F7478',
             margin: 0, maxWidth: '520px',
           }}>
-            Everything you need to know before starting your next property project with IronOak.
+            Everything you need to know before starting your next property project with us.
           </p>
         </div>
 

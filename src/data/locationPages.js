@@ -1,7 +1,7 @@
 /**
  * LOCATION_PAGES — canonical data for each /service-areas/:slug page.
  *
- * These are local SEO landing pages for cities IronOak already lists in the
+ * These are local SEO landing pages for cities already listed in the
  * "Where We Work" area grid (AreasWeServe.jsx) and JSON-LD (SERVICE_AREA_CITIES
  * in config/site.js). Service, property type, process and FAQ content is
  * shared across every page (same real offering everywhere) and sourced from
@@ -58,7 +58,7 @@ export const LOCATION_SERVICES = [
     slug: 'capital-project-management',
     title: 'Capital Projects and Custom Solutions',
     summary: 'Larger improvements and multi site programs managed under one coordinated plan.',
-    body: "Capital projects cover larger scoped work such as lighting rollouts, flooring and wallcovering replacement, CCTV and access control installation across a portfolio, common area upgrades, and custom carpentry or millwork. This service suits owners planning a bigger upgrade or a program that needs to be repeated consistently across several buildings. IronOak typically completes a pilot location first, confirms the approved standard, then coordinates the same scope, schedule and quality across the remaining properties.",
+    body: "Capital projects cover larger scoped work such as lighting rollouts, flooring and wallcovering replacement, CCTV and access control installation across a portfolio, common area upgrades, and custom carpentry or millwork. This service suits owners planning a bigger upgrade or a program that needs to be repeated consistently across several buildings. We typically complete a pilot location first, confirm the approved standard, then coordinate the same scope, schedule and quality across the remaining properties.",
     includes: ['Multi site upgrade and rollout programs', 'Capital improvement and retrofit projects', 'Carpentry and custom millwork', 'Coordinated procurement and trade management', 'Planning through to completion and final review'],
     image: '/services/capital-project-management-hero.jpg',
     imageAlt: 'Modern glass office tower against a city skyline',
@@ -85,11 +85,11 @@ export const LOCATION_PROCESS = [
 
 export const MAINTENANCE_VS_PROJECTS = {
   heading: 'Ongoing Maintenance or a Single Project',
-  intro: 'IronOak supports two different kinds of requests, and many clients move between them over time depending on what the property needs.',
+  intro: 'We support two different kinds of requests, and many clients move between them over time depending on what the property needs.',
   columns: [
     {
       title: 'Ongoing Maintenance',
-      body: 'A recurring arrangement where IronOak provides scheduled upkeep, preventative inspections and responsive support over time. This suits condominium corporations, commercial property managers and portfolio owners who want consistent care across one or several buildings without arranging a separate call every time something comes up.',
+      body: 'A recurring arrangement where we provide scheduled upkeep, preventative inspections and responsive support over time. This suits condominium corporations, commercial property managers and portfolio owners who want consistent care across one or several buildings without arranging a separate call every time something comes up.',
     },
     {
       title: 'Individual Projects',
@@ -101,7 +101,7 @@ export const MAINTENANCE_VS_PROJECTS = {
 
 export const QUOTE_CHECKLIST = {
   heading: 'What to Include When You Request a Quote',
-  intro: 'The more detail IronOak has up front, the faster a property assessment and quote can be prepared.',
+  intro: 'The more detail we have up front, the faster a property assessment and quote can be prepared.',
   items: [
     { label: 'Property type and size', body: 'Whether it is a house, a condominium unit, a commercial building, or a multi unit portfolio, and roughly how large the space or job is.' },
     { label: 'The work you need or the problem you are seeing', body: 'A short description of what is happening or what you would like done is enough to get started.' },
@@ -117,7 +117,7 @@ export const QUOTE_CHECKLIST = {
 export const LOCATION_FAQS_SHARED = [
   {
     q: 'What does a property assessment involve?',
-    a: 'IronOak reviews the property, the issue or scope you have described, and any access or scheduling requirements before confirming a plan. Smaller repairs can often be assessed from the details you provide, while larger or less defined scopes may involve a site visit. Either way, you receive a clear scope and next steps before any work begins, so there are no surprises once work is scheduled.',
+    a: 'We review the property, the issue or scope you have described, and any access or scheduling requirements before confirming a plan. Smaller repairs can often be assessed from the details you provide, while larger or less defined scopes may involve a site visit. Either way, you receive a clear scope and next steps before any work begins, so there are no surprises once work is scheduled.',
   },
   {
     q: 'Can work be coordinated around tenants, residents or business hours?',
@@ -125,7 +125,7 @@ export const LOCATION_FAQS_SHARED = [
   },
   {
     q: 'Do you handle both a single repair and a larger renovation or project?',
-    a: 'Yes. IronOak coordinates one time repairs as well as larger finishing, installation and capital improvement projects, and a property can move between the two as needs change. Requesting a single repair does not commit you to an ongoing arrangement, and an ongoing maintenance client can still request a standalone project whenever one comes up.',
+    a: 'Yes. We coordinate one time repairs as well as larger finishing, installation and capital improvement projects, and a property can move between the two as needs change. Requesting a single repair does not commit you to an ongoing arrangement, and an ongoing maintenance client can still request a standalone project whenever one comes up.',
   },
 ]
 
@@ -138,14 +138,14 @@ export const LOCATION_PAGES = [
     heroSupportingLine: 'Downtown Core • Midtown • North York • Etobicoke',
     meta: {
       title: 'Property Services in Toronto | IronOak Property Services Inc.',
-      description: 'IronOak provides property maintenance, interior finishing, CCTV installation, exterior improvements and capital project services for commercial, condominium and residential properties in Toronto.',
+      description: 'We provide property maintenance, interior finishing, CCTV installation, exterior improvements and capital project services for commercial, condominium and residential properties in Toronto.',
     },
     heroIntro: "Toronto's property stock ranges from dense downtown condominium towers and mixed use commercial buildings to older low rise apartment buildings and retail space in the surrounding neighbourhoods. Property managers and owners across the city are typically balancing tight access windows, resident or tenant schedules, and several buildings at once.",
-    overview: 'IronOak supports property managers, condominium corporations and commercial owners with maintenance, finishing, installation and capital project work, coordinated through a single point of contact so work in an occupied building stays organized from the first call through to completion.',
+    overview: 'We support property managers, condominium corporations and commercial owners with maintenance, finishing, installation and capital project work, coordinated through a single point of contact so work in an occupied building stays organized from the first call through to completion.',
     areaNote: "Toronto's mix of high rise condominiums, commercial towers and older low rise buildings means property needs vary block by block, from routine building maintenance to larger common area and capital upgrades.",
     localFaq: {
-      q: 'Does IronOak provide these services in Toronto?',
-      a: 'Yes. Toronto is one of the areas IronOak actively serves, including the downtown core, midtown and the surrounding districts, alongside the rest of the GTA. Request a quote with your property details and the team will confirm availability and next steps.',
+      q: 'Do you provide these services in Toronto?',
+      a: 'Yes. Toronto is one of the areas we actively serve, including the downtown core, midtown and the surrounding districts, alongside the rest of the GTA. Request a quote with your property details and the team will confirm availability and next steps.',
     },
   },
   {
@@ -156,14 +156,14 @@ export const LOCATION_PAGES = [
     heroSupportingLine: 'City Centre • Meadowvale • Port Credit • Airport Corridor',
     meta: {
       title: 'Property Services in Mississauga | IronOak Property Services Inc.',
-      description: 'IronOak provides property maintenance, interior finishing, CCTV installation, exterior improvements and capital project services for commercial, condominium and industrial properties in Mississauga.',
+      description: 'We provide property maintenance, interior finishing, CCTV installation, exterior improvements and capital project services for commercial, condominium and industrial properties in Mississauga.',
     },
     heroIntro: "Mississauga's property landscape includes dense condominium clusters around City Centre, established residential neighbourhoods, and a large concentration of business parks, commercial plazas and industrial buildings along the airport corridor.",
-    overview: 'IronOak works with condominium corporations, commercial property managers and industrial property owners, coordinating maintenance, finishing, installations and larger project work so every property in a portfolio is handled to the same standard.',
+    overview: 'We work with condominium corporations, commercial property managers and industrial property owners, coordinating maintenance, finishing, installations and larger project work so every property in a portfolio is handled to the same standard.',
     areaNote: 'With a large share of business parks, commercial plazas and industrial space alongside its residential and condominium towers, properties here often call for coordinated support across several very different building types.',
     localFaq: {
-      q: 'Does IronOak provide these services in Mississauga?',
-      a: 'Yes. Mississauga is one of the areas IronOak actively serves, including City Centre, the airport corridor and the surrounding neighbourhoods. Request a quote with your property details and the team will confirm availability and next steps.',
+      q: 'Do you provide these services in Mississauga?',
+      a: 'Yes. Mississauga is one of the areas we actively serve, including City Centre, the airport corridor and the surrounding neighbourhoods. Request a quote with your property details and the team will confirm availability and next steps.',
     },
   },
   {
@@ -174,14 +174,14 @@ export const LOCATION_PAGES = [
     heroSupportingLine: 'Residential Communities • Retail Plazas • Industrial and Logistics',
     meta: {
       title: 'Property Services in Brampton | IronOak Property Services Inc.',
-      description: 'IronOak provides property maintenance, interior finishing, CCTV installation, repairs and capital project services for residential, commercial and industrial properties in Brampton.',
+      description: 'We provide property maintenance, interior finishing, CCTV installation, repairs and capital project services for residential, commercial and industrial properties in Brampton.',
     },
     heroIntro: 'Brampton has grown quickly, with newer residential subdivisions and townhome communities alongside a significant industrial, warehouse and logistics sector, plus retail plazas along the main corridors.',
-    overview: "IronOak supports residential, commercial and industrial property owners with maintenance, finishing, installations and capital project work, coordinated around each property's specific access and operating requirements.",
+    overview: "We support residential, commercial and industrial property owners with maintenance, finishing, installations and capital project work, coordinated around each property's specific access and operating requirements.",
     areaNote: "Brampton's newer residential subdivisions sit alongside a large industrial and logistics sector, so property support here spans everything from townhome communities to warehouse and distribution facilities.",
     localFaq: {
-      q: 'Does IronOak provide these services in Brampton?',
-      a: 'Yes. Brampton is one of the areas IronOak actively serves, including its residential communities and industrial corridors. Request a quote with your property details and the team will confirm availability and next steps.',
+      q: 'Do you provide these services in Brampton?',
+      a: 'Yes. Brampton is one of the areas we actively serve, including its residential communities and industrial corridors. Request a quote with your property details and the team will confirm availability and next steps.',
     },
   },
   {
@@ -192,14 +192,14 @@ export const LOCATION_PAGES = [
     heroSupportingLine: 'Corporate Business Parks • Unionville • Newer Residential Developments',
     meta: {
       title: 'Property Services in Markham | IronOak Property Services Inc.',
-      description: 'IronOak provides property maintenance, interior finishing, CCTV installation, exterior improvements and capital project services for commercial and residential properties in Markham.',
+      description: 'We provide property maintenance, interior finishing, CCTV installation, exterior improvements and capital project services for commercial and residential properties in Markham.',
     },
     heroIntro: 'Markham is known for its concentration of corporate offices and business parks alongside newer condominium and townhome developments, with commercial tenants and property managers often needing finish and installation work completed around active offices.',
-    overview: 'IronOak supports commercial property managers, corporate landlords and residential property owners with maintenance, interior finishing, installations and capital project work, scheduled around business hours and occupancy.',
+    overview: 'We support commercial property managers, corporate landlords and residential property owners with maintenance, interior finishing, installations and capital project work, scheduled around business hours and occupancy.',
     areaNote: "Markham's mix of corporate business parks and newer residential developments means property work often needs to be scheduled carefully around active offices and occupied units.",
     localFaq: {
-      q: 'Does IronOak provide these services in Markham?',
-      a: 'Yes. Markham is one of the areas IronOak actively serves, including its business parks and residential communities. Request a quote with your property details and the team will confirm availability and next steps.',
+      q: 'Do you provide these services in Markham?',
+      a: 'Yes. Markham is one of the areas we actively serve, including its business parks and residential communities. Request a quote with your property details and the team will confirm availability and next steps.',
     },
   },
   {
@@ -210,14 +210,14 @@ export const LOCATION_PAGES = [
     heroSupportingLine: 'Established Residential Neighbourhoods • Mid Rise Condominiums',
     meta: {
       title: 'Property Services in Richmond Hill | IronOak Property Services Inc.',
-      description: 'IronOak provides property maintenance, interior finishing, CCTV installation, exterior improvements and capital project services for residential and condominium properties in Richmond Hill.',
+      description: 'We provide property maintenance, interior finishing, CCTV installation, exterior improvements and capital project services for residential and condominium properties in Richmond Hill.',
     },
     heroIntro: 'Richmond Hill is an established community with a mix of single family homes, townhomes and mid rise condominium buildings, plus neighbourhood retail plazas.',
-    overview: 'IronOak supports condominium corporations, residential property owners and neighbourhood commercial properties with maintenance, finishing, installations and project work, coordinated from the first assessment through to completion.',
+    overview: 'We support condominium corporations, residential property owners and neighbourhood commercial properties with maintenance, finishing, installations and project work, coordinated from the first assessment through to completion.',
     areaNote: "Richmond Hill's established neighbourhoods and mid rise condominium buildings typically call for a mix of routine maintenance and periodic common area finishing or system upgrades.",
     localFaq: {
-      q: 'Does IronOak provide these services in Richmond Hill?',
-      a: 'Yes. Richmond Hill is one of the areas IronOak actively serves. Request a quote with your property details and the team will confirm availability and next steps.',
+      q: 'Do you provide these services in Richmond Hill?',
+      a: 'Yes. Richmond Hill is one of the areas we actively serve. Request a quote with your property details and the team will confirm availability and next steps.',
     },
   },
   {
@@ -228,14 +228,14 @@ export const LOCATION_PAGES = [
     heroSupportingLine: 'Downtown Core • Established Commercial and Residential Buildings',
     meta: {
       title: 'Property Services in Hamilton | IronOak Property Services Inc.',
-      description: 'IronOak provides property maintenance, repairs, interior finishing, CCTV installation and capital project services for commercial and residential properties in Hamilton.',
+      description: 'We provide property maintenance, repairs, interior finishing, CCTV installation and capital project services for commercial and residential properties in Hamilton.',
     },
     heroIntro: "Hamilton's building stock includes a large share of older commercial and residential properties alongside a growing downtown condominium market, and many of these buildings benefit from more attentive maintenance and corrective repair work to keep them performing well.",
-    overview: 'IronOak supports property owners and managers with responsive repairs, planned maintenance, interior finishing and building system installations, work that suits a city with a mix of heritage and newer construction.',
+    overview: 'We support property owners and managers with responsive repairs, planned maintenance, interior finishing and building system installations, work that suits a city with a mix of heritage and newer construction.',
     areaNote: "Hamilton's older commercial and residential building stock, alongside its growing condominium market, means property support here often includes both corrective repair work and planned upgrades.",
     localFaq: {
-      q: 'Does IronOak provide these services in Hamilton?',
-      a: 'Yes. Hamilton is one of the areas IronOak actively serves. Request a quote with your property details and the team will confirm availability and next steps.',
+      q: 'Do you provide these services in Hamilton?',
+      a: 'Yes. Hamilton is one of the areas we actively serve. Request a quote with your property details and the team will confirm availability and next steps.',
     },
   },
   {
@@ -246,14 +246,14 @@ export const LOCATION_PAGES = [
     heroSupportingLine: 'High Rise Apartments • Retail Plazas • Established Neighbourhoods',
     meta: {
       title: 'Property Services in Scarborough | IronOak Property Services Inc.',
-      description: 'IronOak provides property maintenance, interior finishing, CCTV installation, exterior improvements and capital project services for residential and commercial properties in Scarborough.',
+      description: 'We provide property maintenance, interior finishing, CCTV installation, exterior improvements and capital project services for residential and commercial properties in Scarborough.',
     },
     heroIntro: 'Scarborough is one of the largest and most diverse parts of Toronto, with a mix of high rise apartment towers, low rise retail plazas and established residential neighbourhoods.',
-    overview: "IronOak supports residential, condominium and commercial property owners with maintenance, finishing, installations and capital project work, coordinated around each building's occupancy and access requirements.",
+    overview: "We support residential, condominium and commercial property owners with maintenance, finishing, installations and capital project work, coordinated around each building's occupancy and access requirements.",
     areaNote: "Scarborough's mix of high rise apartment towers, retail plazas and established residential streets means property needs vary widely, from routine building upkeep to common area and exterior upgrades.",
     localFaq: {
-      q: 'Does IronOak provide these services in Scarborough?',
-      a: 'Yes. Scarborough is one of the areas IronOak actively serves. Request a quote with your property details and the team will confirm availability and next steps.',
+      q: 'Do you provide these services in Scarborough?',
+      a: 'Yes. Scarborough is one of the areas we actively serve. Request a quote with your property details and the team will confirm availability and next steps.',
     },
   },
   {
@@ -264,14 +264,14 @@ export const LOCATION_PAGES = [
     heroSupportingLine: 'Vaughan Metropolitan Centre • Business Parks • Newer Residential Developments',
     meta: {
       title: 'Property Services in Vaughan | IronOak Property Services Inc.',
-      description: 'IronOak provides property maintenance, interior finishing, CCTV installation, exterior improvements and capital project services for commercial, industrial and residential properties in Vaughan.',
+      description: 'We provide property maintenance, interior finishing, CCTV installation, exterior improvements and capital project services for commercial, industrial and residential properties in Vaughan.',
     },
     heroIntro: 'Vaughan has developed rapidly, with large industrial and business park zones alongside newer residential subdivisions and condominium developments around Vaughan Metropolitan Centre.',
-    overview: 'IronOak supports commercial, industrial and residential property owners with maintenance, finishing, installations and capital project work, coordinated to keep newer properties performing as intended.',
+    overview: 'We support commercial, industrial and residential property owners with maintenance, finishing, installations and capital project work, coordinated to keep newer properties performing as intended.',
     areaNote: "Vaughan's mix of industrial and business park zones with newer residential and condominium development means property needs range from warehouse upkeep to common area finishing in newer buildings.",
     localFaq: {
-      q: 'Does IronOak provide these services in Vaughan?',
-      a: 'Yes. Vaughan is one of the areas IronOak actively serves. Request a quote with your property details and the team will confirm availability and next steps.',
+      q: 'Do you provide these services in Vaughan?',
+      a: 'Yes. Vaughan is one of the areas we actively serve. Request a quote with your property details and the team will confirm availability and next steps.',
     },
   },
   {
@@ -282,14 +282,14 @@ export const LOCATION_PAGES = [
     heroSupportingLine: 'Established Residential Neighbourhoods • Lakeside Commercial Properties',
     meta: {
       title: 'Property Services in Oakville | IronOak Property Services Inc.',
-      description: 'IronOak provides property maintenance, interior finishing, CCTV installation, exterior improvements and capital project services for residential and commercial properties in Oakville.',
+      description: 'We provide property maintenance, interior finishing, CCTV installation, exterior improvements and capital project services for residential and commercial properties in Oakville.',
     },
     heroIntro: 'Oakville is an established residential community along Lake Ontario, with a mix of single family homes, townhome communities, low rise condominiums and neighbourhood commercial properties.',
-    overview: 'IronOak supports residential, condominium and commercial property owners with maintenance, finishing, installations and project work, coordinated to fit the standard of the property and the surrounding neighbourhood.',
+    overview: 'We support residential, condominium and commercial property owners with maintenance, finishing, installations and project work, coordinated to fit the standard of the property and the surrounding neighbourhood.',
     areaNote: "Oakville's established neighbourhoods and low rise condominium buildings tend to call for careful, higher finish maintenance and upgrade work alongside routine upkeep.",
     localFaq: {
-      q: 'Does IronOak provide these services in Oakville?',
-      a: 'Yes. Oakville is one of the areas IronOak actively serves. Request a quote with your property details and the team will confirm availability and next steps.',
+      q: 'Do you provide these services in Oakville?',
+      a: 'Yes. Oakville is one of the areas we actively serve. Request a quote with your property details and the team will confirm availability and next steps.',
     },
   },
 ]

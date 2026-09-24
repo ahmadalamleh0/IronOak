@@ -5,8 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 gsap.registerPlugin(ScrollTrigger)
 
 const PHRASES = [
-  "IronOak Property Services Inc. ",
-  "provides property maintenance, interior and exterior finishing, ",
+  "We provide property maintenance, interior and exterior finishing, ",
   "CCTV security, repairs and capital projects ",
   "for commercial, condominium and residential properties ",
   "across Toronto and the GTA.",

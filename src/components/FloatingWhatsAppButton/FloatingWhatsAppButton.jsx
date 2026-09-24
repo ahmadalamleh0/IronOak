@@ -86,7 +86,7 @@ const FloatingWhatsAppButton = () => (
       href="https://wa.me/14165709074?text=Hi%20IronOak%2C%20I%27m%20interested%20in%20your%20property%20services.%20Can%20you%20help%20me%20with%20a%20request%3F"
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="Chat with IronOak on WhatsApp"
+      aria-label="Chat with us on WhatsApp"
       className="ironhawkWhatsappButton"
     >
       <WhatsAppIcon />

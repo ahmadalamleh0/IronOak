@@ -240,7 +240,7 @@ const AreasWeServe = () => {
               margin: 0,
               maxWidth: '460px',
             }}>
-              IronOak supports properties across Toronto—including North York,
+              We support properties across Toronto—including North York,
               Scarborough and Etobicoke—as well as Mississauga, Brampton, Vaughan,
               Markham, Richmond Hill, Oakville, Burlington, Milton and Hamilton.
             </p>

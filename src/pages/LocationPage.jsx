@@ -278,7 +278,7 @@ export default function LocationPage() {
         <div className="lp-notfound">
           <p className="lp-notfound-code">Service Area Not Found</p>
           <h1 className="lp-notfound-h">We don't have a page for that area yet.</h1>
-          <p className="lp-notfound-p">The link may be broken, or this area may not be listed yet. Head back to see where IronOak works.</p>
+          <p className="lp-notfound-p">The link may be broken, or this area may not be listed yet. Head back to see where we work.</p>
           <Link to="/#areas-we-serve" className="lp-btn-primary" style={{ margin: '0 auto' }}>
             View Service Areas
           </Link>
@@ -336,7 +336,7 @@ export default function LocationPage() {
             <div className="lp-section-head">
               <p className="lp-section-eyebrow">What We Offer</p>
               <h2 className="lp-h2">Services We Provide</h2>
-              <p className="lp-section-body">The same five coordinated services IronOak provides across Toronto and the GTA, explained below so you know what each one actually covers before you reach out.</p>
+              <p className="lp-section-body">The same five coordinated services we provide across Toronto and the GTA, explained below so you know what each one actually covers before you reach out.</p>
             </div>
             <div className="lp-svc-list">
               {LOCATION_SERVICES.map((svc, i) => (

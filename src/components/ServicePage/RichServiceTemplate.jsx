@@ -1145,7 +1145,7 @@ const IntroGrid = ({ items }) => {
   }, [])
 
   return (
-    <section ref={sectionRef} className="rp-section rp-intro-section" aria-label="How IronOak approaches this work">
+    <section ref={sectionRef} className="rp-section rp-intro-section" aria-label="How we approach this work">
       <div className="rp-inner">
         <div className="rp-intro-grid">
           {items.map((item, i) => (
@@ -1744,7 +1744,7 @@ export default function RichServiceTemplate({ service, relatedServices, relatedA
               <h2 className="rp-final-cta-h">{rc.finalCta.heading}</h2>
               <p className="rp-final-cta-p">{rc.finalCta.body}</p>
               <div className="rp-final-ctas">
-                <Link to="/#contact" className="rp-btn-primary">Discuss Your Project</Link>
+                <Link to="/#contact" className="rp-btn-primary">{rc.finalCta.buttonLabel || 'Discuss Your Project'}</Link>
                 <a href={rc.finalCta.phoneHref} className="rp-final-phone">Call {rc.finalCta.phoneDisplay}</a>
               </div>
             </div>

@@ -173,7 +173,7 @@ export const ARTICLES = [
         'A multi-site property upgrade succeeds or struggles based on planning decisions made before the first tool is picked up: a clearly defined scope, a survey of every location, a repeatable standard, a rollout strategy suited to the properties involved, and one point of accountability tying it all together. None of this removes the day-to-day complexity of working across a portfolio, but it does turn that complexity into something that can be managed and communicated clearly — to trades, to site contacts, and to the people who use the properties every day.',
       ],
       [
-        'IronOak coordinates capital projects and multi-site work across residential, condominium, commercial, and hospitality properties, managing scheduling, trades, and site communication from a single point of contact.',
+        'We coordinate capital projects and multi-site work across residential, condominium, commercial, and hospitality properties, managing scheduling, trades, and site communication from a single point of contact.',
       ],
     ],
 
@@ -188,7 +188,7 @@ export const ARTICLES = [
     ],
     finalCta: {
       heading: 'Planning a property project?',
-      body: "Tell IronOak what your property needs and we'll help you understand the next step.",
+      body: "Tell us what your property needs and we'll help you understand the next step.",
       buttonLabel: 'Request a Quote',
     },
   },
@@ -384,7 +384,7 @@ export const ARTICLES = [
         'A dependable maintenance routine is less about any single inspection and more about consistency — checking the same areas on a regular schedule, documenting what is found, and knowing when an issue has moved from routine repair into planned project territory. Structural, electrical, and safety-related findings should always be directed to an appropriately qualified professional.',
       ],
       [
-        'IronOak supports condominium boards and property managers with ongoing maintenance, responsive repairs, and the capital project work that follows when a building is ready for a larger upgrade.',
+        'We support condominium boards and property managers with ongoing maintenance, responsive repairs, and the capital project work that follows when a building is ready for a larger upgrade.',
       ],
     ],
 
@@ -399,7 +399,7 @@ export const ARTICLES = [
     ],
     finalCta: {
       heading: 'Planning a property project?',
-      body: "Tell IronOak what your property needs and we'll help you understand the next step.",
+      body: "Tell us what your property needs and we'll help you understand the next step.",
       buttonLabel: 'Request a Quote',
     },
   },
@@ -541,7 +541,7 @@ export const ARTICLES = [
         'Recognizing wear early, weighing repair against replacement honestly, and planning the work around the people who use the building every day are the main factors that separate a smooth interior finishing project from a disruptive one. Good planning can improve consistency and reduce interruption, though outcomes will always depend on the specific building, material, and scope involved.',
       ],
       [
-        'IronOak plans and delivers interior finishing work — flooring, carpet, wallcoverings, and painting — for condominiums, hospitality properties, and commercial buildings, coordinating around occupied spaces from start to finish.',
+        'We plan and deliver interior finishing work — flooring, carpet, wallcoverings, and painting — for condominiums, hospitality properties, and commercial buildings, coordinating around occupied spaces from start to finish.',
       ],
     ],
 
@@ -555,7 +555,7 @@ export const ARTICLES = [
     ],
     finalCta: {
       heading: 'Planning a property project?',
-      body: "Tell IronOak what your property needs and we'll help you understand the next step.",
+      body: "Tell us what your property needs and we'll help you understand the next step.",
       buttonLabel: 'Request a Quote',
     },
   },

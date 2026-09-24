@@ -5,28 +5,28 @@ import LogoMark from '../Logo/LogoMark.jsx'
 // ── FAQ data ──────────────────────────────────────────────────────────────────
 const FAQS = [
   {
-    question: 'What types of properties does IronOak service?',
-    answer:   'IronOak works with residential, commercial, retail, office, and multi-unit properties. The exact scope is reviewed before scheduling so the right team and resources can be coordinated.',
+    question: 'What types of properties do you service?',
+    answer:   'We work with residential, commercial, retail, office, and multi-unit properties. The exact scope is reviewed before scheduling so the right team and resources can be coordinated.',
   },
   {
     question: 'Do you handle both small repairs and larger projects?',
-    answer:   'Yes. IronOak can assist with individual repairs, ongoing maintenance, installations, upgrades, and larger renovation or construction work, depending on the project requirements.',
+    answer:   'Yes. We can assist with individual repairs, ongoing maintenance, installations, upgrades, and larger renovation or construction work, depending on the project requirements.',
   },
   {
     question: 'Which areas do you serve?',
-    answer:   'IronOak serves clients throughout its primary service area and surrounding communities. Customers can submit their location through the quote form to confirm availability.',
+    answer:   'We serve clients throughout our primary service area and surrounding communities. Customers can submit their location through the quote form to confirm availability.',
   },
   {
     question: 'Do you provide free estimates?',
-    answer:   'Yes. Begin by sharing the basic project details through the quote form, phone, or email. IronOak will review the request and confirm whether a site visit is required before preparing the quote.',
+    answer:   'Yes. Begin by sharing the basic project details through the quote form, phone, or email. We will review the request and confirm whether a site visit is required before preparing the quote.',
   },
   {
     question: 'Can you coordinate multiple trades for one project?',
-    answer:   "Yes. One of IronOak's key advantages is the ability to coordinate different services and trades under one project, reducing the need for customers to manage several separate contractors.",
+    answer:   "Yes. One of our key advantages is the ability to coordinate different services and trades under one project, reducing the need for customers to manage several separate contractors.",
   },
   {
     question: 'How quickly can work begin?',
-    answer:   'Scheduling depends on the size, urgency, location, and requirements of the project. Once the scope and quote are approved, IronOak will confirm the expected start date and keep the customer informed.',
+    answer:   'Scheduling depends on the size, urgency, location, and requirements of the project. Once the scope and quote are approved, we will confirm the expected start date and keep the customer informed.',
   },
 ]
 
@@ -304,7 +304,7 @@ export default function ContactFAQSection() {
               lineHeight: 1.74, margin: 0,
               color: 'rgba(244,241,234,0.48)',
             }}>
-              Everything you need to know about working with IronOak Property Services.
+              Everything you need to know about working with us.
             </p>
           </div>
 

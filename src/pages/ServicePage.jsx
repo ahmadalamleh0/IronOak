@@ -472,7 +472,7 @@ export default function ServicePage() {
         <div className="sp-notfound">
           <p className="sp-notfound-code">Service Not Found</p>
           <h1 className="sp-notfound-h">We couldn't find that service.</h1>
-          <p className="sp-notfound-p">The link may be broken or the service page may have moved. Head back to explore everything IronOak offers.</p>
+          <p className="sp-notfound-p">The link may be broken or the service page may have moved. Head back to explore everything we offer.</p>
           <Link to="/#services-explorer" className="sp-btn-primary" style={{ margin: '0 auto' }}>
             View All Services
           </Link>

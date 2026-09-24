@@ -141,7 +141,7 @@ const WhyIronOak = () => {
             color: 'rgba(244,241,234,0.48)',
             margin: 0,
           }}>
-            From quick repairs to full-scale property improvements, IronOak brings dependable service, skilled trades, and organized execution to every project.
+            From quick repairs to full-scale property improvements, we bring dependable service, skilled trades, and organized execution to every project.
           </p>
         </div>
 

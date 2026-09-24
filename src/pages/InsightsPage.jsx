@@ -110,7 +110,7 @@ export default function InsightsPage() {
       if (!el) { el = document.createElement('meta'); el.setAttribute(attr, name); document.head.appendChild(el) }
       el.setAttribute('content', content)
     }
-    const description = 'Explore practical IronOak guides on property maintenance, capital projects, renovations, condominium care, interior finishing, and multi-site improvements.'
+    const description = 'Explore our practical guides on property maintenance, capital projects, renovations, condominium care, interior finishing, and multi-site improvements.'
     setMeta('meta[name="description"]', 'name', 'description', description)
     setMeta('meta[property="og:type"]', 'property', 'og:type', 'website')
     setMeta('meta[property="og:title"]', 'property', 'og:title', 'Property Insights & Maintenance Guides | IronOak')
