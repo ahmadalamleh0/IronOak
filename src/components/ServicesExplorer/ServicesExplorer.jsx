@@ -52,8 +52,8 @@ const SERVICES = [
     title:       'Property Maintenance & Handyman',
     slug:        '/services/property-maintenance-repairs',
     description: 'Reliable repairs, preventative maintenance, and ongoing property support to keep residential, commercial, and condominium spaces performing at their best.',
-    image:       '/services/property-maintenance-repairs-hero.webp',
-    imageAlt:    'Building maintenance crew cleaning windows on a commercial facade with a city skyline in the background',
+    image:       '/services/property-maintenance-homepage.webp',
+    imageAlt:    'Maintenance crew cleaning a glossy commercial lobby floor with a mop and cleaning cart',
   },
 ]
 

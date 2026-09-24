@@ -4,42 +4,45 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
-// ── Update these once the Google Business Profile is live ──────────
-const RATING = '4.9'
-const GOOGLE_REVIEW_URL = '#' // replace with: https://g.page/r/[YOUR_ID]/review
+// ── Live data from the verified Google Business Profile for
+// "IronOak Property Services Inc." (2233 Argentia Rd Ste 302,
+// Mississauga, ON L5N 2X7 — matches Footer.jsx / config/site.js).
+// Checked manually on 2026-09-24: 5.0 rating from 3 reviews.
+// See the "supported integration" note for how to keep this current
+// automatically instead of updating it by hand. ────────────────────
+const RATING = '5.0'
+const REVIEW_COUNT = 3
+// Deep link straight to the Reviews tab of the verified listing — the
+// "Write a review" button Google shows there covers both reading and
+// leaving a review without a separate, harder-to-verify direct-compose URL.
+const GOOGLE_REVIEWS_URL = 'https://www.google.com/maps/place/IronOak+Property+Services+Inc./@43.5977018,-79.7456354,17z/data=!4m8!3m7!1s0x882b6b2c3c8eea8f:0x61770302be872869!8m2!3d43.5977018!4d-79.7456354!9m1!1b1!16s%2Fg%2F11ntxf8mks'
 // ──────────────────────────────────────────────────────────────────
 
 const REVIEWS = [
   {
-    name: 'Property Owner',
-    initials: 'PO',
-    quote: 'Professional, reliable, and easy to work with. The team handled everything properly from start to finish.',
-    tag: 'Residential Property',
+    name: 'Sanjeev Setti',
+    initials: 'SS',
+    quote: "I've had a very positive experience with Iron Oak Properties managing my property. Their team is responsive, dependable, and easy to work with. They address questions and issues promptly, keep me informed, and ensure that nothing is overlooked. I especially appreciate their professionalism, attention to detail, and commitment to excellent service.\n\nTheir support has made property ownership much easier and less stressful. It's reassuring to know that my property is well cared for and that any concerns are handled promptly. I truly appreciate everything they do and would gladly recommend Iron Oak Properties to any property owner seeking reliable, professional property management.",
+    tag: 'Google Review · a week ago',
   },
   {
-    name: 'Commercial Client',
-    initials: 'CC',
-    quote: 'Responsive, organized, and dependable. IronOak made the whole process simple.',
-    tag: 'Commercial Property',
+    name: 'Samroon Robert',
+    initials: 'SR',
+    quote: 'Great experience with IronOak Property Services. The team was professional, responsive, and easy to work with. They delivered quality work, communicated clearly throughout the process, and demonstrated strong attention to detail. I would definitely recommend IronOak to anyone looking for reliable and professional property services.',
+    tag: 'Google Review · 3 weeks ago',
   },
   {
-    name: 'Property Manager',
-    initials: 'PM',
-    quote: 'They helped us handle multiple property needs without chasing different trades.',
-    tag: 'Property Management',
-  },
-  {
-    name: 'Residential Client',
-    initials: 'RC',
-    quote: 'Clean work, great communication, and a team we would call again.',
-    tag: 'Repairs & Maintenance',
+    name: 'Nina A',
+    initials: 'NA',
+    quote: 'IronOak exceeded my expectations! From start to finish, they were professional, reliable, detail-oriented, and truly committed to quality. The attention to detail and care they put into their work really stood out. Everything was handled efficiently and professionally, and the final result was beyond what I expected. I would highly recommend IronOak to anyone looking for exceptional service and high-quality workmanship.',
+    tag: 'Google Review · 4 weeks ago',
   },
 ]
 
 const SCOPED_CSS = `
   .io-rev-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 14px;
   }
   @media (max-width: 980px) {
@@ -253,6 +256,7 @@ const ReviewCard = ({ name, initials, quote, tag, cardRef }) => (
       color: 'rgba(244,241,234,0.82)',
       margin: '12px 0 16px',
       letterSpacing: '0.005em',
+      whiteSpace: 'pre-line',
     }}>
       &ldquo;{quote}&rdquo;
     </p>
@@ -416,10 +420,16 @@ const Reviews = () => {
 
           <div className="io-rev-bar-div" />
 
-          {/* Rating */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '14px', flex: 1 }}>
+          {/* Rating — links to the Reviews tab of the verified Google listing */}
+          <a
+            href={GOOGLE_REVIEWS_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${RATING} out of 5, based on ${REVIEW_COUNT} Google reviews — read all reviews`}
+            style={{ display: 'flex', alignItems: 'center', gap: '14px', flex: 1, textDecoration: 'none', cursor: 'pointer' }}
+          >
             <span
-              aria-label={`${RATING} out of 5`}
+              aria-hidden="true"
               style={{
                 fontFamily: '"Inter Tight", Inter, Arial, sans-serif',
                 fontWeight: 900,
@@ -435,15 +445,15 @@ const Reviews = () => {
                 fontFamily: '"Manrope", system-ui, sans-serif',
                 fontSize: '0.58rem', fontWeight: 500,
                 color: 'rgba(244,241,234,0.55)', margin: 0,
-              }}>Based on client reviews</p>
+              }}>Based on {REVIEW_COUNT} Google reviews</p>
             </div>
-          </div>
+          </a>
 
           <div className="io-rev-bar-div" />
 
           {/* Write a Review CTA */}
           <a
-            href={GOOGLE_REVIEW_URL}
+            href={GOOGLE_REVIEWS_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="io-rev-cta"
