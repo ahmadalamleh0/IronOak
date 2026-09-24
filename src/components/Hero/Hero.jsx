@@ -12,21 +12,13 @@ const HERO_BG_CSS = `
 
   @keyframes heroScrollBounce {
     0%, 100% { transform: translateX(-50%) translateY(0); }
-    50%      { transform: translateX(-50%) translateY(10px); }
-  }
-  @keyframes heroScrollDot {
-    0%   { transform: translateY(0);    opacity: 1; }
-    70%  { opacity: 0; }
-    100% { transform: translateY(16px); opacity: 0; }
+    50%      { transform: translateX(-50%) translateY(8px); }
   }
   .hero-scroll-indicator {
     animation: heroScrollBounce 2.2s ease-in-out infinite;
   }
-  .hero-scroll-dot {
-    animation: heroScrollDot 1.6s ease-in-out infinite;
-  }
   @media (prefers-reduced-motion: reduce) {
-    .hero-scroll-indicator, .hero-scroll-dot { animation: none; }
+    .hero-scroll-indicator { animation: none; }
   }
 `
 
@@ -380,31 +372,12 @@ const Hero = ({ ready = false }) => {
         <span
           aria-hidden="true"
           style={{
-            width: '28px',
-            height: '44px',
-            borderRadius: '16px',
-            border: '2px solid rgba(244,241,234,0.92)',
-            display: 'flex',
-            justifyContent: 'center',
-            paddingTop: '7px',
-            boxSizing: 'border-box',
-            boxShadow: '0 2px 14px rgba(0,0,0,0.45)',
-            background: 'rgba(7,17,29,0.28)',
-            backdropFilter: 'blur(2px)',
+            width: '1px',
+            height: '34px',
+            background: 'linear-gradient(180deg, rgba(244,241,234,0.90), rgba(244,241,234,0))',
+            boxShadow: '0 0 6px rgba(0,0,0,0.5)',
           }}
-        >
-          <span
-            className="hero-scroll-dot"
-            aria-hidden="true"
-            style={{
-              width: '5px',
-              height: '9px',
-              borderRadius: '3px',
-              background: '#E8C97A',
-              boxShadow: '0 0 6px rgba(232,201,122,0.8)',
-            }}
-          />
-        </span>
+        />
       </button>
     </section>
   )
