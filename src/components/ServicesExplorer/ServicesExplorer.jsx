@@ -114,12 +114,11 @@ const CSS = `
   outline-offset: -2px;
 }
 
-/* Photograph — kept modest so it supports the service info rather than
-   dominating the row; a compact landscape crop, not a hero image. */
+/* Photograph */
 .io-svc-img-wrap {
-  flex: 0 0 clamp(112px, 14vw, 164px);
+  flex: 0 0 clamp(150px, 20vw, 216px);
   aspect-ratio: 16 / 9;
-  border-radius: 9px;
+  border-radius: 10px;
   overflow: hidden;
   border: 1px solid rgba(244,241,234,0.08);
 }
@@ -183,15 +182,10 @@ const CSS = `
 }
 .io-svc-link-arr { display: inline-block; }
 
-/* ── Mobile: stack photo above content, shallower crop so the photo
-   supports the text instead of dominating the row ─────────────── */
+/* ── Mobile: stack photo above content ──────────────────────── */
 @media (max-width: 720px) {
-  .io-svc-row { flex-direction: column; align-items: stretch; gap: 12px; }
-  .io-svc-img-wrap {
-    flex-basis: auto; width: 100%;
-    aspect-ratio: 2.4 / 1;
-    max-height: 128px;
-  }
+  .io-svc-row { flex-direction: column; align-items: stretch; gap: 14px; }
+  .io-svc-img-wrap { flex-basis: auto; width: 100%; }
   .io-svc-row:hover, .io-svc-row:focus-visible { padding-left: 4px; }
 }
 
