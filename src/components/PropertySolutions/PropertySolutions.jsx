@@ -12,16 +12,11 @@ const CAPABILITIES = [
   },
   {
     num: '02',
-    title: 'Capital Project Delivery',
-    tags: ['SCOPING', 'SCHEDULING', 'EXECUTION'],
-  },
-  {
-    num: '03',
     title: 'Multi-Site Rollouts',
     tags: ['ONE POINT OF CONTACT', 'CONSISTENT STANDARDS', 'PHASED DELIVERY'],
   },
   {
-    num: '04',
+    num: '03',
     title: 'Ongoing Property Support',
     tags: ['PREVENTATIVE CARE', 'RESPONSIVE SUPPORT', 'LONG-TERM VALUE'],
   },
@@ -128,7 +123,7 @@ const CapabilityRow = ({
           display: 'flex',
           alignItems: 'center',
           gap: '20px',
-          padding: '28px 8px',
+          padding: '16px 8px',
           opacity: active ? 0 : 1,
           transform: active ? 'translateY(-10px)' : 'translateY(0)',
           transition: 'opacity 260ms ease, transform 300ms cubic-bezier(0.16,1,0.3,1)',
@@ -277,20 +272,20 @@ const PropertySolutions = () => {
       id="services"
       style={{
         background: '#07111D',
-        padding: 'clamp(80px, 10vw, 120px) 24px',
+        padding: 'clamp(36px, 5vw, 64px) 24px clamp(64px, 9vw, 100px)',
       }}
     >
       <style>{SCOPED_CSS}</style>
       <div style={{ maxWidth: '1040px', margin: '0 auto' }}>
 
         {/* Section header */}
-        <div ref={headerRef} style={{ marginBottom: '64px' }}>
+        <div ref={headerRef} style={{ marginBottom: '32px' }}>
 
           <p style={{
             fontFamily: '"Manrope", system-ui, sans-serif',
             fontSize: '0.62rem', fontWeight: 700,
             letterSpacing: '0.30em', textTransform: 'uppercase',
-            color: '#C9A24A', margin: '0 0 16px',
+            color: '#C9A24A', margin: '0 0 10px',
           }}>
             Our Capabilities
           </p>
@@ -300,7 +295,7 @@ const PropertySolutions = () => {
             fontWeight: 900,
             fontSize: 'clamp(2rem, 4.5vw, 3.2rem)',
             letterSpacing: '-0.035em', lineHeight: 1.05,
-            color: '#F4F1EA', margin: '0 0 16px',
+            color: '#F4F1EA', margin: '0 0 8px',
           }}>
             Built for Every Property Need
           </h2>

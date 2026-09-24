@@ -12,7 +12,7 @@ export const SERVICE_PAGES = [
     num:                '01',
     category:           'Property Maintenance',
     title:              'Property Maintenance & Handyman',
-    description:        'Responsive repairs, planned maintenance, and coordinated property support for commercial, condominium, hospitality, and multi-site properties.',
+    description:        'Repairs, routine upkeep, and scheduled maintenance for commercial buildings, condominiums, and hospitality properties across Toronto and the GTA.',
     illustrationIndex:  0,
     meta: {
       title:       'Commercial Property Maintenance Toronto & GTA | IronOak',
@@ -41,20 +41,20 @@ export const SERVICE_PAGES = [
       heroImage:            '/services/property-maintenance-repairs-hero.webp',
       heroImageAlt:         'Building maintenance crew cleaning windows on a commercial facade with a city skyline in the background',
       heroOverlayLight:     true,
-      heroHeading:          ['Property Maintenance &', 'Handyman'],
+      heroHeading:          ['Property Maintenance &', 'Repairs'],
       heroSupportingLine:   'Commercial • Condominium • Hospitality • Multi-Site',
 
       intro: [
-        { label: 'Inspect', body: 'Assess the property, the issue, and the priorities before work begins.' },
-        { label: 'Resolve', body: 'Complete repairs and corrective work coordinated around daily operations.' },
-        { label: 'Maintain', body: 'Keep the property performing through planned, ongoing upkeep.' },
+        { label: 'Inspect', body: 'Check the issue and identify what needs attention.' },
+        { label: 'Repair', body: 'Plan and complete the work around building access and daily use.' },
+        { label: 'Maintain', body: 'Arrange regular upkeep to catch problems early.' },
       ],
 
       positioning: {
         eyebrow: 'ONGOING PROPERTY MAINTENANCE',
-        heading: ['Maintenance Support That', 'Keeps Properties Running'],
-        body: 'IronOak provides planned maintenance and responsive repair support across commercial, condominium and hospitality properties. From building repairs, plumbing and leak detection to electrical, mechanical, cleaning and general upkeep, work is coordinated around occupants, access requirements and day-to-day property operations.',
-        ctaLabel: 'Explore maintenance services',
+        heading: ['Day-to-day care for your property'],
+        body: "We handle building repairs, cleaning, plumbing, electrical and mechanical maintenance. Whether you have a repair that needs attention or a list of recurring jobs, we organise the work around your building's schedule and the people using it.",
+        ctaLabel: 'View maintenance services',
         ctaHref: '#rp-typical-h',
       },
 
@@ -62,16 +62,16 @@ export const SERVICE_PAGES = [
         heading: 'Typical maintenance and repair work',
         wideCards: true,
         groups: [
-          { num: '01', title: 'Cleaning & Upkeep', body: 'Ongoing cleaning and upkeep services that help keep shared spaces, exteriors and high-traffic areas presentable and well maintained.', image: '/services/maintenance-cleaning-upkeep.jpg', imageAlt: 'Commercial cleaning cart staged in front of elevators in a building lobby' },
-          { num: '02', title: 'Repairs & Handyman Services', body: 'Day-to-day building repairs, handyman work and corrective maintenance handled across active commercial and multi-residential properties.', image: '/services/maintenance-repairs-handyman.jpg', imageAlt: 'Metal ductwork with zone dampers installed in an open commercial ceiling' },
-          { num: '03', title: 'Plumbing & Corrective Support', body: 'Plumbing, leak detection and responsive repair support for issues affecting property function and day-to-day operations.', image: '/services/maintenance-plumbing-corrective.jpg', imageAlt: 'Technician servicing commercial plumbing pipes, valves and pressure gauges' },
-          { num: '04', title: 'Electrical & Mechanical Support', body: 'Routine electrical, lighting and mechanical service work supporting the day-to-day operation of the property.', image: '/services/maintenance-electrical-mechanical.jpg', imageAlt: 'Technician servicing a commercial electrical control panel while consulting a manual' },
+          { num: '01', title: 'Cleaning & Upkeep', body: 'Cleaning for shared spaces, building exteriors, and busy areas that need regular attention.', image: '/services/maintenance-cleaning-upkeep.jpg', imageAlt: 'Commercial cleaning cart staged in front of elevators in a building lobby' },
+          { num: '02', title: 'Repairs & Handyman Services', body: 'Everyday repairs and smaller maintenance jobs in commercial and multi-residential buildings.', image: '/services/maintenance-repairs-handyman.jpg', imageAlt: 'Metal ductwork with zone dampers installed in an open commercial ceiling' },
+          { num: '03', title: 'Plumbing & Leak Detection', body: 'Find leaks and arrange plumbing repairs to address problems affecting the building.', image: '/services/maintenance-plumbing-repair.jpg', imageAlt: 'Technician using a wrench and voltage tester to service copper plumbing pipes and valves' },
+          { num: '04', title: 'Electrical & Mechanical Maintenance', body: 'Routine maintenance and repairs for lighting, electrical, and mechanical systems.', image: '/services/maintenance-electrical-mechanical.jpg', imageAlt: 'Technician servicing a commercial electrical control panel while consulting a manual' },
         ],
       },
 
       serviceList: {
-        heading: 'Property Maintenance Scope',
-        body:    'A full range of maintenance and property-care services delivered across individual properties, managed portfolios, and multi-site programs.',
+        heading: 'Maintenance services',
+        body:    'Book work for a single property or arrange maintenance across several locations.',
         emphasized: true,
         items: [
           'Building Maintenance',
@@ -88,40 +88,41 @@ export const SERVICE_PAGES = [
       },
 
       industries: {
-        heading: 'Industries We Serve',
+        heading: 'Properties We Work On',
         items: ['Retail', 'Construction Sites', 'Industrial Facilities', 'Condos & Apartments', 'Commercial Buildings', 'Hospitality'],
       },
 
       approachNote: {
         eyebrow: 'How We Support Properties',
-        heading: 'From one repair to ongoing property support.',
-        body:    'Support can be scoped as a single repair or an ongoing maintenance program, both delivered through the same coordinated approach.',
+        heading: 'One-time repairs or regular maintenance',
+        body:    'Get help with a specific job or arrange scheduled visits for ongoing upkeep.',
         items: [
-          { label: 'Responsive Work', body: 'Individual repair and corrective needs, coordinated as they arise.' },
-          { label: 'Planned Support', body: 'Recurring or scheduled maintenance across one or multiple properties.' },
+          { label: 'One-time repairs', body: 'Tell us what needs fixing so we can review the work and arrange a suitable time.' },
+          { label: 'Scheduled maintenance', body: 'Plan recurring maintenance for one building or several properties.' },
         ],
       },
 
       photoBannerAfterBenefits: true,
       photoBanner: {
-        heading: 'More than fixing what breaks.',
-        body:    'Ongoing maintenance helps identify issues early, coordinate repairs efficiently and keep properties operating as they should.',
+        heading: 'Catch small problems early',
+        body:    'Regular checks help identify wear, leaks, and other maintenance issues before they lead to more extensive repairs.',
         image:    '/services/maintenance-photo-banner.jpg',
         imageAlt: 'Active commercial repair and maintenance work with equipment and ladders in an open building space',
         aspectRatio: '3 / 2',
       },
 
       faqEyebrow: 'MAINTENANCE QUESTIONS',
-      faqIntro:   'Helpful details about responsive repairs, planned upkeep and ongoing property support.',
+      faqIntro:   'Common questions about booking repairs and arranging regular maintenance.',
       faqs: [
-        { q: 'Can IronOak handle both one-time repairs and ongoing maintenance?', a: 'Yes. IronOak can coordinate individual repair requests as well as planned or recurring maintenance support for one property or multiple locations.' },
-        { q: 'How are maintenance requests assessed and scheduled?', a: 'Each request is reviewed based on the issue, property conditions, access requirements and urgency. IronOak then defines the appropriate scope and coordinates the work around property operations.' },
-        { q: 'Can repairs be completed while the property remains occupied?', a: 'In many cases, yes. Work can be phased and scheduled around tenants, residents, guests and operating hours to help limit disruption.' },
+        { q: 'Can I book a one-time repair?', a: 'Yes. We handle individual repair jobs as well as recurring maintenance for one property or multiple locations.' },
+        { q: 'How do you assess and schedule the work?', a: "We review the issue, its urgency, and access to the building. We then confirm what needs doing and arrange the work around the property's schedule." },
+        { q: 'Can you work in an occupied building?', a: "Often, yes. Depending on the job, we can schedule work around residents, tenants, guests, and operating hours. We'll discuss access and any expected disruption before starting." },
       ],
 
       finalCta: {
-        heading:      'Need a repair or ongoing maintenance support?',
-        body:         "Tell us about the property and the work you need completed. We'll help you understand the next step.",
+        heading:      'What needs taking care of?',
+        body:         'Send us the property location and a brief description of the work you need.',
+        buttonLabel:  'Discuss the Work',
         phoneDisplay: '(416) 570-9074',
         phoneHref:    'tel:+14165709074',
       },
@@ -138,7 +139,7 @@ export const SERVICE_PAGES = [
     illustrationIndex:  3,
     meta: {
       title:       'Capital Projects & Multi-Site Upgrades Toronto | IronOak',
-      description: 'IronOak coordinates capital improvements, multi-site rollout programs, building retrofits, carpentry and millwork across Toronto and the GTA.',
+      description: 'We coordinate capital improvements, multi-site rollout programs, building retrofits, carpentry and millwork across Toronto and the GTA.',
     },
     related: [3, 2, 4],
     sections: {
@@ -175,7 +176,7 @@ export const SERVICE_PAGES = [
       positioning: {
         eyebrow: 'CAPITAL PROJECT DELIVERY',
         heading: ['Coordinated Projects Across', 'Properties, Trades and Locations'],
-        body: 'IronOak coordinates capital improvements, multi-trade scopes and multi-site upgrade programs from planning through completion. Interior finishing, CCTV, lighting, exterior improvements, flooring, millwork and other project requirements can be managed under one coordinated scope, helping property teams maintain consistent standards, schedules and communication across every location.',
+        body: 'We coordinate capital improvements, multi-trade scopes and multi-site upgrade programs from planning through completion. Interior finishing, CCTV, lighting, exterior improvements, flooring, millwork and other project requirements can be managed under one coordinated scope, helping property teams maintain consistent standards, schedules and communication across every location.',
         ctaLabel: 'Explore capital project delivery',
         ctaHref: '#rp-typical-h',
       },
@@ -185,7 +186,7 @@ export const SERVICE_PAGES = [
         heading:    'Planned around the property, the people, and the operation.',
         paragraphs: [
           'Every capital project begins with understanding the property, the required outcome, and how the work fits around ongoing operations.',
-          'IronOak helps coordinate the project from initial site review and scope development through scheduling, execution, progress reporting, and closeout.',
+          'We help coordinate the project from initial site review and scope development through scheduling, execution, progress reporting, and closeout.',
         ],
         image:    '/services/capital-project-management-overview.jpg',
         imageAlt: 'Bright contemporary office space mid-renovation with new furniture, fresh finishes and materials staged by the windows',
@@ -224,7 +225,7 @@ export const SERVICE_PAGES = [
 
       processSteps: {
         heading: 'Pilot once. Roll out consistently.',
-        body:    'IronOak can complete an initial location, establish the approved scope and standards, then coordinate the same improvement program across an entire portfolio.',
+        body:    'We can complete an initial location, establish the approved scope and standards, then coordinate the same improvement program across an entire portfolio.',
         dark:    true,
         steps: [
           { num: '01', label: 'Pilot Location' },
@@ -239,9 +240,9 @@ export const SERVICE_PAGES = [
       faqEyebrow: 'CAPITAL & CUSTOM PROJECT QUESTIONS',
       faqIntro:   'Helpful information about multi-site rollout programs, custom project scope and coordinated delivery.',
       faqs: [
-        { q: 'Can IronOak manage the same improvement program across multiple locations?', a: 'Yes. IronOak can coordinate repeatable scopes, schedules, trades and quality standards across multi-site property portfolios.' },
+        { q: 'Can you manage the same improvement program across multiple locations?', a: 'Yes. We can coordinate repeatable scopes, schedules, trades and quality standards across multi-site property portfolios.' },
         { q: 'How is a custom or one-off project priced?', a: 'Custom projects are scoped and priced individually based on your specific requirements. Contact us to start with a conversation.' },
-        { q: 'What does IronOak manage from planning through completion?', a: 'Depending on the project, IronOak can support scope development, scheduling, trade coordination, execution oversight, progress communication and final closeout.' },
+        { q: 'What do you manage from planning through completion?', a: 'Depending on the project, we can support scope development, scheduling, trade coordination, execution oversight, progress communication and final closeout.' },
       ],
 
       finalCta: {
@@ -259,7 +260,7 @@ export const SERVICE_PAGES = [
     num:                '03',
     category:           'Interior Finishing',
     title:              'Interior Finishing',
-    description:        'Professional finishing work for flooring, carpet replacement, wallcoverings, painting, and complete interior refreshes.',
+    description:        'Painting, flooring, carpet, wallcoverings, and interior repairs for commercial buildings, condominiums, and hospitality properties.',
     illustrationIndex:  2,
     meta: {
       title:       'Commercial Interior Finishing Toronto & GTA | IronOak',
@@ -292,15 +293,15 @@ export const SERVICE_PAGES = [
       heroSupportingLine:   'Commercial • Condominium • Hospitality • Multi-Site',
 
       intro: [
-        { label: 'Prepare', body: 'Assess surfaces, materials, and access conditions before work begins.' },
-        { label: 'Finish',  body: 'Complete finish work to spec, coordinated around occupancy and operations.' },
-        { label: 'Refine',  body: 'Review, touch up, and confirm a consistent, polished result.' },
+        { label: 'Prepare', body: 'We check the surfaces, agree on materials, and arrange access before starting.' },
+        { label: 'Finish',  body: 'We complete the work in an order that suits the building and its occupants.' },
+        { label: 'Check',   body: 'We inspect the finished work and complete any touch-ups.' },
       ],
 
       positioning: {
         eyebrow: 'INTERIOR FINISHING & SURFACE UPGRADES',
-        heading: ['Interior Finishes Built', 'for Active Properties'],
-        body: 'IronOak coordinates painting, drywall repairs, wallcoverings, flooring, tile and carpet replacement for commercial, condominium and hospitality properties. Work can be phased around occupied corridors, lobbies, common areas and operating schedules, helping property teams refresh worn interiors while maintaining consistent finishes across the space.',
+        heading: ['Interior updates for busy buildings'],
+        body: "We repair drywall, paint interiors, replace flooring and carpet, and install tile and wallcoverings. For occupied buildings, we can work in stages through corridors, lobbies, and shared spaces, with access and working hours agreed in advance.",
         watermarkLg: true,
         ctaLabel: 'Explore interior finishing',
         ctaHref: '#rp-typical-h',
@@ -311,31 +312,31 @@ export const SERVICE_PAGES = [
         wideCards: true,
         centerLastOdd: true,
         groups: [
-          { num: '01', title: 'Walls & Surface Finishes', body: 'Painting, wallcoverings and surface improvements that refresh and protect active interiors.', image: '/services/interior-walls-surfaces.webp', imageAlt: 'Patterned commercial vinyl wallcovering behind a bar counter with stools' },
-          { num: '02', title: 'Flooring & Carpet', body: 'Flooring and carpet replacement planned around access, occupancy and operating schedules.', image: '/services/interior-flooring-carpet.jpg', imageAlt: 'Patterned carpet installation in an elegant hotel guest-room corridor' },
-          { num: '03', title: 'Common-Area Refreshes', body: 'Coordinated finish upgrades for corridors, lobbies, shared spaces and guest-facing environments.', image: '/services/interior-common-area-refreshes.webp', imageAlt: 'Premium commercial washroom with marble vanities and backlit mirrors' },
-          { num: '04', title: 'Painting & Finishing', body: 'Professional painting and finishing work that refreshes interiors, improves presentation and supports long-term property upkeep.', image: '/services/interior-painting-finishing.jpg', imageAlt: 'Commercial office painting work in progress with ladder and supplies staged on protective floor covering' },
-          { num: '05', title: 'Lighting & Fixture Upgrades', body: 'Interior lighting and fixture upgrades coordinated with finish improvements to refresh the appearance and functionality of shared spaces.', image: '/services/interior-lighting-fixtures.jpg', imageAlt: 'Condominium corridor with recessed downlights and cove wall lighting along a textured plaster wall' },
+          { num: '01', title: 'Walls & Wallcoverings', body: 'Wallcovering installation and surface repairs for worn or damaged interior walls.', image: '/services/interior-walls-surfaces.webp', imageAlt: 'Patterned commercial vinyl wallcovering behind a bar counter with stools' },
+          { num: '02', title: 'Flooring & Carpet', body: 'New flooring and carpet, with replacement work scheduled around the areas people need to use.', image: '/services/interior-flooring-carpet.jpg', imageAlt: 'Patterned carpet installation in an elegant hotel guest-room corridor' },
+          { num: '03', title: 'Common-Area Updates', body: 'Updates to corridors, lobbies, washrooms, and other spaces residents, staff, and guests use every day.', image: '/services/interior-common-area-refreshes.webp', imageAlt: 'Premium commercial washroom with marble vanities and backlit mirrors' },
+          { num: '04', title: 'Painting & Finishing', body: 'Surface preparation, painting, and touch-ups for walls, ceilings, and trim.', image: '/services/interior-painting-finishing.jpg', imageAlt: 'Commercial office painting work in progress with ladder and supplies staged on protective floor covering' },
+          { num: '05', title: 'Lighting & Fixture Upgrades', body: 'Replace dated lighting and fixtures alongside other interior work.', image: '/services/interior-lighting-fixtures.jpg', imageAlt: 'Condominium corridor with recessed downlights and cove wall lighting along a textured plaster wall' },
         ],
       },
 
       serviceList: {
-        heading: 'Interior finishing scope',
-        body:    'Coordinated finishing support for individual properties, managed portfolios, and multi-site programs.',
+        heading: 'Interior finishing services',
+        body:    'From a single room to several floors or locations, we can plan the work as one project.',
         items: [
           'Interior painting',
           'Wallcovering installation and replacement',
-          'Carpet and flooring programs',
+          'Carpet and flooring replacement',
           'Drywall repair and preparation',
           'Trim and finish carpentry',
           'Ceiling and surface improvements',
           'Corridor and lobby refreshes',
-          'Multi-floor and multi-site finish programs',
+          'Interior finishing across multiple floors or locations',
         ],
       },
 
       industries: {
-        heading: 'Industries We Serve',
+        heading: 'Properties We Work On',
         beforeServiceList: true,
         items: ['Retail', 'Construction Sites', 'Industrial Facilities', 'Condos & Apartments', 'Commercial Buildings', 'Hospitality'],
       },
@@ -343,36 +344,35 @@ export const SERVICE_PAGES = [
       overviewAfterBenefits: true,
       overview: {
         eyebrow:    'Materials & Finishes',
-        heading:    'Built for appearance. Selected for everyday use.',
+        heading:    'Finishes suited to everyday use',
         paragraphs: [
-          'Finish choices need to balance design intent with durability, maintenance, and the realities of a high-traffic property.',
-          'IronOak helps select and install finishes that hold up to daily use without compromising on appearance.',
+          'Busy hallways and shared spaces need materials that are practical to clean and maintain. We help you choose finishes based on appearance, foot traffic, and how the space is used.',
         ],
         image:    '/services/interior-materials-finishes.jpg',
         imageAlt: 'Elegant hotel guest-room corridor with rich wood paneling, integrated lighting and premium carpet',
       },
 
       benefits: {
-        heading: 'Why coordinated finishing matters',
+        heading: 'How we manage the work',
         items: [
-          { title: 'One Point of Contact', body: 'Clear communication through one accountable lead for every project.' },
-          { title: 'Minimal Disruption',    body: 'Work scheduled around occupancy, access, and daily operations.' },
-          { title: 'Consistent Standards',  body: 'Materials and finishing quality aligned across every space.' },
-          { title: 'Durable Results',       body: 'Finishes selected to perform under everyday, high-traffic use.' },
+          { title: 'One Point of Contact',       body: 'Speak with one person about the schedule, progress, and any questions.' },
+          { title: 'Work Around Occupants',       body: 'We agree on access and working hours before starting.' },
+          { title: 'Consistent Finishes',         body: 'We plan materials and finishes together so adjoining areas look consistent.' },
+          { title: 'Practical Material Choices',  body: 'We consider wear, cleaning, and maintenance when choosing finishes.' },
         ],
       },
 
       faqEyebrow: 'INTERIOR FINISHING QUESTIONS',
-      faqIntro:   'Answers about finish selection, occupied-property work and coordinated interior upgrades.',
+      faqIntro:   'Questions about materials, scheduling, and working in occupied buildings.',
       faqs: [
-        { q: 'Can interior finishing work be phased around an occupied property?', a: 'Yes. Painting, flooring, drywall and finish work can be planned in stages around access, operating hours and occupied areas.' },
-        { q: 'Does IronOak help choose finishes suited to high-traffic spaces?', a: 'IronOak can help coordinate finish options based on appearance, durability, maintenance requirements and the way the space is used.' },
-        { q: 'Can painting, drywall and flooring be managed as one scope?', a: 'Yes. Related interior trades can be coordinated under one defined project scope to maintain consistency and simplify communication.' },
+        { q: 'Can you work while the building is occupied?', a: 'Yes. We can complete work in stages, with access and working hours agreed around the people using the building.' },
+        { q: 'Can you help us choose materials?', a: 'Yes. We can help compare finishes based on appearance, durability, cleaning needs, and the amount of daily use.' },
+        { q: 'Can you handle painting, drywall, and flooring together?', a: "Yes. We can organise these as one project, so you don't have to arrange each part separately." },
       ],
 
       finalCta: {
-        heading:      'Planning an interior finishing project?',
-        body:         "Tell us about the property and the finishes you have in mind. We'll help you understand the next step.",
+        heading:      'Planning an interior update?',
+        body:         "Tell us which areas need work and what you'd like to change.",
         phoneDisplay: '(416) 570-9074',
         phoneHref:    'tel:+14165709074',
       },
@@ -385,7 +385,7 @@ export const SERVICE_PAGES = [
     num:                '05',
     category:           'Property Systems',
     title:              'Installations & Building Systems',
-    description:        'Clean, dependable installation of CCTV systems, retrofit lighting, fixtures, equipment, and essential property upgrades.',
+    description:        'Installation of security cameras, access-control systems, lighting, fixtures, and building equipment.',
     illustrationIndex:  4,
     meta: {
       title:       'CCTV & Security System Installation Toronto | IronOak',
@@ -422,9 +422,9 @@ export const SERVICE_PAGES = [
       positioning: {
         early:    true,
         eyebrow:  'COMMERCIAL SECURITY & CCTV',
-        heading:  ['Commercial Security & CCTV Systems'],
-        body:     'IronOak installs high-definition CCTV and 4K security camera systems for commercial properties, condominiums, construction sites and large facilities. From long-range perimeter coverage to access-control integration, every system is professionally positioned, configured and tested around the property’s layout and security requirements.',
-        ctaLabel: 'Explore CCTV solutions',
+        heading:  ['CCTV & Security Camera Installation'],
+        body:     'We install HD and 4K camera systems for commercial buildings, condominiums, construction sites, and larger facilities. We plan camera positions around the areas you need to monitor, then configure and test the system.',
+        ctaLabel: 'View CCTV options',
         ctaHref:  '#rp-cctv-h',
       },
 
@@ -433,35 +433,33 @@ export const SERVICE_PAGES = [
         wideCards: true,
         centerLastOdd: true,
         groups: [
-          { num: '01', title: 'Security Camera Systems', body: 'Coordinated camera and security installations for commercial and multi-residential properties.', image: '/services/installations-security-cctv.webp', imageAlt: 'Dome security camera mounted on the ceiling of a modern hotel lobby corridor' },
-          { num: '02', title: 'Long-Range Security Camera Systems', body: 'Warehouses, parking lots, stadiums and other large perimeters require broader security coverage. IronOak installs long-range camera systems designed to capture clear, detailed footage across larger areas.', image: '/services/installations-long-range-cameras.jpg', imageAlt: 'Two long-range security cameras mounted on the exterior wall of a commercial building' },
-          { num: '03', title: 'Access Control & Entry Systems', body: 'Entry, intercom and access-control installations designed for secure, reliable day-to-day property operations.', image: '/services/installations-access-control.webp', imageAlt: 'Modern commercial building entrance with automated glass doors and an access-control panel' },
+          { num: '01', title: 'Security Camera Systems', body: 'Camera installation and setup for commercial and multi-residential buildings.', image: '/services/installations-security-cctv.webp', imageAlt: 'Dome security camera mounted on the ceiling of a modern hotel lobby corridor' },
+          { num: '02', title: 'Long-Range Camera Systems', body: 'Camera systems for larger areas such as warehouses, parking lots, and site perimeters. We assess distances and coverage needs when planning the installation.', image: '/services/installations-long-range-cameras.jpg', imageAlt: 'Two long-range security cameras mounted on the exterior wall of a commercial building' },
+          { num: '03', title: 'Access Control & Entry Systems', body: 'Installation of access-control, intercom, and entry systems for building entrances and restricted areas.', image: '/services/installations-access-control.webp', imageAlt: 'Modern commercial building entrance with automated glass doors and an access-control panel' },
         ],
       },
 
       capabilities: {
-        eyebrow: 'SYSTEM CAPABILITIES',
-        heading: 'Security & system solutions',
-        body:    'CCTV, camera systems and access-control support built around how your property actually operates.',
+        heading: 'Camera and access-control services',
+        body:    'We handle installation, setup, and adjustments to suit your building.',
         items: [
-          { image: '/services/icon-ai-video-monitoring.png',   title: '4K Security Camera Systems',           body: 'High-resolution camera systems designed for clear coverage across commercial and multi-residential properties.' },
-          { image: '/services/icon-remote-surveillance.png',   title: 'Camera Placement & System Configuration', body: 'Professional camera positioning, system setup and configuration designed around the property and its security requirements.' },
-          { image: '/services/icon-managed-access-control.png', title: 'Managed Access Control',               body: 'Secure, seamless access management for entry points and controlled areas.' },
-          { image: '/services/icon-inspection-compliance.png', title: 'Security System Support & Maintenance', body: 'Ongoing installation-related support, troubleshooting and system adjustments to keep security systems running reliably.' },
+          { image: '/services/icon-ai-video-monitoring.png',   title: '4K Camera Systems',           body: 'High-resolution cameras for monitoring entrances, shared spaces, and other selected areas.' },
+          { image: '/services/icon-remote-surveillance.png',   title: 'Camera Placement & Setup', body: 'We position cameras for the agreed coverage areas and configure the system.' },
+          { image: '/services/icon-managed-access-control.png', title: 'Access Control',               body: 'Manage entry to the building and areas with restricted access.' },
+          { image: '/services/icon-inspection-compliance.png', title: 'System Support & Maintenance', body: 'Help with troubleshooting, system adjustments, and maintenance after installation.' },
         ],
       },
 
       industries: {
-        heading: 'Industries We Serve',
+        heading: 'Properties We Work On',
         items: ['Retail', 'Construction Sites', 'Industrial Facilities', 'Condos & Apartments', 'Commercial Buildings', 'Hospitality'],
       },
 
       overview: {
         eyebrow:    'Property Systems Installation',
-        heading:    'Installed to standard. Planned around the property.',
+        heading:    'From site review to system handover',
         paragraphs: [
-          'Every installation begins with understanding the property, the systems involved, and how the work fits around daily operations.',
-          'IronOak coordinates access, scheduling, and trades from initial assessment through testing, commissioning, and handover.',
+          'We review the building layout, existing equipment, and installation requirements. We then arrange access, complete the installation, and test the system before handover.',
         ],
         image:    '/services/installations-overview.jpg',
         imageAlt: 'Smart security camera with AI analytics overlay in a modern office corridor',
@@ -469,17 +467,17 @@ export const SERVICE_PAGES = [
       },
 
       faqEyebrow: 'INSTALLATION QUESTIONS',
-      faqIntro:   'Details about system types, occupied-building scheduling, and testing before handover.',
+      faqIntro:   'Questions about installation, scheduling, and testing.',
       faqs: [
-        { q: 'What types of systems can IronOak install?', a: 'CCTV and security systems, interior and exterior lighting, fixtures, property hardware, access-related installations, and related building systems and equipment.' },
-        { q: 'Can installations be scheduled around occupied buildings?', a: 'Yes. Installation work is planned around occupancy, access conditions, and daily operations to minimize disruption.' },
-        { q: 'Are installed systems tested before handover?', a: 'Yes. Systems are tested and commissioned, with documentation provided at handover.' },
+        { q: 'What can you install?', a: 'We install CCTV, access-control systems, lighting, fixtures, property hardware, and related building equipment. Contact us with the equipment or upgrade you have in mind.' },
+        { q: 'Can you work in an occupied building?', a: 'Yes. We arrange installation around building access and working hours, and discuss any expected disruption before starting.' },
+        { q: 'Do you test the systems before handover?', a: 'Yes. We test and commission installed systems and provide the handover documentation.' },
       ],
 
       cctvPackages: {
         eyebrow:  'CCTV & Security Cameras',
-        heading:  '4K security camera solutions for Toronto homes and businesses',
-        body:     'IronOak provides tailored CCTV and security camera solutions, scoped around your site’s layout, coverage needs and operational requirements.',
+        heading:  '4K Security Camera Systems',
+        body:     'We plan your camera system around the building layout and the areas you need to monitor.',
         includesTitle: 'Every System Includes',
         includes: [
           'Private, secure system — no cloud dependency',
@@ -491,8 +489,8 @@ export const SERVICE_PAGES = [
       },
 
       finalCta: {
-        heading:      'Planning an installation or upgrade?',
-        body:         "Tell us about the property and the systems you need installed. We'll help you understand the next step.",
+        heading:      'Need a system installed or upgraded?',
+        body:         'Tell us about the property, any existing equipment, and what you need installed.',
         phoneDisplay: '(416) 570-9074',
         phoneHref:    'tel:+14165709074',
       },
@@ -505,7 +503,7 @@ export const SERVICE_PAGES = [
     num:                '06',
     category:           'Exterior Improvements',
     title:              'Exterior & Outdoor Improvements',
-    description:        'Exterior upgrades and outdoor property improvements designed to improve function, appearance, and long-term value.',
+    description:        'Repairs and improvements for building entrances, walkways, exterior lighting, and outdoor shared spaces.',
     illustrationIndex:  5,
     meta: {
       title:       'Commercial Exterior Improvements Toronto & GTA | IronOak',
@@ -539,15 +537,15 @@ export const SERVICE_PAGES = [
       heroSupportingLine: 'Commercial • Condominium • Hospitality • Multi-Site',
 
       intro: [
-        { label: 'Evaluate', body: 'Review the property exterior, condition, and priorities before scoping the work.' },
-        { label: 'Improve',  body: 'Complete exterior upgrades and repairs coordinated around property operations.' },
-        { label: 'Protect',  body: 'Deliver lasting results that protect the property’s appearance and long-term value.' },
+        { label: 'Assess',   body: 'We check the condition of the area and agree on what needs doing.' },
+        { label: 'Plan',     body: 'We arrange the work around weather, access, and building use.' },
+        { label: 'Complete', body: 'We finish the work and check it against the agreed requirements.' },
       ],
 
       positioning: {
         eyebrow: 'EXTERIOR PROPERTY IMPROVEMENTS',
-        heading: ['Exterior Work That Protects', 'and Improves the Property'],
-        body: 'IronOak handles exterior repairs and improvement work across entrances, walkways, common areas and building surroundings. Services can include exterior lighting and fixtures, power washing, access-area improvements, seasonal upkeep and corrective repairs, coordinated around active properties to improve safety, presentation and long-term condition.',
+        heading: ['Take care of the outside of your building'],
+        body: 'We repair and improve entrances, walkways, lighting, and shared outdoor areas. We also handle power washing and seasonal cleanup, with work scheduled around access to the building and the people using it.',
         ctaLabel: 'Explore exterior services',
         ctaHref: '#rp-typical-h',
       },
@@ -556,44 +554,42 @@ export const SERVICE_PAGES = [
         heading: 'Typical exterior improvement work',
         wideCards: true,
         groups: [
-          { num: '01', title: 'Entrances & Common Areas', body: 'Improvements to high-traffic exterior areas that shape the first impression of the property.', image: '/services/exterior-entrances-common-areas.jpg', imageAlt: 'Illuminated glass entrance of a modern commercial building at dusk, reflecting the surrounding facade' },
-          { num: '02', title: 'Exterior Lighting & Features', body: 'Coordinated upgrades to lighting, fixtures and property elements.', image: '/services/exterior-lighting-features.jpg', imageAlt: 'LED wall lighting illuminating a commercial building entrance and facade at night' },
-          { num: '03', title: 'Walkways & Access Areas', body: 'Upgrades to exterior paths, access points and surrounding surfaces that improve safety, usability and presentation.', image: '/services/exterior-walkways-access-areas.jpg', imageAlt: 'Covered walkway through a landscaped courtyard with brick archways' },
-          { num: '04', title: 'Garage & Exterior Power Washing', body: 'Professional cleaning of parking garages, exterior surfaces, walkways and high-use property areas.', image: '/services/exterior-garage-power-washing.jpg', imageAlt: 'Ride-on scrubber cleaning the concrete floor of a commercial parking garage' },
+          { num: '01', title: 'Entrances & Common Areas', body: 'Repairs and updates to building entrances and shared outdoor spaces.', image: '/services/exterior-entrances-common-areas.jpg', imageAlt: 'Illuminated glass entrance of a modern commercial building at dusk, reflecting the surrounding facade' },
+          { num: '02', title: 'Exterior Lighting & Fixtures', body: 'Install or replace lighting and fixtures around entrances, paths, and building exteriors.', image: '/services/exterior-lighting-features.jpg', imageAlt: 'LED wall lighting illuminating a commercial building entrance and facade at night' },
+          { num: '03', title: 'Walkways & Access Areas', body: 'Repair and improve paths, access points, and surrounding surfaces.', image: '/services/exterior-walkways-access-areas.jpg', imageAlt: 'Covered walkway through a landscaped courtyard with brick archways' },
+          { num: '04', title: 'Garage & Exterior Power Washing', body: 'Clean parking garages, walkways, and exterior surfaces.', image: '/services/exterior-garage-power-washing.jpg', imageAlt: 'Ride-on scrubber cleaning the concrete floor of a commercial parking garage' },
         ],
       },
 
       serviceList: {
         heading: 'Exterior & outdoor services',
-        body:    'Coordinated exterior improvement support for individual properties, managed portfolios, and multi-site programs.',
+        body:    'Arrange a specific exterior job or plan improvements across several properties.',
         items: [
           'Entrance and common-area improvements',
           'Exterior lighting installation',
           'Walkway and property feature upgrades',
           'Exterior repairs and finishing',
-          'Site enhancement programs',
+          'Outdoor area improvements',
           'Building exterior improvements',
-          'Coordinated multi-site exterior programs',
+          'Exterior work across multiple properties',
           'Exterior fixture replacement',
         ],
       },
 
       industries: {
-        heading: 'Industries We Serve',
+        heading: 'Properties We Work On',
         items: ['Retail', 'Construction Sites', 'Industrial Facilities', 'Condos & Apartments', 'Commercial Buildings', 'Hospitality'],
       },
 
       photoBanner: {
-        heading: 'Seasonal property care, planned around the year.',
-        body:    'IronOak provides seasonal upkeep that helps managed properties stay clean, presentable and prepared as conditions change throughout the year.',
+        heading: 'Seasonal cleanup and upkeep',
+        body:    'We handle spring and fall cleanup, gutter cleaning, leaf and debris removal, and light grounds maintenance.',
         sideBySide: true,
         list: [
-          'Spring & fall property cleanup',
+          'Spring and fall property cleanup',
           'Gutter cleaning',
           'Leaf and debris removal',
-          'Light landscaping & grounds upkeep',
-          'Seasonal exterior cleanup',
-          'Property preparation between seasons',
+          'Light grounds maintenance',
         ],
         image:    '/services/exterior-seasonal-services.avif',
         imageAlt: 'Collage of a tree across four seasons, from bare winter branches to autumn leaves',
@@ -602,26 +598,26 @@ export const SERVICE_PAGES = [
       },
 
       benefits: {
-        heading: 'Why coordinated exterior work matters',
+        heading: 'How we plan exterior work',
         items: [
-          { title: 'One Point of Contact',    body: 'Clear communication through one accountable lead for every project.' },
-          { title: 'Condition-First Planning', body: 'Work scoped around property condition, priorities, and access.' },
-          { title: 'Consistent Standards',    body: 'Materials and finishing quality aligned across every site.' },
-          { title: 'Lasting Results',         body: 'Work delivered to protect appearance, function, and value over time.' },
+          { title: 'One Point of Contact',        body: 'Speak with one person about the work and schedule.' },
+          { title: 'Priorities Agreed First',     body: 'We review the condition of the property and agree on what needs attention.' },
+          { title: 'Consistent Across Locations', body: 'For multiple properties, we agree on materials and finishes before work starts.' },
+          { title: 'Weather and Access',          body: 'We plan around seasonal conditions and the entrances and paths people need to use.' },
         ],
       },
 
       faqEyebrow: 'EXTERIOR QUESTIONS',
-      faqIntro:   'Answers about exterior scope, seasonal timing, and working around an active property.',
+      faqIntro:   'Questions about exterior work, weather, and building access.',
       faqs: [
-        { q: 'What exterior work does IronOak handle?', a: 'Entrance and common-area improvements, exterior lighting, walkways and property features, exterior repairs, finishing, and coordinated site enhancement programs.' },
-        { q: 'Can exterior work be scheduled around seasonal conditions?', a: 'Yes. Exterior work is planned around seasonal and site conditions, with timing discussed based on your specific scope.' },
-        { q: 'Can you work around an active, occupied property?', a: 'Yes. Exterior work is planned around access, daily operations, and property use to minimize disruption.' },
+        { q: 'What exterior work do you handle?', a: 'We handle entrance and walkway improvements, exterior lighting, repairs, finishing, power washing, and seasonal upkeep.' },
+        { q: 'Does the weather affect scheduling?', a: "Yes. Timing depends on the job and the conditions it needs. We'll discuss suitable timing when reviewing the work." },
+        { q: 'Can the building stay in use during the work?', a: 'Often, yes. We plan around building access and discuss any temporary restrictions before starting.' },
       ],
 
       finalCta: {
-        heading:      'Planning an exterior improvement project?',
-        body:         "Tell us about the property and the exterior work you have in mind. We'll help you understand the next step.",
+        heading:      'What needs attention outside?',
+        body:         'Tell us about the property and the repairs or improvements you have in mind.',
         phoneDisplay: '(416) 570-9074',
         phoneHref:    'tel:+14165709074',
       },
