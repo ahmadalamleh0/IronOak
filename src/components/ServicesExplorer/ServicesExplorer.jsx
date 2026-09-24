@@ -150,6 +150,9 @@ const CSS = `
   object-fit: contain !important;
   display: block;
 }
+/* The camera illustration sits high in its own viewBox; nudge it down
+   slightly so it reads as centered next to the title. */
+.io-svc-icon--camera { margin-top: 8px; }
 .io-svc-title {
   font-family: "Inter Tight", Inter, Arial, sans-serif;
   font-weight: 900; letter-spacing: -0.02em;
@@ -228,7 +231,10 @@ export default function ServicesExplorer() {
 
                 <div className="io-svc-content">
                   <div className="io-svc-title-row">
-                    <span className="io-svc-icon" aria-hidden="true">
+                    <span
+                      className={`io-svc-icon${svc.id === 'installations-property-systems' ? ' io-svc-icon--camera' : ''}`}
+                      aria-hidden="true"
+                    >
                       {ILLUSTRATIONS[i]}
                     </span>
                     <h3 className="io-svc-title">{svc.title}</h3>
