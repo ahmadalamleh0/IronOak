@@ -2,7 +2,6 @@ import { useEffect } from 'react'
 import { useLocation, useNavigationType } from 'react-router-dom'
 
 const SCROLL_KEY = 'io-scroll'
-const HOME_CARD_KEY = 'io-home-card-idx'
 
 export default function ScrollToTop() {
   const location = useLocation()
@@ -18,14 +17,9 @@ export default function ScrollToTop() {
   // On route change: restore position for back/forward, scroll top for clicks
   useEffect(() => {
     if (navType === 'POP') {
-      // ServicesExplorer owns restoring scroll to the exact service card
-      // on this route — don't fight it with a generic pixel-offset restore.
-      if (location.pathname === '/' && sessionStorage.getItem(HOME_CARD_KEY) !== null) {
-        return
-      }
       const saved = sessionStorage.getItem(`${SCROLL_KEY}-${location.key}`)
       if (saved) {
-        // Wait one frame so the DOM is laid out (GSAP ScrollTrigger may refresh)
+        // Wait one frame so the DOM is laid out
         requestAnimationFrame(() => {
           window.scrollTo(0, parseInt(saved, 10))
         })

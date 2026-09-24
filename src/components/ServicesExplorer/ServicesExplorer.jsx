@@ -1,7 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
-import { Link, useNavigationType } from 'react-router-dom'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { Link } from 'react-router-dom'
 import {
   IllustrationMaintenance,
   IllustrationRenovations,
@@ -11,553 +8,247 @@ import {
   SVG_ANIM_CSS,
 } from '../ServicesIllustrations/index.jsx'
 
-gsap.registerPlugin(ScrollTrigger)
-
-const SCROLL_PER = 680   // px per service; (N-1) × 680 = 4080px total pin
-const CARD_RETURN_KEY = 'io-home-card-idx'   // shared with ScrollToTop.jsx
-
 /* ─────────────────────────────────────────────────────────────────
-   Service data
-   Renovations & Remodeling removed from this explorer; its icon
-   (IllustrationRenovations) now represents Capital Projects below.
+   Service data — order, names, descriptions and links preserved from
+   the previous pinned-scroll version. Each `image` is the same hero
+   photograph already used on that service's own page (servicePages.js
+   richContent.heroImage), reused here rather than duplicated content.
 ───────────────────────────────────────────────────────────────── */
 const SERVICES = [
   {
     id:          'interior-finishing',
-    num:         '01',
-    category:    'Interior Finishing',
     title:       'Interior Finishing',
     slug:        '/services/interior-finishing',
     description: 'Professional finishing work for flooring, carpet replacement, wallcoverings, painting, and complete interior refreshes.',
+    image:       '/services/interior-finishing-hero.webp',
+    imageAlt:    'Bright commercial office space mid-renovation with exposed ceiling, city views and flooring materials staged on site',
   },
   {
     id:          'exterior-outdoor-improvements',
-    num:         '02',
-    category:    'Exterior Improvements',
     title:       'Exterior & Outdoor Improvements',
     slug:        '/services/exterior-outdoor-improvements',
     description: 'Exterior upgrades and outdoor property improvements designed to improve function, appearance, and long-term value.',
+    image:       '/services/exterior-outdoor-improvements-hero.webp',
+    imageAlt:    'Modern office building entrance at night with an illuminated glass canopy and landscaped walkway',
   },
   {
     id:          'installations-property-systems',
-    num:         '03',
-    category:    'Property Systems',
     title:       'Installations & Building Systems',
     slug:        '/services/installations-property-systems',
     description: 'Clean, dependable installation of CCTV systems, retrofit lighting, fixtures, equipment, and essential property upgrades.',
+    image:       '/services/installations-property-systems-hero.webp',
+    imageAlt:    'Elevated view of a modern glass building entrance with automated pedestrian doors',
   },
   {
     id:          'capital-project-management',
-    num:         '04',
-    category:    'Capital Projects',
     title:       'Capital Projects & Custom Solutions',
     slug:        '/services/capital-project-management',
     description: 'Coordinated capital improvements, multi-site rollout programs and custom property solutions delivered with consistent scope, scheduling and execution.',
+    image:       '/services/capital-project-management-hero.jpg',
+    imageAlt:    'Looking up at a modern glass office tower with a construction crane reflected in the facade against a blue sky',
   },
   {
     id:          'property-maintenance-repairs',
-    num:         '05',
-    category:    'Property Maintenance',
     title:       'Property Maintenance & Handyman',
     slug:        '/services/property-maintenance-repairs',
     description: 'Reliable repairs, preventative maintenance, and ongoing property support to keep residential, commercial, and condominium spaces performing at their best.',
+    image:       '/services/property-maintenance-repairs-hero.webp',
+    imageAlt:    'Building maintenance crew cleaning windows on a commercial facade with a city skyline in the background',
   },
 ]
 
-const N = SERVICES.length
-
-/* Illustrations — index-matched to SERVICES above. Capital Projects uses
-   IllustrationRenovations (its own icon) now that Renovations & Remodeling
-   has been removed from this explorer. */
-const ILLUSTRATION_LIST = [
-  IllustrationInterior,
-  IllustrationExterior,
-  IllustrationInstallations,
-  IllustrationRenovations,
-  IllustrationMaintenance,
+/* Small animated accents — same illustrations as before, index-matched
+   to SERVICES, now sized down to sit beside each title instead of
+   filling their own panel. */
+const ILLUSTRATIONS = [
+  <IllustrationInterior key="interior-finishing" />,
+  <IllustrationExterior key="exterior-outdoor-improvements" />,
+  <IllustrationInstallations key="installations-property-systems" />,
+  <IllustrationRenovations key="capital-project-management" />,
+  <IllustrationMaintenance key="property-maintenance-repairs" />,
 ]
-const ILLUSTRATIONS = ILLUSTRATION_LIST.map((Comp, i) => <Comp key={i} />)
 
 /* ─────────────────────────────────────────────────────────────────
-   CSS — scoped to io-pin-* and io-mob-* prefixes
+   CSS — scoped to io-svc-*
 ───────────────────────────────────────────────────────────────── */
 const CSS = `
-/* ── Desktop sticky section ───────────────────────────────────── */
-.io-pin-section {
+.io-svc-section {
   background: #07111D;
-  min-height: 100dvh;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  overflow: hidden;
+  padding: clamp(48px, 7vh, 84px) 0;
 }
-
-/* Persistent top label */
-.io-pin-topbar {
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  padding: clamp(18px,2.2vh,28px) clamp(24px,5vw,80px);
-  z-index: 3;
-  pointer-events: none;
-}
-.io-pin-toplabel {
-  font-family: "Manrope", system-ui, sans-serif;
-  font-size: 0.58rem; font-weight: 700;
-  letter-spacing: 0.30em; text-transform: uppercase;
-  color: rgba(201,162,74,0.55);
-}
-
-/* Two-column body */
-.io-pin-body {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  gap: clamp(40px, 5vw, 72px);
-  padding:
-    clamp(80px, 10vh, 112px)
-    clamp(24px, 5vw, 80px)
-    clamp(64px, 8vh, 88px);
-  max-width: 1400px;
-  width: 100%;
+.io-svc-inner {
+  max-width: 1180px;
   margin: 0 auto;
+  padding: 0 clamp(20px, 5vw, 64px);
   box-sizing: border-box;
 }
-
-/* Left column: all panels stacked in same grid cell */
-.io-pin-left {
-  flex: 0 0 46%;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: auto;
-  align-items: center;
-}
-.io-pin-panel {
-  grid-column: 1;
-  grid-row: 1;
-  will-change: opacity, transform;
-  pointer-events: none;    /* hidden panels: block all events */
-  position: relative;
-  z-index: 1;
-}
-/* Active panel: re-enable pointer events so CTA is clickable */
-.io-pin-panel:not([aria-hidden]) {
-  pointer-events: auto;
-  z-index: 2;
-}
-/* CTA always clickable + above any stacking context */
-.io-pin-cta-wrap {
-  position: relative;
-  z-index: 3;
-}
-
-/* Typography */
-.io-pin-cat {
+.io-svc-eyebrow {
   font-family: "Manrope", system-ui, sans-serif;
-  font-size: 0.59rem; font-weight: 700;
-  letter-spacing: 0.26em; text-transform: uppercase;
-  color: rgba(201,162,74,0.72); margin: 0 0 18px;
-}
-.io-pin-title {
-  font-family: "Inter Tight", Inter, Arial, sans-serif;
-  font-size: clamp(2.5rem, 5.0vw, 4.8rem);
-  font-weight: 900; letter-spacing: -0.04em; line-height: 0.96;
-  color: #F4F1EA; margin: 0 0 24px;
-}
-.io-pin-desc {
-  font-family: "Manrope", system-ui, sans-serif;
-  font-size: clamp(0.875rem, 1.3vw, 0.975rem);
-  line-height: 1.74; color: rgba(244,241,234,0.50);
-  max-width: 400px; margin: 0 0 30px;
-}
-.io-pin-cta {
-  display: inline-flex; align-items: center; gap: 8px;
-  font-family: "Manrope", system-ui, sans-serif;
-  font-size: 0.70rem; font-weight: 800;
-  letter-spacing: 0.18em; text-transform: uppercase;
-  color: rgba(201,162,74,0.80); text-decoration: none;
-  border-bottom: 1.5px solid rgba(201,162,74,0.28);
-  padding-bottom: 3px;
-  transition: color 200ms ease, gap 220ms ease, border-color 200ms ease;
-}
-.io-pin-cta:hover { color: #C9A24A; gap: 14px; border-color: rgba(201,162,74,0.65); }
-.io-pin-cta:focus-visible {
-  outline: 2px solid rgba(201,162,74,0.60); outline-offset: 4px; border-radius: 2px;
-}
-.io-pin-arr { display: inline-block; transition: transform 220ms ease; }
-.io-pin-cta:hover .io-pin-arr { transform: translateX(4px); }
-
-/* Right column: all SVGs stacked in same grid cell — never intercept clicks */
-.io-pin-right {
-  flex: 1;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: auto;
-  align-items: center;
-  justify-items: center;
-  pointer-events: none;
-}
-.io-pin-illus {
-  grid-column: 1;
-  grid-row: 1;
-  width: 100%;
-  max-width: 580px;
-  will-change: opacity;
-  pointer-events: none;
+  font-size: 0.60rem; font-weight: 700;
+  letter-spacing: 0.28em; text-transform: uppercase;
+  color: rgba(201,162,74,0.65);
+  margin: 0 0 clamp(20px, 3vh, 30px);
 }
 
-/* Progress indicator */
-.io-pin-foot {
-  position: absolute;
-  bottom: clamp(18px, 2.2vh, 28px);
-  left: 50%; transform: translateX(-50%);
-  display: flex; flex-direction: column; align-items: center; gap: 10px;
-  z-index: 3; pointer-events: none;
-}
-.io-pin-track {
-  width: 64px; height: 1.5px;
-  background: rgba(244,241,234,0.09);
-  border-radius: 1px; overflow: hidden;
-}
-.io-pin-fill {
-  height: 100%; border-radius: 1px;
-  background: #C9A24A;
-  transition: width 320ms cubic-bezier(0.4, 0, 0.2, 1);
-}
-.io-pin-count {
-  font-family: "Manrope", system-ui, sans-serif;
-  font-size: 0.58rem; font-weight: 700; letter-spacing: 0.20em;
-  color: rgba(244,241,234,0.26);
-  font-variant-numeric: tabular-nums;
-}
-
-/* ── Mobile: stacked editorial panels ─────────────────────────── */
-.io-pin-mobile {
-  display: none;
-  background: #07111D;
+.io-svc-list {
+  display: flex;
   flex-direction: column;
+  border-top: 1px solid rgba(244,241,234,0.08);
 }
-.io-mob-eyebrow {
-  font-family: "Manrope", system-ui, sans-serif;
-  font-size: 0.58rem; font-weight: 700;
-  letter-spacing: 0.30em; text-transform: uppercase;
-  color: rgba(201,162,74,0.55);
-  padding: clamp(56px,8vw,80px) clamp(20px,6vw,48px) 0;
+.io-svc-row {
+  display: flex;
+  align-items: center;
+  gap: clamp(20px, 3vw, 36px);
+  padding: clamp(16px, 2.4vh, 24px) 4px;
+  border-bottom: 1px solid rgba(244,241,234,0.08);
+  text-decoration: none;
+  color: inherit;
+  transition: background 180ms ease, padding-left 180ms ease;
+}
+.io-svc-row:hover, .io-svc-row:focus-visible {
+  background: rgba(244,241,234,0.025);
+  padding-left: 10px;
+}
+.io-svc-row:focus-visible {
+  outline: 2px solid rgba(201,162,74,0.65);
+  outline-offset: -2px;
+}
+
+/* Photograph — kept modest so it supports the service info rather than
+   dominating the row; a compact landscape crop, not a hero image. */
+.io-svc-img-wrap {
+  flex: 0 0 clamp(112px, 14vw, 164px);
+  aspect-ratio: 16 / 9;
+  border-radius: 9px;
+  overflow: hidden;
+  border: 1px solid rgba(244,241,234,0.08);
+}
+.io-svc-img-wrap img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center 35%;
+  display: block;
+  transition: transform 450ms ease;
+}
+.io-svc-row:hover .io-svc-img-wrap img { transform: scale(1.04); }
+
+/* Content */
+.io-svc-content { flex: 1; min-width: 0; }
+.io-svc-title-row {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 6px;
+}
+.io-svc-icon {
+  flex-shrink: 0;
+  height: clamp(40px, 8vw, 52px);
+  width: auto;
+  max-width: 60px;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+.io-svc-icon svg, .io-svc-icon object, .io-svc-icon img {
+  width: 100% !important; height: 100% !important;
+  object-fit: contain !important;
+  display: block;
+}
+.io-svc-title {
+  font-family: "Inter Tight", Inter, Arial, sans-serif;
+  font-weight: 900; letter-spacing: -0.02em;
+  font-size: clamp(1.05rem, 2vw, 1.3rem);
+  line-height: 1.2;
+  color: #F4F1EA;
   margin: 0;
 }
-.io-mob-panel {
-  padding: clamp(48px,7vw,72px) clamp(20px,6vw,48px);
-  border-bottom: 1px solid rgba(244,241,234,0.06);
-}
-.io-mob-panel:last-child { border-bottom: none; }
-.io-mob-cat {
+.io-svc-desc {
   font-family: "Manrope", system-ui, sans-serif;
-  font-size: 0.58rem; font-weight: 700;
-  letter-spacing: 0.24em; text-transform: uppercase;
-  color: rgba(201,162,74,0.65); margin: 0 0 16px;
+  font-size: clamp(0.82rem, 1.2vw, 0.88rem);
+  line-height: 1.62;
+  color: rgba(244,241,234,0.50);
+  max-width: 540px;
+  margin: 0 0 12px;
 }
-.io-mob-title {
-  font-family: "Inter Tight", Inter, Arial, sans-serif;
-  font-size: clamp(2.0rem, 7.5vw, 2.8rem);
-  font-weight: 900; letter-spacing: -0.035em; line-height: 0.97;
-  color: #F4F1EA; margin: 0 0 28px;
-}
-.io-mob-svg {
-  max-width: min(340px, 80vw);
-  margin-bottom: 24px;
-}
-.io-mob-desc {
+.io-svc-link {
+  display: inline-flex; align-items: center; gap: 7px;
   font-family: "Manrope", system-ui, sans-serif;
-  font-size: clamp(0.875rem, 4.2vw, 1rem);
-  line-height: 1.72; color: rgba(244,241,234,0.50);
-  margin: 0 0 22px;
-}
-.io-mob-cta {
-  display: inline-flex; align-items: center; gap: 8px;
-  font-family: "Manrope", system-ui, sans-serif;
-  font-size: 0.68rem; font-weight: 800;
-  letter-spacing: 0.18em; text-transform: uppercase;
-  color: rgba(201,162,74,0.80); text-decoration: none;
+  font-size: 0.66rem; font-weight: 800;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(201,162,74,0.80);
   border-bottom: 1.5px solid rgba(201,162,74,0.28);
-  padding-bottom: 3px;
+  padding-bottom: 2px;
+  width: fit-content;
+  transition: color 180ms ease, gap 180ms ease, border-color 180ms ease;
+}
+.io-svc-row:hover .io-svc-link, .io-svc-row:focus-visible .io-svc-link {
+  color: #C9A24A; gap: 12px; border-color: rgba(201,162,74,0.65);
+}
+.io-svc-link-arr { display: inline-block; }
+
+/* ── Mobile: stack photo above content, shallower crop so the photo
+   supports the text instead of dominating the row ─────────────── */
+@media (max-width: 720px) {
+  .io-svc-row { flex-direction: column; align-items: stretch; gap: 12px; }
+  .io-svc-img-wrap {
+    flex-basis: auto; width: 100%;
+    aspect-ratio: 2.4 / 1;
+    max-height: 128px;
+  }
+  .io-svc-row:hover, .io-svc-row:focus-visible { padding-left: 4px; }
 }
 
-/* ── Responsive breakpoints ───────────────────────────────────── */
-@media (max-width: 1023px) {
-  .io-pin-section { display: none; }
-  .io-pin-mobile  { display: flex; }
-}
-
+@media (prefers-reduced-motion: reduce) {
+  .io-svc-row, .io-svc-link, .io-svc-img-wrap img { transition: none; }
+  .io-svc-row:hover .io-svc-img-wrap img { transform: none; }
 }
 `
 
-/* ─────────────────────────────────────────────────────────────────
-   Helper: restart CSS draw animations on an SVG wrapper
-   (called when a service's illustration becomes active)
-───────────────────────────────────────────────────────────────── */
-function restartSVGAnims(wrapper) {
-  if (!wrapper) return
-  wrapper.querySelectorAll('.io-svc-svg-primary, .io-svc-svg-secondary').forEach(el => {
-    const delay = el.style.animationDelay
-    el.style.animation = 'none'
-    void el.getBoundingClientRect()  // force reflow
-    el.style.animation = ''
-    el.style.animationDelay = delay  // restore inline delay
-  })
-}
-
-/* ─────────────────────────────────────────────────────────────────
-   Main component
-───────────────────────────────────────────────────────────────── */
-/* Illustrations built from PlayOnVisibleSvg (<object> embeds, e.g. cabin.svg's
-   frame-animation) must never be `display:none` — that stops the browser from
-   decoding them in the background, so the heavy ones sit blank for seconds the
-   moment they're revealed. CSS draw-in illustrations still need display:none
-   to stop their keyframe animation from running early, so only skip it here. */
-const hideIllus = (el) => {
-  if (!el) return
-  if (!el.querySelector('object')) el.style.display = 'none'
-}
-const showIllus = (el) => {
-  if (!el) return
-  el.style.display = ''
-}
-
 export default function ServicesExplorer() {
-  const sectionRef   = useRef(null)
-  const contentRefs  = useRef([])   // 7 panel divs (left column)
-  const svgRefs      = useRef([])   // 7 illus divs (right column)
-  const activeRef    = useRef(0)    // avoids stale closure in onUpdate
-  const [activeIdx, setActiveIdx]   = useState(0)
-  const navType = useNavigationType()
-
-  /* Remember which card was open so browser-back can return to it. */
-  const rememberCard = (idx) => {
-    sessionStorage.setItem(CARD_RETURN_KEY, String(idx))
-  }
-
-  useEffect(() => {
-    const section = sectionRef.current
-    if (!section) return
-
-    const rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    const mm = gsap.matchMedia()
-
-    mm.add('(min-width: 1024px)', () => {
-      /* ── Initialize all panels ── */
-      contentRefs.current.forEach((el, i) => {
-        if (!el) return
-        gsap.set(el, { opacity: i === 0 ? 1 : 0, y: 0 })
-      })
-      svgRefs.current.forEach((el, i) => {
-        if (!el) return
-        if (i === 0) {
-          gsap.set(el, { opacity: 1 })
-          // SVG 0 CSS animation plays normally on mount
-        } else {
-          gsap.set(el, { opacity: 0 })
-          hideIllus(el)  // prevents CSS draw animation from playing early (object embeds excluded)
-        }
-      })
-      activeRef.current = 0
-      setActiveIdx(0)
-
-      /* ── ScrollTrigger pin ── */
-      const st = ScrollTrigger.create({
-        trigger: section,
-        start: 'top top',
-        end: `+=${(N - 1) * SCROLL_PER}`,
-        pin: true,
-        pinSpacing: true,
-        anticipatePin: 1,
-        onUpdate(self) {
-          const newIdx = Math.min(N - 1, Math.floor(self.progress * N))
-          if (newIdx === activeRef.current) return
-
-          const oldIdx = activeRef.current
-          const dir    = newIdx > oldIdx ? 1 : -1
-          activeRef.current = newIdx
-
-          // Kill any in-flight tweens on the four affected elements
-          gsap.killTweensOf([
-            contentRefs.current[oldIdx],
-            contentRefs.current[newIdx],
-            svgRefs.current[oldIdx],
-            svgRefs.current[newIdx],
-          ].filter(Boolean))
-
-          if (rm) {
-            /* Reduced motion: instant swap */
-            gsap.set(contentRefs.current[oldIdx], { opacity: 0 })
-            gsap.set(svgRefs.current[oldIdx], { opacity: 0 })
-            hideIllus(svgRefs.current[oldIdx])
-
-            gsap.set(contentRefs.current[newIdx], { opacity: 1, y: 0 })
-            if (svgRefs.current[newIdx]) {
-              showIllus(svgRefs.current[newIdx])
-              gsap.set(svgRefs.current[newIdx], { opacity: 1 })
-            }
-          } else {
-            /* ── Outgoing ── */
-            gsap.to(contentRefs.current[oldIdx], {
-              opacity: 0, y: dir * -28,
-              duration: 0.28, ease: 'power2.in',
-            })
-            gsap.to(svgRefs.current[oldIdx], {
-              opacity: 0, duration: 0.22, ease: 'power1.in',
-              onComplete() {
-                hideIllus(svgRefs.current[oldIdx])
-              },
-            })
-
-            /* ── Incoming ── */
-            const svgIn = svgRefs.current[newIdx]
-            if (svgIn) {
-              showIllus(svgIn)            // removing display:none restarts CSS anims
-              restartSVGAnims(svgIn)       // explicit restart for revisits
-              gsap.fromTo(svgIn,
-                { opacity: 0 },
-                { opacity: 1, duration: 0.40, ease: 'power2.out', delay: 0.20 }
-              )
-            }
-
-            gsap.set(contentRefs.current[newIdx], { y: dir * 30 })
-            gsap.to(contentRefs.current[newIdx], {
-              opacity: 1, y: 0,
-              duration: 0.40, ease: 'power2.out', delay: 0.16,
-            })
-          }
-
-          setActiveIdx(newIdx)
-        },
-      })
-
-      /* ── Restore the exact card on browser-back ──
-         Pin-spacing height doesn't exist until this ScrollTrigger has been
-         created, so a raw scrollY restore (done elsewhere, pre-mount) can
-         land short/clamped. Once `st` exists we know its true scroll range
-         and can jump straight to the saved card's slice of it. */
-      if (navType === 'POP') {
-        const savedIdx = sessionStorage.getItem(CARD_RETURN_KEY)
-        if (savedIdx !== null) {
-          sessionStorage.removeItem(CARD_RETURN_KEY)
-          const idx = Math.min(N - 1, Math.max(0, parseInt(savedIdx, 10)))
-          requestAnimationFrame(() => {
-            requestAnimationFrame(() => {
-              ScrollTrigger.refresh()
-              const target = st.start + ((idx + 0.5) / N) * (st.end - st.start)
-              window.scrollTo(0, target)
-            })
-          })
-        }
-      }
-
-      /* ── Cleanup ── */
-      return () => {
-        st.kill()
-        svgRefs.current.forEach(el => { if (el) el.style.display = '' })
-        gsap.killTweensOf([
-          ...contentRefs.current,
-          ...svgRefs.current,
-        ].filter(Boolean))
-      }
-    })
-
-    return () => mm.revert()
-  }, [])
-
   return (
     <>
       <style>{CSS}{SVG_ANIM_CSS}</style>
 
-      {/* ════ DESKTOP: sticky cinematic section ════ */}
       <section
-        ref={sectionRef}
         id="services-explorer"
-        className="io-pin-section"
+        className="io-svc-section"
         data-navbar="invert"
         aria-label="Services"
       >
-        {/* Persistent label */}
-        <div className="io-pin-topbar" aria-hidden="true">
-          <span className="io-pin-toplabel">Our Services</span>
-        </div>
+        <div className="io-svc-inner">
+          <p className="io-svc-eyebrow">Our Services</p>
 
-        {/* Two-column body */}
-        <div className="io-pin-body">
-          {/* Left: stacked content panels */}
-          <div className="io-pin-left">
+          <div className="io-svc-list">
             {SERVICES.map((svc, i) => (
-              <div
+              <Link
                 key={svc.id}
-                ref={el => { contentRefs.current[i] = el }}
-                className="io-pin-panel"
-                aria-hidden={i !== activeIdx ? 'true' : undefined}
+                to={svc.slug}
+                className="io-svc-row"
+                aria-label={`Explore ${svc.title}`}
               >
-                <p className="io-pin-cat">
-                  {svc.num} — {svc.category.toUpperCase()}
-                </p>
-                <h2 className="io-pin-title">{svc.title}</h2>
-                <p className="io-pin-desc">{svc.description}</p>
-                <div className="io-pin-cta-wrap">
-                  <Link
-                    to={svc.slug}
-                    className="io-pin-cta"
-                    tabIndex={i !== activeIdx ? -1 : 0}
-                    aria-label={`Explore ${svc.title}`}
-                    onClick={() => rememberCard(i)}
-                  >
-                    Explore Service
-                    <span className="io-pin-arr" aria-hidden="true">→</span>
-                  </Link>
+                <div className="io-svc-img-wrap">
+                  <img
+                    src={svc.image}
+                    alt={svc.imageAlt}
+                    loading="lazy"
+                    decoding="async"
+                  />
                 </div>
-              </div>
-            ))}
-          </div>
 
-          {/* Right: stacked SVG illustrations */}
-          <div className="io-pin-right" aria-hidden="true">
-            {ILLUSTRATIONS.map((illus, i) => (
-              <div
-                key={i}
-                ref={el => { svgRefs.current[i] = el }}
-                className="io-pin-illus"
-              >
-                {illus}
-              </div>
+                <div className="io-svc-content">
+                  <div className="io-svc-title-row">
+                    <span className="io-svc-icon" aria-hidden="true">
+                      {ILLUSTRATIONS[i]}
+                    </span>
+                    <h3 className="io-svc-title">{svc.title}</h3>
+                  </div>
+                  <p className="io-svc-desc">{svc.description}</p>
+                  <span className="io-svc-link" aria-hidden="true">
+                    Explore Service
+                    <span className="io-svc-link-arr">→</span>
+                  </span>
+                </div>
+              </Link>
             ))}
           </div>
         </div>
-
-        {/* Progress */}
-        <div className="io-pin-foot" aria-hidden="true">
-          <div className="io-pin-track">
-            <div
-              className="io-pin-fill"
-              style={{ width: `${((activeIdx + 1) / N) * 100}%` }}
-            />
-          </div>
-          <span className="io-pin-count">
-            {String(activeIdx + 1).padStart(2, '0')}&thinsp;/&thinsp;{String(N).padStart(2, '0')}
-          </span>
-        </div>
-      </section>
-
-      {/* ════ MOBILE: stacked editorial panels ════ */}
-      <section className="io-pin-mobile" id="services-explorer-mobile" data-navbar="invert" aria-label="Services">
-        <p className="io-mob-eyebrow">Our Services</p>
-        {SERVICES.map((svc, i) => (
-          <article key={svc.id} className="io-mob-panel">
-            <p className="io-mob-cat">{svc.num} — {svc.category.toUpperCase()}</p>
-            <h2 className="io-mob-title">{svc.title}</h2>
-            <div className="io-mob-svg" aria-hidden="true">
-              {ILLUSTRATIONS[i]}
-            </div>
-            <p className="io-mob-desc">{svc.description}</p>
-            <Link to={svc.slug} className="io-mob-cta" aria-label={`Explore ${svc.title}`}>
-              Explore Service <span aria-hidden="true">→</span>
-            </Link>
-          </article>
-        ))}
       </section>
     </>
   )

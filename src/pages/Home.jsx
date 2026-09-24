@@ -70,8 +70,8 @@ const Home = () => {
         <TrustStrip />
         <Statement />
         <ServicesExplorer />
-        <PropertyTypes />
         <PropertySolutions />
+        <PropertyTypes />
         <Contact />
         <HowItWorks />
         <BuildingStatement />
