@@ -9,6 +9,25 @@ const HERO_BG_CSS = `
   @media (min-width: 769px) {
     .hero-bg-img { background-image: url(/images/hero-bg.webp); }
   }
+
+  @keyframes heroScrollBounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50%      { transform: translateX(-50%) translateY(10px); }
+  }
+  @keyframes heroScrollDot {
+    0%   { transform: translateY(0);    opacity: 1; }
+    70%  { opacity: 0; }
+    100% { transform: translateY(16px); opacity: 0; }
+  }
+  .hero-scroll-indicator {
+    animation: heroScrollBounce 2.2s ease-in-out infinite;
+  }
+  .hero-scroll-dot {
+    animation: heroScrollDot 1.6s ease-in-out infinite;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-scroll-indicator, .hero-scroll-dot { animation: none; }
+  }
 `
 
 const RM =
@@ -318,6 +337,75 @@ const Hero = ({ ready = false }) => {
         </div>
 
       </div>
+
+      {/* Scroll indicator */}
+      <button
+        type="button"
+        onClick={() => {
+          document.getElementById('services-explorer')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        }}
+        className="hero-scroll-indicator"
+        aria-label="Scroll to explore"
+        style={{
+          position: 'absolute',
+          bottom: 'clamp(18px, 3.5vh, 32px)',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          zIndex: 20,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: '10px',
+          background: 'none',
+          border: 'none',
+          padding: 0,
+          cursor: 'pointer',
+          opacity: ready ? 1 : 0,
+          transition: ready ? 'opacity 900ms ease 1500ms' : 'none',
+        }}
+      >
+        <span
+          style={{
+            fontFamily: '"Manrope", system-ui, sans-serif',
+            fontSize: '0.62rem',
+            fontWeight: 800,
+            letterSpacing: '0.32em',
+            textTransform: 'uppercase',
+            color: 'rgba(244,241,234,0.90)',
+            textShadow: '0 2px 10px rgba(0,0,0,0.7), 0 1px 3px rgba(0,0,0,0.8)',
+          }}
+        >
+          Scroll
+        </span>
+        <span
+          aria-hidden="true"
+          style={{
+            width: '28px',
+            height: '44px',
+            borderRadius: '16px',
+            border: '2px solid rgba(244,241,234,0.92)',
+            display: 'flex',
+            justifyContent: 'center',
+            paddingTop: '7px',
+            boxSizing: 'border-box',
+            boxShadow: '0 2px 14px rgba(0,0,0,0.45)',
+            background: 'rgba(7,17,29,0.28)',
+            backdropFilter: 'blur(2px)',
+          }}
+        >
+          <span
+            className="hero-scroll-dot"
+            aria-hidden="true"
+            style={{
+              width: '5px',
+              height: '9px',
+              borderRadius: '3px',
+              background: '#E8C97A',
+              boxShadow: '0 0 6px rgba(232,201,122,0.8)',
+            }}
+          />
+        </span>
+      </button>
     </section>
   )
 }
