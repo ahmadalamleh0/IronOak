@@ -7,7 +7,7 @@ const SCOPED_CSS = `
   .ironhawkWhatsappButton {
     position: fixed;
     right: 28px;
-    bottom: 112px;
+    bottom: 28px;
     z-index: 9999;
     display: flex;
     align-items: center;

@@ -91,36 +91,48 @@ const CSS = `
 }
 
 .io-svc-list {
-  display: flex;
-  flex-direction: column;
-  border-top: 1px solid rgba(244,241,234,0.08);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px 32px;
 }
+@media (min-width: 721px) {
+  .io-svc-list { grid-template-columns: repeat(2, 1fr); }
+  /* Odd item out (5 services in a 2-up grid) — center it instead of
+     leaving it stuck in the left column with an empty slot beside it. */
+  .io-svc-list > .io-svc-row:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    width: calc((100% - 32px) / 2);
+    margin: 0 auto;
+  }
+}
+
 .io-svc-row {
   display: flex;
-  align-items: center;
-  gap: clamp(20px, 3vw, 36px);
-  padding: clamp(16px, 2.4vh, 24px) 4px;
-  border-bottom: 1px solid rgba(244,241,234,0.08);
+  flex-direction: column;
+  align-items: stretch;
+  gap: 18px;
   text-decoration: none;
   color: inherit;
-  transition: background 180ms ease, padding-left 180ms ease;
+  transition: transform 240ms ease;
 }
 .io-svc-row:hover, .io-svc-row:focus-visible {
-  background: rgba(244,241,234,0.025);
-  padding-left: 10px;
+  transform: translateY(-4px);
 }
 .io-svc-row:focus-visible {
   outline: 2px solid rgba(201,162,74,0.65);
-  outline-offset: -2px;
+  outline-offset: 6px;
+  border-radius: 14px;
 }
 
-/* Photograph */
+/* Photograph — big, card-style; way more prominent than the old
+   small side thumbnail so it carries real visual weight in a 2-up grid. */
 .io-svc-img-wrap {
-  flex: 0 0 clamp(150px, 20vw, 216px);
-  aspect-ratio: 16 / 9;
-  border-radius: 10px;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 14px;
   overflow: hidden;
   border: 1px solid rgba(244,241,234,0.08);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.24);
 }
 .io-svc-img-wrap img {
   width: 100%; height: 100%;
@@ -132,10 +144,10 @@ const CSS = `
 .io-svc-row:hover .io-svc-img-wrap img { transform: scale(1.04); }
 
 /* Content */
-.io-svc-content { flex: 1; min-width: 0; }
+.io-svc-content { min-width: 0; }
 .io-svc-title-row {
-  display: flex; align-items: center; gap: 12px;
-  margin-bottom: 6px;
+  display: flex; align-items: center; gap: 14px;
+  margin-bottom: 8px;
 }
 .io-svc-icon {
   flex-shrink: 0;
@@ -148,8 +160,8 @@ const CSS = `
      any given moment. A fixed square box removes the ambiguity, and
      preserveAspectRatio (SVG default: meet) letterboxes non-square
      artwork inside it without cropping anything. */
-  width: clamp(40px, 8vw, 52px);
-  height: clamp(40px, 8vw, 52px);
+  width: clamp(64px, 10vw, 84px);
+  height: clamp(64px, 10vw, 84px);
   display: flex; align-items: center; justify-content: center;
   /* Visible, not hidden: some of these illustrations animate (rotate,
      translate) beyond their own viewBox, so a hard clip can still cut
@@ -166,7 +178,7 @@ const CSS = `
 .io-svc-title {
   font-family: "Inter Tight", Inter, Arial, sans-serif;
   font-weight: 900; letter-spacing: -0.02em;
-  font-size: clamp(1.05rem, 2vw, 1.3rem);
+  font-size: clamp(1.2rem, 2.3vw, 1.5rem);
   line-height: 1.2;
   color: #F4F1EA;
   margin: 0;
@@ -195,15 +207,9 @@ const CSS = `
 }
 .io-svc-link-arr { display: inline-block; }
 
-/* ── Mobile: stack photo above content ──────────────────────── */
-@media (max-width: 720px) {
-  .io-svc-row { flex-direction: column; align-items: stretch; gap: 14px; }
-  .io-svc-img-wrap { flex-basis: auto; width: 100%; }
-  .io-svc-row:hover, .io-svc-row:focus-visible { padding-left: 4px; }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .io-svc-row, .io-svc-link, .io-svc-img-wrap img { transition: none; }
+  .io-svc-row:hover, .io-svc-row:focus-visible { transform: none; }
   .io-svc-row:hover .io-svc-img-wrap img { transform: none; }
 }
 `
