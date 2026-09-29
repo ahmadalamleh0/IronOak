@@ -1096,6 +1096,11 @@ const IntroGrid = ({ items }) => {
     }
 
     sizeRules()
+    // The first measurement can land before "Inter Tight" finishes loading,
+    // while the word is still rendered in a wider fallback font — sizing the
+    // underline off that stale, too-wide measurement instead of the word's
+    // final custom-font width. Re-measure once all fonts are actually ready.
+    document.fonts?.ready?.then(sizeRules)
     window.addEventListener('resize', sizeRules)
     return () => window.removeEventListener('resize', sizeRules)
   }, [items])
