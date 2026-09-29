@@ -21,12 +21,14 @@ const HERO_BG_CSS = `
     .hero-scroll-indicator { animation: none; }
   }
 
-  /* Mobile: drop the redundant brand wordmark (the header already shows
-     it), pull the headline up into the sky/roofline instead of centering
-     the whole block, then leave real space so the building's middle
-     shows through before the (shorter) description and CTA cluster. */
+  /* The header nav already carries the IronOak wordmark, so this second,
+     larger repeat of it directly above the headline is dropped everywhere. */
+  .hero-brand-block { display: none; }
+
+  /* Mobile: pull the headline up into the sky/roofline instead of
+     centering the whole block, then leave real space so the building's
+     middle shows through before the (shorter) description and CTA cluster. */
   @media (max-width: 768px) {
-    .hero-brand-block { display: none; }
     .hero-desc-full { display: none; }
     .hero-content-col {
       justify-content: flex-start;
@@ -34,7 +36,10 @@ const HERO_BG_CSS = `
       padding-bottom: 100px;
     }
     .hero-desc-gap { margin-top: 20vh; }
-    .hero-cta-gap { margin-top: 24px !important; }
+    /* Auto margin soaks up whatever's left in the column, parking the
+       button + pill right above the scroll indicator instead of a fixed
+       distance under the description. */
+    .hero-cta-gap { margin-top: auto !important; }
     .hero-pill-gap { margin-top: 16px !important; }
   }
   @media (min-width: 769px) {
