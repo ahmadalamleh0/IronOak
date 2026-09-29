@@ -20,6 +20,26 @@ const HERO_BG_CSS = `
   @media (prefers-reduced-motion: reduce) {
     .hero-scroll-indicator { animation: none; }
   }
+
+  /* Mobile: drop the redundant brand wordmark (the header already shows
+     it), pull the headline up into the sky/roofline instead of centering
+     the whole block, then leave real space so the building's middle
+     shows through before the (shorter) description and CTA cluster. */
+  @media (max-width: 768px) {
+    .hero-brand-block { display: none; }
+    .hero-desc-full { display: none; }
+    .hero-content-col {
+      justify-content: flex-start;
+      padding-top: 96px;
+      padding-bottom: 100px;
+    }
+    .hero-desc-gap { margin-top: 20vh; }
+    .hero-cta-gap { margin-top: 24px !important; }
+    .hero-pill-gap { margin-top: 16px !important; }
+  }
+  @media (min-width: 769px) {
+    .hero-desc-short { display: none; }
+  }
 `
 
 const RM =
@@ -125,79 +145,83 @@ const Hero = ({ ready = false }) => {
       <Header ready={ready} />
 
       {/* ── Hero content — centered ── */}
-      <div className="relative z-10 flex w-full flex-1 flex-col items-center justify-center px-6 py-28 text-center">
+      <div className="hero-content-col relative z-10 flex w-full flex-1 flex-col items-center justify-center px-6 py-28 text-center">
 
-        {/* Brand wordmark — IRONOAK */}
-        <div style={brandMask.outer}>
-          <div
-            style={{
-              ...brandMask.inner,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '14px',
-            }}
-          >
-            <span
+        {/* Brand wordmark — IRONOAK. Hidden on mobile: the header already
+            carries this branding, so repeating it here just eats space
+            that's better spent letting the headline sit up in the sky. */}
+        <div className="hero-brand-block">
+          <div style={brandMask.outer}>
+            <div
               style={{
-                width: '52px',
-                height: '1px',
-                background: 'rgba(201,162,74,0.75)',
-                flexShrink: 0,
-              }}
-            />
-            <span
-              style={{
-                ...ts,
-                fontFamily: '"Manrope", system-ui, sans-serif',
-                fontSize: '1.0rem',
-                fontWeight: 800,
-                letterSpacing: '0.46em',
-                textTransform: 'uppercase',
-                color: '#C9A24A',
+                ...brandMask.inner,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '14px',
               }}
             >
-              IRONOAK
-            </span>
-            <span
-              style={{
-                width: '52px',
-                height: '1px',
-                background: 'rgba(201,162,74,0.75)',
-                flexShrink: 0,
-              }}
-            />
+              <span
+                style={{
+                  width: '52px',
+                  height: '1px',
+                  background: 'rgba(201,162,74,0.75)',
+                  flexShrink: 0,
+                }}
+              />
+              <span
+                style={{
+                  ...ts,
+                  fontFamily: '"Manrope", system-ui, sans-serif',
+                  fontSize: '1.0rem',
+                  fontWeight: 800,
+                  letterSpacing: '0.46em',
+                  textTransform: 'uppercase',
+                  color: '#C9A24A',
+                }}
+              >
+                IRONOAK
+              </span>
+              <span
+                style={{
+                  width: '52px',
+                  height: '1px',
+                  background: 'rgba(201,162,74,0.75)',
+                  flexShrink: 0,
+                }}
+              />
+            </div>
           </div>
+
+          {/* Descriptor — PROPERTY SERVICES INC. */}
+          <p
+            style={{
+              ...descFade,
+              ...ts,
+              fontFamily: '"Manrope", system-ui, sans-serif',
+              fontSize: '0.56rem',
+              fontWeight: 600,
+              letterSpacing: '0.36em',
+              textTransform: 'uppercase',
+              color: 'rgba(201,162,74,0.55)',
+              margin: '8px 0 0',
+            }}
+          >
+            PROPERTY SERVICES INC.
+          </p>
+
+          {/* Thin vertical breathing space */}
+          <div
+            aria-hidden="true"
+            style={{
+              width: '1px',
+              height: '30px',
+              background:
+                'linear-gradient(180deg, transparent 0%, rgba(201,162,74,0.42) 50%, transparent 100%)',
+              margin: '24px auto',
+            }}
+          />
         </div>
-
-        {/* Descriptor — PROPERTY SERVICES INC. */}
-        <p
-          style={{
-            ...descFade,
-            ...ts,
-            fontFamily: '"Manrope", system-ui, sans-serif',
-            fontSize: '0.56rem',
-            fontWeight: 600,
-            letterSpacing: '0.36em',
-            textTransform: 'uppercase',
-            color: 'rgba(201,162,74,0.55)',
-            margin: '8px 0 0',
-          }}
-        >
-          PROPERTY SERVICES INC.
-        </p>
-
-        {/* Thin vertical breathing space */}
-        <div
-          aria-hidden="true"
-          style={{
-            width: '1px',
-            height: '30px',
-            background:
-              'linear-gradient(180deg, transparent 0%, rgba(201,162,74,0.42) 50%, transparent 100%)',
-            margin: '24px auto',
-          }}
-        />
 
         {/* ── Main headline ── */}
         <h1 style={{ margin: 0, maxWidth: '820px', width: '100%' }}>
@@ -240,8 +264,10 @@ const Hero = ({ ready = false }) => {
           </div>
         </h1>
 
-        {/* Supporting copy */}
+        {/* Supporting copy — shortened on mobile so it reads as one quick
+            line lower on the photo instead of a full paragraph. */}
         <p
+          className="hero-desc-gap hero-desc-full"
           style={{
             ...bodyFade,
             ...ts,
@@ -257,9 +283,24 @@ const Hero = ({ ready = false }) => {
           buildings, condominiums, and residential properties across Toronto &
           the GTA.
         </p>
+        <p
+          className="hero-desc-gap hero-desc-short"
+          style={{
+            ...bodyFade,
+            ...ts,
+            fontFamily: '"Manrope", system-ui, sans-serif',
+            fontSize: 'clamp(0.875rem, 1.7vw, 1rem)',
+            lineHeight: 1.74,
+            color: 'rgba(244,241,234,0.82)',
+            maxWidth: '460px',
+            marginTop: '28px',
+          }}
+        >
+          Property maintenance, improvements, and project services across Toronto &amp; the GTA.
+        </p>
 
         {/* CTA */}
-        <div style={{ ...btnFade, marginTop: '34px' }}>
+        <div className="hero-cta-gap" style={{ ...btnFade, marginTop: '34px' }}>
           <a
             href="#contact"
             onClick={(e) => {
@@ -299,6 +340,7 @@ const Hero = ({ ready = false }) => {
 
         {/* Trust pill */}
         <div
+          className="hero-pill-gap"
           style={{
             ...pillFade,
             display: 'inline-flex',
